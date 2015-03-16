@@ -1,7 +1,7 @@
 <?php
 /**
  * ide: PhpStorm
- * author: Pandabeard
+ * author: Gummibeer
  * url: https://bitbucket.org/Gummibeer
  * package: a3l_admintool
  * subpackage: views
