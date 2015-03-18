@@ -52,6 +52,21 @@ Route::get('/webuser', array('before' => 'auth|admin', function() {
     return View::make('main')->nest('content', 'webuser', array('level_label'=>$level_label, 'webusers'=>$webusers));
 }));
 
+Route::get('/vehicles', array('before' => 'auth|support1', function() {
+    $level_label[0] = '<span class="label label-default">Mitglied</span>';
+    $level_label[1] = '<span class="label label-info">Support I</span>';
+    $level_label[2] = '<span class="label label-success">Support II</span>';
+    $level_label[3] = '<span class="label label-warning">Support III</span>';
+    $level_label[4] = '<span class="label label-primary">Admin</span>';
+    $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
+
+    $all_vehicles = DB::table('vehicles')->get();
+
+    $vehicles = json_decode(file_get_contents('../app/views/jsons/vehicles.json'), true);
+
+    return View::make('main')->nest('content', 'vehicles', array('level_label'=>$level_label, 'vehicles'=>$vehicles, 'all_vehicles'=>$all_vehicles));
+}));
+
 
 
 Route::get('/login', function() {
@@ -63,3 +78,5 @@ Route::get('/register', function() {
 });
 
 Route::controller('user', 'UsersController');
+
+Route::controller('vehicle', 'VehiclesController');

@@ -26,24 +26,31 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nutzername</th>
                         <th>Spieler-ID</th>
-                        <th>E-Mail</th>
-                        <th>Rechtelevel</th>
+                        <th>Seite</th>
+                        <th>Typ</th>
+                        <th>Art</th>
+                        <th>Klassenname</th>
+                        <th>ganz</th>
+                        <th>ausgeparkt</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($webusers as $webuser)
-                    {{ Form::open(array('url'=>'user/edit')) }}
+                @foreach($all_vehicles as $vehicle)
+                    {{ Form::open(array('url'=>'vehicle/edit')) }}
                     <tr>
-                        <td>{{ $webuser->id }}</td>
-                        <td>{{ $webuser->username }}</td>
-                        <td>{{ $webuser->playerid }}</td>
-                        <td><a href="mailto:{{ $webuser->email }}">{{ $webuser->email }}</a></td>
-                        <td>{{ Form::number('level', $webuser->level, array('min'=>0, 'max'=>5)) }} {{ $level_label[$webuser->level] }}</td>
+                        <td>{{ $vehicle->id }}</td>
+                        <td>{{ $vehicle->pid }}</td>
+                        <td>{{ strtoupper($vehicle->side) }}</td>
+                        <td>{{ strtoupper($vehicle->type) }}</td>
+                        <td>{{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}</td>
+                        <td>{{ $vehicle->classname }}</td>
+                        <td>{{ Form::checkbox('alive', '1', $vehicle->alive); }}</td>
+                        <td>{{ Form::checkbox('active', '1', $vehicle->active); }}</td>
+
                         <td>
-                            {{ Form::hidden('userid', $webuser->id) }}
+                            <input type="hidden" name="vehicleid" value="{{ $vehicle->id }}" />
                             <button type="submit" class="btn btn-primary btn-sm">speichern</button>
                         </td>
                     </tr>
@@ -53,10 +60,13 @@
                 <tfoot>
                     <tr>
                         <th>ID</th>
-                        <th>Nutzername</th>
                         <th>Spieler-ID</th>
-                        <th>E-Mail</th>
-                        <th>Rechtelevel</th>
+                        <th>Seite</th>
+                        <th>Typ</th>
+                        <th>Art</th>
+                        <th>Klassenname</th>
+                        <th>ganz</th>
+                        <th>ausgeparkt</th>
                         <th></th>
                     </tr>
                 </tfoot>

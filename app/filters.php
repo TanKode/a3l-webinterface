@@ -98,31 +98,51 @@ Route::filter('csrf', function()
  * package: a3l_admintool
  * since 0.1
  */
-Route::filter('superadmin', function()
-{
-    if (Auth::user()->level < 5)
-    {
-        if (Request::ajax())
-        {
+Route::filter('superadmin', function() {
+    if (Auth::user()->level < 5) {
+        if (Request::ajax()) {
             return Response::make('Unauthorized', 401);
-        }
-        else
-        {
+        } else {
             return Redirect::to('/');
         }
     }
 });
 
-Route::filter('admin', function()
-{
-    if (Auth::user()->level < 4)
-    {
-        if (Request::ajax())
-        {
+Route::filter('admin', function() {
+    if (Auth::user()->level < 4) {
+        if (Request::ajax()) {
             return Response::make('Unauthorized', 401);
+        } else {
+            return Redirect::to('/');
         }
-        else
-        {
+    }
+});
+
+Route::filter('support3', function() {
+    if (Auth::user()->level < 3) {
+        if (Request::ajax()) {
+            return Response::make('Unauthorized', 401);
+        } else {
+            return Redirect::to('/');
+        }
+    }
+});
+
+Route::filter('support2', function() {
+    if (Auth::user()->level < 2) {
+        if (Request::ajax()) {
+            return Response::make('Unauthorized', 401);
+        } else {
+            return Redirect::to('/');
+        }
+    }
+});
+
+Route::filter('support1', function() {
+    if (Auth::user()->level < 1) {
+        if (Request::ajax()) {
+            return Response::make('Unauthorized', 401);
+        } else {
             return Redirect::to('/');
         }
     }

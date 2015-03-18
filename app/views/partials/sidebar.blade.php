@@ -20,6 +20,9 @@
 
     <ul class="nav nav-pills nav-stacked">
         <li>{{ HTML::link('/', 'Dashboard') }}</li>
+        @if(Auth::user()->level >= 1)
+            <li>{{ HTML::link('vehicles', 'Fahrzeuge') }}</li>
+        @endif
         @if(Auth::user()->level >= 4)
             <li>{{ HTML::link('webuser', 'Web-User') }}</li>
         @endif
