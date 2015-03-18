@@ -92,6 +92,21 @@ Route::get('/register', function() {
     return View::make('main')->nest('content', 'login_register', array('login'=>'', 'register'=>'active'));
 });
 
+Route::get('/db_user_Setup', function() {
+    Schema::create('users', function($table) {
+        $table->increments('id');
+        $table->bigInteger('playerid');
+        $table->string('username', 32);
+        $table->string('email', 320);
+        $table->string('password', 60);
+        $table->tinyInteger('level');
+        $table->timestamps();
+        $table->rememberToken();
+    });
+
+    return View::make('main')->nest('content', 'dashboard');
+});
+
 Route::controller('user', 'UsersController');
 
 Route::controller('vehicle', 'VehiclesController');

@@ -7,14 +7,15 @@ class PlayersController extends BaseController {
 
     public function postEdit() {
         $rules = array(
-            'playerid'=>'required|numeric|exists:players,uid',
+            'uid'=>'required|numeric|exists:players,uid',
+            'playerid'=>'required|numeric|exists:players,playerid',
             'cash'=>'numeric',
             'bankacc'=>'numeric',
             'coplevel'=>'numeric|min:0|max:11',
             'mediclevel'=>'numeric|min:0|max:5',
             'adaclevel'=>'numeric|min:0|max:5',
             'donatorlvl'=>'numeric|min:0|max:5',
-            'adminlevel'=>'numeric|min:0|max:5'
+            'adminlevel'=>'numeric|min:0|max:3'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -114,7 +115,7 @@ class PlayersController extends BaseController {
             $med_licenses = Auth::user()->encodeDBArray($med_licenses);
             $adac_licenses = Auth::user()->encodeDBArray($adac_licenses);
 
-            $player = Player::find(Input::get('playerid'));
+            $player = Player::find(Input::get('uid'));
             $player->cash = Input::get('cash');
             $player->bankacc = Input::get('bankacc');
             $player->coplevel = Input::get('coplevel');
@@ -168,7 +169,7 @@ class PlayersController extends BaseController {
             $med_licenses = Auth::user()->encodeDBArray($med_licenses);
             $adac_licenses = Auth::user()->encodeDBArray($adac_licenses);
 
-            $player = Player::find(Input::get('playerid'));
+            $player = Player::find(Input::get('uid'));
             $player->cash = Input::get('cash');
             $player->bankacc = Input::get('bankacc');
             $player->coplevel = Input::get('coplevel');
@@ -220,7 +221,7 @@ class PlayersController extends BaseController {
             $med_licenses = Auth::user()->encodeDBArray($med_licenses);
             $adac_licenses = Auth::user()->encodeDBArray($adac_licenses);
 
-            $player = Player::find(Input::get('playerid'));
+            $player = Player::find(Input::get('uid'));
             $player->cash = Input::get('cash');
             $player->bankacc = Input::get('bankacc');
             $player->coplevel = Input::get('coplevel');

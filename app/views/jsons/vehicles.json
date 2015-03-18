@@ -71,5 +71,7 @@
 
   "cl3_e60_m5_black": "BMW M5",
 
-  "A3L_Atom": "F1 Wagen"
+  "A3L_Atom": "F1 Wagen",
+  "A3L_EscortTaxi": "Taxi",
+  "A3L_Bus": "Bus"
 }

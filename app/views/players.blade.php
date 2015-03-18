@@ -124,10 +124,11 @@
                                 @endif
                             </span>
                             <span>@if(Auth::user()->level >= 4){{ Form::number('donatorlvl', $player->donatorlvl, array('min'=>0, 'max'=>5)) }}@else{{ $player->donatorlvl }}@endif</span>
-                            <span>@if(Auth::user()->level >= 4){{ Form::number('adminlevel', $player->adminlevel, array('min'=>0, 'max'=>5)) }}@else{{ $player->adminlevel }}@endif</span>
+                            <span>@if(Auth::user()->level >= 4){{ Form::number('adminlevel', $player->adminlevel, array('min'=>0, 'max'=>3)) }}@else{{ $player->adminlevel }}@endif</span>
 
                             <span>
-                                <input type="hidden" name="playerid" value="{{ $player->uid }}" />
+                                <input type="hidden" name="uid" value="{{ $player->uid }}" />
+                                <input type="hidden" name="playerid" value="{{ $player->playerid }}" />
                                 <button type="submit" class="btn btn-primary btn-sm">speichern</button>
                             </span>
                         {{ Form::close() }}
