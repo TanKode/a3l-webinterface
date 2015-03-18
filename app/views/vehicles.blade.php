@@ -13,7 +13,7 @@
         {{ View::make('partials/sidebar', array('level_label'=>$level_label)) }}
 
         <div class="col-md-10">
-            <h2>Dashboard</h2>
+            <h2>Fahrzeuge</h2>
 
             @if(Session::has('message') && Session::has('type'))
                 <div class="alert alert-dismissible alert-{{ Session::get('type') }}">
