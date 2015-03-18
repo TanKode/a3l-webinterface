@@ -28,9 +28,7 @@
                         <th>ID</th>
                         <th>Spieler-ID</th>
                         <th>Seite</th>
-                        <th>Typ</th>
-                        <th>Art</th>
-                        <th>Klassenname</th>
+                        <th>Fahrzeug</th>
                         <th>ganz</th>
                         <th>ausgeparkt</th>
                         <th></th>
@@ -43,14 +41,15 @@
                         <td>{{ $vehicle->id }}</td>
                         <td>{{ $vehicle->pid }}</td>
                         <td>{{ strtoupper($vehicle->side) }}</td>
-                        <td>{{ strtoupper($vehicle->type) }}</td>
-                        <td>{{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}</td>
-                        <td>{{ $vehicle->classname }}</td>
+                        <td>
+                            {{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }} | {{ $vehicle->classname }}
+                        </td>
                         <td>{{ Form::checkbox('alive', '1', $vehicle->alive); }}</td>
                         <td>{{ Form::checkbox('active', '1', $vehicle->active); }}</td>
 
                         <td>
                             <input type="hidden" name="vehicleid" value="{{ $vehicle->id }}" />
+                            <input type="hidden" name="playerid" value="{{ $vehicle->pid }}" />
                             <button type="submit" class="btn btn-primary btn-sm">speichern</button>
                         </td>
                     </tr>
@@ -62,9 +61,7 @@
                         <th>ID</th>
                         <th>Spieler-ID</th>
                         <th>Seite</th>
-                        <th>Typ</th>
-                        <th>Art</th>
-                        <th>Klassenname</th>
+                        <th>Fahrzeug</th>
                         <th>ganz</th>
                         <th>ausgeparkt</th>
                         <th></th>

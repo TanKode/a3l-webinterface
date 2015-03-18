@@ -24,7 +24,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $hidden = array('password', 'remember_token');
 
 	public static $rules = array(
-		'playerid'=>'required|numeric|min:17|unique:users',
+		'playerid'=>'required|numeric|unique:users',
         'username'=>'required|alpha_num|min:2|max:32|unique:users',
 		'email'=>'required|email|unique:users',
 		'password'=>'required|min:6|confirmed',
@@ -44,7 +44,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $url;
     }
 
-    public function parseDBArray( $string ) {
+    public function decodeDBArray( $string ) {
         if(!empty($string)):
             $string = str_replace('"', '', $string);
             $string = str_replace('`', '"', $string);
@@ -55,8 +55,63 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         endif;
     }
 
+    public function encodeDBArray( $array ) {
+        if(is_array($array)):
+            $string = json_encode($array);
+            $string = str_replace('{', '[', $string);
+            $string = str_replace('"', '`', $string);
+            $string = str_replace(':', ',', $string);
+            $string = str_replace('}', ']', $string);
+            $string = preg_replace("/`\d+`,/", "", $string);
+            $string = '"' . $string . '"';
+            return $string;
+        else:
+            return null;
+        endif;
+    }
+
     public function canEditUser( $newLevel, $oldLevel ) {
         if(Auth::user()->level >= 4 && $newLevel <= Auth::user()->level && $oldLevel <= Auth::user()->level) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function canEditVehicle( $playerid ) {
+        if(Auth::user()->level >= 2 && $playerid != Auth::user()->playerid) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function canEditPlayerLevel( $playerid ) {
+        if(Auth::user()->level >= 1 && $playerid != Auth::user()->playerid) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function canEditPlayerLicenses( $playerid ) {
+        if(Auth::user()->level >= 2 && $playerid != Auth::user()->playerid) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function canEditPlayerMoney( $playerid ) {
+        if(Auth::user()->level >= 3 && $playerid != Auth::user()->playerid) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function canEditPlayerAdminDonator( $playerid ) {
+        if(Auth::user()->level >= 4 && $playerid != Auth::user()->playerid) {
             return true;
         } else {
             return false;

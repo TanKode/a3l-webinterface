@@ -47,5 +47,15 @@
   "license_civ_good": "Luxuswagen",
   "license_civ_bus": "Busfahrer",
   "license_civ_taxi": "Taxifahrer",
-  "license_civ_hunting": "Jagdschein"
+  "license_civ_hunting": "Jagdschein",
+
+  "license_cop_air": "Pilotenschein",
+  "license_cop_sek": "SEK",
+  "license_cop_cg": "Küstenwache",
+  "license_cop_tf": false,
+
+  "license_med_air": "Pilotenschein",
+
+  "license_adac_car": "Führerschein",
+  "license_adac_air": "Pilotenschein"
 }

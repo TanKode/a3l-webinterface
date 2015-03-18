@@ -7,12 +7,13 @@ class VehiclesController extends BaseController {
 
     public function postEdit() {
         $rules = array(
-            'vehicleid'=>'required|numeric|min:1|exists:vehicles,id'
+            'vehicleid'=>'required|numeric|exists:vehicles,id',
+            'playerid'=>'required|numeric|exists:players,playerid'
         );
 
         $validator = Validator::make(Input::all(), $rules);
 
-        if($validator->passes() && Auth::user()->level >= 1) {
+        if($validator->passes() && Auth::user()->canEditVehicle(Input::get('playerid'))) {
             $alive = 0;
             if(Input::get('alive') == 1)
                 $alive = 1;

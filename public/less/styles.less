@@ -11,3 +11,26 @@
   margin: 0 5px 5px 0;
   float: left;
 }
+
+.no-margin {
+  margin: 0;
+}
+
+div.table {
+  display: table;
+
+  > * {
+    display: table-row;
+
+    > * {
+      display: table-cell;
+      padding: 6px;
+    }
+  }
+
+  &.table-hover {
+    > *:hover > * {
+      background: #4e5d6c;
+    }
+  }
+}

@@ -60,12 +60,12 @@
                                 <div class="list-group-item">
                                     <h4 class="list-group-item-heading">Lizenzen</h4>
                                     <p class="list-group-item-text clearfix">
-                                        @foreach(Auth::user()->parseDBArray($current_player->civ_licenses) as $licence)
-                                            @if($licenses->$licence[0] != false)
-                                                @if($licence[1])
-                                                    <span class="label label-success label-list">{{ $licenses->$licence[0] }}</span>
+                                        @foreach(Auth::user()->decodeDBArray($current_player->civ_licenses) as $license)
+                                            @if($licenses->$license[0] != false)
+                                                @if($license[1])
+                                                    <span class="label label-success label-list">{{ $licenses->$license[0] }}</span>
                                                 @else
-                                                    <span class="label label-info label-list">{{ $licenses->$licence[0] }}</span>
+                                                    <span class="label label-info label-list">{{ $licenses->$license[0] }}</span>
                                                 @endif
                                             @endif
                                         @endforeach
@@ -74,7 +74,7 @@
                                 <div class="list-group-item">
                                     <h4 class="list-group-item-heading">Skilllevel</h4>
                                     <p class="list-group-item-text clearfix">
-                                        @foreach(Auth::user()->parseDBArray($current_player->civ_prof) as $prof)
+                                        @foreach(Auth::user()->decodeDBArray($current_player->civ_prof) as $prof)
                                             @if(!empty($profs->$prof[0]))
                                                 @if($prof[1] > 1)
                                                     <span class="label label-success label-list">{{ $profs->$prof[0] }} - {{ $prof[1] }}</span>
@@ -102,12 +102,12 @@
                                     <div class="list-group-item">
                                         <h4 class="list-group-item-heading">Lizenzen</h4>
                                         <p class="list-group-item-text clearfix">
-                                            @foreach(Auth::user()->parseDBArray($current_player->cop_licenses) as $licence)
-                                                @if($licenses->$licence[0] != false)
-                                                    @if($licence[1])
-                                                        <span class="label label-success label-list">{{ $licenses->$licence[0] }}</span>
+                                            @foreach(Auth::user()->decodeDBArray($current_player->cop_licenses) as $license)
+                                                @if($licenses->$license[0] != false)
+                                                    @if($license[1])
+                                                        <span class="label label-success label-list">{{ $licenses->$license[0] }}</span>
                                                     @else
-                                                        <span class="label label-info label-list">{{ $licenses->$licence[0] }}</span>
+                                                        <span class="label label-info label-list">{{ $licenses->$license[0] }}</span>
                                                     @endif
                                                 @endif
                                             @endforeach
@@ -123,12 +123,12 @@
                                     <div class="list-group-item">
                                         <h4 class="list-group-item-heading">Lizenzen</h4>
                                         <p class="list-group-item-text clearfix">
-                                            @foreach(Auth::user()->parseDBArray($current_player->med_licenses) as $licence)
-                                                @if($licenses->$licence[0] != false)
-                                                    @if($licence[1])
-                                                        <span class="label label-success label-list">{{ $licenses->$licence[0] }}</span>
+                                            @foreach(Auth::user()->decodeDBArray($current_player->med_licenses) as $license)
+                                                @if($licenses->$license[0] != false)
+                                                    @if($license[1])
+                                                        <span class="label label-success label-list">{{ $licenses->$license[0] }}</span>
                                                     @else
-                                                        <span class="label label-info label-list">{{ $licenses->$licence[0] }}</span>
+                                                        <span class="label label-info label-list">{{ $licenses->$license[0] }}</span>
                                                     @endif
                                                 @endif
                                             @endforeach
@@ -144,12 +144,12 @@
                                     <div class="list-group-item">
                                         <h4 class="list-group-item-heading">Lizenzen</h4>
                                         <p class="list-group-item-text clearfix">
-                                            @foreach(Auth::user()->parseDBArray($current_player->adac_licenses) as $licence)
-                                                @if($licenses->$licence[0] != false)
-                                                    @if($licence[1])
-                                                        <span class="label label-success label-list">{{ $licenses->$licence[0] }}</span>
+                                            @foreach(Auth::user()->decodeDBArray($current_player->adac_licenses) as $license)
+                                                @if($licenses->$license[0] != false)
+                                                    @if($license[1])
+                                                        <span class="label label-success label-list">{{ $licenses->$license[0] }}</span>
                                                     @else
-                                                        <span class="label label-info label-list">{{ $licenses->$licence[0] }}</span>
+                                                        <span class="label label-info label-list">{{ $licenses->$license[0] }}</span>
                                                     @endif
                                                 @endif
                                             @endforeach
