@@ -43,4 +43,23 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         }
         return $url;
     }
+
+    public function parseDBArray( $string ) {
+        if(!empty($string)):
+            $string = str_replace('"', '', $string);
+            $string = str_replace('`', '"', $string);
+            $array = json_decode($string);
+            return $array;
+        else:
+            return [];
+        endif;
+    }
+
+    public function canEditUser( $newLevel, $oldLevel ) {
+        if(Auth::user()->level >= 4 && $newLevel <= Auth::user()->level && $oldLevel <= Auth::user()->level) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

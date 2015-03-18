@@ -53,6 +53,27 @@ class UsersController extends BaseController {
         }
     }
 
+    public function postEdit() {
+        $rules = array(
+            'userid'=>'required|numeric|min:1|exists:users,id',
+            'level'=>'required|numeric|min:0|max:5'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if($validator->passes() && Auth::user()->canEditUser(Input::get('level'), User::find(Input::get('userid'))->level)) {
+            $user = User::find(Input::get('userid'));
+            $user->level = Input::get('level');
+            $user->save();
+
+            return Redirect::to('/webuser')
+                ->with(array('message'=>'Die Änderung wurde erfolgreich übernommen.', 'type' => 'success'));
+        } else {
+            return Redirect::to('/webuser')
+                ->with(array('message'=>'Leider ist ein Fehler aufgetreten, die Änderung wurde verworfen.', 'type' => 'danger'));
+        }
+    }
+
     public function getLogout() {
         Auth::logout();
         return Redirect::to('/login')

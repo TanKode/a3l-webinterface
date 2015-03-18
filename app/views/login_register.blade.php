@@ -4,7 +4,6 @@
  * author: Gummibeer
  * url: https://bitbucket.org/Gummibeer
  * package: a3l_admintool
- * subpackage: views
  * since 0.1
  */
 ?>
@@ -20,7 +19,7 @@
             @endif
 
             <div class="panel panel-default">
-                <ul class="nav nav-pills block-2">
+                <ul class="nav nav-pills nav-justified">
                     <li class="{{ $login }}"><a href="#login_form" data-toggle="pill">Anmelden</a></li>
                     <li class="{{ $register }}"><a href="#register_form" data-toggle="pill">Registrieren</a></li>
                 </ul>

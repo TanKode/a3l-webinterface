@@ -88,3 +88,42 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+/**
+ * custom Filters
+ *
+ * ide: PhpStorm
+ * author: Gummibeer
+ * url: https://bitbucket.org/Gummibeer
+ * package: a3l_admintool
+ * since 0.1
+ */
+Route::filter('superadmin', function()
+{
+    if (Auth::user()->level < 5)
+    {
+        if (Request::ajax())
+        {
+            return Response::make('Unauthorized', 401);
+        }
+        else
+        {
+            return Redirect::to('/');
+        }
+    }
+});
+
+Route::filter('admin', function()
+{
+    if (Auth::user()->level < 4)
+    {
+        if (Request::ajax())
+        {
+            return Response::make('Unauthorized', 401);
+        }
+        else
+        {
+            return Redirect::to('/');
+        }
+    }
+});

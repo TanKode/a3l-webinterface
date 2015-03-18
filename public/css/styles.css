@@ -1,0 +1,11 @@
+.tab-pane {
+  display: none;
+}
+.tab-pane.active {
+  display: block;
+}
+.label-list {
+  display: block;
+  margin: 0 5px 5px 0;
+  float: left;
+}
