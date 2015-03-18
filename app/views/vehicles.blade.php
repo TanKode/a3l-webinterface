@@ -31,6 +31,7 @@
                         <th>Fahrzeug</th>
                         <th>ganz</th>
                         <th>ausgeparkt</th>
+                        <th>löschen</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -46,6 +47,7 @@
                         </td>
                         <td>{{ Form::checkbox('alive', '1', $vehicle->alive); }}</td>
                         <td>{{ Form::checkbox('active', '1', $vehicle->active); }}</td>
+                        <td>{{ Form::checkbox('delete', '1', $vehicle->delete); }}</td>
 
                         <td>
                             <input type="hidden" name="vehicleid" value="{{ $vehicle->id }}" />
@@ -64,6 +66,7 @@
                         <th>Fahrzeug</th>
                         <th>ganz</th>
                         <th>ausgeparkt</th>
+                        <th>löschen</th>
                         <th></th>
                     </tr>
                 </tfoot>

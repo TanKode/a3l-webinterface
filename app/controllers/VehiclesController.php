@@ -22,9 +22,14 @@ class VehiclesController extends BaseController {
             if(Input::get('active') == 1)
                 $active = 1;
 
+            $delete = 0;
+            if(Input::get('delete') == 1)
+                $delete = 1;
+
             $vehicle = Vehicle::find(Input::get('vehicleid'));
             $vehicle->alive = $alive;
             $vehicle->active = $active;
+            $vehicle->delete = $delete;
             $vehicle->save();
 
             return Redirect::to('/vehicles')

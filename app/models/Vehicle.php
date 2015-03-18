@@ -7,6 +7,7 @@ class Vehicle extends Eloquent {
     public static $rules = array(
         'id'=>'required|numeric|min:1|unique:vehicles',
         'active'=>'required|boolean',
-        'alive'=>'required|boolean'
+        'alive'=>'required|boolean',
+        'delete'=>'required|boolean'
     );
 }
