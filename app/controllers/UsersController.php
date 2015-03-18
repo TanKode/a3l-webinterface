@@ -6,26 +6,48 @@ class UsersController extends BaseController {
     }
 
     public function postCreate() {
-        $validator = Validator::make(Input::all(), User::$rules);
+        $messages = array(
+            'playerid.required' => 'Deine Spieler-ID wird benötigt.',
+            'playerid.numeric' => 'Die Spieler-ID besteht nur aus Zahlen.',
+            'playerid.min' => 'Die Spieler-ID ist 17 Ziffern lang.',
+            'playerid.unique' => 'Die Spieler-ID wurde schon beansprucht - falls dies deine ist melde dich bei einem Supporter.',
+            'username.required' => 'Dein Nutzername wird benötigt.',
+            'username.alpha_num' => 'Dein Nutzername darf nur aus Zahlen und Buchstaben bestehen.',
+            'username.unique' => 'Der Nutzername ist schon vergeben - bitte such dir einen anderen.',
+            'email.required' => 'Deine E-Mail wird benötigt.',
+            'email.email' => 'Dies ist keine gültige E-Mail Adresse.',
+            'email.unique' => 'Verwende bitte eine andere E-Mail Adresse.',
+            'password.required' => 'Dein Passwort wird benötigt.',
+            'password.min' => 'Dein Passwort muss min. 6 Zeichen lang sein.',
+            'password.confirmed' => 'Deine Passwort-Wiederholung stimmt nicht überein.',
+            'password_confirmation.required' => 'Wiederhole dein Passwort.',
+        );
+
+        $validator = Validator::make(Input::all(), User::$rules, $messages);
 
         if($validator->passes()) {
             $user = new User;
+            $user->playerid = Input::get('playerid');
             $user->username = Input::get('username');
             $user->email = Input::get('email');
             $user->password = Hash::make(Input::get('password'));
             $user->save();
 
-            return Redirect::to('/')->with('message', 'Vielen Dank für deine Registrierung! Du kannst dich nun anmelden.');
+            return Redirect::to('/login')
+                ->with(array('message'=>'Vielen Dank für deine Registrierung! Du kannst dich nun anmelden.', 'type'=>'success'));
         } else {
-            return Redirect::to('/')->with('message', 'Leider sind bei deiner Registrierung fehler aufgetreten. Versuche es doch noch einmal.')->withErrors($validator)->withInput();
+            return Redirect::to('/register')
+                ->with(array('message'=>'Leider sind bei deiner Registrierung Fehler aufgetreten. Versuche es doch noch einmal.', 'type' => 'danger'))
+                ->withErrors($validator)
+                ->withInput();
         }
     }
 
-    public function postSignin() {
+    public function postLogin() {
         if (Auth::attempt(array('email'=>Input::get('email'), 'password'=>Input::get('password')))) {
             return Redirect::to('/')->with('message', 'Du bist angemeldet!');
         } else {
-            return Redirect::to('/')
+            return Redirect::to('/login')
                 ->with('message', 'Die E-Mail oder das Passwort waren falsch.')
                 ->withInput();
         }
@@ -33,108 +55,7 @@ class UsersController extends BaseController {
 
     public function getLogout() {
         Auth::logout();
-        return Redirect::to('/')->with('message', 'Du wurdest erfolgreich abgemeldet!');
-    }
-
-    public function getSawn($movieid) {
-        if(Auth::check()) {
-            DB::table('u2m_sawn')->insert(
-                array('userid' => Auth::user()->id, 'movieid' => $movieid)
-            );
-
-            return Redirect::to('/')->with('message', 'Änderung erfolgreich übernommen!');
-        } else {
-            return Redirect::to('/')->with('message', 'Du musst angemeldet sein um dies tun zu können!');
-        }
-    }
-
-    public function getUnsawn($movieid) {
-        if(Auth::check()) {
-            DB::table('u2m_sawn')
-                ->where('userid', '=', Auth::user()->id)
-                ->where('movieid', '=', $movieid)
-                ->delete();
-
-            return Redirect::to('/')->with('message', 'Änderung erfolgreich übernommen!');
-        } else {
-            return Redirect::to('/')->with('message', 'Du musst angemeldet sein um dies tun zu können!');
-        }
-    }
-
-    public function postSawn() {
-        if(Auth::check()) {
-            $rules = array(
-                'staffel'=>'required|integer',
-                'episode'=>'required|integer',
-                'movieid'=>'required|integer'
-            );
-
-            $validator = Validator::make(Input::all(), $rules);
-
-            if($validator->passes()) {
-                $data = array(
-                    'staffel' => Input::get('staffel'),
-                    'episode' => Input::get('episode'),
-                    'movieid' => Input::get('movieid'),
-                    'userid' => Auth::user()->id
-                );
-
-                if($data['staffel'] == 0 && $data['episode'] == 0) {
-                    $u2s_sawn = DB::table('u2s_sawn')
-                        ->where('userid', '=', $data['userid'])
-                        ->where('movieid', '=', $data['movieid'])
-                        ->delete();
-                } else {
-                    $u2s_sawn = DB::table('u2s_sawn')
-                        ->where('userid', '=', $data['userid'])
-                        ->where('movieid', '=', $data['movieid'])
-                        ->first();
-
-                    if(!empty($u2s_sawn)) {
-                        DB::table('u2s_sawn')
-                            ->where('userid', $data['userid'])
-                            ->where('movieid', $data['movieid'])
-                            ->update(array('staffel' => $data['staffel'], 'episode' => $data['episode']));
-                    } else {
-                        DB::table('u2s_sawn')->insert(
-                            array('userid' => $data['userid'], 'movieid' => $data['movieid'], 'staffel' => $data['staffel'], 'episode' => $data['episode'])
-                        );
-                    }
-                }
-
-                return Redirect::to(Input::get('ressource'))->with('message', 'Änderung erfolgreich übernommen!');
-            } else {
-                return Redirect::to(Input::get('ressource'))->with('message', 'Leider ist ein Fehler aufgetreten. Versuche es doch noch einmal!');
-            }
-        } else {
-            return Redirect::to('/')->with('message', 'Du musst angemeldet sein um dies tun zu können!');
-        }
-    }
-
-
-
-    public function getFavorite($movieid) {
-        if(Auth::check()) {
-            DB::table('u2ms_favos')->insert(
-                array('userid' => Auth::user()->id, 'movieid' => $movieid)
-            );
-
-            return Redirect::to('/')->with('message', 'Änderung erfolgreich übernommen!');
-        } else {
-            return Redirect::to('/')->with('message', 'Du musst angemeldet sein um dies tun zu können!');
-        }
-    }
-
-    public function getUnfavorite($movieid) {
-        if(Auth::check()) {
-            DB::table('u2ms_favos')
-                ->where('userid', '=', Auth::user()->id)
-                ->where('movieid', '=', $movieid)
-                ->delete();
-
-            return Redirect::to('/')->with('message', 'Änderung erfolgreich übernommen!');
-        } else {
-            return Redirect::to('/')->with('message', 'Du musst angemeldet sein um dies tun zu können!');
-        }
+        return Redirect::to('/login')
+            ->with(array('message'=>'Du wurdest erfolgreich abgemeldet.', 'type'=>'success'));
     }
 }
