@@ -13,7 +13,7 @@
         {{ View::make('partials/sidebar', array('level_label'=>$level_label)) }}
 
         <div class="col-md-10">
-            <h2>Dashboard</h2>
+            <h2>Dashboard @if($database == 'arma3life')<span class="label label-danger">LIVE</span>@endif</h2>
             <div class="row">
                 <div class="col-md-4">
                     <h3>Übersicht</h3>

@@ -36,7 +36,9 @@ Route::get('/', array('before' => 'auth', function() {
     $profs = json_decode(file_get_contents('../app/views/jsons/profs.json'));
     $vehicles = json_decode(file_get_contents('../app/views/jsons/vehicles.json'), true);
 
-    return View::make('main')->nest('content', 'dashboard', array('level_label'=>$level_label, 'counter'=>$counter, 'current_player'=>$current_player, 'licenses'=>$licenses, 'profs'=>$profs, 'vehicles'=>$vehicles, 'current_player_vehicles'=>$current_player_vehicles));
+    $database = DB::getConfig('database');
+
+    return View::make('main')->nest('content', 'dashboard', array('level_label'=>$level_label, 'counter'=>$counter, 'current_player'=>$current_player, 'licenses'=>$licenses, 'profs'=>$profs, 'vehicles'=>$vehicles, 'current_player_vehicles'=>$current_player_vehicles, 'database'=>$database));
 }));
 
 Route::get('/webuser', array('before' => 'auth|admin', function() {
@@ -64,7 +66,9 @@ Route::get('/vehicles', array('before' => 'auth|support2', function() {
 
     $vehicles = json_decode(file_get_contents('../app/views/jsons/vehicles.json'), true);
 
-    return View::make('main')->nest('content', 'vehicles', array('level_label'=>$level_label, 'vehicles'=>$vehicles, 'all_vehicles'=>$all_vehicles));
+    $database = DB::getConfig('database');
+
+    return View::make('main')->nest('content', 'vehicles', array('level_label'=>$level_label, 'vehicles'=>$vehicles, 'all_vehicles'=>$all_vehicles, 'database'=>$database));
 }));
 
 Route::get('/players', array('before' => 'auth|support1', function() {
@@ -79,7 +83,9 @@ Route::get('/players', array('before' => 'auth|support1', function() {
 
     $licenses = json_decode(file_get_contents('../app/views/jsons/licenses.json'));
 
-    return View::make('main')->nest('content', 'players', array('level_label'=>$level_label, 'players'=>$players, 'licenses'=>$licenses));
+    $database = DB::getConfig('database');
+
+    return View::make('main')->nest('content', 'players', array('level_label'=>$level_label, 'players'=>$players, 'licenses'=>$licenses, 'database'=>$database));
 }));
 
 
