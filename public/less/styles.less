@@ -29,8 +29,12 @@ div.table {
   }
 
   &.table-hover {
-    > *:hover > * {
+    > *:hover:not(.thead):not(.tfoot) > * {
       background: #4e5d6c;
     }
   }
+}
+
+select {
+  color: #000000;
 }

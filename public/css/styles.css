@@ -22,6 +22,9 @@ div.table > * > * {
   display: table-cell;
   padding: 6px;
 }
-div.table.table-hover > *:hover > * {
+div.table.table-hover > *:hover:not(.thead):not(.tfoot) > * {
   background: #4e5d6c;
+}
+select {
+  color: #000000;
 }

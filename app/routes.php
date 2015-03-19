@@ -21,6 +21,9 @@ Route::get('/', array('before' => 'auth', function() {
 
     $counter['users'] = DB::table('users')->count();
     $counter['players'] = DB::table('players')->count();
+    $counter['cops'] = DB::table('players')->where('coplevel', '>', 0)->count();
+    $counter['medics'] = DB::table('players')->where('mediclevel', '>', 0)->count();
+    $counter['adac'] = DB::table('players')->where('adaclevel', '>', 0)->count();
     $counter['vehicles'] = DB::table('vehicles')->count();
     $counter['houses'] = DB::table('houses')->count();
     $counter['gangs'] = DB::table('gangs')->count();
@@ -38,7 +41,7 @@ Route::get('/', array('before' => 'auth', function() {
 
     $database = DB::getConfig('database');
 
-    return View::make('main')->nest('content', 'dashboard', array('level_label'=>$level_label, 'counter'=>$counter, 'current_player'=>$current_player, 'licenses'=>$licenses, 'profs'=>$profs, 'vehicles'=>$vehicles, 'current_player_vehicles'=>$current_player_vehicles, 'database'=>$database));
+    return View::make('main', array('level_label'=>$level_label))->nest('content', 'dashboard', array('level_label'=>$level_label, 'counter'=>$counter, 'current_player'=>$current_player, 'licenses'=>$licenses, 'profs'=>$profs, 'vehicles'=>$vehicles, 'current_player_vehicles'=>$current_player_vehicles, 'database'=>$database));
 }));
 
 Route::get('/webuser', array('before' => 'auth|admin', function() {
@@ -51,7 +54,7 @@ Route::get('/webuser', array('before' => 'auth|admin', function() {
 
     $webusers = DB::table('users')->get();
 
-    return View::make('main')->nest('content', 'webuser', array('level_label'=>$level_label, 'webusers'=>$webusers));
+    return View::make('main', array('level_label'=>$level_label))->nest('content', 'webuser', array('level_label'=>$level_label, 'webusers'=>$webusers));
 }));
 
 Route::get('/vehicles', array('before' => 'auth|support2', function() {
@@ -62,13 +65,22 @@ Route::get('/vehicles', array('before' => 'auth|support2', function() {
     $level_label[4] = '<span class="label label-primary">Admin</span>';
     $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
 
-    $all_vehicles = DB::table('vehicles')->get();
+    $search = Input::get('s');
+
+    if(empty($search)) {
+        $all_vehicles = DB::table('vehicles')->get();
+    } else {
+        $all_vehicles = DB::table('vehicles')
+            ->where('pid', 'LIKE', '%'.$search.'%')
+            ->orWhere('classname', 'LIKE', '%'.$search.'%')
+            ->get();
+    }
 
     $vehicles = json_decode(file_get_contents('../app/views/jsons/vehicles.json'), true);
 
     $database = DB::getConfig('database');
 
-    return View::make('main')->nest('content', 'vehicles', array('level_label'=>$level_label, 'vehicles'=>$vehicles, 'all_vehicles'=>$all_vehicles, 'database'=>$database));
+    return View::make('main', array('level_label'=>$level_label))->nest('content', 'vehicles', array('level_label'=>$level_label, 'vehicles'=>$vehicles, 'all_vehicles'=>$all_vehicles, 'database'=>$database, 'search'=>$search));
 }));
 
 Route::get('/players', array('before' => 'auth|support1', function() {
@@ -79,13 +91,26 @@ Route::get('/players', array('before' => 'auth|support1', function() {
     $level_label[4] = '<span class="label label-primary">Admin</span>';
     $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
 
-    $players = DB::table('players')->get();
+    $search = Input::get('s');
+
+    if(empty($search)) {
+        $players = DB::table('players')->get();
+    } else {
+        $players = DB::table('players')
+            ->where('playerid', 'LIKE', '%'.$search.'%')
+            ->orWhere('name', 'LIKE', '%'.$search.'%')
+            ->orWhere('aliases', 'LIKE', '%'.$search.'%')
+            ->get();
+    }
 
     $licenses = json_decode(file_get_contents('../app/views/jsons/licenses.json'));
+    $coplevel = json_decode(file_get_contents('../app/views/jsons/coplevel.json'));
+    $mediclevel = json_decode(file_get_contents('../app/views/jsons/mediclevel.json'));
+    $adaclevel = json_decode(file_get_contents('../app/views/jsons/adaclevel.json'));
 
     $database = DB::getConfig('database');
 
-    return View::make('main')->nest('content', 'players', array('level_label'=>$level_label, 'players'=>$players, 'licenses'=>$licenses, 'database'=>$database));
+    return View::make('main', array('level_label'=>$level_label))->nest('content', 'players', array('level_label'=>$level_label, 'players'=>$players, 'licenses'=>$licenses, 'database'=>$database, 'coplevel'=>$coplevel, 'mediclevel'=>$mediclevel, 'adaclevel'=>$adaclevel, 'search'=>$search));
 }));
 
 
@@ -96,21 +121,6 @@ Route::get('/login', function() {
 
 Route::get('/register', function() {
     return View::make('main')->nest('content', 'login_register', array('login'=>'', 'register'=>'active'));
-});
-
-Route::get('/db_user_Setup', function() {
-    Schema::create('users', function($table) {
-        $table->increments('id');
-        $table->bigInteger('playerid');
-        $table->string('username', 32);
-        $table->string('email', 320);
-        $table->string('password', 60);
-        $table->tinyInteger('level');
-        $table->timestamps();
-        $table->rememberToken();
-    });
-
-    return View::make('main')->nest('content', 'dashboard');
 });
 
 Route::controller('user', 'UsersController');
