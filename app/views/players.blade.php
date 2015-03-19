@@ -11,14 +11,33 @@
 
 <h2>Spieler @if($database == 'arma3life')<span class="label label-danger">LIVE</span>@endif</h2>
 
-{{ Form::open(array('url'=>'players', 'method'=>'GET')) }}
-    <div class="input-group">
-        <input type="text" name="s" class="form-control" placeholder="Spieler-ID || Name || Alias" value="{{ $search }}">
+<div class="row">
+    <div class="col-md-7">
+        {{ Form::open(array('url'=>'players', 'method'=>'GET')) }}
+        <div class="input-group">
+            <input type="text" name="s" class="form-control" placeholder="Spieler-ID || Name || Alias" value="{{ $search }}">
             <span class="input-group-btn">
                 <button class="btn btn-primary" type="submit">suchen</button>
             </span>
+        </div>
+        {{ Form::close() }}
     </div>
-{{ Form::close() }}
+    <div class="col-md-1">
+        <a href="?t=cops" class="btn btn-primary btn-block">Polizisten</a>
+    </div>
+    <div class="col-md-1">
+        <a href="?t=medics" class="btn btn-primary btn-block">Medics</a>
+    </div>
+    <div class="col-md-1">
+        <a href="?t=adac" class="btn btn-primary btn-block">ADAC</a>
+    </div>
+    <div class="col-md-1">
+        <a href="?t=donator" class="btn btn-primary btn-block">Donatoren</a>
+    </div>
+    <div class="col-md-1">
+        <a href="?t=admins" class="btn btn-primary btn-block">Admins</a>
+    </div>
+</div>
 
 @if(Session::has('message') && Session::has('type'))
     <div class="alert alert-dismissible alert-{{ Session::get('type') }}">

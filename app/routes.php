@@ -21,10 +21,13 @@ Route::get('/', array('before' => 'auth', function() {
 
     $counter['users'] = DB::table('users')->count();
     $counter['players'] = DB::table('players')->count();
+    $counter['admins'] = DB::table('players')->where('adminlevel', '>', 0)->count();
     $counter['cops'] = DB::table('players')->where('coplevel', '>', 0)->count();
     $counter['medics'] = DB::table('players')->where('mediclevel', '>', 0)->count();
     $counter['adac'] = DB::table('players')->where('adaclevel', '>', 0)->count();
+    $counter['donators'] = DB::table('players')->where('donatorlvl', '>', 0)->count();
     $counter['vehicles'] = DB::table('vehicles')->count();
+    $counter['vehicles_destroyed'] = DB::table('vehicles')->where('alive', 0)->count();
     $counter['houses'] = DB::table('houses')->count();
     $counter['gangs'] = DB::table('gangs')->count();
 
@@ -66,14 +69,28 @@ Route::get('/vehicles', array('before' => 'auth|support2', function() {
     $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
 
     $search = Input::get('s');
+    $type = Input::get('t');
 
-    if(empty($search)) {
-        $all_vehicles = DB::table('vehicles')->get();
-    } else {
+    if(!empty($search)) {
         $all_vehicles = DB::table('vehicles')
             ->where('pid', 'LIKE', '%'.$search.'%')
             ->orWhere('classname', 'LIKE', '%'.$search.'%')
             ->get();
+    } elseif(!empty($type)) {
+        switch($type):
+            case 'alive':
+                $where = array('alive', 1);
+                break;
+            case 'destroyed':
+                $where = array('alive', 0);
+                break;
+        endswitch;
+
+        $all_vehicles = DB::table('vehicles')
+            ->where($where[0], $where[1])
+            ->get();
+    } else {
+        $all_vehicles = DB::table('vehicles')->get();
     }
 
     $vehicles = json_decode(file_get_contents('../app/views/jsons/vehicles.json'), true);
@@ -92,15 +109,38 @@ Route::get('/players', array('before' => 'auth|support1', function() {
     $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
 
     $search = Input::get('s');
+    $type = Input::get('t');
 
-    if(empty($search)) {
-        $players = DB::table('players')->get();
-    } else {
+    if(!empty($search)) {
         $players = DB::table('players')
             ->where('playerid', 'LIKE', '%'.$search.'%')
             ->orWhere('name', 'LIKE', '%'.$search.'%')
             ->orWhere('aliases', 'LIKE', '%'.$search.'%')
             ->get();
+    } elseif(!empty($type)) {
+        switch($type):
+            case 'cops':
+                $where = array('coplevel', '>', 0);
+                break;
+            case 'medics':
+                $where = array('mediclevel', '>', 0);
+                break;
+            case 'adac':
+                $where = array('adaclevel', '>', 0);
+                break;
+            case 'donator':
+                $where = array('donatorlvl', '>', 0);
+                break;
+            case 'admins':
+                $where = array('adminlevel', '>', 0);
+                break;
+        endswitch;
+
+        $players = DB::table('players')
+            ->where($where[0], $where[1], $where[2])
+            ->get();
+    } else {
+        $players = DB::table('players')->get();
     }
 
     $licenses = json_decode(file_get_contents('../app/views/jsons/licenses.json'));

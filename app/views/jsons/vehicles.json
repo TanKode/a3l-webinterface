@@ -11,6 +11,7 @@
   "B_Truck_01_transport_F": "HEMTT Transport",
   "B_Truck_01_box_F": "HEMTT Box",
   "B_Truck_01_ammo_F": "HEMTT Munition",
+  "B_Truck_01_fuel_F": "HEMTT Tank",
   "B_UGV_01_F": "UGV",
   "O_MRAP_02_F": "Ifrit",
   "O_Truck_03_covered_F": "Tempest Transport (abgedeckt)",
@@ -53,6 +54,7 @@
 
   "cl3_dodge_charger_k9": "Dodge Charger",
   "cl3_dodge_chargerum_s_white": "Dodge Charger",
+  "cl3_dodge_charger_s_black": "Dodge Charger",
 
   "Jonzie_Viper": "Dodge Viper",
 
@@ -62,16 +64,22 @@
   "cl3_golf_mk2_babypink": "VW Golf",
   "cl3_golf_mk2_camo": "VW Golf",
   "cl3_golf_mk2_black": "VW Golf",
+  "cl3_golf_mk2_aqua": "VW Golf",
 
   "cl3_polo_gti_blue": "VW Polo",
   "cl3_polo_gti_orange": "VW Polo",
   "cl3_polo_gti_babypink": "VW Polo",
   "cl3_polo_gti_aqua": "VW Polo",
   "cl3_polo_gti_gold": "VW Polo",
+  "cl3_polo_gti_green": "VW Polo",
 
   "cl3_e60_m5_black": "BMW M5",
+  "cl3_e60_m5_blue": "BMW M5",
+
+  "cl3_carrera_gt_black": "Porsche Carrera",
 
   "A3L_Atom": "F1 Wagen",
   "A3L_EscortTaxi": "Taxi",
-  "A3L_Bus": "Bus"
+  "A3L_Bus": "Bus",
+  "sfp_wheelchair": "Rollstuhl"
 }

@@ -26,11 +26,14 @@ class VehiclesController extends BaseController {
             if(Input::get('delete') == 1)
                 $delete = 1;
 
-            $vehicle = Vehicle::find(Input::get('vehicleid'));
-            $vehicle->alive = $alive;
-            $vehicle->active = $active;
-            $vehicle->delete = $delete;
-            $vehicle->save();
+            if($delete) {
+                DB::table('vehicles')->where('id', Input::get('vehicleid'))->delete();
+            } else {
+                $vehicle = Vehicle::find(Input::get('vehicleid'));
+                $vehicle->alive = $alive;
+                $vehicle->active = $active;
+                $vehicle->save();
+            }
 
             return Redirect::to('/vehicles')
                 ->with(array('message'=>'Die Änderung wurde erfolgreich übernommen.', 'type' => 'success'));

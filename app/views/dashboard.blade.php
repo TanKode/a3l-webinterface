@@ -15,10 +15,12 @@
         <ul class="list-group">
             <li class="list-group-item">Web-Tool Benutzer<span class="badge">{{ $counter['users'] }}</span></li>
             <li class="list-group-item">Spieler<span class="badge">{{ $counter['players'] }}</span></li>
+            <li class="list-group-item">Admins<span class="badge">{{ $counter['admins'] }}</span></li>
             <li class="list-group-item">Polizisten<span class="badge">{{ $counter['cops'] }}</span></li>
             <li class="list-group-item">Medics<span class="badge">{{ $counter['medics'] }}</span></li>
             <li class="list-group-item">ADAC<span class="badge">{{ $counter['adac'] }}</span></li>
-            <li class="list-group-item">Fahrzeuge<span class="badge">{{ $counter['vehicles'] }}</span></li>
+            <li class="list-group-item">Donatoren<span class="badge">{{ $counter['donators'] }}</span></li>
+            <li class="list-group-item">Fahrzeuge<span class="badge">{{ $counter['vehicles'] }} ({{ $counter['vehicles_destroyed'] }})</span></li>
             <li class="list-group-item">Häuser<span class="badge">{{ $counter['houses'] }}</span></li>
             <li class="list-group-item">Gangs<span class="badge">{{ $counter['gangs'] }}</span></li>
         </ul>
