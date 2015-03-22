@@ -89,7 +89,9 @@
                         <h4 class="list-group-item-heading">Fahrzeuge</h4>
                         <p class="list-group-item-text clearfix">
                             @foreach($current_player_vehicles as $vehicle)
-                                <span class="label label-info label-list">{{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }} | {{ strtoupper($vehicle->side) }}</span>
+                                @if(strtoupper($vehicle->side) == 'CIV')
+                                    <span class="label label-info label-list">{{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}</span>
+                                @endif
                             @endforeach
                         </p>
                     </div>
@@ -109,6 +111,16 @@
                                         @else
                                             <span class="label label-info label-list">{{ $licenses->$license[0] }}</span>
                                         @endif
+                                    @endif
+                                @endforeach
+                            </p>
+                        </div>
+                        <div class="list-group-item">
+                            <h4 class="list-group-item-heading">Fahrzeuge</h4>
+                            <p class="list-group-item-text clearfix">
+                                @foreach($current_player_vehicles as $vehicle)
+                                    @if(strtoupper($vehicle->side) == 'COP')
+                                        <span class="label label-info label-list">{{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}</span>
                                     @endif
                                 @endforeach
                             </p>
@@ -134,6 +146,16 @@
                                 @endforeach
                             </p>
                         </div>
+                        <div class="list-group-item">
+                            <h4 class="list-group-item-heading">Fahrzeuge</h4>
+                            <p class="list-group-item-text clearfix">
+                                @foreach($current_player_vehicles as $vehicle)
+                                    @if(strtoupper($vehicle->side) == 'MED')
+                                        <span class="label label-info label-list">{{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}</span>
+                                    @endif
+                                @endforeach
+                            </p>
+                        </div>
                     </div>
                 </div>
             @endif
@@ -151,6 +173,16 @@
                                         @else
                                             <span class="label label-info label-list">{{ $licenses->$license[0] }}</span>
                                         @endif
+                                    @endif
+                                @endforeach
+                            </p>
+                        </div>
+                        <div class="list-group-item">
+                            <h4 class="list-group-item-heading">Fahrzeuge</h4>
+                            <p class="list-group-item-text clearfix">
+                                @foreach($current_player_vehicles as $vehicle)
+                                    @if(strtoupper($vehicle->side) == 'ADAC')
+                                        <span class="label label-info label-list">{{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}</span>
                                     @endif
                                 @endforeach
                             </p>
