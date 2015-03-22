@@ -12,11 +12,15 @@ Um das Webinterface nutzen zu können muss die ```database.sample.php``` angepas
 
 ## Rechte
 
-|                        | Super-Admin   | Admin   | Support III   | Support II   | Support I   | Mitglied   |
-|------------------------|:-------------:|:-------:|:-------------:|:------------:|:-----------:|:----------:|
-| Rechte-Level verändern |               |         |               |              |             |            |
-| Spieler                |               |         |               |              |             |            |
-| Fahrzeuge              |               |         |               |              |             |            |
+|                        | Super-Admin             | Admin                   | Support III             | Support II              | Support I               | Mitglied                |
+|------------------------|-------------------------|-------------------------|-------------------------|-------------------------|-------------------------|-------------------------|
+| Rechte-Level verändern | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/error.jpg) | ![ja](/icons/error.jpg) | ![ja](/icons/error.jpg) | ![ja](/icons/error.jpg) |
+| Spieler Level          | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/error.jpg) |
+| Spieler Lizenzen       | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/error.jpg) | ![ja](/icons/error.jpg) |
+| Spieler Geld           | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/error.jpg) | ![ja](/icons/error.jpg) | ![ja](/icons/error.jpg) |
+| Spieler Donator        | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/error.jpg) | ![ja](/icons/error.jpg) | ![ja](/icons/error.jpg) |
+| Spieler Admin          | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/error.jpg) | ![ja](/icons/error.jpg) | ![ja](/icons/error.jpg) | ![ja](/icons/error.jpg) |
+| Fahrzeuge              | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/check.jpg) | ![ja](/icons/error.jpg) | ![ja](/icons/error.jpg) |
 
 ## Lizenz
 
