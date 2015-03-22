@@ -166,7 +166,7 @@
                     @endif
                 </span>
                 <span>
-                    @if(Auth::user()->level >= 4)
+                    @if(Auth::user()->level >= 3)
                         {{ Form::select('donatorlvl', array('0'=>'kein Donator', '5'=>'Donator'), $player->donatorlvl) }}
                     @else
                         {{ $player->donatorlvl }}

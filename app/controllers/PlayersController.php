@@ -77,7 +77,7 @@ class PlayersController extends BaseController {
             array('license_adac_air', 0),
         );
 
-        if($validator->passes() && Auth::user()->canEditPlayerAdminDonator(Input::get('playerid'))) {
+        if($validator->passes() && Auth::user()->canEditPlayerAdmin(Input::get('playerid'))) {
             foreach(Input::all() as $str_key => $value):
                 $subStr = substr($str_key, 0, 12);
                 if($subStr == 'license_civ_'):
@@ -179,6 +179,7 @@ class PlayersController extends BaseController {
             $player->cop_licenses = $cop_licenses;
             $player->med_licenses = $med_licenses;
             $player->adac_licenses = $adac_licenses;
+            $player->donatorlvl = Input::get('donatorlvl');
             $player->save();
 
             return Redirect::to('/players')

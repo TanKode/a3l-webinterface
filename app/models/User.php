@@ -110,7 +110,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         }
     }
 
-    public function canEditPlayerAdminDonator( $playerid ) {
+    public function canEditPlayerAdmin( $playerid ) {
         if(Auth::user()->level >= 4 && $playerid != Auth::user()->playerid) {
             return true;
         } else {
