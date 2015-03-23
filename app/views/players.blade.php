@@ -70,8 +70,20 @@
                 <span>{{ $player->uid }}</span>
                 <span>{{ $player->playerid }}</span>
                 <span>{{ utf8_decode($player->name) }}</span>
-                <span>@if(Auth::user()->level >= 3){{ Form::number('cash', $player->cash) }}@else{{ number_format($player->cash, 2, ',', '.') }}@endif</span>
-                <span>@if(Auth::user()->level >= 3){{ Form::number('bankacc', $player->bankacc) }}@else{{ number_format($player->bankacc, 2, ',', '.') }}@endif</span>
+                <span>
+                    @if(Auth::user()->level >= 3)
+                        {{ Form::number('cash', $player->cash) }}
+                    @else
+                        {{ number_format($player->cash, 2, ',', '.') }}
+                    @endif
+                </span>
+                <span>
+                    @if(Auth::user()->level >= 3)
+                        {{ Form::number('bankacc', $player->bankacc) }}
+                    @else
+                        {{ number_format($player->bankacc, 2, ',', '.') }}
+                    @endif
+                </span>
                 <span id="civ_licenses_{{ $player->playerid }}_holder">
                     @if(count(Auth::user()->decodeDBArray($player->civ_licenses)))
                         <p><button class="btn btn-info btn-sm" type="button" data-parent="#civ_licenses_{{ $player->playerid }}_holder" data-toggle="collapse" data-target="#civ_licenses_{{ $player->playerid }}">CIV Lizenzen</button></p>

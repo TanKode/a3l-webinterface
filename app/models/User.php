@@ -55,14 +55,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         endif;
     }
 
-    public function encodeDBArray( $array ) {
+    public function encodeDBArray( $array, $ints = false ) {
         if(is_array($array)):
             $string = json_encode($array);
             $string = str_replace('{', '[', $string);
             $string = str_replace('"', '`', $string);
             $string = str_replace(':', ',', $string);
             $string = str_replace('}', ']', $string);
-            $string = preg_replace("/`\d+`,/", "", $string);
+            if($ints == false) {
+                $string = preg_replace("/`\d+`,/", "", $string);
+            }
             $string = '"' . $string . '"';
             return $string;
         else:

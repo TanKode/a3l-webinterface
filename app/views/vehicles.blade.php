@@ -36,57 +36,49 @@
     </div>
 @endif
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Spieler-ID</th>
-            <th>Seite</th>
-            <th>Fahrzeugtyp</th>
-            <th>Klassenname</th>
-            <th>ganz</th>
-            <th>ausgeparkt</th>
-            <th>löschen</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="table table-hover">
+    <div class="thead">
+        <strong>ID</strong>
+        <strong>Spieler-ID</strong>
+        <strong>Seite</strong>
+        <strong>Fahrzeugtyp</strong>
+        <strong>Klassenname</strong>
+        <strong>ganz</strong>
+        <strong>ausgeparkt</strong>
+        <strong>löschen</strong>
+        <strong></strong>
+    </div>
     @foreach($all_vehicles as $vehicle)
         {{ Form::open(array('url'=>'vehicle/edit')) }}
-        <tr>
-            <td>{{ $vehicle->id }}</td>
-            <td>{{ $vehicle->pid }}</td>
-            <td>{{ strtoupper($vehicle->side) }}</td>
-            <td>
+            <span>{{ $vehicle->id }}</span>
+            <span>{{ $vehicle->pid }}</span>
+            <span>{{ strtoupper($vehicle->side) }}</span>
+            <span>
                 {{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}
-            </td>
-            <td>
+            </span>
+            <span>
                 {{ $vehicle->classname }}
-            </td>
-            <td>{{ Form::checkbox('alive', '1', $vehicle->alive); }}</td>
-            <td>{{ Form::checkbox('active', '1', $vehicle->active); }}</td>
-            <td>{{ Form::checkbox('delete', '1'); }}</td>
+            </span>
+            <span>{{ Form::checkbox('alive', '1', $vehicle->alive); }}</span>
+            <span>{{ Form::checkbox('active', '1', $vehicle->active); }}</span>
+            <span>{{ Form::checkbox('delete', '1'); }}</span>
 
-            <td>
+            <span>
                 <input type="hidden" name="vehicleid" value="{{ $vehicle->id }}" />
                 <input type="hidden" name="playerid" value="{{ $vehicle->pid }}" />
                 <button type="submit" class="btn btn-primary btn-sm">speichern</button>
-            </td>
-        </tr>
+            </span>
         {{ Form::close() }}
     @endforeach
-    </tbody>
-    <tfoot>
-        <tr>
-            <th>ID</th>
-            <th>Spieler-ID</th>
-            <th>Seite</th>
-            <th>Fahrzeugtyp</th>
-            <th>Klassenname</th>
-            <th>ganz</th>
-            <th>ausgeparkt</th>
-            <th>löschen</th>
-            <th></th>
-        </tr>
-    </tfoot>
-</table>
+    <div class="tfoot">
+        <strong>ID</strong>
+        <strong>Spieler-ID</strong>
+        <strong>Seite</strong>
+        <strong>Fahrzeugtyp</strong>
+        <strong>Klassenname</strong>
+        <strong>ganz</strong>
+        <strong>ausgeparkt</strong>
+        <strong>löschen</strong>
+        <strong></strong>
+    </div>
+</div>

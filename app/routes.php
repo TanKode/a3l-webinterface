@@ -153,6 +153,30 @@ Route::get('/players', array('before' => 'auth|support1', function() {
     return View::make('main', array('level_label'=>$level_label))->nest('content', 'players', array('level_label'=>$level_label, 'players'=>$players, 'licenses'=>$licenses, 'database'=>$database, 'coplevel'=>$coplevel, 'mediclevel'=>$mediclevel, 'adaclevel'=>$adaclevel, 'search'=>$search));
 }));
 
+Route::get('/gangs', array('before' => 'auth|support2', function() {
+    $level_label[0] = '<span class="label label-default">Mitglied</span>';
+    $level_label[1] = '<span class="label label-info">Support I</span>';
+    $level_label[2] = '<span class="label label-success">Support II</span>';
+    $level_label[3] = '<span class="label label-warning">Support III</span>';
+    $level_label[4] = '<span class="label label-primary">Admin</span>';
+    $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
+
+    $search = Input::get('s');
+
+    if(!empty($search)) {
+        $gangs = DB::table('gangs')
+            ->where('id', 'LIKE', '%'.$search.'%')
+            ->orWhere('owner', 'LIKE', '%'.$search.'%')
+            ->get();
+    } else {
+        $gangs = DB::table('gangs')->get();
+    }
+
+    $database = DB::getConfig('database');
+
+    return View::make('main', array('level_label'=>$level_label))->nest('content', 'gangs', array('level_label'=>$level_label, 'gangs'=>$gangs, 'database'=>$database, 'search'=>$search));
+}));
+
 
 
 Route::get('/login', function() {
@@ -168,3 +192,5 @@ Route::controller('user', 'UsersController');
 Route::controller('vehicle', 'VehiclesController');
 
 Route::controller('player', 'PlayersController');
+
+Route::controller('gang', 'GangsController');

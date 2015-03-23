@@ -12,9 +12,9 @@
 
 <h2>Gangs @if($database == 'arma3life')<span class="label label-danger">LIVE</span>@endif</h2>
 
-{{ Form::open(array('url'=>'vehicles', 'method'=>'GET')) }}
+{{ Form::open(array('url'=>'gangs', 'method'=>'GET')) }}
     <div class="input-group">
-        <input type="text" name="s" class="form-control" placeholder="Spieler-ID || Klassenname" value="{{ $search }}">
+        <input type="text" name="s" class="form-control" placeholder="Gang-ID || Gang-Name" value="{{ $search }}">
         <span class="input-group-btn">
             <button class="btn btn-primary" type="submit">suchen</button>
         </span>
@@ -28,57 +28,61 @@
     </div>
 @endif
 
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Spieler-ID</th>
-        <th>Seite</th>
-        <th>Fahrzeugtyp</th>
-        <th>Klassenname</th>
-        <th>ganz</th>
-        <th>ausgeparkt</th>
-        <th>löschen</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach($all_vehicles as $vehicle)
-        {{ Form::open(array('url'=>'vehicle/edit')) }}
-        <tr>
-            <td>{{ $vehicle->id }}</td>
-            <td>{{ $vehicle->pid }}</td>
-            <td>{{ strtoupper($vehicle->side) }}</td>
-            <td>
-                {{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}
-            </td>
-            <td>
-                {{ $vehicle->classname }}
-            </td>
-            <td>{{ Form::checkbox('alive', '1', $vehicle->alive); }}</td>
-            <td>{{ Form::checkbox('active', '1', $vehicle->active); }}</td>
-            <td>{{ Form::checkbox('delete', '1', $vehicle->delete); }}</td>
+<div class="table table-hover">
+    <div class="thead">
+        <strong>ID</strong>
+        <strong>Name</strong>
+        <strong>Leiter</strong>
+        <strong>Mitglieder</strong>
+        <strong>Bankguthaben</strong>
+        <strong>aktiv</strong>
+        <strong></strong>
+    </div>
+    @foreach($gangs as $gang)
+        {{ Form::open(array('url'=>'gang/edit')) }}
+            <span>{{ $gang->id }}</span>
+            <span>{{ $gang->name }}</span>
+            <span>{{ $gang->owner }}</span>
+            <span id="gang_members_{{ $gang->id }}_holder">
+                @if(count(Auth::user()->decodeDBArray($gang->members)))
+                    <p><button class="btn btn-info btn-sm" type="button" data-parent="#gang_members_{{ $gang->id }}_holder" data-toggle="collapse" data-target="#gang_members_{{ $gang->id }}">Mitglieder</button></p>
+                    <div class="collapse" id="gang_members_{{ $gang->id }}">
+                        @foreach(array_unique(Auth::user()->decodeDBArray($gang->members)) as $member)
+                            <span class="label label-success label-list">{{ $member }}@if(Auth::user()->level >= 2) {{ Form::checkbox('member_'.$member, '1', true); }}@endif</span>
+                        @endforeach
+                    </div>
+                @else
+                    <p>keine Mitglieder</p>
+                @endif
+            </span>
+            <span>
+                @if(Auth::user()->level >= 3)
+                    {{ Form::number('bank', $gang->bank) }}
+                @else
+                    {{ number_format($gang->bank, 2, ',', '.') }}
+                @endif
+            </span>
+            <span>
+                @if(Auth::user()->level >= 3)
+                    {{ Form::checkbox('active', '1', $gang->active); }}
+                @else
+                    @if($gang->active) ja @else nein @endif
+                @endif
+            </span>
 
-            <td>
-                <input type="hidden" name="vehicleid" value="{{ $vehicle->id }}" />
-                <input type="hidden" name="playerid" value="{{ $vehicle->pid }}" />
+            <span>
+                <input type="hidden" name="gangid" value="{{ $gang->id }}" />
                 <button type="submit" class="btn btn-primary btn-sm">speichern</button>
-            </td>
-        </tr>
+            </span>
         {{ Form::close() }}
     @endforeach
-    </tbody>
-    <tfoot>
-    <tr>
-        <th>ID</th>
-        <th>Spieler-ID</th>
-        <th>Seite</th>
-        <th>Fahrzeugtyp</th>
-        <th>Klassenname</th>
-        <th>ganz</th>
-        <th>ausgeparkt</th>
-        <th>löschen</th>
-        <th></th>
-    </tr>
-    </tfoot>
-</table>
+    <div class="tfoot">
+        <strong>ID</strong>
+        <strong>Name</strong>
+        <strong>Leiter</strong>
+        <strong>Mitglieder</strong>
+        <strong>Bankguthaben</strong>
+        <strong>aktiv</strong>
+        <strong></strong>
+    </div>
+</div>

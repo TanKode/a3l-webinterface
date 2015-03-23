@@ -28,6 +28,9 @@
             @if(Auth::user()->level >= 2)
                 <li><a href="{{ url('vehicles') }}"><i class="icon-automobile-car"></i> Fahrzeuge</a></li>
             @endif
+            @if(Auth::user()->level >= 2)
+                <li><a href="{{ url('gangs') }}"><i class="icon-groups-friends"></i> Gangs</a></li>
+            @endif
             @if(Auth::user()->level >= 4)
                 <li><a href="{{ url('webuser') }}"><i class="icon-supportalt"></i> Web-User</a></li>
             @endif
