@@ -20,7 +20,11 @@
             <li class="list-group-item">Medics<span class="badge">{{ $counter['medics'] }}</span></li>
             <li class="list-group-item">ADAC<span class="badge">{{ $counter['adac'] }}</span></li>
             <li class="list-group-item">Donatoren<span class="badge">{{ $counter['donators'] }}</span></li>
-            <li class="list-group-item">Fahrzeuge<span class="badge">{{ $counter['vehicles'] }} ({{ $counter['vehicles_destroyed'] }})</span></li>
+            <li class="list-group-item">Geld gesamt<span class="badge">{{ number_format($counter['cash'] + $counter['bank'], 2, ',', '.') }}</span></li>
+            <li class="list-group-item">Bargeld<span class="badge">{{ number_format($counter['cash'], 2, ',', '.') }}</span></li>
+            <li class="list-group-item">Bankeinlagen<span class="badge">{{ number_format($counter['bank'], 2, ',', '.') }}</span></li>
+            <li class="list-group-item">Fahrzeuge<span class="badge">{{ $counter['vehicles'] }}</span></li>
+            <li class="list-group-item">zerstörte Fahrzeuge<span class="badge">{{ $counter['vehicles_destroyed'] }}</span></li>
             <li class="list-group-item">Häuser<span class="badge">{{ $counter['houses'] }}</span></li>
             <li class="list-group-item">Gangs<span class="badge">{{ $counter['gangs'] }}</span></li>
         </ul>
