@@ -28,11 +28,12 @@
 
     <div class="container-fluid">
         @if(Auth::check())
-            {{ View::make('partials/sidebar', array('level_label'=>$level_label)) }}
+            {{ View::make('partials/header', array('level_label'=>$level_label)) }}
         @endif
         @if( isset($content) )
             {{ $content }}
         @endif
+        {{ View::make('partials/footer') }}
     </div>
 
 <script src="js/jquery.min.js"></script>

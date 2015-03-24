@@ -8,7 +8,7 @@
  */
 ?>
 
-<div class="row">
+<header class="row">
     <div class="col-md-2">
         <div class="media">
             <div class="media-left"><img class="media-object" src="{{ Auth::user()->getAvatar(Auth::user()->email, 48) }}" alt="Avatar" /></div>
@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div class="col-md-10">
+    <nav class="col-md-10">
         <ul class="nav nav-pills">
             <li><a href="{{ url('/') }}"><i class="icon-clipboard-paste"></i> Dashboard</a></li>
             @if(Auth::user()->level >= 1)
@@ -36,5 +36,5 @@
             @endif
             <li><a href="{{ url('user/logout') }}"><i class="icon-key"></i> abmelden</a></li>
         </ul>
-    </div>
-</div>
+    </nav>
+</header>
