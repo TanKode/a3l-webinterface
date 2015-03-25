@@ -38,6 +38,13 @@ Route::get('/', array('before' => 'auth', function() {
     $current_player->mediclevel_name = json_decode(file_get_contents('../app/views/jsons/mediclevel.json'))[$current_player->mediclevel];
     $current_player->adaclevel_name = json_decode(file_get_contents('../app/views/jsons/adaclevel.json'))[$current_player->adaclevel];
 
+    $playernames = unserialize(Auth::user()->playernames) ? unserialize(Auth::user()->playernames) : array();
+    $playernames[] = $current_player->name;
+    $playernames = array_unique($playernames);
+    $current_player->aliases = implode(', ', $playernames);
+    $playernames = serialize($playernames);
+    DB::table('users')->where('playerid', Auth::user()->playerid)->update(array('playernames' => $playernames));
+
     $current_player_vehicles = DB::table('vehicles')->where('pid', Auth::user()->playerid)->get();
 
     $licenses = json_decode(file_get_contents('../app/views/jsons/licenses.json'));
@@ -182,11 +189,19 @@ Route::get('/gangs', array('before' => 'auth|support2', function() {
 
 
 Route::get('/login', function() {
-    return View::make('main')->nest('content', 'login_register', array('login'=>'active', 'register'=>''));
+    if(Auth::check()) {
+        return Redirect::to('/');
+    } else {
+        return View::make('main')->nest('content', 'login_register', array('login'=>'active', 'register'=>''));
+    }
 });
 
 Route::get('/register', function() {
-    return View::make('main')->nest('content', 'login_register', array('login'=>'', 'register'=>'active'));
+    if(Auth::check()) {
+        return Redirect::to('/');
+    } else {
+        return View::make('main')->nest('content', 'login_register', array('login'=>'', 'register'=>'active'));
+    }
 });
 
 Route::controller('user', 'UsersController');

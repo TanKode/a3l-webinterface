@@ -34,6 +34,9 @@
             Profil
             <small>{{ $current_player->name }}</small>
         </h3>
+        <p class="well-sm">
+            <strong>Aliases:</strong> {{ $current_player->aliases }}
+        </p>
 
         <ul class="list-group">
             <li class="list-group-item"><i class="icon-money-cash"></i> Bargeld<span class="badge">{{ number_format($current_player->cash, 2, ',', '.') }}</span></li>

@@ -69,7 +69,7 @@
             {{ Form::open(array('url'=>'player/edit')) }}
                 <span>{{ $player->uid }}</span>
                 <span>{{ $player->playerid }}</span>
-                <span>{{ utf8_decode($player->name) }}</span>
+                <span>{{ $player->name }}</span>
                 <span>
                     @if(Auth::user()->level >= 3)
                         {{ Form::number('cash', $player->cash) }}
