@@ -64,7 +64,7 @@ Route::get('/webuser', array('before' => 'auth|admin', function() {
     $level_label[4] = '<span class="label label-primary">Admin</span>';
     $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
 
-    $webusers = DB::table('users')->get();
+    $webusers = DB::table('users')->orderBy('level', 'desc')->get();
 
     return View::make('main', array('level_label'=>$level_label))->nest('content', 'webuser', array('level_label'=>$level_label, 'webusers'=>$webusers));
 }));
@@ -130,23 +130,29 @@ Route::get('/players', array('before' => 'auth|support1', function() {
         switch($type):
             case 'cops':
                 $where = array('coplevel', '>', 0);
+                $order = 'coplevel';
                 break;
             case 'medics':
                 $where = array('mediclevel', '>', 0);
+                $order = 'mediclevel';
                 break;
             case 'adac':
                 $where = array('adaclevel', '>', 0);
+                $order = 'adaclevel';
                 break;
             case 'donator':
                 $where = array('donatorlvl', '>', 0);
+                $order = 'donatorlvl';
                 break;
             case 'admins':
                 $where = array('adminlevel', '>', 0);
+                $order = 'adminlevel';
                 break;
         endswitch;
 
         $players = DB::table('players')
             ->where($where[0], $where[1], $where[2])
+            ->orderBy($order, 'desc')
             ->get();
     } else {
         $players = DB::table('players')->get();
