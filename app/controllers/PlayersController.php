@@ -222,7 +222,6 @@ class PlayersController extends BaseController {
                     'med_licenses'=>$player->med_licenses,
                     'adac_licenses'=>$player->adac_licenses,
                     'donatorlvl'=>$player->donatorlvl,
-                    'adminlevel'=>$player->adminlevel,
                 ),
                 array(
                     'cash'=>Input::get('cash')*1,
@@ -235,7 +234,6 @@ class PlayersController extends BaseController {
                     'med_licenses'=>$med_licenses,
                     'adac_licenses'=>$adac_licenses,
                     'donatorlvl'=>Input::get('donatorlvl'),
-                    'adminlevel'=>Input::get('adminlevel'),
                 )
             );
             $log->save();
@@ -300,8 +298,6 @@ class PlayersController extends BaseController {
             $log->objectid = Input::get('uid');
             $log->difference = $log->getDifference(
                 array(
-                    'cash'=>$player->cash,
-                    'bankacc'=>$player->bankacc,
                     'coplevel'=>$player->coplevel,
                     'mediclevel'=>$player->mediclevel,
                     'adaclevel'=>$player->adaclevel,
@@ -309,12 +305,8 @@ class PlayersController extends BaseController {
                     'cop_licenses'=>$player->cop_licenses,
                     'med_licenses'=>$player->med_licenses,
                     'adac_licenses'=>$player->adac_licenses,
-                    'donatorlvl'=>$player->donatorlvl,
-                    'adminlevel'=>$player->adminlevel,
                 ),
                 array(
-                    'cash'=>Input::get('cash')*1,
-                    'bankacc'=>Input::get('bankacc')*1,
                     'coplevel'=>Input::get('coplevel')*1,
                     'mediclevel'=>Input::get('mediclevel')*1,
                     'adaclevel'=>Input::get('adaclevel')*1,
@@ -322,14 +314,10 @@ class PlayersController extends BaseController {
                     'cop_licenses'=>$cop_licenses,
                     'med_licenses'=>$med_licenses,
                     'adac_licenses'=>$adac_licenses,
-                    'donatorlvl'=>Input::get('donatorlvl'),
-                    'adminlevel'=>Input::get('adminlevel'),
                 )
             );
             $log->save();
 
-            $player->cash = Input::get('cash');
-            $player->bankacc = Input::get('bankacc');
             $player->coplevel = Input::get('coplevel');
             $player->mediclevel = Input::get('mediclevel');
             $player->adaclevel = Input::get('adaclevel');
@@ -343,6 +331,24 @@ class PlayersController extends BaseController {
                 ->with(array('message'=>'Die Änderung wurde erfolgreich übernommen.', 'type' => 'success'));
         } elseif($validator->passes() && Auth::user()->canEditPlayerLevel(Input::get('playerid'))) {
             $player = Player::find(Input::get('playerid'));
+
+            $log = new Adminlog;
+            $log->type = 'player';
+            $log->editor = Auth::user()->id;
+            $log->objectid = Input::get('uid');
+            $log->difference = $log->getDifference(
+                array(
+                    'coplevel'=>$player->coplevel,
+                    'mediclevel'=>$player->mediclevel,
+                    'adaclevel'=>$player->adaclevel,
+                ),
+                array(
+                    'coplevel'=>Input::get('coplevel')*1,
+                    'mediclevel'=>Input::get('mediclevel')*1,
+                    'adaclevel'=>Input::get('adaclevel')*1,
+                )
+            );
+            $log->save();
             $player->coplevel = Input::get('coplevel');
             $player->mediclevel = Input::get('mediclevel');
             $player->adaclevel = Input::get('adaclevel');
