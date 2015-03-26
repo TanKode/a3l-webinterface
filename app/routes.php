@@ -227,6 +227,19 @@ Route::get('/logs', array('before' => 'auth|admin', function() {
     return View::make('main', array('level_label'=>$level_label))->nest('content', 'logs', array('level_label'=>$level_label, 'logs'=>$logs));
 }));
 
+Route::get('/statistics', array('before' => 'auth', function() {
+    $level_label[0] = '<span class="label label-default">Mitglied</span>';
+    $level_label[1] = '<span class="label label-info">Support I</span>';
+    $level_label[2] = '<span class="label label-success">Support II</span>';
+    $level_label[3] = '<span class="label label-warning">Support III</span>';
+    $level_label[4] = '<span class="label label-primary">Admin</span>';
+    $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
+
+    $statistics = DB::table('statistics')->orderBy('timestamp', 'asc')->get();
+
+    return View::make('main', array('level_label'=>$level_label))->nest('content', 'statistics', array('level_label'=>$level_label, 'statistics'=>$statistics));
+}));
+
 
 
 Route::get('/login', function() {

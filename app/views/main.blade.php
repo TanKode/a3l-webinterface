@@ -20,6 +20,9 @@
     {{ HTML::style('css/whhg.css'); }}
     {{ HTML::style('css/styles.css'); }}
 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.jquery.min.js"></script>
+    <script src="//code.highcharts.com/highcharts.js"></script>
     <!--[if lt IE 9]>
         <script src="js/html5shiv.min.js"></script>
         <script src="js/respond.min.js"></script>
@@ -37,7 +40,5 @@
         {{ View::make('partials/footer') }}
     </div>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.jquery.min.js"></script>
 </body>
 </html>

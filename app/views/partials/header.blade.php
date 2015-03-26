@@ -22,6 +22,7 @@
     <nav class="col-md-10">
         <ul class="nav nav-pills">
             <li @if(Request::is('/'))class="active"@endif><a href="{{ url('/') }}"><i class="icon-clipboard-paste"></i> Dashboard</a></li>
+            <li @if(Request::is('statistics'))class="active"@endif><a href="{{ url('statistics') }}"><i class="icon-awstats"></i> Statistiken</a></li>
             @if(Auth::user()->level >= 1)
                 <li @if(Request::is('players'))class="active"@endif><a href="{{ url('players') }}"><i class="icon-user"></i> Spieler</a></li>
             @endif
