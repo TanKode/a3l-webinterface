@@ -34,6 +34,7 @@
         <strong>Name</strong>
         <strong>Leiter</strong>
         <strong>Mitglieder</strong>
+        <strong>max. Mitglieder</strong>
         <strong>Bankguthaben</strong>
         <strong>aktiv</strong>
         <strong></strong>
@@ -53,6 +54,13 @@
                     </div>
                 @else
                     <p>keine Mitglieder</p>
+                @endif
+            </span>
+            <span>
+                @if(Auth::user()->level >= 2)
+                    {{ Form::number('maxmembers', $gang->maxmembers) }}
+                @else
+                    {{ $gang->maxmembers }}
                 @endif
             </span>
             <span>
@@ -81,6 +89,7 @@
         <strong>Name</strong>
         <strong>Leiter</strong>
         <strong>Mitglieder</strong>
+        <strong>max. Mitglieder</strong>
         <strong>Bankguthaben</strong>
         <strong>aktiv</strong>
         <strong></strong>
