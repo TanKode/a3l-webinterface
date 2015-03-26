@@ -192,6 +192,41 @@ Route::get('/gangs', array('before' => 'auth|support2', function() {
     return View::make('main', array('level_label'=>$level_label))->nest('content', 'gangs', array('level_label'=>$level_label, 'gangs'=>$gangs, 'database'=>$database, 'search'=>$search));
 }));
 
+Route::get('/logs', array('before' => 'auth|admin', function() {
+    $level_label[0] = '<span class="label label-default">Mitglied</span>';
+    $level_label[1] = '<span class="label label-info">Support I</span>';
+    $level_label[2] = '<span class="label label-success">Support II</span>';
+    $level_label[3] = '<span class="label label-warning">Support III</span>';
+    $level_label[4] = '<span class="label label-primary">Admin</span>';
+    $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
+
+    $logs = DB::table('logs')->orderBy('created_at', 'desc')->get();
+    foreach($logs as $key => $log) {
+        $logs[$key]->editor_name = User::find($log->editor)->username;
+        $logs[$key]->difference = unserialize($log->difference);
+        $logs[$key]->differences = array();
+        foreach($logs[$key]->difference as $differencekey => $difference) {
+            $logs[$key]->differences[] = array($differencekey, $difference[0], $difference[1]);
+        }
+        switch($log->type):
+            case 'player':
+                $logs[$key]->type = 'Spieler';
+                $logs[$key]->object_name = Player::find($log->objectid)->name;
+                break;
+            case 'gang':
+                $logs[$key]->type = 'Gang';
+                $logs[$key]->object_name = Gang::find($log->objectid)->name;
+                break;
+            case 'vehicle':
+                $logs[$key]->type = 'Fahrzeug';
+                $logs[$key]->object_name = Vehicle::find($log->objectid)->classname;
+                break;
+        endswitch;
+    }
+
+    return View::make('main', array('level_label'=>$level_label))->nest('content', 'logs', array('level_label'=>$level_label, 'logs'=>$logs));
+}));
+
 
 
 Route::get('/login', function() {

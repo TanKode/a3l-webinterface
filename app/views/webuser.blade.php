@@ -17,45 +17,37 @@
     </div>
 @endif
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th></th>
-            <th>ID</th>
-            <th>Nutzername</th>
-            <th>Spieler-ID</th>
-            <th>E-Mail</th>
-            <th>Rechtelevel</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="table table-hover">
+    <div class="thead">
+        <strong></strong>
+        <strong>ID</strong>
+        <strong>Nutzername</strong>
+        <strong>Spieler-ID</strong>
+        <strong>E-Mail</strong>
+        <strong>Rechtelevel</strong>
+        <strong></strong>
+    </div>
     @foreach($webusers as $webuser)
         {{ Form::open(array('url'=>'user/edit')) }}
-        <tr>
-            <td><img src="{{ Auth::user()->getAvatar($webuser->email, 32) }}" alt="Avatar" /></td>
-            <td>{{ $webuser->id }}</td>
-            <td>{{ $webuser->username }}</td>
-            <td>{{ $webuser->playerid }}</td>
-            <td><a href="mailto:{{ $webuser->email }}">{{ $webuser->email }}</a></td>
-            <td>{{ Form::number('level', $webuser->level, array('min'=>0, 'max'=>5)) }} {{ $level_label[$webuser->level] }}</td>
-            <td>
+            <span><img src="{{ Auth::user()->getAvatar($webuser->email, 32) }}" alt="Avatar" /></span>
+            <span>{{ $webuser->id }}</span>
+            <span>{{ $webuser->username }}</span>
+            <span>{{ $webuser->playerid }}</span>
+            <span><a href="mailto:{{ $webuser->email }}">{{ $webuser->email }}</a></span>
+            <span>{{ Form::number('level', $webuser->level, array('min'=>0, 'max'=>5)) }} {{ $level_label[$webuser->level] }}</span>
+            <span>
                 {{ Form::hidden('userid', $webuser->id) }}
                 <button type="submit" class="btn btn-primary btn-sm">speichern</button>
-            </td>
-        </tr>
+            </span>
         {{ Form::close() }}
     @endforeach
-    </tbody>
-    <tfoot>
-        <tr>
-            <th></th>
-            <th>ID</th>
-            <th>Nutzername</th>
-            <th>Spieler-ID</th>
-            <th>E-Mail</th>
-            <th>Rechtelevel</th>
-            <th></th>
-        </tr>
-    </tfoot>
-</table>
+    <div class="tfoot">
+        <strong></strong>
+        <strong>ID</strong>
+        <strong>Nutzername</strong>
+        <strong>Spieler-ID</strong>
+        <strong>E-Mail</strong>
+        <strong>Rechtelevel</strong>
+        <strong></strong>
+    </div>
+</div>

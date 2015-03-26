@@ -32,6 +32,17 @@ class GangsController extends BaseController {
 
 
             $gang = Gang::find(Input::get('gangid'));
+
+            $log = new Adminlog;
+            $log->type = 'gang';
+            $log->editor = Auth::user()->id;
+            $log->objectid = Input::get('gangid');
+            $log->difference = $log->getDifference(
+                array('members'=>$gang->members, 'maxmembers'=>$gang->maxmembers, 'bank'=>$gang->bank, 'active'=>$gang->active),
+                array('members'=>$members, 'maxmembers'=>Input::get('maxmembers')*1, 'bank'=>Input::get('bank')*1, 'active'=>$active)
+            );
+            $log->save();
+
             $gang->members = $members;
             $gang->maxmembers = Input::get('maxmembers');
 

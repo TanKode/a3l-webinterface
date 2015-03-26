@@ -27,9 +27,30 @@ class VehiclesController extends BaseController {
                 $delete = 1;
 
             if($delete) {
+                $log = new Adminlog;
+                $log->type = 'vehicle';
+                $log->editor = Auth::user()->id;
+                $log->objectid = Input::get('vehicleid');
+                $log->difference = $log->getDifference(
+                    array('deleted'=>0),
+                    array('deleted'=>1)
+                );
+                $log->save();
+
                 DB::table('vehicles')->where('id', Input::get('vehicleid'))->delete();
             } else {
                 $vehicle = Vehicle::find(Input::get('vehicleid'));
+
+                $log = new Adminlog;
+                $log->type = 'vehicle';
+                $log->editor = Auth::user()->id;
+                $log->objectid = Input::get('vehicleid');
+                $log->difference = $log->getDifference(
+                    array('alive'=>$vehicle->alive, 'active'=>$vehicle->active),
+                    array('alive'=>$alive, 'active'=>$active)
+                );
+                $log->save();
+
                 $vehicle->alive = $alive;
                 $vehicle->active = $active;
                 $vehicle->save();

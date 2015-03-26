@@ -116,6 +116,41 @@ class PlayersController extends BaseController {
             $adac_licenses = Auth::user()->encodeDBArray($adac_licenses);
 
             $player = Player::find(Input::get('uid'));
+
+            $log = new Adminlog;
+            $log->type = 'player';
+            $log->editor = Auth::user()->id;
+            $log->objectid = Input::get('uid');
+            $log->difference = $log->getDifference(
+                array(
+                    'cash'=>$player->cash,
+                    'bankacc'=>$player->bankacc,
+                    'coplevel'=>$player->coplevel,
+                    'mediclevel'=>$player->mediclevel,
+                    'adaclevel'=>$player->adaclevel,
+                    'civ_licenses'=>$player->civ_licenses,
+                    'cop_licenses'=>$player->cop_licenses,
+                    'med_licenses'=>$player->med_licenses,
+                    'adac_licenses'=>$player->adac_licenses,
+                    'donatorlvl'=>$player->donatorlvl,
+                    'adminlevel'=>$player->adminlevel,
+                ),
+                array(
+                    'cash'=>Input::get('cash')*1,
+                    'bankacc'=>Input::get('bankacc')*1,
+                    'coplevel'=>Input::get('coplevel')*1,
+                    'mediclevel'=>Input::get('mediclevel')*1,
+                    'adaclevel'=>Input::get('adaclevel')*1,
+                    'civ_licenses'=>$civ_licenses,
+                    'cop_licenses'=>$cop_licenses,
+                    'med_licenses'=>$med_licenses,
+                    'adac_licenses'=>$adac_licenses,
+                    'donatorlvl'=>Input::get('donatorlvl'),
+                    'adminlevel'=>Input::get('adminlevel'),
+                )
+            );
+            $log->save();
+
             $player->cash = Input::get('cash');
             $player->bankacc = Input::get('bankacc');
             $player->coplevel = Input::get('coplevel');
@@ -170,6 +205,41 @@ class PlayersController extends BaseController {
             $adac_licenses = Auth::user()->encodeDBArray($adac_licenses);
 
             $player = Player::find(Input::get('uid'));
+
+            $log = new Adminlog;
+            $log->type = 'player';
+            $log->editor = Auth::user()->id;
+            $log->objectid = Input::get('uid');
+            $log->difference = $log->getDifference(
+                array(
+                    'cash'=>$player->cash,
+                    'bankacc'=>$player->bankacc,
+                    'coplevel'=>$player->coplevel,
+                    'mediclevel'=>$player->mediclevel,
+                    'adaclevel'=>$player->adaclevel,
+                    'civ_licenses'=>$player->civ_licenses,
+                    'cop_licenses'=>$player->cop_licenses,
+                    'med_licenses'=>$player->med_licenses,
+                    'adac_licenses'=>$player->adac_licenses,
+                    'donatorlvl'=>$player->donatorlvl,
+                    'adminlevel'=>$player->adminlevel,
+                ),
+                array(
+                    'cash'=>Input::get('cash')*1,
+                    'bankacc'=>Input::get('bankacc')*1,
+                    'coplevel'=>Input::get('coplevel')*1,
+                    'mediclevel'=>Input::get('mediclevel')*1,
+                    'adaclevel'=>Input::get('adaclevel')*1,
+                    'civ_licenses'=>$civ_licenses,
+                    'cop_licenses'=>$cop_licenses,
+                    'med_licenses'=>$med_licenses,
+                    'adac_licenses'=>$adac_licenses,
+                    'donatorlvl'=>Input::get('donatorlvl'),
+                    'adminlevel'=>Input::get('adminlevel'),
+                )
+            );
+            $log->save();
+
             $player->cash = Input::get('cash');
             $player->bankacc = Input::get('bankacc');
             $player->coplevel = Input::get('coplevel');
@@ -223,6 +293,41 @@ class PlayersController extends BaseController {
             $adac_licenses = Auth::user()->encodeDBArray($adac_licenses);
 
             $player = Player::find(Input::get('uid'));
+
+            $log = new Adminlog;
+            $log->type = 'player';
+            $log->editor = Auth::user()->id;
+            $log->objectid = Input::get('uid');
+            $log->difference = $log->getDifference(
+                array(
+                    'cash'=>$player->cash,
+                    'bankacc'=>$player->bankacc,
+                    'coplevel'=>$player->coplevel,
+                    'mediclevel'=>$player->mediclevel,
+                    'adaclevel'=>$player->adaclevel,
+                    'civ_licenses'=>$player->civ_licenses,
+                    'cop_licenses'=>$player->cop_licenses,
+                    'med_licenses'=>$player->med_licenses,
+                    'adac_licenses'=>$player->adac_licenses,
+                    'donatorlvl'=>$player->donatorlvl,
+                    'adminlevel'=>$player->adminlevel,
+                ),
+                array(
+                    'cash'=>Input::get('cash')*1,
+                    'bankacc'=>Input::get('bankacc')*1,
+                    'coplevel'=>Input::get('coplevel')*1,
+                    'mediclevel'=>Input::get('mediclevel')*1,
+                    'adaclevel'=>Input::get('adaclevel')*1,
+                    'civ_licenses'=>$civ_licenses,
+                    'cop_licenses'=>$cop_licenses,
+                    'med_licenses'=>$med_licenses,
+                    'adac_licenses'=>$adac_licenses,
+                    'donatorlvl'=>Input::get('donatorlvl'),
+                    'adminlevel'=>Input::get('adminlevel'),
+                )
+            );
+            $log->save();
+
             $player->cash = Input::get('cash');
             $player->bankacc = Input::get('bankacc');
             $player->coplevel = Input::get('coplevel');
