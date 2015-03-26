@@ -3,6 +3,7 @@
 class Vehicle extends Eloquent {
 
     protected $table = 'vehicles';
+    protected $primaryKey = 'id';
 
     public static $rules = array(
         'id'=>'required|numeric|min:1|unique:vehicles',

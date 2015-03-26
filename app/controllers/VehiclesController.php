@@ -31,6 +31,7 @@ class VehiclesController extends BaseController {
                 $log->type = 'vehicle';
                 $log->editor = Auth::user()->id;
                 $log->objectid = Input::get('vehicleid');
+                $log->playerid = DB::table('players')->where('playerid', Input::get('playerid'))->first()->uid;
                 $log->difference = $log->getDifference(
                     array('deleted'=>0),
                     array('deleted'=>1)
@@ -45,6 +46,7 @@ class VehiclesController extends BaseController {
                 $log->type = 'vehicle';
                 $log->editor = Auth::user()->id;
                 $log->objectid = Input::get('vehicleid');
+                $log->playerid = DB::table('players')->where('playerid', Input::get('playerid'))->first()->uid;
                 $log->difference = $log->getDifference(
                     array('alive'=>$vehicle->alive, 'active'=>$vehicle->active),
                     array('alive'=>$alive, 'active'=>$active)

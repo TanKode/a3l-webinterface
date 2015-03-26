@@ -219,7 +219,7 @@ Route::get('/logs', array('before' => 'auth|admin', function() {
                 break;
             case 'vehicle':
                 $logs[$key]->type = 'Fahrzeug';
-                $logs[$key]->object_name = Vehicle::find($log->objectid)->classname;
+                $logs[$key]->object_name = Vehicle::find($log->objectid)['classname'];
                 break;
         endswitch;
     }
