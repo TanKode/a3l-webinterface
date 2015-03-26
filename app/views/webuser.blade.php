@@ -17,6 +17,8 @@
     </div>
 @endif
 
+{{ $webusers->links() }}
+
 <div class="table table-hover">
     <div class="thead">
         <strong></strong>
@@ -51,3 +53,5 @@
         <strong></strong>
     </div>
 </div>
+
+{{ $webusers->links() }}

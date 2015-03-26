@@ -10,6 +10,8 @@
 
 <h2>Logs</h2>
 
+{{ $logs->links() }}
+
 <div class="table table-hover">
     <div class="thead">
         <strong>ID</strong>
@@ -35,6 +37,8 @@
                         <span class="label label-info label-list">MEDIC Lizenzen</span>
                     @elseif($difference[0] == 'adac_licenses')
                         <span class="label label-info label-list">ADAC Lizenzen</span>
+                    @elseif($difference[0] == 'members')
+                        <span class="label label-info label-list">Mitglieder</span>
                     @else
                         <span class="label label-info label-list">{{ $difference[0] }} {{ $difference[1] }} -> {{ $difference[2] }}</span>
                     @endif
@@ -52,3 +56,5 @@
         <strong>Zeitpunkt</strong>
     </div>
 </div>
+
+{{ $logs->links() }}

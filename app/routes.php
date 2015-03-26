@@ -64,7 +64,7 @@ Route::get('/webuser', array('before' => 'auth|admin', function() {
     $level_label[4] = '<span class="label label-primary">Admin</span>';
     $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
 
-    $webusers = DB::table('users')->orderBy('level', 'desc')->get();
+    $webusers = DB::table('users')->orderBy('level', 'desc')->paginate(25);
 
     return View::make('main', array('level_label'=>$level_label))->nest('content', 'webuser', array('level_label'=>$level_label, 'webusers'=>$webusers));
 }));
@@ -99,14 +99,14 @@ Route::get('/vehicles', array('before' => 'auth|support2', function() {
             ->where($where[0], $where[1])
             ->get();
     } else {
-        $all_vehicles = DB::table('vehicles')->get();
+        $all_vehicles = DB::table('vehicles')->paginate(50);
     }
 
     $vehicles = json_decode(file_get_contents('../app/views/jsons/vehicles.json'), true);
 
     $database = DB::getConfig('database');
 
-    return View::make('main', array('level_label'=>$level_label))->nest('content', 'vehicles', array('level_label'=>$level_label, 'vehicles'=>$vehicles, 'all_vehicles'=>$all_vehicles, 'database'=>$database, 'search'=>$search));
+    return View::make('main', array('level_label'=>$level_label))->nest('content', 'vehicles', array('level_label'=>$level_label, 'vehicles'=>$vehicles, 'all_vehicles'=>$all_vehicles, 'database'=>$database, 'search'=>$search, 'type'=>$type));
 }));
 
 Route::get('/players', array('before' => 'auth|support1', function() {
@@ -155,7 +155,7 @@ Route::get('/players', array('before' => 'auth|support1', function() {
             ->orderBy($order, 'desc')
             ->get();
     } else {
-        $players = DB::table('players')->get();
+        $players = DB::table('players')->paginate(50);
     }
 
     $licenses = json_decode(file_get_contents('../app/views/jsons/licenses.json'));
@@ -165,7 +165,7 @@ Route::get('/players', array('before' => 'auth|support1', function() {
 
     $database = DB::getConfig('database');
 
-    return View::make('main', array('level_label'=>$level_label))->nest('content', 'players', array('level_label'=>$level_label, 'players'=>$players, 'licenses'=>$licenses, 'database'=>$database, 'coplevel'=>$coplevel, 'mediclevel'=>$mediclevel, 'adaclevel'=>$adaclevel, 'search'=>$search));
+    return View::make('main', array('level_label'=>$level_label))->nest('content', 'players', array('level_label'=>$level_label, 'players'=>$players, 'licenses'=>$licenses, 'database'=>$database, 'coplevel'=>$coplevel, 'mediclevel'=>$mediclevel, 'adaclevel'=>$adaclevel, 'search'=>$search, 'type'=>$type));
 }));
 
 Route::get('/gangs', array('before' => 'auth|support2', function() {
@@ -184,7 +184,7 @@ Route::get('/gangs', array('before' => 'auth|support2', function() {
             ->orWhere('owner', 'LIKE', '%'.$search.'%')
             ->get();
     } else {
-        $gangs = DB::table('gangs')->get();
+        $gangs = DB::table('gangs')->paginate(25);
     }
 
     $database = DB::getConfig('database');
@@ -200,7 +200,7 @@ Route::get('/logs', array('before' => 'auth|admin', function() {
     $level_label[4] = '<span class="label label-primary">Admin</span>';
     $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
 
-    $logs = DB::table('logs')->orderBy('created_at', 'desc')->get();
+    $logs = DB::table('logs')->orderBy('created_at', 'desc')->paginate(100);
     foreach($logs as $key => $log) {
         $logs[$key]->editor_name = User::find($log->editor)->username;
         $logs[$key]->difference = unserialize($log->difference);

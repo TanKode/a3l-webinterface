@@ -36,6 +36,10 @@
     </div>
 @endif
 
+@if(empty($search) && empty($type))
+    {{ $all_vehicles->links() }}
+@endif
+
 <div class="table table-hover">
     <div class="thead">
         <strong>ID</strong>
@@ -82,3 +86,7 @@
         <strong></strong>
     </div>
 </div>
+
+@if(empty($search) && empty($type))
+    {{ $all_vehicles->links() }}
+@endif

@@ -28,6 +28,10 @@
     </div>
 @endif
 
+@if(empty($search))
+    {{ $gangs->links() }}
+@endif
+
 <div class="table table-hover">
     <div class="thead">
         <strong>ID</strong>
@@ -95,3 +99,7 @@
         <strong></strong>
     </div>
 </div>
+
+@if(empty($search))
+    {{ $gangs->links() }}
+@endif
