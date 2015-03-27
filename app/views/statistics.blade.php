@@ -4,7 +4,7 @@
  * author: Gummibeer
  * url: https://bitbucket.org/Gummibeer
  * package: a3l_admintool
- * since 1.0
+ * since 1.1
  */
 ?>
 
@@ -21,13 +21,6 @@
 
 <script type="text/javascript">
     jQuery(function () {
-        Highcharts.setOptions({
-            lang: {
-                shortMonths: [ "Jan" , "Feb" , "Mär" , "Apr" , "Mai" , "Jun" , "Jul" , "Aug" , "Sep" , "Okt" , "Nov" , "Dez"],
-                weekdays: ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"]
-            }
-        });
-
         jQuery('#chart_players').highcharts({
             chart: { zoomType: 'x' },
             title: { text: 'Altis Life Server Spieler-Verlauf' },

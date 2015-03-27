@@ -20,9 +20,11 @@
     {{ HTML::style('css/whhg.css'); }}
     {{ HTML::style('css/styles.css'); }}
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.jquery.min.js"></script>
+    {{ HTML::script('js/jquery.min.js'); }}
+    {{ HTML::script('js/bootstrap.jquery.min.js'); }}
     <script src="//code.highcharts.com/highcharts.js"></script>
+    {{ HTML::script('js/highcharts.jquery.js'); }}
+
     <!--[if lt IE 9]>
         <script src="js/html5shiv.min.js"></script>
         <script src="js/respond.min.js"></script>
