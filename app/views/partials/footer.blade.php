@@ -12,7 +12,7 @@
     <p class="well">
         Arma 3 Altis Life WebInterface v1.1 |
         developed by <a href="https://github.com/Gummibeer" target="_blank">Gummibeer</a> &copy; 2015 |
-        Repository on <a href="https://bitbucket.org/Gummibeer/al-admin-tool" target="_blank">BitBucket</a> |
+        Repository on <a href="https://github.com/Gummibeer/a3l-webinterface" target="_blank">GitHub</a> |
         licensed under <a href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a>
     </p>
 </footer>
