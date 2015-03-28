@@ -10,7 +10,9 @@
 
 Um das Webinterface nutzen zu können muss die ```database.sample.php``` angepasst - *Host*, *Datenbank*, *Benutzer*, *Passwort* etc. - und als ```database.php``` gespeichert werden. Des Weiteren können die *Coplevel*, *Mediclevel*, *ADAC-Level*, *Lizenzen*, *Skilllevel* und *Fahrzeuge* in den entsprechenden JSON-Dateien unter ```app/views/jsons/``` angepasst werden. Alle weiteren Änderungen müssen derzeit noch direkt im Code gemacht werden.
 
-In jeder A3L Tabelle müssen die Spalten ```updated_at``` und ```created_at``` als Timestamp hinzugefügt werden.
+In jeder A3L Tabelle müssen die Spalten ```updated_at``` und ```created_at``` als Timestamp hinzugefügt werden. Des Weiteren müssen die Tabellen ```users```, ```logs``` und es kann die ```statistics``` Tabelle angelegt werden z.B. durch [newtables.sql](https://github.com/Gummibeer/a3l-webinterface/blob/master/newtables.sql). Für die Statistiken wäre noch ein Cronjob nötig welcher die [cronjob.php](https://github.com/Gummibeer/a3l-webinterface/blob/master/cronjob.php) Datei regelmäßig ausführt (zum Server-Restart).
+ 
+ Um das Statistik-Modul vollständig nutzen zu können müsste noch das Startdatum und Interval der aufgezeichneten Daten in der [statistics.blade.php](https://github.com/Gummibeer/a3l-webinterface/blob/master/app/views/statistics.blade.php) geändert werden. ```pointInterval: 4 * 60 * 60 * 1000, pointStart: Date.UTC(2015, 2, 26, 16)```.
 
 ## Rechte
 
