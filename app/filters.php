@@ -151,3 +151,13 @@ Route::filter('support1', function() {
         }
     }
 });
+
+Route::filter('nocache', function() {
+    $cachedViewsDirectory = app('path.storage').'/views/';
+    $files = glob($cachedViewsDirectory.'*');
+    foreach($files as $file) {
+        if(is_file($file)) {
+            @unlink($file);
+        }
+    }
+});
