@@ -8,6 +8,7 @@ class GangsController extends BaseController {
     public function postEdit() {
         $rules = array(
             'gangid'=>'required|numeric|exists:gangs,id',
+            'newmember'=>'numeric',
             'maxmembers'=>'numeric',
             'bank'=>'numeric',
         );
@@ -23,6 +24,10 @@ class GangsController extends BaseController {
                     array_push($members, $key);
                 endif;
             endforeach;
+
+            if(Input::get('newmember')) {
+                array_push($members, Input::get('newmember'));
+            }
 
             $members = Auth::user()->encodeDBArray($members, true);
 

@@ -50,7 +50,12 @@
             <span>{{ $gang->owner }}</span>
             <span id="gang_members_{{ $gang->id }}_holder">
                 @if(count(Auth::user()->decodeDBArray($gang->members)))
-                    <p><button class="btn btn-info btn-sm" type="button" data-parent="#gang_members_{{ $gang->id }}_holder" data-toggle="collapse" data-target="#gang_members_{{ $gang->id }}">Mitglieder</button></p>
+                    <p>
+                        <button class="btn btn-info btn-sm" type="button" data-parent="#gang_members_{{ $gang->id }}_holder" data-toggle="collapse" data-target="#gang_members_{{ $gang->id }}">Mitglieder</button>
+                        @if(Auth::user()->level >= 2)
+                            {{ Form::text('newmember', null, array('placeholder'=>'Mitglied hinzufügen')) }}
+                        @endif
+                    </p>
                     <div class="collapse" id="gang_members_{{ $gang->id }}">
                         @foreach(array_unique(Auth::user()->decodeDBArray($gang->members)) as $member)
                             <span class="label label-success label-list">{{ $member }}@if(Auth::user()->level >= 2) {{ Form::checkbox('member_'.$member, '1', true); }}@endif</span>
