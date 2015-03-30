@@ -6,8 +6,6 @@
  * package: a3l_admintool
  * since 0.5
  */
-
-// TODO: Model, View, Controller anlegen/bearbeiten
 ?>
 
 <h2>Gangs @if($database == 'arma3life')<span class="label label-danger">LIVE</span>@endif</h2>
@@ -47,7 +45,13 @@
         {{ Form::open(array('url'=>'gang/edit')) }}
             <span>{{ $gang->id }}</span>
             <span>{{ $gang->name }}</span>
-            <span>{{ $gang->owner }}</span>
+            <span>
+                @if(Auth::user()->level >= 3)
+                    {{ Form::number('owner', $gang->owner) }}
+                @else
+                    {{ $gang->owner }}
+                @endif
+            </span>
             <span id="gang_members_{{ $gang->id }}_holder">
                 @if(count(Auth::user()->decodeDBArray($gang->members)))
                     <p>

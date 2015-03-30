@@ -8,6 +8,7 @@ class GangsController extends BaseController {
     public function postEdit() {
         $rules = array(
             'gangid'=>'required|numeric|exists:gangs,id',
+            'owner'=>'numeric',
             'newmember'=>'numeric',
             'maxmembers'=>'numeric',
             'bank'=>'numeric',
@@ -18,7 +19,6 @@ class GangsController extends BaseController {
         if($validator->passes() && Auth::user()->level >= 2) {
             $members = array();
             foreach(Input::all() as $key => $value):
-//                $key = str_replace('member_', '', $key);
                 if($key != 'bank' && $key != '_token' && $key != 'gangid' && $key != 'active' && $key != 'maxmembers'):
                     $key = str_replace('member_', '', $key);
                     array_push($members, $key);
@@ -43,8 +43,8 @@ class GangsController extends BaseController {
             $log->editor = Auth::user()->id;
             $log->objectid = Input::get('gangid');
             $log->difference = $log->getDifference(
-                array('members'=>$gang->members, 'maxmembers'=>$gang->maxmembers, 'bank'=>$gang->bank, 'active'=>$gang->active),
-                array('members'=>$members, 'maxmembers'=>Input::get('maxmembers')*1, 'bank'=>Input::get('bank')*1, 'active'=>$active)
+                array('owner'=>$gang->owner, 'members'=>$gang->members, 'maxmembers'=>$gang->maxmembers, 'bank'=>$gang->bank, 'active'=>$gang->active),
+                array('owner'=>Input::get('owner'), 'members'=>$members, 'maxmembers'=>Input::get('maxmembers')*1, 'bank'=>Input::get('bank')*1, 'active'=>$active)
             );
             $log->save();
 
@@ -52,6 +52,7 @@ class GangsController extends BaseController {
             $gang->maxmembers = Input::get('maxmembers');
 
             if(Auth::user()->level >= 3) {
+                $gang->owner = Input::get('owner');
                 $gang->bank = Input::get('bank');
                 $gang->active = $active;
             }
