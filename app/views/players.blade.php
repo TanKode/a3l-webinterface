@@ -2,7 +2,7 @@
 /**
  * ide: PhpStorm
  * Author: Gummibeer
- * url: https://bitbucket.org/Gummibeer
+ * url: https://github.com/Gummibeer
  * package: a3l_admintool
  * since 0.1
  */
