@@ -19,7 +19,7 @@ class GangsController extends BaseController {
         if($validator->passes() && Auth::user()->level >= 2) {
             $members = array();
             foreach(Input::all() as $key => $value):
-                if($key != 'bank' && $key != '_token' && $key != 'gangid' && $key != 'active' && $key != 'maxmembers'):
+                if($key != 'bank' && $key != '_token' && $key != 'gangid' && $key != 'active' && $key != 'maxmembers' && $key != 'owner' && $key != 'newmember'):
                     $key = str_replace('member_', '', $key);
                     array_push($members, $key);
                 endif;
