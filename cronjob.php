@@ -97,7 +97,7 @@ function backup_tables($host,$user,$pass,$name,$tables = '*')
         $return.="\n\n\n";
     endforeach;
 
-    $handle = fopen('db-backup-'.time().'-'.(md5(implode(',',$tables))).'.sql','w+');
+    $handle = fopen('db-backup-'.date('d-m-Y_H-i').'-'.(md5(implode(',',$tables))).'.sql','w+');
     fwrite($handle,$return);
     fclose($handle);
 }
