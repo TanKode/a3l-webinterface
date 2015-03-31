@@ -53,17 +53,14 @@
 <div class="table table-hover">
     <div class="thead">
         <strong>ID</strong>
-        <strong>Spieler-ID</strong>
-        <strong>Name</strong>
+        <strong>Spieler</strong>
+        <strong>Daten</strong>
         <strong>Bargeld</strong>
         <strong>Bankguthaben</strong>
         <strong>CIV-Lizenzen</strong>
-        <strong>COP-Level</strong>
-        <strong>COP-Lizenzen</strong>
-        <strong>MEDIC-Level</strong>
-        <strong>MEDIC-Lizenzen</strong>
-        <strong>ADAC-Level</strong>
-        <strong>ADAC-Lizenzen</strong>
+        <strong>COP</strong>
+        <strong>MEDIC</strong>
+        <strong>ADAC</strong>
         <strong>Donator-Level</strong>
         <strong>Admin-Level</strong>
         <strong></strong>
@@ -72,8 +69,14 @@
         @if(count(Auth::user()->decodeDBArray($player->civ_licenses)) || count(Auth::user()->decodeDBArray($player->cop_licenses)) || count(Auth::user()->decodeDBArray($player->med_licenses)) || count(Auth::user()->decodeDBArray($player->adac_licenses)))
             {{ Form::open(array('url'=>'player/edit')) }}
                 <span>{{ $player->uid }}</span>
-                <span>{{ $player->playerid }}</span>
-                <span>{{ $player->name }}</span>
+                <span>
+                    {{ $player->playerid }}<br/>
+                    {{ $player->name }}
+                </span>
+                <span>
+                    {{ date('d.m.Y H:i', strtotime($player->created_at)) }}<br/>
+                    {{ date('d.m.Y H:i', strtotime($player->updated_at)) }}
+                </span>
                 <span>
                     @if(Auth::user()->level >= 3)
                         {{ Form::number('cash', $player->cash) }}
@@ -112,24 +115,24 @@
                     @else
                         {{ $player->coplevel }}
                     @endif
-                </span>
-                <span id="cop_licenses_{{ $player->playerid }}_holder">
-                    @if(count(Auth::user()->decodeDBArray($player->cop_licenses)))
-                        <p><button class="btn btn-info btn-sm" type="button" data-parent="#cop_licenses_{{ $player->playerid }}_holder" data-toggle="collapse" data-target="#cop_licenses_{{ $player->playerid }}">COP Lizenzen</button></p>
-                        <div class="collapse" id="cop_licenses_{{ $player->playerid }}">
-                            @foreach(Auth::user()->decodeDBArray($player->cop_licenses) as $license)
-                                @if($licenses->$license[0] != false)
-                                    @if($license[1])
-                                        <span class="label label-success label-list">{{ $licenses->$license[0] }}@if(Auth::user()->level >= 2) {{ Form::checkbox($license[0], '1', true); }}@endif</span>
-                                    @else
-                                        <span class="label label-info label-list">{{ $licenses->$license[0] }}@if(Auth::user()->level >= 2) {{ Form::checkbox($license[0], '1', false); }}@endif</span>
+                    <span id="cop_licenses_{{ $player->playerid }}_holder">
+                        @if(count(Auth::user()->decodeDBArray($player->cop_licenses)))
+                            <p><button class="btn btn-info btn-sm" type="button" data-parent="#cop_licenses_{{ $player->playerid }}_holder" data-toggle="collapse" data-target="#cop_licenses_{{ $player->playerid }}">COP Lizenzen</button></p>
+                            <div class="collapse" id="cop_licenses_{{ $player->playerid }}">
+                                @foreach(Auth::user()->decodeDBArray($player->cop_licenses) as $license)
+                                    @if($licenses->$license[0] != false)
+                                        @if($license[1])
+                                            <span class="label label-success label-list">{{ $licenses->$license[0] }}@if(Auth::user()->level >= 2) {{ Form::checkbox($license[0], '1', true); }}@endif</span>
+                                        @else
+                                            <span class="label label-info label-list">{{ $licenses->$license[0] }}@if(Auth::user()->level >= 2) {{ Form::checkbox($license[0], '1', false); }}@endif</span>
+                                        @endif
                                     @endif
-                                @endif
-                            @endforeach
-                        </div>
-                    @else
-                        <p>noch kein Login</p>
-                    @endif
+                                @endforeach
+                            </div>
+                        @else
+                            <p>noch kein Login</p>
+                        @endif
+                    </span>
                 </span>
                 <span>
                     @if(Auth::user()->level >= 1)
@@ -137,24 +140,24 @@
                     @else
                         {{ $player->mediclevel }}
                     @endif
-                </span>
-                <span id="med_licenses_{{ $player->playerid }}_holder">
-                    @if(count(Auth::user()->decodeDBArray($player->med_licenses)))
-                        <p><button class="btn btn-info btn-sm" type="button" data-parent="#med_licenses_{{ $player->playerid }}_holder" data-toggle="collapse" data-target="#med_licenses_{{ $player->playerid }}">MEDIC Lizenzen</button></p>
-                        <div class="collapse" id="med_licenses_{{ $player->playerid }}">
-                            @foreach(Auth::user()->decodeDBArray($player->med_licenses) as $license)
-                                @if($licenses->$license[0] != false)
-                                    @if($license[1])
-                                        <span class="label label-success label-list">{{ $licenses->$license[0] }}@if(Auth::user()->level >= 2) {{ Form::checkbox($license[0], '1', true); }}@endif</span>
-                                    @else
-                                        <span class="label label-info label-list">{{ $licenses->$license[0] }}@if(Auth::user()->level >= 2) {{ Form::checkbox($license[0], '1', false); }}@endif</span>
+                    <span id="med_licenses_{{ $player->playerid }}_holder">
+                        @if(count(Auth::user()->decodeDBArray($player->med_licenses)))
+                            <p><button class="btn btn-info btn-sm" type="button" data-parent="#med_licenses_{{ $player->playerid }}_holder" data-toggle="collapse" data-target="#med_licenses_{{ $player->playerid }}">MEDIC Lizenzen</button></p>
+                            <div class="collapse" id="med_licenses_{{ $player->playerid }}">
+                                @foreach(Auth::user()->decodeDBArray($player->med_licenses) as $license)
+                                    @if($licenses->$license[0] != false)
+                                        @if($license[1])
+                                            <span class="label label-success label-list">{{ $licenses->$license[0] }}@if(Auth::user()->level >= 2) {{ Form::checkbox($license[0], '1', true); }}@endif</span>
+                                        @else
+                                            <span class="label label-info label-list">{{ $licenses->$license[0] }}@if(Auth::user()->level >= 2) {{ Form::checkbox($license[0], '1', false); }}@endif</span>
+                                        @endif
                                     @endif
-                                @endif
-                            @endforeach
-                        </div>
-                    @else
-                        <p>noch kein Login</p>
-                    @endif
+                                @endforeach
+                            </div>
+                        @else
+                            <p>noch kein Login</p>
+                        @endif
+                    </span>
                 </span>
                 <span>
                     @if(Auth::user()->level >= 1)
@@ -162,24 +165,24 @@
                     @else
                         {{ $player->adaclevel }}
                     @endif
-                </span>
-                <span id="adac_licenses_{{ $player->playerid }}_holder">
-                    @if(count(Auth::user()->decodeDBArray($player->adac_licenses)))
-                        <p><button class="btn btn-info btn-sm" type="button" data-parent="#adac_licenses_{{ $player->playerid }}_holder" data-toggle="collapse" data-target="#adac_licenses_{{ $player->playerid }}">ADAC Lizenzen</button></p>
-                        <div class="collapse" id="adac_licenses_{{ $player->playerid }}">
-                            @foreach(Auth::user()->decodeDBArray($player->adac_licenses) as $license)
-                                @if($licenses->$license[0] != false)
-                                    @if($license[1])
-                                        <span class="label label-success label-list">{{ $licenses->$license[0] }}@if(Auth::user()->level >= 2) {{ Form::checkbox($license[0], '1', true); }}@endif</span>
-                                    @else
-                                        <span class="label label-info label-list">{{ $licenses->$license[0] }}@if(Auth::user()->level >= 2) {{ Form::checkbox($license[0], '1', false); }}@endif</span>
+                    <span id="adac_licenses_{{ $player->playerid }}_holder">
+                        @if(count(Auth::user()->decodeDBArray($player->adac_licenses)))
+                            <p><button class="btn btn-info btn-sm" type="button" data-parent="#adac_licenses_{{ $player->playerid }}_holder" data-toggle="collapse" data-target="#adac_licenses_{{ $player->playerid }}">ADAC Lizenzen</button></p>
+                            <div class="collapse" id="adac_licenses_{{ $player->playerid }}">
+                                @foreach(Auth::user()->decodeDBArray($player->adac_licenses) as $license)
+                                    @if($licenses->$license[0] != false)
+                                        @if($license[1])
+                                            <span class="label label-success label-list">{{ $licenses->$license[0] }}@if(Auth::user()->level >= 2) {{ Form::checkbox($license[0], '1', true); }}@endif</span>
+                                        @else
+                                            <span class="label label-info label-list">{{ $licenses->$license[0] }}@if(Auth::user()->level >= 2) {{ Form::checkbox($license[0], '1', false); }}@endif</span>
+                                        @endif
                                     @endif
-                                @endif
-                            @endforeach
-                        </div>
-                    @else
-                        <p>noch kein Login</p>
-                    @endif
+                                @endforeach
+                            </div>
+                        @else
+                            <p>noch kein Login</p>
+                        @endif
+                    </span>
                 </span>
                 <span>
                     @if(Auth::user()->level >= 3)
@@ -206,17 +209,14 @@
     @endforeach
     <div class="tfoot">
         <strong>ID</strong>
-        <strong>Spieler-ID</strong>
-        <strong>Name</strong>
+        <strong>Spieler</strong>
+        <strong>Daten</strong>
         <strong>Bargeld</strong>
         <strong>Bankguthaben</strong>
         <strong>CIV-Lizenzen</strong>
-        <strong>COP-Level</strong>
-        <strong>COP-Lizenzen</strong>
-        <strong>MEDIC-Level</strong>
-        <strong>MEDIC-Lizenzen</strong>
-        <strong>ADAC-Level</strong>
-        <strong>ADAC-Lizenzen</strong>
+        <strong>COP</strong>
+        <strong>MEDIC</strong>
+        <strong>ADAC</strong>
         <strong>Donator-Level</strong>
         <strong>Admin-Level</strong>
         <strong></strong>
