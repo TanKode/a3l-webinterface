@@ -44,6 +44,7 @@
     <div class="thead">
         <strong>ID</strong>
         <strong>Spieler-ID</strong>
+        <strong>Daten</strong>
         <strong>Seite</strong>
         <strong>Fahrzeugtyp</strong>
         <strong>Klassenname</strong>
@@ -56,6 +57,10 @@
         {{ Form::open(array('url'=>'vehicle/edit')) }}
             <span>{{ $vehicle->id }}</span>
             <span>{{ $vehicle->pid }}</span>
+            <span>
+                {{ date('d.m.Y H:i', strtotime($vehicle->created_at)) }}<br/>
+                {{ date('d.m.Y H:i', strtotime($vehicle->updated_at)) }}
+            </span>
             <span>{{ strtoupper($vehicle->side) }}</span>
             <span>
                 {{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}
@@ -77,6 +82,7 @@
     <div class="tfoot">
         <strong>ID</strong>
         <strong>Spieler-ID</strong>
+        <strong>Daten</strong>
         <strong>Seite</strong>
         <strong>Fahrzeugtyp</strong>
         <strong>Klassenname</strong>
