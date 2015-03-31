@@ -70,6 +70,7 @@ class PlayersController extends BaseController {
 
         $med_licenses = array(
             array('license_med_air', 0),
+            array('license_med_mohawk', 0),
         );
 
         $adac_licenses = array(
