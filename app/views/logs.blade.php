@@ -46,7 +46,7 @@
                     @endif
                 @endforeach
             </span>
-            <span>{{ date('d-m-Y H:i', strtotime($log->created_at)) }}</span>
+            <span>{{ date('d.m.Y H:i', strtotime($log->created_at)) }}</span>
         </div>
     @endforeach
     <div class="tfoot">
