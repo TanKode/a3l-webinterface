@@ -9,6 +9,14 @@
 ?>
 
 <h2>Dashboard @if($database == 'arma3life')<span class="label label-danger">LIVE</span>@endif</h2>
+
+@if(Session::has('message') && Session::has('type'))
+    <div class="alert alert-dismissible alert-{{ Session::get('type') }}">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{ Session::get('message') }}
+    </div>
+@endif
+
 <div class="row">
     <div class="col-md-4">
         <h3>Übersicht</h3>

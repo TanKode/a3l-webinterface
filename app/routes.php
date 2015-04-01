@@ -35,7 +35,7 @@ $counter['houses'] = DB::table('houses')->count();
 $counter['gangs'] = DB::table('gangs')->count();
 $counter['logs'] = DB::table('logs')->count();
 
-Route::get('/', array('before' => 'auth|nocache', function() use ($level_label, $counter) {
+Route::get('/', array('before' => 'auth', function() use ($level_label, $counter) {
     $current_player = DB::table('players')->where('playerid', Auth::user()->playerid)->first();
     $current_player->coplevel_name = json_decode(file_get_contents('../app/views/jsons/coplevel.json'))[$current_player->coplevel];
     $current_player->mediclevel_name = json_decode(file_get_contents('../app/views/jsons/mediclevel.json'))[$current_player->mediclevel];
@@ -275,6 +275,11 @@ Route::get('/statistics', array('before' => 'auth', function() use ($level_label
     return View::make('main', array('level_label'=>$level_label, 'counter'=>$counter))->nest('content', 'statistics', array('level_label'=>$level_label, 'statistics'=>$statistics));
 }));
 
+
+
+Route::get('/clearcache', array('before' => 'auth|superadmin|nocache', function() {
+    return Redirect::to('/')->with(array('message'=>'Seiten-Cache wurde gelöscht.', 'type' => 'success'));
+}));
 
 
 Route::get('/login', function() {
