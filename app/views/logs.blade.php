@@ -14,7 +14,7 @@
     <div class="col-md-9">
         {{ Form::open(array('url'=>'logs', 'method'=>'GET')) }}
         <div class="input-group">
-            <input type="text" name="s" class="form-control" placeholder="Bearbeiter: e16 || Fahrzeug: v345 || Spieler: p246 || Gang: g14" value="{{ $search }}">
+            <input type="text" name="s" class="form-control" placeholder="Bearbeiter: e16 || Fahrzeug: v345 || Spieler: p246 || Gang: g14 || Datum: d2015-03-30" value="{{ $search }}">
             <span class="input-group-btn">
                 <button class="btn btn-primary" type="submit">suchen</button>
             </span>

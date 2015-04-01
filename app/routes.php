@@ -165,7 +165,7 @@ Route::get('/gangs', array('before' => 'auth|support2', function() use ($level_l
 
     $database = DB::getConfig('database');
 
-    return View::make('main', array('level_label'=>$level_label))->nest('content', 'gangs', array('level_label'=>$level_label, 'gangs'=>$gangs, 'database'=>$database, 'search'=>$search));
+    return View::make('main', array('level_label'=>$level_label, 'counter'=>$counter))->nest('content', 'gangs', array('level_label'=>$level_label, 'gangs'=>$gangs, 'database'=>$database, 'search'=>$search));
 }));
 
 Route::get('/logs', array('before' => 'auth|support1', function() use ($level_label, $counter) {
@@ -200,6 +200,12 @@ Route::get('/logs', array('before' => 'auth|support1', function() use ($level_la
                     ->orWhere(function($query) use ($search) {
                         $query->where('objectid', substr($search, 1))->where('type', 'player');
                     })
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+                break;
+            case 'd':
+                $logs = DB::table('logs')
+                    ->where('created_at', 'LIKE', substr($search, 1) . '%')
                     ->orderBy('created_at', 'desc')
                     ->get();
                 break;
