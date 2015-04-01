@@ -60,7 +60,7 @@
         <strong>COP</strong>
         <strong>MEDIC</strong>
         <strong>ADAC</strong>
-        <strong>Level</strong>
+        <strong>Admin</strong>
         <strong>Begründung</strong>
         <strong></strong>
     </div>
@@ -184,12 +184,6 @@
                 </span>
                 <span>
                     @if(Auth::user()->level >= 4)
-                        {{ Form::select('donatorlvl', array('0'=>'kein Donator', '5'=>'Donator'), $player->donatorlvl) }}
-                    @else
-                        {{ $player->donatorlvl }}
-                    @endif
-                    <br/>
-                    @if(Auth::user()->level >= 4)
                         {{ Form::select('adminlevel', array('0'=>'kein Admin', '3'=>'Admin'), $player->adminlevel) }}
                     @else
                         {{ $player->adminlevel }}
@@ -214,7 +208,7 @@
         <strong>COP</strong>
         <strong>MEDIC</strong>
         <strong>ADAC</strong>
-        <strong>Level</strong>
+        <strong>Admin</strong>
         <strong>Begründung</strong>
         <strong></strong>
     </div>

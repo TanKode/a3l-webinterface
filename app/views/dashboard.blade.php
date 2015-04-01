@@ -50,6 +50,9 @@
             <li class="list-group-item"><i class="icon-handcuffs"></i> Polizei-Rang<span class="badge">{{ $current_player->coplevel_name }}</span></li>
             <li class="list-group-item"><i class="icon-firstaid"></i> Medic-Rang<span class="badge">{{ $current_player->mediclevel_name }}</span></li>
             <li class="list-group-item"><i class="icon-construction"></i> ADAC-Rang<span class="badge">{{ $current_player->adaclevel_name }}</span></li>
+            @if($current_player->donatorlvl == 5)
+                <li class="list-group-item"><i class="icon-bill"></i> Donator<span class="badge">{{ $current_player->donatorexpires }}</span></li>
+            @endif
         </ul>
 
 

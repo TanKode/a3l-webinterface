@@ -41,6 +41,11 @@ Route::get('/', array('before' => 'auth', function() use ($level_label, $counter
     $current_player->mediclevel_name = json_decode(file_get_contents('../app/views/jsons/mediclevel.json'))[$current_player->mediclevel];
     $current_player->adaclevel_name = json_decode(file_get_contents('../app/views/jsons/adaclevel.json'))[$current_player->adaclevel];
 
+    $date = new DateTime($current_player->donatordate);
+    $duration = $current_player->donatorduration < 1 ? 1 : $current_player->donatorduration;
+    $date->modify('+'.$duration.' month');
+    $current_player->donatorexpires = $date->format('d.m.Y');
+
     $playernames = unserialize(Auth::user()->playernames) ? unserialize(Auth::user()->playernames) : array();
     $playernames[] = $current_player->name;
     $playernames = array_unique($playernames);
@@ -275,6 +280,21 @@ Route::get('/statistics', array('before' => 'auth', function() use ($level_label
     return View::make('main', array('level_label'=>$level_label, 'counter'=>$counter))->nest('content', 'statistics', array('level_label'=>$level_label, 'statistics'=>$statistics));
 }));
 
+Route::get('/donators', array('before' => 'auth|admin', function() use ($level_label, $counter) {
+    $donators = DB::table('players')->where('donatorlvl', '>', 0)->paginate(50);
+
+    foreach($donators as $key => $donator) {
+        $date = new DateTime($donator->donatordate);
+        $duration = $donator->donatorduration < 1 ? 1 : $donator->donatorduration;
+        $date->modify('+'.$duration.' month');
+        $donators[$key]->donatorexpires = $date->format('Y-m-d');
+    }
+
+    $database = DB::getConfig('database');
+
+    return View::make('main', array('level_label'=>$level_label, 'counter'=>$counter))->nest('content', 'donator', array('level_label'=>$level_label, 'database'=>$database, 'donators'=>$donators));
+}));
+
 
 
 Route::get('/clearcache', array('before' => 'auth|superadmin|nocache', function() {
@@ -305,3 +325,5 @@ Route::controller('vehicle', 'VehiclesController');
 Route::controller('player', 'PlayersController');
 
 Route::controller('gang', 'GangsController');
+
+Route::controller('donators', 'DonatorsController');

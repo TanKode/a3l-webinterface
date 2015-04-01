@@ -14,7 +14,6 @@ class PlayersController extends BaseController {
             'coplevel'=>'numeric|min:0|max:11',
             'mediclevel'=>'numeric|min:0|max:5',
             'adaclevel'=>'numeric|min:0|max:5',
-            'donatorlvl'=>'numeric|min:0|max:5',
             'adminlevel'=>'numeric|min:0|max:3',
             'reason'=>'required'
         );
@@ -135,7 +134,6 @@ class PlayersController extends BaseController {
                     'cop_licenses'=>$player->cop_licenses,
                     'med_licenses'=>$player->med_licenses,
                     'adac_licenses'=>$player->adac_licenses,
-                    'donatorlvl'=>$player->donatorlvl,
                     'adminlevel'=>$player->adminlevel,
                 ),
                 array(
@@ -148,7 +146,6 @@ class PlayersController extends BaseController {
                     'cop_licenses'=>$cop_licenses,
                     'med_licenses'=>$med_licenses,
                     'adac_licenses'=>$adac_licenses,
-                    'donatorlvl'=>Input::get('donatorlvl'),
                     'adminlevel'=>Input::get('adminlevel'),
                 )
             );
@@ -163,7 +160,6 @@ class PlayersController extends BaseController {
             $player->cop_licenses = $cop_licenses;
             $player->med_licenses = $med_licenses;
             $player->adac_licenses = $adac_licenses;
-            $player->donatorlvl = Input::get('donatorlvl');
             $player->adminlevel = Input::get('adminlevel');
             $player->save();
 
@@ -225,7 +221,6 @@ class PlayersController extends BaseController {
                     'cop_licenses'=>$player->cop_licenses,
                     'med_licenses'=>$player->med_licenses,
                     'adac_licenses'=>$player->adac_licenses,
-                    'donatorlvl'=>$player->donatorlvl,
                 ),
                 array(
                     'cash'=>Input::get('cash')*1,
@@ -237,7 +232,6 @@ class PlayersController extends BaseController {
                     'cop_licenses'=>$cop_licenses,
                     'med_licenses'=>$med_licenses,
                     'adac_licenses'=>$adac_licenses,
-                    'donatorlvl'=>Input::get('donatorlvl'),
                 )
             );
             $log->save();
@@ -251,7 +245,6 @@ class PlayersController extends BaseController {
             $player->cop_licenses = $cop_licenses;
             $player->med_licenses = $med_licenses;
             $player->adac_licenses = $adac_licenses;
-            $player->donatorlvl = Input::get('donatorlvl');
             $player->save();
 
             return Redirect::to('/players')
