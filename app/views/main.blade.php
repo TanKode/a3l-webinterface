@@ -34,7 +34,7 @@
 
     <div class="container-fluid">
         @if(Auth::check())
-            {{ View::make('partials/header', array('level_label'=>$level_label)) }}
+            {{ View::make('partials/header', array('level_label'=>$level_label, 'counter'=>$counter)) }}
         @endif
         @if( isset($content) )
             {{ $content }}

@@ -11,28 +11,30 @@
 |
 */
 
-Route::get('/', array('before' => 'auth', function() {
-    $level_label[0] = '<span class="label label-default">Mitglied</span>';
-    $level_label[1] = '<span class="label label-info">Support I</span>';
-    $level_label[2] = '<span class="label label-success">Support II</span>';
-    $level_label[3] = '<span class="label label-warning">Support III</span>';
-    $level_label[4] = '<span class="label label-primary">Admin</span>';
-    $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
+$level_label = array();
+$level_label[0] = '<span class="label label-default">Mitglied</span>';
+$level_label[1] = '<span class="label label-info">Support I</span>';
+$level_label[2] = '<span class="label label-success">Support II</span>';
+$level_label[3] = '<span class="label label-warning">Support III</span>';
+$level_label[4] = '<span class="label label-primary">Admin</span>';
+$level_label[5] = '<span class="label label-danger">Super-Admin</span>';
 
-    $counter['users'] = DB::table('users')->count();
-    $counter['players'] = DB::table('players')->count();
-    $counter['admins'] = DB::table('players')->where('adminlevel', '>', 0)->count();
-    $counter['cops'] = DB::table('players')->where('coplevel', '>', 0)->count();
-    $counter['medics'] = DB::table('players')->where('mediclevel', '>', 0)->count();
-    $counter['adac'] = DB::table('players')->where('adaclevel', '>', 0)->count();
-    $counter['donators'] = DB::table('players')->where('donatorlvl', '>', 0)->count();
-    $counter['cash'] = DB::table('players')->sum('cash');
-    $counter['bank'] = DB::table('players')->sum('bankacc');
-    $counter['vehicles'] = DB::table('vehicles')->count();
-    $counter['vehicles_destroyed'] = DB::table('vehicles')->where('alive', 0)->count();
-    $counter['houses'] = DB::table('houses')->count();
-    $counter['gangs'] = DB::table('gangs')->count();
+$counter = array();
+$counter['users'] = DB::table('users')->count();
+$counter['players'] = DB::table('players')->count();
+$counter['admins'] = DB::table('players')->where('adminlevel', '>', 0)->count();
+$counter['cops'] = DB::table('players')->where('coplevel', '>', 0)->count();
+$counter['medics'] = DB::table('players')->where('mediclevel', '>', 0)->count();
+$counter['adac'] = DB::table('players')->where('adaclevel', '>', 0)->count();
+$counter['donators'] = DB::table('players')->where('donatorlvl', '>', 0)->count();
+$counter['cash'] = DB::table('players')->sum('cash');
+$counter['bank'] = DB::table('players')->sum('bankacc');
+$counter['vehicles'] = DB::table('vehicles')->count();
+$counter['vehicles_destroyed'] = DB::table('vehicles')->where('alive', 0)->count();
+$counter['houses'] = DB::table('houses')->count();
+$counter['gangs'] = DB::table('gangs')->count();
 
+Route::get('/', array('before' => 'auth|nocache', function() use ($level_label, $counter) {
     $current_player = DB::table('players')->where('playerid', Auth::user()->playerid)->first();
     $current_player->coplevel_name = json_decode(file_get_contents('../app/views/jsons/coplevel.json'))[$current_player->coplevel];
     $current_player->mediclevel_name = json_decode(file_get_contents('../app/views/jsons/mediclevel.json'))[$current_player->mediclevel];
@@ -53,30 +55,16 @@ Route::get('/', array('before' => 'auth', function() {
 
     $database = DB::getConfig('database');
 
-    return View::make('main', array('level_label'=>$level_label))->nest('content', 'dashboard', array('level_label'=>$level_label, 'counter'=>$counter, 'current_player'=>$current_player, 'licenses'=>$licenses, 'profs'=>$profs, 'vehicles'=>$vehicles, 'current_player_vehicles'=>$current_player_vehicles, 'database'=>$database));
+    return View::make('main', array('level_label'=>$level_label, 'counter'=>$counter))->nest('content', 'dashboard', array('level_label'=>$level_label, 'counter'=>$counter, 'current_player'=>$current_player, 'licenses'=>$licenses, 'profs'=>$profs, 'vehicles'=>$vehicles, 'current_player_vehicles'=>$current_player_vehicles, 'database'=>$database));
 }));
 
-Route::get('/webuser', array('before' => 'auth|admin', function() {
-    $level_label[0] = '<span class="label label-default">Mitglied</span>';
-    $level_label[1] = '<span class="label label-info">Support I</span>';
-    $level_label[2] = '<span class="label label-success">Support II</span>';
-    $level_label[3] = '<span class="label label-warning">Support III</span>';
-    $level_label[4] = '<span class="label label-primary">Admin</span>';
-    $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
-
+Route::get('/webuser', array('before' => 'auth|admin', function() use ($level_label, $counter) {
     $webusers = DB::table('users')->orderBy('level', 'desc')->paginate(25);
 
-    return View::make('main', array('level_label'=>$level_label))->nest('content', 'webuser', array('level_label'=>$level_label, 'webusers'=>$webusers));
+    return View::make('main', array('level_label'=>$level_label, 'counter'=>$counter))->nest('content', 'webuser', array('level_label'=>$level_label, 'webusers'=>$webusers));
 }));
 
-Route::get('/vehicles', array('before' => 'auth|support2', function() {
-    $level_label[0] = '<span class="label label-default">Mitglied</span>';
-    $level_label[1] = '<span class="label label-info">Support I</span>';
-    $level_label[2] = '<span class="label label-success">Support II</span>';
-    $level_label[3] = '<span class="label label-warning">Support III</span>';
-    $level_label[4] = '<span class="label label-primary">Admin</span>';
-    $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
-
+Route::get('/vehicles', array('before' => 'auth|support2', function() use ($level_label, $counter) {
     $search = Input::get('s');
     $type = Input::get('t');
 
@@ -107,17 +95,10 @@ Route::get('/vehicles', array('before' => 'auth|support2', function() {
 
     $database = DB::getConfig('database');
 
-    return View::make('main', array('level_label'=>$level_label))->nest('content', 'vehicles', array('level_label'=>$level_label, 'vehicles'=>$vehicles, 'all_vehicles'=>$all_vehicles, 'database'=>$database, 'search'=>$search, 'type'=>$type));
+    return View::make('main', array('level_label'=>$level_label, 'counter'=>$counter))->nest('content', 'vehicles', array('level_label'=>$level_label, 'vehicles'=>$vehicles, 'all_vehicles'=>$all_vehicles, 'database'=>$database, 'search'=>$search, 'type'=>$type));
 }));
 
-Route::get('/players', array('before' => 'auth|support1', function() {
-    $level_label[0] = '<span class="label label-default">Mitglied</span>';
-    $level_label[1] = '<span class="label label-info">Support I</span>';
-    $level_label[2] = '<span class="label label-success">Support II</span>';
-    $level_label[3] = '<span class="label label-warning">Support III</span>';
-    $level_label[4] = '<span class="label label-primary">Admin</span>';
-    $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
-
+Route::get('/players', array('before' => 'auth|support1', function() use ($level_label, $counter) {
     $search = Input::get('s');
     $type = Input::get('t');
 
@@ -167,17 +148,10 @@ Route::get('/players', array('before' => 'auth|support1', function() {
 
     $database = DB::getConfig('database');
 
-    return View::make('main', array('level_label'=>$level_label))->nest('content', 'players', array('level_label'=>$level_label, 'players'=>$players, 'licenses'=>$licenses, 'database'=>$database, 'coplevel'=>$coplevel, 'mediclevel'=>$mediclevel, 'adaclevel'=>$adaclevel, 'search'=>$search, 'type'=>$type));
+    return View::make('main', array('level_label'=>$level_label, 'counter'=>$counter))->nest('content', 'players', array('level_label'=>$level_label, 'players'=>$players, 'licenses'=>$licenses, 'database'=>$database, 'coplevel'=>$coplevel, 'mediclevel'=>$mediclevel, 'adaclevel'=>$adaclevel, 'search'=>$search, 'type'=>$type));
 }));
 
-Route::get('/gangs', array('before' => 'auth|support2', function() {
-    $level_label[0] = '<span class="label label-default">Mitglied</span>';
-    $level_label[1] = '<span class="label label-info">Support I</span>';
-    $level_label[2] = '<span class="label label-success">Support II</span>';
-    $level_label[3] = '<span class="label label-warning">Support III</span>';
-    $level_label[4] = '<span class="label label-primary">Admin</span>';
-    $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
-
+Route::get('/gangs', array('before' => 'auth|support2', function() use ($level_label, $counter) {
     $search = Input::get('s');
 
     if(!empty($search)) {
@@ -194,14 +168,7 @@ Route::get('/gangs', array('before' => 'auth|support2', function() {
     return View::make('main', array('level_label'=>$level_label))->nest('content', 'gangs', array('level_label'=>$level_label, 'gangs'=>$gangs, 'database'=>$database, 'search'=>$search));
 }));
 
-Route::get('/logs', array('before' => 'auth|support1', function() {
-    $level_label[0] = '<span class="label label-default">Mitglied</span>';
-    $level_label[1] = '<span class="label label-info">Support I</span>';
-    $level_label[2] = '<span class="label label-success">Support II</span>';
-    $level_label[3] = '<span class="label label-warning">Support III</span>';
-    $level_label[4] = '<span class="label label-primary">Admin</span>';
-    $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
-
+Route::get('/logs', array('before' => 'auth|support1', function() use ($level_label, $counter) {
     $search = Input::get('s');
     $type = Input::get('t');
 
@@ -292,20 +259,13 @@ Route::get('/logs', array('before' => 'auth|support1', function() {
         endswitch;
     }
 
-    return View::make('main', array('level_label'=>$level_label))->nest('content', 'logs', array('level_label'=>$level_label, 'logs'=>$logs, 'search'=>$search, 'type'=>$type));
+    return View::make('main', array('level_label'=>$level_label, 'counter'=>$counter))->nest('content', 'logs', array('level_label'=>$level_label, 'logs'=>$logs, 'search'=>$search, 'type'=>$type));
 }));
 
-Route::get('/statistics', array('before' => 'auth', function() {
-    $level_label[0] = '<span class="label label-default">Mitglied</span>';
-    $level_label[1] = '<span class="label label-info">Support I</span>';
-    $level_label[2] = '<span class="label label-success">Support II</span>';
-    $level_label[3] = '<span class="label label-warning">Support III</span>';
-    $level_label[4] = '<span class="label label-primary">Admin</span>';
-    $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
-
+Route::get('/statistics', array('before' => 'auth', function() use ($level_label, $counter) {
     $statistics = DB::table('statistics')->orderBy('timestamp', 'asc')->get();
 
-    return View::make('main', array('level_label'=>$level_label))->nest('content', 'statistics', array('level_label'=>$level_label, 'statistics'=>$statistics));
+    return View::make('main', array('level_label'=>$level_label, 'counter'=>$counter))->nest('content', 'statistics', array('level_label'=>$level_label, 'statistics'=>$statistics));
 }));
 
 

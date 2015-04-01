@@ -24,17 +24,17 @@
             <li @if(Request::is('/'))class="active"@endif><a href="{{ url('/') }}"><i class="icon-clipboard-paste"></i> Dashboard</a></li>
             <li @if(Request::is('statistics'))class="active"@endif><a href="{{ url('statistics') }}"><i class="icon-awstats"></i> Statistiken</a></li>
             @if(Auth::user()->level >= 1)
-                <li @if(Request::is('players'))class="active"@endif><a href="{{ url('players') }}"><i class="icon-user"></i> Spieler</a></li>
+                <li @if(Request::is('players'))class="active"@endif><a href="{{ url('players') }}"><i class="icon-user"></i> Spieler <span class="badge">{{ $counter['players'] }}</span></a></li>
             @endif
             @if(Auth::user()->level >= 2)
-                <li @if(Request::is('vehicles'))class="active"@endif><a href="{{ url('vehicles') }}"><i class="icon-automobile-car"></i> Fahrzeuge</a></li>
+                <li @if(Request::is('vehicles'))class="active"@endif><a href="{{ url('vehicles') }}"><i class="icon-automobile-car"></i> Fahrzeuge <span class="badge">{{ $counter['vehicles'] - $counter['vehicles_destroyed'] }}</span></a></li>
             @endif
             @if(Auth::user()->level >= 2)
-                <li @if(Request::is('gangs'))class="active"@endif><a href="{{ url('gangs') }}"><i class="icon-groups-friends"></i> Gangs</a></li>
+                <li @if(Request::is('gangs'))class="active"@endif><a href="{{ url('gangs') }}"><i class="icon-groups-friends"></i> Gangs <span class="badge">{{ $counter['gangs'] }}</span></a></li>
             @endif
             @if(Auth::user()->level >= 4)
                 <li @if(Request::is('logs'))class="active"@endif><a href="{{ url('logs') }}"><i class="icon-rawaccesslogs"></i> Logs</a></li>
-                <li @if(Request::is('webuser'))class="active"@endif><a href="{{ url('webuser') }}"><i class="icon-supportalt"></i> Web-User</a></li>
+                <li @if(Request::is('webuser'))class="active"@endif><a href="{{ url('webuser') }}"><i class="icon-supportalt"></i> Web-User <span class="badge">{{ $counter['users'] }}</span></a></li>
             @endif
             <li><a href="{{ url('user/logout') }}"><i class="icon-key"></i> abmelden</a></li>
         </ul>
