@@ -10,7 +10,31 @@
 
 <h2>Logs</h2>
 
-{{ $logs->links() }}
+<div class="row">
+    <div class="col-md-9">
+        {{ Form::open(array('url'=>'logs', 'method'=>'GET')) }}
+        <div class="input-group">
+            <input type="text" name="s" class="form-control" placeholder="Bearbeiter: e16 || Fahrzeug: v345 || Spieler: p246 || Gang: g14" value="{{ $search }}">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">suchen</button>
+            </span>
+        </div>
+        {{ Form::close() }}
+    </div>
+    <div class="col-md-1">
+        <a href="?t=p" class="btn btn-primary btn-block">Spieler</a>
+    </div>
+    <div class="col-md-1">
+        <a href="?t=v" class="btn btn-primary btn-block">Fahrzeuge</a>
+    </div>
+    <div class="col-md-1">
+        <a href="?t=g" class="btn btn-primary btn-block">Gangs</a>
+    </div>
+</div>
+
+@if(empty($search) && empty($type))
+    {{ $logs->links() }}
+@endif
 
 <div class="table table-hover">
     <div class="thead">
@@ -25,8 +49,8 @@
         <div>
             <span>{{ $log->id }}</span>
             <span>{{ $log->type }}</span>
-            <span>{{ $log->editor_name }}</span>
-            <span>{{ $log->object_name }}@if($log->type = 'Fahrzeug' && $log->playerid != 0) von {{ Player::find($log->playerid)['name'] }}@endif</span>
+            <span>{{ $log->editor_name }} ({{ $log->editor }})</span>
+            <span>{{ $log->object_name }} ({{ $log->objectid }})@if($log->type = 'Fahrzeug' && $log->playerid != 0) von {{ Player::find($log->playerid)['name'] }} ({{ $log->playerid }})@endif</span>
             <span>
                 @foreach($log->differences as $difference)
                     @if($difference[0] == 'civ_licenses')
@@ -59,4 +83,6 @@
     </div>
 </div>
 
-{{ $logs->links() }}
+@if(empty($search) && empty($type))
+    {{ $logs->links() }}
+@endif

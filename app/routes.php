@@ -83,6 +83,7 @@ Route::get('/vehicles', array('before' => 'auth|support2', function() {
     if(!empty($search)) {
         $all_vehicles = DB::table('vehicles')
             ->where('pid', 'LIKE', '%'.$search.'%')
+            ->orWhere('id', $search)
             ->orWhere('classname', 'LIKE', '%'.$search.'%')
             ->get();
     } elseif(!empty($type)) {
@@ -123,6 +124,7 @@ Route::get('/players', array('before' => 'auth|support1', function() {
     if(!empty($search)) {
         $players = DB::table('players')
             ->where('playerid', 'LIKE', '%'.$search.'%')
+            ->orWhere('uid', $search)
             ->orWhere('name', 'LIKE', '%'.$search.'%')
             ->orWhere('aliases', 'LIKE', '%'.$search.'%')
             ->get();
@@ -200,7 +202,73 @@ Route::get('/logs', array('before' => 'auth|support1', function() {
     $level_label[4] = '<span class="label label-primary">Admin</span>';
     $level_label[5] = '<span class="label label-danger">Super-Admin</span>';
 
-    $logs = DB::table('logs')->orderBy('created_at', 'desc')->paginate(100);
+    $search = Input::get('s');
+    $type = Input::get('t');
+
+    if(!empty($search)) {
+        switch($search[0]):
+            case 'e':
+                $logs = DB::table('logs')->where('editor', substr($search, 1))->orderBy('created_at', 'desc')->get();
+                break;
+            case 'v':
+                $logs = DB::table('logs')
+                    ->where(function($query) use ($search) {
+                        $query->where('objectid', substr($search, 1))->where('type', 'vehicle');
+                    })
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+                break;
+            case 'g':
+                $logs = DB::table('logs')
+                    ->where(function($query) use ($search) {
+                        $query->where('objectid', substr($search, 1))->where('type', 'gang');
+                    })
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+                break;
+            case 'p':
+                $logs = DB::table('logs')
+                    ->where('playerid', substr($search, 1))
+                    ->orWhere('objectid', 'LIKE', '%'.$search.'%')
+                    ->orWhere(function($query) use ($search) {
+                        $query->where('objectid', substr($search, 1))->where('type', 'player');
+                    })
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+                break;
+            default:
+                $logs = DB::table('logs')
+                    ->where('editor', 'LIKE', '%'.$search.'%')
+                    ->orWhere('objectid', 'LIKE', '%'.$search.'%')
+                    ->orWhere('playerid', 'LIKE', '%'.$search.'%')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+                break;
+        endswitch;
+    } elseif(!empty($type)) {
+        switch($type):
+            case 'p':
+                $where = 'player';
+                break;
+            case 'g':
+                $where = 'gang';
+                break;
+            case 'v':
+                $where = 'vehicle';
+                break;
+            default:
+                $where = '%';
+                break;
+        endswitch;
+
+        $logs = DB::table('logs')
+            ->where('type', $where)
+            ->orderBy('created_at', 'desc')
+            ->get();
+    } else {
+        $logs = DB::table('logs')->orderBy('created_at', 'desc')->paginate(100);
+    }
+
     foreach($logs as $key => $log) {
         $logs[$key]->editor_name = User::find($log->editor)->username;
         $logs[$key]->difference = unserialize($log->difference);
@@ -224,7 +292,7 @@ Route::get('/logs', array('before' => 'auth|support1', function() {
         endswitch;
     }
 
-    return View::make('main', array('level_label'=>$level_label))->nest('content', 'logs', array('level_label'=>$level_label, 'logs'=>$logs));
+    return View::make('main', array('level_label'=>$level_label))->nest('content', 'logs', array('level_label'=>$level_label, 'logs'=>$logs, 'search'=>$search, 'type'=>$type));
 }));
 
 Route::get('/statistics', array('before' => 'auth', function() {
