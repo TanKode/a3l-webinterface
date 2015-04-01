@@ -43,6 +43,7 @@
         <strong>Bearbeiter</strong>
         <strong>Objekt</strong>
         <strong>Verändert</strong>
+        <strong>Begründung</strong>
         <strong>Zeitpunkt</strong>
     </div>
     @foreach($logs as $log)
@@ -70,6 +71,7 @@
                     @endif
                 @endforeach
             </span>
+            <span>{{ $log->reason }}</span>
             <span>{{ date('d.m.Y H:i', strtotime($log->created_at)) }}</span>
         </div>
     @endforeach
@@ -79,6 +81,7 @@
         <strong>Bearbeiter</strong>
         <strong>Objekt</strong>
         <strong>Verändert</strong>
+        <strong>Begründung</strong>
         <strong>Zeitpunkt</strong>
     </div>
 </div>

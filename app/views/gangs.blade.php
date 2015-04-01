@@ -39,6 +39,7 @@
         <strong>max. Mitglieder</strong>
         <strong>Bankguthaben</strong>
         <strong>aktiv</strong>
+        <strong>Begründung</strong>
         <strong></strong>
     </div>
     @foreach($gangs as $gang)
@@ -90,6 +91,7 @@
                     @if($gang->active) ja @else nein @endif
                 @endif
             </span>
+            <span>{{ Form::text('reason') }}</span>
 
             <span>
                 <input type="hidden" name="gangid" value="{{ $gang->id }}" />
@@ -105,6 +107,7 @@
         <strong>max. Mitglieder</strong>
         <strong>Bankguthaben</strong>
         <strong>aktiv</strong>
+        <strong>Begründung</strong>
         <strong></strong>
     </div>
 </div>

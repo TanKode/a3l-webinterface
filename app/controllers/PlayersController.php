@@ -15,7 +15,8 @@ class PlayersController extends BaseController {
             'mediclevel'=>'numeric|min:0|max:5',
             'adaclevel'=>'numeric|min:0|max:5',
             'donatorlvl'=>'numeric|min:0|max:5',
-            'adminlevel'=>'numeric|min:0|max:3'
+            'adminlevel'=>'numeric|min:0|max:3',
+            'reason'=>'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -122,6 +123,7 @@ class PlayersController extends BaseController {
             $log->type = 'player';
             $log->editor = Auth::user()->id;
             $log->objectid = Input::get('uid');
+            $log->reason = Input::get('reason');
             $log->difference = $log->getDifference(
                 array(
                     'cash'=>$player->cash,
@@ -211,6 +213,7 @@ class PlayersController extends BaseController {
             $log->type = 'player';
             $log->editor = Auth::user()->id;
             $log->objectid = Input::get('uid');
+            $log->reason = Input::get('reason');
             $log->difference = $log->getDifference(
                 array(
                     'cash'=>$player->cash,
@@ -297,6 +300,7 @@ class PlayersController extends BaseController {
             $log->type = 'player';
             $log->editor = Auth::user()->id;
             $log->objectid = Input::get('uid');
+            $log->reason = Input::get('reason');
             $log->difference = $log->getDifference(
                 array(
                     'coplevel'=>$player->coplevel,
@@ -337,6 +341,7 @@ class PlayersController extends BaseController {
             $log->type = 'player';
             $log->editor = Auth::user()->id;
             $log->objectid = Input::get('uid');
+            $log->reason = Input::get('reason');
             $log->difference = $log->getDifference(
                 array(
                     'coplevel'=>$player->coplevel,

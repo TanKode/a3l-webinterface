@@ -55,14 +55,13 @@
         <strong>ID</strong>
         <strong>Spieler</strong>
         <strong>Daten</strong>
-        <strong>Bargeld</strong>
-        <strong>Bankguthaben</strong>
+        <strong>Bargeld / Bankguthaben</strong>
         <strong>CIV-Lizenzen</strong>
         <strong>COP</strong>
         <strong>MEDIC</strong>
         <strong>ADAC</strong>
-        <strong>Donator-Level</strong>
-        <strong>Admin-Level</strong>
+        <strong>Level</strong>
+        <strong>Begründung</strong>
         <strong></strong>
     </div>
     @foreach($players as $player)
@@ -83,8 +82,7 @@
                     @else
                         {{ number_format($player->cash, 2, ',', '.') }}
                     @endif
-                </span>
-                <span>
+                    <br/>
                     @if(Auth::user()->level >= 3)
                         {{ Form::number('bankacc', $player->bankacc) }}
                     @else
@@ -190,14 +188,14 @@
                     @else
                         {{ $player->donatorlvl }}
                     @endif
-                </span>
-                <span>
+                    <br/>
                     @if(Auth::user()->level >= 4)
                         {{ Form::select('adminlevel', array('0'=>'kein Admin', '3'=>'Admin'), $player->adminlevel) }}
                     @else
                         {{ $player->adminlevel }}
                     @endif
                 </span>
+                <span>{{ Form::text('reason') }}</span>
 
                 <span>
                     <input type="hidden" name="uid" value="{{ $player->uid }}" />
@@ -211,14 +209,13 @@
         <strong>ID</strong>
         <strong>Spieler</strong>
         <strong>Daten</strong>
-        <strong>Bargeld</strong>
-        <strong>Bankguthaben</strong>
+        <strong>Bargeld / Bankguthaben</strong>
         <strong>CIV-Lizenzen</strong>
         <strong>COP</strong>
         <strong>MEDIC</strong>
         <strong>ADAC</strong>
-        <strong>Donator-Level</strong>
-        <strong>Admin-Level</strong>
+        <strong>Level</strong>
+        <strong>Begründung</strong>
         <strong></strong>
     </div>
 </div>

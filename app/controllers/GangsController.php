@@ -12,6 +12,7 @@ class GangsController extends BaseController {
             'newmember'=>'numeric',
             'maxmembers'=>'numeric',
             'bank'=>'numeric',
+            'reason'=>'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -37,24 +38,37 @@ class GangsController extends BaseController {
 
 
             $gang = Gang::find(Input::get('gangid'));
-
-            $log = new Adminlog;
-            $log->type = 'gang';
-            $log->editor = Auth::user()->id;
-            $log->objectid = Input::get('gangid');
-            $log->difference = $log->getDifference(
-                array('owner'=>$gang->owner, 'members'=>$gang->members, 'maxmembers'=>$gang->maxmembers, 'bank'=>$gang->bank, 'active'=>$gang->active),
-                array('owner'=>Input::get('owner'), 'members'=>$members, 'maxmembers'=>Input::get('maxmembers')*1, 'bank'=>Input::get('bank')*1, 'active'=>$active)
-            );
-            $log->save();
-
-            $gang->members = $members;
-            $gang->maxmembers = Input::get('maxmembers');
-
             if(Auth::user()->level >= 3) {
+                $log = new Adminlog;
+                $log->type = 'gang';
+                $log->editor = Auth::user()->id;
+                $log->objectid = Input::get('gangid');
+                $log->reason = Input::get('reason');
+                $log->difference = $log->getDifference(
+                    array('owner'=>$gang->owner, 'members'=>$gang->members, 'maxmembers'=>$gang->maxmembers, 'bank'=>$gang->bank, 'active'=>$gang->active),
+                    array('owner'=>Input::get('owner'), 'members'=>$members, 'maxmembers'=>Input::get('maxmembers')*1, 'bank'=>Input::get('bank')*1, 'active'=>$active)
+                );
+                $log->save();
+
+                $gang->members = $members;
+                $gang->maxmembers = Input::get('maxmembers');
                 $gang->owner = Input::get('owner');
                 $gang->bank = Input::get('bank');
                 $gang->active = $active;
+            } else {
+                $log = new Adminlog;
+                $log->type = 'gang';
+                $log->editor = Auth::user()->id;
+                $log->objectid = Input::get('gangid');
+                $log->reason = Input::get('reason');
+                $log->difference = $log->getDifference(
+                    array('members'=>$gang->members, 'maxmembers'=>$gang->maxmembers),
+                    array('members'=>$members, 'maxmembers'=>Input::get('maxmembers')*1)
+                );
+                $log->save();
+
+                $gang->members = $members;
+                $gang->maxmembers = Input::get('maxmembers');
             }
             $gang->save();
 

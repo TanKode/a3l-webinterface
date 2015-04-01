@@ -51,6 +51,7 @@
         <strong>ganz</strong>
         <strong>ausgeparkt</strong>
         <strong>löschen</strong>
+        <strong>Begründung</strong>
         <strong></strong>
     </div>
     @foreach($all_vehicles as $vehicle)
@@ -71,6 +72,7 @@
             <span>{{ Form::checkbox('alive', '1', $vehicle->alive); }}</span>
             <span>{{ Form::checkbox('active', '1', $vehicle->active); }}</span>
             <span>{{ Form::checkbox('delete', '1'); }}</span>
+            <span>{{ Form::text('reason') }}</span>
 
             <span>
                 <input type="hidden" name="vehicleid" value="{{ $vehicle->id }}" />
@@ -89,6 +91,7 @@
         <strong>ganz</strong>
         <strong>ausgeparkt</strong>
         <strong>löschen</strong>
+        <strong>Begründung</strong>
         <strong></strong>
     </div>
 </div>

@@ -8,7 +8,8 @@ class VehiclesController extends BaseController {
     public function postEdit() {
         $rules = array(
             'vehicleid'=>'required|numeric|exists:vehicles,id',
-            'playerid'=>'required|numeric|exists:players,playerid'
+            'playerid'=>'required|numeric|exists:players,playerid',
+            'reason'=>'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -32,6 +33,7 @@ class VehiclesController extends BaseController {
                 $log->editor = Auth::user()->id;
                 $log->objectid = Input::get('vehicleid');
                 $log->playerid = DB::table('players')->where('playerid', Input::get('playerid'))->first()->uid;
+                $log->reason = Input::get('reason');
                 $log->difference = $log->getDifference(
                     array('deleted'=>0),
                     array('deleted'=>1)
@@ -47,6 +49,7 @@ class VehiclesController extends BaseController {
                 $log->editor = Auth::user()->id;
                 $log->objectid = Input::get('vehicleid');
                 $log->playerid = DB::table('players')->where('playerid', Input::get('playerid'))->first()->uid;
+                $log->reason = Input::get('reason');
                 $log->difference = $log->getDifference(
                     array('alive'=>$vehicle->alive, 'active'=>$vehicle->active),
                     array('alive'=>$alive, 'active'=>$active)
