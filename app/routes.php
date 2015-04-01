@@ -287,7 +287,7 @@ Route::get('/donators', array('before' => 'auth|admin', function() use ($level_l
         $date = new DateTime($donator->donatordate);
         $duration = $donator->donatorduration < 1 ? 1 : $donator->donatorduration;
         $date->modify('+'.$duration.' month');
-        $donators[$key]->donatorexpires = $date->format('Y-m-d');
+        $donators[$key]->donatorexpires = $date->format('d.m.Y');
     }
 
     $database = DB::getConfig('database');
