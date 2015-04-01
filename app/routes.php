@@ -192,7 +192,7 @@ Route::get('/gangs', array('before' => 'auth|support2', function() {
     return View::make('main', array('level_label'=>$level_label))->nest('content', 'gangs', array('level_label'=>$level_label, 'gangs'=>$gangs, 'database'=>$database, 'search'=>$search));
 }));
 
-Route::get('/logs', array('before' => 'auth|admin', function() {
+Route::get('/logs', array('before' => 'auth|support1', function() {
     $level_label[0] = '<span class="label label-default">Mitglied</span>';
     $level_label[1] = '<span class="label label-info">Support I</span>';
     $level_label[2] = '<span class="label label-success">Support II</span>';
