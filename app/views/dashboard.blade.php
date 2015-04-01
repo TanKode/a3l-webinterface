@@ -103,7 +103,7 @@
                         <p class="list-group-item-text clearfix">
                             @foreach($current_player_vehicles as $vehicle)
                                 @if(strtoupper($vehicle->side) == 'CIV')
-                                    <span class="label label-info label-list">{{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}</span>
+                                    <span class="label label-success label-list">{{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}</span>
                                 @endif
                             @endforeach
                         </p>
@@ -133,7 +133,7 @@
                             <p class="list-group-item-text clearfix">
                                 @foreach($current_player_vehicles as $vehicle)
                                     @if(strtoupper($vehicle->side) == 'COP')
-                                        <span class="label label-info label-list">{{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}</span>
+                                        <span class="label label-success label-list">{{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}</span>
                                     @endif
                                 @endforeach
                             </p>
@@ -164,7 +164,7 @@
                             <p class="list-group-item-text clearfix">
                                 @foreach($current_player_vehicles as $vehicle)
                                     @if(strtoupper($vehicle->side) == 'MED')
-                                        <span class="label label-info label-list">{{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}</span>
+                                        <span class="label label-success label-list">{{ !empty($vehicles[$vehicle->classname]) ? $vehicles[$vehicle->classname] : $vehicle->classname }}</span>
                                     @endif
                                 @endforeach
                             </p>
