@@ -33,6 +33,7 @@ $counter['vehicles'] = DB::table('vehicles')->count();
 $counter['vehicles_destroyed'] = DB::table('vehicles')->where('alive', 0)->count();
 $counter['houses'] = DB::table('houses')->count();
 $counter['gangs'] = DB::table('gangs')->count();
+$counter['logs'] = DB::table('logs')->count();
 
 Route::get('/', array('before' => 'auth|nocache', function() use ($level_label, $counter) {
     $current_player = DB::table('players')->where('playerid', Auth::user()->playerid)->first();

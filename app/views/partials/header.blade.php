@@ -33,7 +33,7 @@
                 <li @if(Request::is('gangs'))class="active"@endif><a href="{{ url('gangs') }}"><i class="icon-groups-friends"></i> Gangs <span class="badge">{{ $counter['gangs'] }}</span></a></li>
             @endif
             @if(Auth::user()->level >= 4)
-                <li @if(Request::is('logs'))class="active"@endif><a href="{{ url('logs') }}"><i class="icon-rawaccesslogs"></i> Logs</a></li>
+                <li @if(Request::is('logs'))class="active"@endif><a href="{{ url('logs') }}"><i class="icon-rawaccesslogs"></i> Logs <span class="badge">{{ $counter['logs'] }}</span></a></li>
                 <li @if(Request::is('webuser'))class="active"@endif><a href="{{ url('webuser') }}"><i class="icon-supportalt"></i> Web-User <span class="badge">{{ $counter['users'] }}</span></a></li>
             @endif
             <li><a href="{{ url('user/logout') }}"><i class="icon-key"></i> abmelden</a></li>
