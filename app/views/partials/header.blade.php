@@ -34,10 +34,12 @@
             @endif
             @if(Auth::user()->level >= 4)
                 <li @if(Request::is('donators'))class="active"@endif><a href="{{ url('donators') }}"><i class="icon-bill"></i> Donatoren <span class="badge">{{ $counter['donators'] }}</span></a></li>
-                <li @if(Request::is('logs'))class="active"@endif><a href="{{ url('logs') }}"><i class="icon-rawaccesslogs"></i> Logs <span class="badge">{{ $counter['logs'] }}</span></a></li>
                 <li @if(Request::is('webuser'))class="active"@endif><a href="{{ url('webuser') }}"><i class="icon-supportalt"></i> Webnutzer <span class="badge">{{ $counter['users'] }}</span></a></li>
             @endif
-            @if(Auth::user()->level = 5)
+            @if(Auth::user()->level >= 1)
+                <li @if(Request::is('logs'))class="active"@endif><a href="{{ url('logs') }}"><i class="icon-rawaccesslogs"></i> Logs <span class="badge">{{ $counter['logs'] }}</span></a></li>
+            @endif
+            @if(Auth::user()->level == 5)
                 <li><a href="{{ url('clearcache') }}"><i class="icon-databasedelete"></i> Cache löschen</a></li>
             @endif
             <li><a href="{{ url('user/logout') }}"><i class="icon-key"></i> abmelden</a></li>

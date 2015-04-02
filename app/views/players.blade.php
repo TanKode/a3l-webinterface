@@ -189,7 +189,7 @@
                         {{ $player->adminlevel }}
                     @endif
                 </span>
-                <span>{{ Form::text('reason') }}</span>
+                <span>{{ Form::text('reason', null, array('class'=>'reason-input', 'size'=>100)) }}</span>
 
                 <span>
                     <input type="hidden" name="uid" value="{{ $player->uid }}" />

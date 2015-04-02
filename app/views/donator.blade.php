@@ -55,7 +55,7 @@
             {{ Form::text('donatordate', null, array('placeholder'=>'Datum: YYYY-MM-DD', 'class'=>'datepicker')) }}
         </span>
         <span></span>
-        <span>{{ Form::text('reason') }}</span>
+        <span>{{ Form::text('reason', null, array('class'=>'reason-input', 'size'=>100)) }}</span>
 
         <span>
             <button type="submit" class="btn btn-primary btn-sm">speichern</button>
@@ -92,7 +92,7 @@
         <span>
             {{ $donator->donatorexpires }}
         </span>
-        <span>{{ Form::text('reason') }}</span>
+        <span>{{ Form::text('reason', null, array('class'=>'reason-input', 'size'=>100)) }}</span>
 
         <span>
             <input type="hidden" name="uid" value="{{ $donator->uid }}" />
