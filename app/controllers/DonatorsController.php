@@ -88,7 +88,7 @@ class DonatorsController extends BaseController {
             );
             $log->save();
 
-            $player->donatorlvl = Input::get('donatorlvl');
+            $player->donatorlvl = 5;
             $player->donatordate = Input::get('donatordate');
             $player->donatoramount = Input::get('donatoramount') * 1;
             $player->donatorduration = Input::get('donatorduration');

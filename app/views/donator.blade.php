@@ -52,7 +52,7 @@
             {{ Form::select('donatorduration', array('1'=>'1 Monat', '2'=>'2 Monate', '3'=>'3 Monate', '4'=>'4 Monate', '5'=>'5 Monate', '6'=>'6 Monate')) }}
         </span>
         <span>
-            {{ Form::text('donatordate', null, array('placeholder'=>'Datum: YYYY-MM-DD')) }}
+            {{ Form::text('donatordate', null, array('placeholder'=>'Datum: YYYY-MM-DD', 'class'=>'datepicker')) }}
         </span>
         <span></span>
         <span>{{ Form::text('reason') }}</span>
@@ -87,7 +87,7 @@
             {{ Form::select('donatorduration', array('1'=>'1 Monat', '2'=>'2 Monate', '3'=>'3 Monate', '4'=>'4 Monate', '5'=>'5 Monate', '6'=>'6 Monate'), $donator->donatorduration) }}
         </span>
         <span>
-            {{ Form::text('donatordate', $donator->donatordate, array('placeholder'=>'Datum: YYYY-MM-DD')) }}
+            {{ Form::text('donatordate', $donator->donatordate, array('placeholder'=>'Datum: YYYY-MM-DD', 'class'=>'datepicker', 'data-value'=>$donator->donatordate)) }}
         </span>
         <span>
             {{ $donator->donatorexpires }}

@@ -18,12 +18,17 @@
     <link rel="shortcut icon" href="{{ url('/') }}/favicon.ico" type="image/x-icon">
     {{ HTML::style('css/superhero.min.css'); }}
     {{ HTML::style('css/whhg.css'); }}
+    {{ HTML::style('css/jquery-ui.min.css'); }}
+    {{ HTML::style('css/jquery-ui.structure.min.css'); }}
+    {{ HTML::style('css/jquery-ui.theme.min.css'); }}
     {{ HTML::style('css/styles.css'); }}
 
     {{ HTML::script('js/jquery.min.js'); }}
+    {{ HTML::script('js/jquery-ui.min.js'); }}
     {{ HTML::script('js/bootstrap.jquery.min.js'); }}
-    <script src="//code.highcharts.com/highcharts.js"></script>
+    {{ HTML::script('js/highcharts.min.js'); }}
     {{ HTML::script('js/highcharts.jquery.js'); }}
+    {{ HTML::script('js/functions.jquery.js'); }}
 
     <!--[if lt IE 9]>
         <script src="js/html5shiv.min.js"></script>
