@@ -36,7 +36,9 @@ jQuery(window).on('load', function() {
         { label: '[DESYNC] Fahrzeug ist in anderes Fahrzeug gedesynct', category: 'DESYNC' },
         { label: '[DESYNC] Fahrzeug ist in Gebäude gedesynct', category: 'DESYNC' },
 
-        { label: '[BUG] Fahrzeug ist beim Einsteigen explodiert', category: 'BUG' },
+        { label: '[BUG] Fahrzeug ist beim einsteigen explodiert', category: 'BUG' },
+        { label: '[BUG] Fahrzeug ist beim fliegen explodiert', category: 'BUG' },
+        { label: '[BUG] Fahrzeug ist beim fahren explodiert', category: 'BUG' },
         { label: '[BUG] Lizenz ist verschwunden', category: 'BUG' },
         { label: '[BUG] Geld ist verschwunden', category: 'BUG' },
         { label: '[BUG] Fall-Bug von Stein/Mäuerchen', category: 'BUG' },
