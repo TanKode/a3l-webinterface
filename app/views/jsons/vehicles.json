@@ -7,6 +7,7 @@
   "C_Van_01_box_F": "Truck Boxer",
   "C_Van_01_fuel_F": "Truck Tank",
   "B_Quadbike_01_F": "Quadbike",
+  "B_G_Offroad_01_F": "Offroader",
   "B_MRAP_01_F": "Hunter",
   "B_Truck_01_transport_F": "HEMTT Transport",
   "B_Truck_01_box_F": "HEMTT Box",
@@ -54,10 +55,14 @@
   "cl3_range_rover_light_blue": "Range Rover",
   "cl3_range_rover_orange": "Range Rover",
   "cl3_range_rover_burgundy": "Range Rover",
+  "cl3_range_rover_yellow": "Range Rover",
+  "cl3_range_rover_grey": "Range Rover",
+  "cl3_range_rover_babypink": "Range Rover",
 
   "cl3_dodge_charger_k9": "Dodge Charger",
   "cl3_dodge_chargerum_s_white": "Dodge Charger",
   "cl3_dodge_charger_s_black": "Dodge Charger",
+  "cl3_dodge_chargerum_s_black": "Dodge Charger",
   "DAR_ChargerPolice": "Dodge Charger",
 
   "Jonzie_Viper": "Dodge Viper",
@@ -70,6 +75,7 @@
   "DAR_CVPIAuxiliary": "Ford Interceptor",
   "DAR_ExplorerPolice": "Ford Explorer",
   "DAR_ExplorerPoliceStealth": "Ford Explorer",
+  "cl3_taurus_black": "Ford Taurus",
 
   "cl3_golf_mk2_gold": "VW Golf",
   "cl3_golf_mk2_grey": "VW Golf",
@@ -78,6 +84,7 @@
   "cl3_golf_mk2_camo": "VW Golf",
   "cl3_golf_mk2_black": "VW Golf",
   "cl3_golf_mk2_aqua": "VW Golf",
+  "cl3_golf_mk2_camo_urban": "VW Golf",
 
   "cl3_polo_gti_blue": "VW Polo",
   "cl3_polo_gti_orange": "VW Polo",
@@ -85,6 +92,8 @@
   "cl3_polo_gti_aqua": "VW Polo",
   "cl3_polo_gti_gold": "VW Polo",
   "cl3_polo_gti_green": "VW Polo",
+  "cl3_polo_gti_black": "VW Polo",
+  "cl3_polo_gti_light_blue": "VW Polo",
 
   "cl3_e60_m5_black": "BMW M5",
   "cl3_e60_m5_blue": "BMW M5",
@@ -95,5 +104,8 @@
   "A3L_EscortTaxi": "Taxi",
   "A3L_Bus": "Bus",
   "sfp_wheelchair": "Rollstuhl",
-  "A3L_AmberLamps": "Krankenwagen"
+  "A3L_AmberLamps": "Krankenwagen",
+  "max_Police_Quadbike": "Polizei-Quadbike",
+
+  "GNT_C185": "Cessna 185"
 }
