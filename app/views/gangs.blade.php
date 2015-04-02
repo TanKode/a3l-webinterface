@@ -91,7 +91,7 @@
                     @if($gang->active) ja @else nein @endif
                 @endif
             </span>
-            <span>{{ Form::text('reason') }}</span>
+            <span>{{ Form::text('reason', null, array('class'=>'reason-input', 'size'=>100)) }}</span>
 
             <span>
                 <input type="hidden" name="gangid" value="{{ $gang->id }}" />
