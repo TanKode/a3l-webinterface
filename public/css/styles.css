@@ -34,6 +34,11 @@ select {
   overflow-x: hidden;
   margin-bottom: 30px;
 }
-.ui-autocomplete-category {
+.ui-autocomplete {
+  max-height: 25%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.ui-autocomplete .ui-autocomplete-category {
   font-weight: 700;
 }
