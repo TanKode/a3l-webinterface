@@ -258,11 +258,11 @@ Route::get('/logs', array('before' => 'auth|support1', function() use ($level_la
         switch($log->type):
             case 'player':
                 $logs[$key]->type = 'Spieler';
-                $logs[$key]->object_name = Player::find($log->objectid)->name;
+                $logs[$key]->object_name = Player::find($log->objectid)['name'];
                 break;
             case 'gang':
                 $logs[$key]->type = 'Gang';
-                $logs[$key]->object_name = Gang::find($log->objectid)->name;
+                $logs[$key]->object_name = Gang::find($log->objectid)['name'];
                 break;
             case 'vehicle':
                 $logs[$key]->type = 'Fahrzeug';
