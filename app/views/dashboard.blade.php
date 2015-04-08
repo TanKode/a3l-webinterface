@@ -83,6 +83,12 @@
                                     @else
                                         <span class="label label-info label-list">{{ $licenses->$license[0] }}</span>
                                     @endif
+                                @else
+                                    @if($license[1])
+                                        <span class="label label-success label-list">{{ $license[0] }}</span>
+                                    @else
+                                        <span class="label label-info label-list">{{ $license[0] }}</span>
+                                    @endif
                                 @endif
                             @endforeach
                         </p>
