@@ -21,7 +21,7 @@
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="pull-right">
                 <input type="hidden" name="cmd" value="_s-xclick">
                 <input type="hidden" name="hosted_button_id" value="TZAAFRENXZ7ZU">
-                <button type="submit" name="submit" class="btn btn-primary btn-sm"><i class="icon-paypal"></i> Weiterentwicklung unterstützen</button>
+                <button type="submit" name="submit" class="btn btn-primary btn-sm" data-toggle="tooltip" data-title="Paypal-Gebühren: 1,2% + 0,35€"><i class="icon-paypal"></i> Weiterentwicklung unterstützen</button>
                 <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
             </form>
         </span>
