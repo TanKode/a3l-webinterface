@@ -15,6 +15,12 @@
             developed by <a href="https://github.com/Gummibeer" target="_blank">Gummibeer</a> &copy; 2015 |
             Repository on <a href="https://github.com/Gummibeer/a3l-webinterface" target="_blank">GitHub</a> |
             licensed under <a href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a>
+            <br/>
+            Credits: <a href="http://laravel.com" target="_blank">Laravel</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>,
+            <a href="https://bootswatch.com/superhero" target="_blank">Bootswatch</a>,
+            <a href="http://jquery.com" target="_blank">jQuery</a>,
+            <a href="https://jqueryui.com" target="_blank">jQueryUI</a>
         </span>
 
         <span class="pull-right">
