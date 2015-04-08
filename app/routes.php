@@ -54,14 +54,50 @@ Route::get('/', array('before' => 'auth', function() use ($level_label, $counter
     DB::table('users')->where('playerid', Auth::user()->playerid)->update(array('playernames' => $playernames));
 
     $current_player_vehicles = DB::table('vehicles')->where('pid', Auth::user()->playerid)->get();
+    $all_vehicles = DB::table('vehicles')->get();
 
     $licenses = json_decode(file_get_contents('../app/views/jsons/licenses.json'));
     $profs = json_decode(file_get_contents('../app/views/jsons/profs.json'));
     $vehicles = json_decode(file_get_contents('../app/views/jsons/vehicles.json'), true);
+    $cartaxes = json_decode(file_get_contents('../app/views/jsons/cartax.json'), true);
+
+    $current_player_cartax = 0;
+    foreach($current_player_vehicles as $vehicle):
+        if(Config::get('a3lwi.cartax.1.'.$vehicle->side)):
+            if(isset($cartaxes[$vehicle->classname])):
+                if($vehicle->type == 'Air'):
+                    $current_player_cartax += $cartaxes[$vehicle->classname] * Config::get('a3lwi.cartax.3') + Config::get('a3lwi.cartax.4');
+                elseif(in_array($vehicle->classname, Config::get('a3lwi.cartax.6'))):
+                    $current_player_cartax += $cartaxes[$vehicle->classname] * Config::get('a3lwi.cartax.3') + Config::get('a3lwi.cartax.5');
+                else:
+                    $current_player_cartax += $cartaxes[$vehicle->classname] * Config::get('a3lwi.cartax.3');
+                endif;
+            else:
+                $current_player_cartax += Config::get('a3lwi.cartax.2') * Config::get('a3lwi.cartax.3');
+            endif;
+        endif;
+    endforeach;
+
+    $cartax = 0;
+    foreach($all_vehicles as $vehicle):
+        if(Config::get('a3lwi.cartax.1.'.$vehicle->side)):
+            if(isset($cartaxes[$vehicle->classname])):
+                if($vehicle->type == 'Air'):
+                    $cartax += $cartaxes[$vehicle->classname] * Config::get('a3lwi.cartax.3') + Config::get('a3lwi.cartax.4');
+                elseif(in_array($vehicle->classname, Config::get('a3lwi.cartax.6'))):
+                    $cartax += $cartaxes[$vehicle->classname] * Config::get('a3lwi.cartax.3') + Config::get('a3lwi.cartax.5');
+                else:
+                    $cartax += $cartaxes[$vehicle->classname] * Config::get('a3lwi.cartax.3');
+                endif;
+            else:
+                $cartax += Config::get('a3lwi.cartax.2') * Config::get('a3lwi.cartax.3');
+            endif;
+        endif;
+    endforeach;
 
     $database = DB::getConfig('database');
 
-    return View::make('main', array('level_label'=>$level_label, 'counter'=>$counter))->nest('content', 'dashboard', array('level_label'=>$level_label, 'counter'=>$counter, 'current_player'=>$current_player, 'licenses'=>$licenses, 'profs'=>$profs, 'vehicles'=>$vehicles, 'current_player_vehicles'=>$current_player_vehicles, 'database'=>$database));
+    return View::make('main', array('level_label'=>$level_label, 'counter'=>$counter))->nest('content', 'dashboard', array('level_label'=>$level_label, 'counter'=>$counter, 'current_player'=>$current_player, 'licenses'=>$licenses, 'profs'=>$profs, 'vehicles'=>$vehicles, 'current_player_vehicles'=>$current_player_vehicles, 'current_player_cartax'=>$current_player_cartax, 'cartax'=>$cartax, 'database'=>$database));
 }));
 
 Route::get('/webuser', array('before' => 'auth|admin', function() use ($level_label, $counter) {

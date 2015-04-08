@@ -29,6 +29,7 @@
             <li class="list-group-item"><i class="icon-bill"></i> Donatoren<span class="badge">{{ $counter['donators'] }}</span></li>
             <li class="list-group-item"><i class="icon-money-cash"></i> Bargeld<span class="badge">{{ number_format($counter['cash'], 2, ',', '.') }}</span></li>
             <li class="list-group-item"><i class="icon-bank"></i> Bankeinlagen<span class="badge">{{ number_format($counter['bank'], 2, ',', '.') }}</span></li>
+            <li class="list-group-item"><i class="icon-cashregister"></i> KFZ-Steuer<span class="badge">pro Tag {{ number_format($cartax, 2, ',', '.') }} (BETA)</span></li>
             <li class="list-group-item"><i class="icon-automobile-car"></i> Fahrzeuge<span class="badge">{{ $counter['vehicles'] - $counter['vehicles_destroyed'] }}</span></li>
             <li class="list-group-item"><i class="icon-house"></i> Häuser<span class="badge">{{ $counter['houses'] }}</span></li>
             <li class="list-group-item"><i class="icon-groups-friends"></i> Gangs<span class="badge">{{ $counter['gangs'] }}</span></li>
@@ -50,6 +51,9 @@
             <li class="list-group-item"><i class="icon-handcuffs"></i> Polizei-Rang<span class="badge">{{ $current_player->coplevel_name }}</span></li>
             <li class="list-group-item"><i class="icon-firstaid"></i> Medic-Rang<span class="badge">{{ $current_player->mediclevel_name }}</span></li>
             <li class="list-group-item"><i class="icon-construction"></i> ADAC-Rang<span class="badge">{{ $current_player->adaclevel_name }}</span></li>
+            @if(Config::get('a3lwi.cartax.0'))
+                <li class="list-group-item"><i class="icon-cashregister"></i> KFZ-Steuer<span class="badge">pro Tag {{ number_format($current_player_cartax, 2, ',', '.') }} (BETA)</span></li>
+            @endif
             @if($current_player->donatorlvl == 5)
                 <li class="list-group-item"><i class="icon-bill"></i> Donator<span class="badge">bis {{ $current_player->donatorexpires }} @if(empty($current_player->donatordate))(BETA)@endif</span></li>
             @endif
