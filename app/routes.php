@@ -255,6 +255,7 @@ Route::get('/logs', array('before' => 'auth|support1', function() use ($level_la
         foreach($logs[$key]->difference as $differencekey => $difference) {
             $logs[$key]->differences[] = array($differencekey, $difference[0], $difference[1]);
         }
+        $log->search_letter = strtolower(substr($log->type, 0, 1));
         switch($log->type):
             case 'player':
                 $logs[$key]->type = 'Spieler';

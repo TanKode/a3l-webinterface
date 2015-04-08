@@ -44,7 +44,9 @@
     </div>
     @foreach($gangs as $gang)
         {{ Form::open(array('url'=>'gang/edit')) }}
-            <span>{{ $gang->id }}</span>
+            <span>
+                <a href="{{ url('/logs?s=g'.$gang->id) }}">{{ $gang->id }}</a>
+            </span>
             <span>{{ $gang->name }}</span>
             <span>
                 @if(Auth::user()->level >= 3)

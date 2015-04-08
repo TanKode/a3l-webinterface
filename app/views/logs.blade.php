@@ -50,8 +50,8 @@
         <div>
             <span>{{ $log->id }}</span>
             <span>{{ $log->type }}</span>
-            <span>{{ $log->editor_name }} ({{ $log->editor }})</span>
-            <span>{{ $log->object_name }} ({{ $log->objectid }})@if($log->type = 'Fahrzeug' && $log->playerid != 0) von {{ Player::find($log->playerid)['name'] }} ({{ $log->playerid }})@endif</span>
+            <span>{{ $log->editor_name }} (<a href="{{ url('/logs?s=e'.$log->editor) }}">{{ $log->editor }}</a>)</span>
+            <span>{{ $log->object_name }} (<a href="{{ url('/logs?s='.$log->search_letter.$log->objectid) }}">{{ $log->objectid }}</a>)@if($log->type = 'Fahrzeug' && $log->playerid != 0) von {{ Player::find($log->playerid)['name'] }} ({{ $log->playerid }})@endif</span>
             <span>
                 @foreach($log->differences as $difference)
                     @if($difference[0] == 'civ_licenses')
@@ -72,7 +72,7 @@
                 @endforeach
             </span>
             <span>{{ $log->reason }}</span>
-            <span>{{ date('d.m.Y H:i', strtotime($log->created_at)) }}</span>
+            <span><a href="{{ url('/logs?s=d'.date('Y-m-d', strtotime($log->created_at))) }}">{{ date('d.m.Y H:i', strtotime($log->created_at)) }}</a></span>
         </div>
     @endforeach
     <div class="tfoot">

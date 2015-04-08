@@ -56,7 +56,9 @@
     </div>
     @foreach($all_vehicles as $vehicle)
         {{ Form::open(array('url'=>'vehicle/edit')) }}
-            <span>{{ $vehicle->id }}</span>
+            <span>
+                <a href="{{ url('/logs?s=v'.$vehicle->id) }}">{{ $vehicle->id }}</a>
+            </span>
             <span>{{ $vehicle->pid }}</span>
             <span>
                 {{ date('d.m.Y H:i', strtotime($vehicle->created_at)) }}<br/>

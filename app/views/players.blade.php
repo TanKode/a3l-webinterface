@@ -67,7 +67,9 @@
     @foreach($players as $player)
         @if(count(Auth::user()->decodeDBArray($player->civ_licenses)) || count(Auth::user()->decodeDBArray($player->cop_licenses)) || count(Auth::user()->decodeDBArray($player->med_licenses)) || count(Auth::user()->decodeDBArray($player->adac_licenses)))
             {{ Form::open(array('url'=>'player/edit')) }}
-                <span>{{ $player->uid }}</span>
+                <span>
+                    <a href="{{ url('/logs?s=p'.$player->uid) }}">{{ $player->uid }}</a>
+                </span>
                 <span>
                     {{ $player->playerid }}<br/>
                     {{ $player->name }}
