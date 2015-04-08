@@ -20,7 +20,7 @@
     </div>
 
     <nav class="col-md-10">
-        <ul class="nav nav-pills">
+        <ul class="nav nav-pills nav-justified">
             <li @if(Request::is('/'))class="active"@endif><a href="{{ url('/') }}"><i class="icon-clipboard-paste"></i> Dashboard</a></li>
             <li @if(Request::is('statistics'))class="active"@endif><a href="{{ url('statistics') }}"><i class="icon-awstats"></i> Statistiken</a></li>
             @if(Auth::user()->level >= 1)
