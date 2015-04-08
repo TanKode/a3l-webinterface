@@ -78,6 +78,7 @@ jQuery( window ).on('load', function() {
         { label: '[SUPPORT] RDM Items erstattet', category: 'SUPPORT' },
         { label: '[SUPPORT] Datenbank-Fehler erstattet', category: 'SUPPORT' },
         { label: '[SUPPORT] Verbindung verloren', category: 'SUPPORT' },
+        { label: '[SUPPORT] Ermahnung: xyz', category: 'SUPPORT' },
     ];
 
     jQuery( '.reason-input' ).catcomplete({
