@@ -51,7 +51,7 @@
             <span>{{ $log->id }}</span>
             <span>{{ $log->type }}</span>
             <span>{{ $log->editor_name }} (<a href="{{ url('/logs?s=e'.$log->editor) }}">{{ $log->editor }}</a>)</span>
-            <span>{{ $log->object_name }} (<a href="{{ url('/logs?s='.$log->search_letter.$log->objectid) }}">{{ $log->objectid }}</a>)@if($log->type = 'Fahrzeug' && $log->playerid != 0) von {{ Player::find($log->playerid)['name'] }} ({{ $log->playerid }})@endif</span>
+            <span>{{ $log->object_name }} (<a href="{{ url('/logs?s='.$log->search_letter.$log->objectid) }}">{{ $log->objectid }}</a>)@if($log->type = 'Fahrzeug' && $log->playerid != 0) von {{ Player::find($log->playerid)['name'] }} (<a href="{{ url('/logs?s=p'.$log->playerid) }}">{{ $log->playerid }}</a>)@endif</span>
             <span>
                 @foreach($log->differences as $difference)
                     @if($difference[0] == 'civ_licenses')
