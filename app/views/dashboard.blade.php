@@ -64,7 +64,7 @@
 
         <div>
             <ul class="nav nav-pills nav-justified">
-                <li class="active"><a href="#civ_details" data-toggle="tab">Zivilist</a></li>
+                <li class="active"><a href="#civ_details" data-toggle="tab"><i class="icon-user"></i> Zivilist</a></li>
                 @if($current_player->coplevel > 0)
                     <li><a href="#cop_details" data-toggle="tab"><i class="icon-handcuffs"></i> {{ $current_player->coplevel_name }}</a></li>
                 @endif
