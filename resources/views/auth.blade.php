@@ -19,13 +19,23 @@
                     <li @if(Request::is('auth/register')) class="active" @endif><a data-toggle="tab" href="#authRegister">Registrieren</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="panel-body tab-pane active" id="authLogin">
+                    <div class="panel-body tab-pane @if(Request::is('auth/login')) active @endif" id="authLogin">
                         @include('auth.signin')
                     </div>
-                    <div class="panel-body tab-pane" id="authRegister">
+                    <div class="panel-body tab-pane @if(Request::is('auth/register')) active @endif" id="authRegister">
                         @include('auth.signup')
                     </div>
                 </div>
+            </div>
+            <div class="panel-body padding-top-0">
+                <a href="{{ url('auth/facebook') }}" class="btn btn-block btn-labeled social-facebook">
+                    <span class="btn-label"><i class="icon bd-facebook"></i></span>
+                    Facebook
+                </a>
+                <a href="{{ url('auth/github') }}" class="btn btn-block btn-labeled social-github">
+                    <span class="btn-label"><i class="icon bd-github"></i></span>
+                    Github
+                </a>
             </div>
         </div>
     </div>

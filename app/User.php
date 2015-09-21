@@ -17,8 +17,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     use Authenticatable, Authorizable, CanResetPassword, HasRolesAndAbilities, UserCanContract;
 
     protected $table = 'users';
-    protected $fillable = ['username', 'email', 'password'];
-    protected $hidden = ['password', 'remember_token'];
+    protected $fillable = [
+        'username',
+        'email',
+        'password',
+        'facebook',
+        'github',
+    ];
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'facebook',
+        'github',
+    ];
 
     public static $rules = [
         'create' => [
@@ -35,11 +46,36 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function avatar($size = 64)
     {
-        return 'https://gravatar.com/avatar/'.md5($this->email).'?d=mm&s='.$size;
+        if(!empty($this->facebook_id)) {
+            return 'https://graph.facebook.com/v2.4/' . $this->facebook_id . '/picture?type=normal';
+        } else {
+            return 'https://gravatar.com/avatar/'.md5($this->email).'?d=mm&s='.$size;
+        }
     }
 
     public function isSuperAdmin()
     {
         return $this->is('super-admin');
+    }
+
+    public function saveOauthId($provider, $id)
+    {
+        $this->$provider = $id;
+        $this->save();
+    }
+
+    public function scopeFacebook($query, $id)
+    {
+        return $query->where('facebook', $id);
+    }
+
+    public function scopeGithub($query, $id)
+    {
+        return $query->where('github', $id);
+    }
+
+    public function scopeEmail($query, $email)
+    {
+        return $query->where('email', $email);
     }
 }

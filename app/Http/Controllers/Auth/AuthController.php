@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Http\Request;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -47,5 +48,48 @@ class AuthController extends Controller
     public function getRegister()
     {
         return view('auth');
+    }
+
+    public function getFacebook()
+    {
+        return \Socialite::driver('facebook')->redirect();
+    }
+
+    public function getFacebookcallback(Request $request)
+    {
+        $response = \Socialite::driver('facebook')->user();
+        return $this->handleOauthUser($request, 'facebook', $response);
+    }
+
+    public function getGithub()
+    {
+        return \Socialite::driver('github')->redirect();
+    }
+
+    public function getGithubcallback(Request $request)
+    {
+        $response = \Socialite::driver('github')->user();
+        return $this->handleOauthUser($request, 'github', $response);
+    }
+
+    private function handleOauthUser($request, $provider, $oAuthUser)
+    {
+        $user = User::$provider($oAuthUser->getId())->first();
+        if(is_null($user)) {
+            $user = User::email($oAuthUser->getEmail())->first();
+            if(!is_null($user)) {
+                $user->saveOauthId($provider, $oAuthUser->getId());
+            }
+        }
+        if(is_null($user)) {
+            $user = User::create([
+                $provider => $oAuthUser->getId(),
+                'username' => is_null($oAuthUser->getNickname()) ? $oAuthUser->getName() : $oAuthUser->getNickname(),
+                'email' => $oAuthUser->getEmail(),
+            ]);
+        }
+
+        \Auth::login($user);
+        return $this->handleUserWasAuthenticated($request, $this->isUsingThrottlesLoginsTrait());
     }
 }
