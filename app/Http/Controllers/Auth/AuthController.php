@@ -19,7 +19,15 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('guest', [
+            'except' => [
+                'getLogout',
+                'getFacebook',
+                'getFacebookcallback',
+                'getGithub',
+                'getGithubcallback',
+            ],
+        ]);
     }
 
     protected function validator(array $data)
@@ -54,7 +62,6 @@ class AuthController extends Controller
     {
         return \Socialite::driver('facebook')->redirect();
     }
-
     public function getFacebookcallback(Request $request)
     {
         $response = \Socialite::driver('facebook')->user();
@@ -65,7 +72,6 @@ class AuthController extends Controller
     {
         return \Socialite::driver('github')->redirect();
     }
-
     public function getGithubcallback(Request $request)
     {
         $response = \Socialite::driver('github')->user();
@@ -74,22 +80,27 @@ class AuthController extends Controller
 
     private function handleOauthUser($request, $provider, $oAuthUser)
     {
-        $user = User::$provider($oAuthUser->getId())->first();
-        if(is_null($user)) {
-            $user = User::email($oAuthUser->getEmail())->first();
-            if(!is_null($user)) {
-                $user->saveOauthId($provider, $oAuthUser->getId());
+        if(\Auth::check()) {
+            \Auth::User()->saveOauthId($provider, $oAuthUser->getId());
+            return back();
+        } else {
+            $user = User::$provider($oAuthUser->getId())->first();
+            if (is_null($user)) {
+                $user = User::email($oAuthUser->getEmail())->first();
+                if (!is_null($user)) {
+                    $user->saveOauthId($provider, $oAuthUser->getId());
+                }
             }
-        }
-        if(is_null($user)) {
-            $user = User::create([
-                $provider => $oAuthUser->getId(),
-                'username' => is_null($oAuthUser->getNickname()) ? $oAuthUser->getName() : $oAuthUser->getNickname(),
-                'email' => $oAuthUser->getEmail(),
-            ]);
-        }
+            if (is_null($user)) {
+                $user = User::create([
+                    $provider => $oAuthUser->getId(),
+                    'username' => is_null($oAuthUser->getNickname()) ? $oAuthUser->getName() : $oAuthUser->getNickname(),
+                    'email' => $oAuthUser->getEmail(),
+                ]);
+            }
 
-        \Auth::login($user);
-        return $this->handleUserWasAuthenticated($request, $this->isUsingThrottlesLoginsTrait());
+            \Auth::login($user);
+            return $this->handleUserWasAuthenticated($request, $this->isUsingThrottlesLoginsTrait());
+        }
     }
 }

@@ -46,6 +46,12 @@
                             @endcan
                         </ul>
                     </li>
+                    <li class="site-menu-item @if(Request::is('app/setting*')) active @endif">
+                        <a href="{{ url('app/setting') }}">
+                            <i class="site-menu-icon fa-cogs"></i>
+                            <span class="site-menu-title">Einstellungen</span>
+                        </a>
+                    </li>
                     @endif
                     @endif
                 </ul>

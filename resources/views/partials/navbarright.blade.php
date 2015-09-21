@@ -9,7 +9,11 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a href="{{ url('auth/logout') }}"><i class="icon fa-power-off"></i> {{ 'Abmelden' }}</a>
+                <a href="{{ url('app/profile/edit/' . \Auth::User()->id) }}"><i class="icon fa-user"></i>Profil</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="{{ url('auth/logout') }}"><i class="icon fa-power-off"></i>Abmelden</a>
             </li>
         </ul>
     </li>

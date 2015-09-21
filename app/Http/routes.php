@@ -18,6 +18,8 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth', 'namespace' => 'App'], 
     Route::controller('user', 'UserController');
     Route::controller('role', 'RoleController');
     Route::controller('ability', 'AbilityController');
+    Route::controller('profile', 'ProfileController');
+    Route::controller('setting', 'SettingController');
 });
 
 // ALIASES

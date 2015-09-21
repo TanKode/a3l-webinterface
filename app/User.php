@@ -6,6 +6,7 @@ use App\Contracts\UserCanContract;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -14,7 +15,7 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRolesAndAbilities, UserCanContract;
+    use Authenticatable, Authorizable, CanResetPassword, HasRolesAndAbilities, UserCanContract, SoftDeletes;
 
     protected $table = 'users';
     protected $fillable = [
@@ -62,6 +63,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         $this->$provider = $id;
         $this->save();
+    }
+
+    public function scopeId($query, $id)
+    {
+        return $query->where('id', $id);
     }
 
     public function scopeFacebook($query, $id)
