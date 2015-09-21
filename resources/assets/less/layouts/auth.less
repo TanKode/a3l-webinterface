@@ -1,0 +1,24 @@
+.auth-layout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: @page-bg;
+
+  .panel {
+    width: 400px;
+    background: @color-white;
+
+    .panel-heading {
+      padding: 30px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-layout .panel {
+    width: 380px;
+  }
+}

@@ -6,7 +6,14 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.1.*"
+        "laravel/framework": "5.1.*",
+        "laravel/socialite": "2.0.*",
+        "laravelcollective/html": "~5.0",
+        "linfo/laravel": "~1.0",
+        "maknz/slack": "~1.0",
+        "michelf/php-markdown": "~1.5.0",
+        "silber/bouncer": "0.*",
+        "barryvdh/laravel-ide-helper": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -30,12 +37,14 @@
     "scripts": {
         "post-install-cmd": [
             "php artisan clear-compiled",
+            "php artisan vendor:publish",
+            "php artisan ide-helper:generate",
             "php artisan optimize"
         ],
-        "pre-update-cmd": [
-            "php artisan clear-compiled"
-        ],
         "post-update-cmd": [
+            "php artisan clear-compiled",
+            "php artisan vendor:publish",
+            "php artisan ide-helper:generate",
             "php artisan optimize"
         ],
         "post-root-package-install": [

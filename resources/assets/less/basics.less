@@ -1,0 +1,51 @@
+.vertical-middle {
+  .vertical-align();
+}
+
+#site-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background: fade(@color-grey-700, 50%);
+  z-index: 10000;
+
+  .vertical-middle {
+    display: block;
+    text-align: center;
+
+    .icon {
+      color: @color-white;
+    }
+  }
+}
+
+label.control-label{
+  font-weight: 700;
+}
+
+a {
+  &.icon {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+pre {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
+code {
+  border: none;
+  border-radius: 0;
+  background: @gray-base;
+  color: @color-white;
+}
