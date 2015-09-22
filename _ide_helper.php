@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.17 (LTS) on 2015-09-21.
+ * Generated for Laravel 5.1.17 (LTS) on 2015-09-22.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -12370,6 +12370,589 @@ namespace {
          */
         public static function ability(){
             return \Silber\Bouncer\Bouncer::ability();
+        }
+        
+    }
+
+
+    class Notifynder extends \Fenos\Notifynder\Facades\Notifynder{
+        
+        /**
+         * Set the category of the
+         * notification
+         *
+         * @param $name
+         * @return $this 
+         * @static 
+         */
+        public static function category($name){
+            return \Fenos\Notifynder\NotifynderManager::category($name);
+        }
+        
+        /**
+         * Define an entity when Notifynder is
+         * used Polymorpically
+         *
+         * @param $name
+         * @return $this 
+         * @static 
+         */
+        public static function entity($name){
+            return \Fenos\Notifynder\NotifynderManager::entity($name);
+        }
+        
+        /**
+         * Add a category
+         *
+         * @param $name
+         * @param $text
+         * @return static 
+         * @static 
+         */
+        public static function addCategory($name, $text){
+            return \Fenos\Notifynder\NotifynderManager::addCategory($name, $text);
+        }
+        
+        /**
+         * Update a category
+         *
+         * @param array $updates
+         * @param $id
+         * @return mixed 
+         * @static 
+         */
+        public static function updateCategory($updates, $id){
+            return \Fenos\Notifynder\NotifynderManager::updateCategory($updates, $id);
+        }
+        
+        /**
+         * Send notifications
+         * Both multiple and single
+         *
+         * @param array $info
+         * @return mixed 
+         * @static 
+         */
+        public static function send($info = array()){
+            return \Fenos\Notifynder\NotifynderManager::send($info);
+        }
+        
+        /**
+         * Send immediately the notification
+         * even if the queue is enabled
+         *
+         * @param array $info
+         * @return mixed 
+         * @static 
+         */
+        public static function sendNow($info = array()){
+            return \Fenos\Notifynder\NotifynderManager::sendNow($info);
+        }
+        
+        /**
+         * Send One notification
+         *
+         * @param array $info
+         * @return mixed 
+         * @static 
+         */
+        public static function sendOne($info = array()){
+            return \Fenos\Notifynder\NotifynderManager::sendOne($info);
+        }
+        
+        /**
+         * Send multiple notifications
+         *
+         * @param array $info
+         * @return \Fenos\Notifynder\Senders\SendMultiple 
+         * @static 
+         */
+        public static function sendMultiple($info = array()){
+            return \Fenos\Notifynder\NotifynderManager::sendMultiple($info);
+        }
+        
+        /**
+         * Send a group of notifications
+         *
+         * @param $group_name
+         * @param $info
+         * @return mixed 
+         * @static 
+         */
+        public static function sendGroup($group_name, $info = array()){
+            return \Fenos\Notifynder\NotifynderManager::sendGroup($group_name, $info);
+        }
+        
+        /**
+         * Read one notification
+         *
+         * @param $notification_id
+         * @return bool|\Fenos\Notifynder\Models\Notification 
+         * @static 
+         */
+        public static function readOne($notification_id){
+            return \Fenos\Notifynder\NotifynderManager::readOne($notification_id);
+        }
+        
+        /**
+         * Read notification in base the number
+         * Given
+         *
+         * @param $to_id
+         * @param $numbers
+         * @param string $order
+         * @return mixed 
+         * @static 
+         */
+        public static function readLimit($to_id, $numbers, $order = 'ASC'){
+            return \Fenos\Notifynder\NotifynderManager::readLimit($to_id, $numbers, $order);
+        }
+        
+        /**
+         * Read all notifications of the given
+         * entity
+         *
+         * @param $to_id
+         * @return \Fenos\Notifynder\Number 
+         * @static 
+         */
+        public static function readAll($to_id){
+            return \Fenos\Notifynder\NotifynderManager::readAll($to_id);
+        }
+        
+        /**
+         * Delete a single notification
+         *
+         * @param $notification_id
+         * @return Bool 
+         * @static 
+         */
+        public static function delete($notification_id){
+            return \Fenos\Notifynder\NotifynderManager::delete($notification_id);
+        }
+        
+        /**
+         * Delete number of notifications
+         * secified of the given entity
+         *
+         * @param $to_id
+         * @param $number
+         * @param string $order
+         * @return mixed 
+         * @static 
+         */
+        public static function deleteLimit($to_id, $number, $order = 'ASC'){
+            return \Fenos\Notifynder\NotifynderManager::deleteLimit($to_id, $number, $order);
+        }
+        
+        /**
+         * Delete all notifications
+         * of the the given entity
+         *
+         * @param $to_id
+         * @return Bool 
+         * @static 
+         */
+        public static function deleteAll($to_id){
+            return \Fenos\Notifynder\NotifynderManager::deleteAll($to_id);
+        }
+        
+        /**
+         * Delete All notifications from a
+         * defined category
+         *
+         * @param $category_name string
+         * @param $expired Bool
+         * @return Bool 
+         * @static 
+         */
+        public static function deleteByCategory($category_name, $expired = false){
+            return \Fenos\Notifynder\NotifynderManager::deleteByCategory($category_name, $expired);
+        }
+        
+        /**
+         * Get Notifications not read
+         * of the given entity
+         *
+         * @param $to_id
+         * @param null $limit
+         * @param null|int $paginate
+         * @param string $order
+         * @return mixed 
+         * @static 
+         */
+        public static function getNotRead($to_id, $limit = null, $paginate = null, $order = 'desc'){
+            return \Fenos\Notifynder\NotifynderManager::getNotRead($to_id, $limit, $paginate, $order);
+        }
+        
+        /**
+         * Get all notifications of the
+         * given entity
+         *
+         * @param $to_id
+         * @param null $limit
+         * @param int|null $paginate
+         * @param string $order
+         * @return mixed 
+         * @static 
+         */
+        public static function getAll($to_id, $limit = null, $paginate = null, $order = 'desc'){
+            return \Fenos\Notifynder\NotifynderManager::getAll($to_id, $limit, $paginate, $order);
+        }
+        
+        /**
+         * Get number of notification not read
+         * of the given entity
+         *
+         * @param $to_id
+         * @return mixed 
+         * @static 
+         */
+        public static function countNotRead($to_id){
+            return \Fenos\Notifynder\NotifynderManager::countNotRead($to_id);
+        }
+        
+        /**
+         * Find Notification by ID
+         *
+         * @param $notification_id
+         * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|static 
+         * @static 
+         */
+        public static function findNotificationById($notification_id){
+            return \Fenos\Notifynder\NotifynderManager::findNotificationById($notification_id);
+        }
+        
+        /**
+         * Get last notification of the given
+         * entity, second parameter can filter by
+         * category
+         *
+         * @param $to_id
+         * @param null $category
+         * @return mixed 
+         * @static 
+         */
+        public static function getLastNotification($to_id, $category = null){
+            return \Fenos\Notifynder\NotifynderManager::getLastNotification($to_id, $category);
+        }
+        
+        /**
+         * Add category to a group
+         * giving the names of them
+         *
+         * @param $gorup_name
+         * @param $category_name
+         * @return mixed 
+         * @static 
+         */
+        public static function addCategoryToGroupByName($gorup_name, $category_name){
+            return \Fenos\Notifynder\NotifynderManager::addCategoryToGroupByName($gorup_name, $category_name);
+        }
+        
+        /**
+         * Add category to a group
+         * giving the ids of them
+         *
+         * @param $gorup_id
+         * @param $category_id
+         * @return mixed 
+         * @static 
+         */
+        public static function addCategoryToGroupById($gorup_id, $category_id){
+            return \Fenos\Notifynder\NotifynderManager::addCategoryToGroupById($gorup_id, $category_id);
+        }
+        
+        /**
+         * Add categories to a group having as first parameter
+         * the name of the group, and others as name
+         * categories
+         *
+         * @return mixed 
+         * @static 
+         */
+        public static function addCategoriesToGroup(){
+            return \Fenos\Notifynder\NotifynderManager::addCategoriesToGroup();
+        }
+        
+        /**
+         * Fire method for fire listeners
+         * of logic
+         *
+         * @param string $key
+         * @param string $category_name
+         * @param mixed|null $values
+         * @return mixed|null 
+         * @static 
+         */
+        public static function fire($key, $category_name, $values = array()){
+            return \Fenos\Notifynder\NotifynderManager::fire($key, $category_name, $values);
+        }
+        
+        /**
+         * Associate events to categories
+         *
+         * @param $data
+         * @param array $delegation
+         * @return mixed 
+         * @static 
+         */
+        public static function delegate($delegation, $data = array()){
+            return \Fenos\Notifynder\NotifynderManager::delegate($delegation, $data);
+        }
+        
+        /**
+         * Boot Listeners
+         *
+         * @param array $listeners
+         * @static 
+         */
+        public static function bootListeners($listeners){
+            return \Fenos\Notifynder\NotifynderManager::bootListeners($listeners);
+        }
+        
+        /**
+         * Get instance of the notifynder builder
+         *
+         * @return \Fenos\Notifynder\NotifynderBuilder 
+         * @static 
+         */
+        public static function builder(){
+            return \Fenos\Notifynder\NotifynderManager::builder();
+        }
+        
+        /**
+         * Extend a custom sender method
+         *
+         * @param $name
+         * @param callable $registrar
+         * @return $this 
+         * @static 
+         */
+        public static function extend($name, $registrar){
+            return \Fenos\Notifynder\NotifynderManager::extend($name, $registrar);
+        }
+        
+        /**
+         * Return the Id of the category
+         *
+         * @return mixed 
+         * @static 
+         */
+        public static function id(){
+            return \Fenos\Notifynder\NotifynderManager::id();
+        }
+        
+        /**
+         * Get the categoriesContainer property
+         *
+         * @param $name
+         * @return array 
+         * @static 
+         */
+        public static function getCategoriesContainer($name){
+            return \Fenos\Notifynder\NotifynderManager::getCategoriesContainer($name);
+        }
+        
+        /**
+         * Define which method
+         * the event dispatcher has
+         * to send the notifications
+         *
+         * @param $customSenderName
+         * @return $this 
+         * @static 
+         */
+        public static function dipatchWith($customSenderName){
+            return \Fenos\Notifynder\NotifynderManager::dipatchWith($customSenderName);
+        }
+        
+        /**
+         * Set who will send the notification
+         *
+         * @return $this 
+         * @static 
+         */
+        public static function from(){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::from();
+        }
+        
+        /**
+         * Set who will receive the notification
+         *
+         * @return $this 
+         * @static 
+         */
+        public static function to(){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::to();
+        }
+        
+        /**
+         * Set the url of the notification
+         *
+         * @param $url
+         * @return $this 
+         * @static 
+         */
+        public static function url($url){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::url($url);
+        }
+        
+        /**
+         * Set expire time
+         *
+         * @param $datetime
+         * @return $this 
+         * @static 
+         */
+        public static function expire($datetime){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::expire($datetime);
+        }
+        
+        /**
+         * Set extra value
+         *
+         * @param $extra
+         * @return $this 
+         * @static 
+         */
+        public static function extra($extra = array()){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::extra($extra);
+        }
+        
+        /**
+         * Build the array with the builder inside
+         * a Closure, it has more flexibility for
+         * the generation of your array
+         *
+         * @param callable|\Closure $closure
+         * @return array|false 
+         * @throws NotificationBuilderException
+         * @static 
+         */
+        public static function raw($closure){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::raw($closure);
+        }
+        
+        /**
+         * Loop the datas for create
+         * multi notifications array
+         *
+         * @param $dataToIterate
+         * @param \Closure $builder
+         * @return $this 
+         * @throws NotificationBuilderException
+         * @static 
+         */
+        public static function loop($dataToIterate, $builder){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::loop($dataToIterate, $builder);
+        }
+        
+        /**
+         * Compose the builder to
+         * the array
+         *
+         * @throws NotificationBuilderException
+         * @return mixed 
+         * @static 
+         */
+        public static function toArray(){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::toArray();
+        }
+        
+        /**
+         * 
+         *
+         * @param mixed $offset
+         * @return bool 
+         * @static 
+         */
+        public static function offsetExists($offset){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::offsetExists($offset);
+        }
+        
+        /**
+         * 
+         *
+         * @param mixed $offset
+         * @return mixed 
+         * @static 
+         */
+        public static function offsetGet($offset){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::offsetGet($offset);
+        }
+        
+        /**
+         * 
+         *
+         * @param mixed $offset
+         * @param mixed $value
+         * @static 
+         */
+        public static function offsetSet($offset, $value){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::offsetSet($offset, $value);
+        }
+        
+        /**
+         * 
+         *
+         * @param mixed $offset
+         * @return null 
+         * @static 
+         */
+        public static function offsetUnset($offset){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::offsetUnset($offset);
+        }
+        
+        /**
+         * Check that the builder has
+         * the required field to send the
+         * notifications correctly
+         *
+         * @param $array
+         * @return bool 
+         * @static 
+         */
+        public static function hasRequiredFields($array){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::hasRequiredFields($array);
+        }
+        
+        /**
+         * Check if is a required field
+         *
+         * @param $offset
+         * @return bool 
+         * @static 
+         */
+        public static function isRequiredField($offset){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::isRequiredField($offset);
+        }
+        
+        /**
+         * Check if the array is
+         * multidimensional
+         *
+         * @param $arr
+         * @return bool 
+         * @static 
+         */
+        public static function isMultidimensionalArray($arr){
+            //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
+            return \Fenos\Notifynder\NotifynderManager::isMultidimensionalArray($arr);
         }
         
     }

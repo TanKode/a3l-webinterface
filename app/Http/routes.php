@@ -15,6 +15,7 @@ Route::controller('auth', 'Auth\AuthController');
 
 Route::group(['prefix' => 'app', 'middleware' => 'auth', 'namespace' => 'App'], function() {
     Route::controller('dashboard', 'DashboardController');
+    Route::controller('notification', 'NotificationController');
     Route::controller('user', 'UserController');
     Route::controller('role', 'RoleController');
     Route::controller('ability', 'AbilityController');

@@ -69,13 +69,13 @@ h6,
 }
 .btn-group.open .btn-select,
 .btn-select:focus {
-  border-color: #f2a654 !important;
+  border-color: #20861f !important;
 }
 .dropdown-menu > li > span {
   padding: 8px 15px;
 }
 .panel .panel-title {
-  color: #f4b066;
+  color: #259b24;
 }
 .panel .panel-actions .panel-action {
   color: #9e9e9e;

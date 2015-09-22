@@ -1,4 +1,5 @@
 <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+    @include('partials.app.notifications')
     <li class="dropdown">
         <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
             <div class="pull-left padding-vertical-4 padding-right-15">{{ \Auth::User()->username }}</div>

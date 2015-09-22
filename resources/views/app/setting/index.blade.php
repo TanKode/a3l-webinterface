@@ -10,10 +10,10 @@
         <div class="panel-body">
             {!! Form::open(['url' => 'app/setting/store', 'class' => 'row']) !!}
                 <div class="col-md-4">
-                    {!! Form::text('key') !!}
+                    {!! Form::text('key', null, ['placeholder' => 'Schlüssel']) !!}
                 </div>
                 <div class="col-md-4">
-                    {!! Form::text('value') !!}
+                    {!! Form::text('value', null, ['placeholder' => 'Wert']) !!}
                 </div>
                 <div class="col-md-2">
                     {!! Form::submit('speichern', ['class' => 'btn-primary btn-block']) !!}
@@ -28,7 +28,7 @@
                     {!! Form::text('value', $setting->value) !!}
                 </div>
                 <div class="col-md-2">
-                    {!! Form::submit('speichern', ['class' => 'btn-primary btn-block']) !!}
+                    {!! Form::submit('speichern', ['class' => 'btn-primary btn-block', ['placeholder' => 'Wert']]) !!}
                 </div>
                 <div class="col-md-2">
                     <a href="{{ url('app/setting/delete/' . $setting->id) }}" class="btn btn-danger btn-block">löschen</a>

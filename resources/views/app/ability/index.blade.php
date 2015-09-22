@@ -21,7 +21,7 @@
                     @foreach($abilities as $ability)
                         <tr>
                             <td>{{ $ability->id }}</td>
-                            <td>{{ $ability->full_title }}</td>
+                            <td>{{ $ability->name }}</td>
                             <td>
                                 <ul class="list-inline pull-right">
                                     <li><a href="{{ url('app/ability/edit/'.$ability->id) }}" class="text-warning"><i class="icon fa-pencil"></i></a></li>

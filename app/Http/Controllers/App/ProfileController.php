@@ -19,10 +19,22 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function postUpdate(Request $request, $id)
     {
         if(\Auth::User()->id != $id) {
             abort(403);
         }
+    }
+
+    public function getDisconnect($id, $provider)
+    {
+        if(\Auth::User()->id != $id) {
+            abort(403);
+        }
+
+        $user = User::id($id)->first();
+        $user->$provider = null;
+        $user->save();
+        return back();
     }
 }

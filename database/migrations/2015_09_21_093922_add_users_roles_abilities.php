@@ -16,6 +16,8 @@ class AddUsersRolesAbilities extends Migration
         \Bouncer::allow('admin')->to('manage', Role::class);
         \Bouncer::allow('admin')->to('manage', Ability::class);
 
+        \Bouncer::allow('member');
+
         $gummibeer = User::create([
             'username' => 'gummibeer',
             'email' => 'dev.gummibeer@gmail.com',

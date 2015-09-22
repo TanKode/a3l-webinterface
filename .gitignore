@@ -1,3 +1,4 @@
+/composer.lock
 /vendor
 /node_modules
 Homestead.yaml
@@ -11,3 +12,4 @@ Homestead.json
 /public/assets/css/*.css
 /public/assets/css/*.min.css.map
 *.iml
+*.ids

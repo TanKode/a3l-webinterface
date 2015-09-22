@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserCreated;
 use App\User;
+use Fenos\Notifynder\Builder\NotifynderBuilder;
 use Illuminate\Http\Request;
+use Silber\Bouncer\Database\Role;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -41,11 +44,13 @@ class AuthController extends Controller
 
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        event(new UserCreated($user));
+        return $user;
     }
 
     public function getLogin()
@@ -97,6 +102,7 @@ class AuthController extends Controller
                     'username' => is_null($oAuthUser->getNickname()) ? $oAuthUser->getName() : $oAuthUser->getNickname(),
                     'email' => $oAuthUser->getEmail(),
                 ]);
+                event(new UserCreated($user));
             }
 
             \Auth::login($user);

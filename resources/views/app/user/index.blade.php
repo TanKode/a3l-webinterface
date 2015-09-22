@@ -50,7 +50,7 @@
                                 @else
                                     @foreach($user->roles as $role)
                                         <span class="label label-default label-outline">
-                                            {{ $role->title }}
+                                            {{ $role->name }}
                                         </span>
                                     @endforeach
                                 @endif

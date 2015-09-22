@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Contracts\UserCanContract;
+use Fenos\Notifynder\Notifable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -15,7 +16,7 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRolesAndAbilities, UserCanContract, SoftDeletes;
+    use Authenticatable, Authorizable, CanResetPassword, HasRolesAndAbilities, UserCanContract, SoftDeletes, Notifable;
 
     protected $table = 'users';
     protected $fillable = [

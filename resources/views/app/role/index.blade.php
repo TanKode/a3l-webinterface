@@ -22,15 +22,15 @@
                     @foreach($roles as $role)
                         <tr>
                             <td>{{ $role->id }}</td>
-                            <td>{{ $role->title }}</td>
+                            <td>{{ $role->name }}</td>
                             <td>
-                                @if($role->title == 'super-admin')
+                                @if($role->name == 'super-admin')
                                     <span class="label label-danger label-outline">alle Berechtigungen</span>
                                 @else
                                     <ul class="list-inline">
                                         @foreach($role->abilities as $ability)
                                             <li class="label label-default label-outline">
-                                                {{ $ability->full_title }}
+                                                {{ $ability->name }}
                                             </li>
                                         @endforeach
                                     </ul>
