@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql_root'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,18 +52,6 @@ return [
             'database'  => env('DB_DATABASE', 'forge'),
             'username'  => env('DB_USERNAME', 'forge'),
             'password'  => env('DB_PASSWORD', ''),
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
-            'strict'    => false,
-        ],
-
-        'mysql_root' => [
-            'driver'    => 'mysql',
-            'host'      => '134.255.252.59',
-            'database'  => env('DB_DATABASE', 'forge'),
-            'username'  => 'root',
-            'password'  => env('DB_ROOT_PASSWORD', ''),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

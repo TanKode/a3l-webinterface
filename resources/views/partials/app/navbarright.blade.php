@@ -1,4 +1,7 @@
 <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+    <li>
+        <a href="https://bambusfarm.slack.com" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Slack Community & Chat"><i class="icon fa-slack"></i></a>
+    </li>
     @include('partials.app.notifications')
     <li class="dropdown">
         <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
@@ -19,3 +22,4 @@
         </ul>
     </li>
 </ul>
+<p class="navbar-text navbar-right" data-toggle="tooltip" data-placement="bottom" title="Bamboo-Coins">50 <i class="icon fa-leaf"></i></p>

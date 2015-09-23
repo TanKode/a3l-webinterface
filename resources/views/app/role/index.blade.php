@@ -30,17 +30,16 @@
                                     <ul class="list-inline">
                                         @foreach($role->abilities as $ability)
                                             <li class="label label-default label-outline">
-                                                {{ $ability->name }}
+                                                {{ full_ability_name($ability) }}
                                             </li>
                                         @endforeach
                                     </ul>
                                 @endif
                             </td>
                             <td>
-                                <ul class="list-inline pull-right">
-                                    <li><a href="{{ url('app/role/edit/'.$role->id) }}" class="text-warning"><i class="icon fa-pencil"></i></a></li>
-                                    <li><a href="{{ url('app/role/delete/'.$role->id) }}" class="text-danger"><i class="icon fa-trash-o"></i></a></li>
-                                </ul>
+                                @if(\Auth::User()->canAssignRole($role->id))
+                                    <a href="{{ url('app/role/edit/'.$role->id) }}" class="text-warning pull-right"><i class="icon fa-pencil"></i></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

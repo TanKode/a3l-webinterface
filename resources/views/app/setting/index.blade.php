@@ -22,13 +22,13 @@
             @foreach($settings as $setting)
                 {!! Form::open(['url' => 'app/setting/create', 'class' => 'row']) !!}
                 <div class="col-md-4">
-                    <strong>{{ $setting->key }}</strong>
+                    {!! Form::text('key', $setting->key, ['disabled' => true]) !!}
                 </div>
                 <div class="col-md-4">
                     {!! Form::text('value', $setting->value) !!}
                 </div>
                 <div class="col-md-2">
-                    {!! Form::submit('speichern', ['class' => 'btn-primary btn-block', ['placeholder' => 'Wert']]) !!}
+                    {!! Form::submit('speichern', ['class' => 'btn-primary btn-block']) !!}
                 </div>
                 <div class="col-md-2">
                     <a href="{{ url('app/setting/delete/' . $setting->id) }}" class="btn btn-danger btn-block">löschen</a>

@@ -4,7 +4,7 @@
 
 @section('content')
     <h1 class="font-size-80">
-        <i class="icon text-primary fa-key"></i>
+        <i class="icon text-warning fa-key"></i>
         403
     </h1>
     <p class="error-advise">Leider bist du nicht berechtigt diesen bereich der Seite zu sehen.</p>

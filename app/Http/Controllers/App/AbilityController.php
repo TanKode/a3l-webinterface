@@ -20,9 +20,8 @@ class AbilityController extends Controller
 
     public function getIndex()
     {
-        $abilities = Ability::all();
         return view('app.ability.index')->with([
-            'abilities' => $abilities,
+            'abilities' => Ability::all(),
         ]);
     }
 }

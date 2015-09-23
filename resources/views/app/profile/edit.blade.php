@@ -20,7 +20,7 @@
                                 </a>
                             @else
                                 <a href="{{ url('auth/facebook') }}" class="btn btn-labeled btn-block social-facebook">
-                                    <span class="btn-label"><i class="icon bd-facebook"></i></span>
+                                    <span class="btn-label"><i class="icon fa-facebook"></i></span>
                                     Facebook
                                 </a>
                             @endif
@@ -33,7 +33,7 @@
                                 </a>
                             @else
                                 <a href="{{ url('auth/github') }}" class="btn btn-labeled btn-block social-github">
-                                    <span class="btn-label"><i class="icon bd-github"></i></span>
+                                    <span class="btn-label"><i class="icon fa-github"></i></span>
                                     Github
                                 </a>
                             @endif

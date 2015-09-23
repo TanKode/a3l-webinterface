@@ -1,17 +1,27 @@
 <?php
-namespace App\Contracts;
+namespace App\Traits;
 
+use App\Donation;
+use App\Setting;
 use App\User;
 use Silber\Bouncer\Database\Ability;
 use Silber\Bouncer\Database\Role;
 
-trait UserCanContract
+trait UserCan
 {
     protected $access = [
+        'content' => [
+            'manage', User::class,
+        ],
+        'blog' => [
+            'manage', User::class,
+        ],
         'administration' => [
             'manage', User::class,
             'manage', Role::class,
             'manage', Ability::class,
+            'manage', Setting::class,
+            'manage', Donation::class,
         ],
         'access_management' => [
             'manage', User::class,

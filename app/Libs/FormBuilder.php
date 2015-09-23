@@ -13,6 +13,11 @@ class FormBuilder extends IlluminateFormBuilder
         return $this->constructHTML(parent::input($type, $name, $value, $this->clearOptions($options)), $options);
     }
 
+    public function hidden($name, $value = null, $options = [])
+    {
+        return parent::input('hidden', $name, $value, $options);
+    }
+
     public function search($name, $value = null, $options)
     {
         $options['container'] = false;

@@ -14,18 +14,21 @@
                     <tr>
                         <th class="german">#</th>
                         <th class="german">Name</th>
-                        <th class="noindex"></th>
+                        <th class="german">Rollen</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($abilities as $ability)
                         <tr>
                             <td>{{ $ability->id }}</td>
-                            <td>{{ $ability->name }}</td>
+                            <td>{{ full_ability_name($ability) }}</td>
                             <td>
-                                <ul class="list-inline pull-right">
-                                    <li><a href="{{ url('app/ability/edit/'.$ability->id) }}" class="text-warning"><i class="icon fa-pencil"></i></a></li>
-                                    <li><a href="{{ url('app/ability/delete/'.$ability->id) }}" class="text-danger"><i class="icon fa-trash-o"></i></a></li>
+                                <ul class="list-inline">
+                                    @foreach($ability->roles as $role)
+                                        <li class="label label-default label-outline">
+                                            {{ $role->name }}
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </td>
                         </tr>

@@ -35,7 +35,7 @@
                     </li>
                 </ul>
 
-                @include('partials.navbarright')
+                @include('partials.app.navbarright')
             </div>
         </div>
     </nav>
@@ -48,10 +48,5 @@
         </div>
     </div>
 
-    <footer class="site-footer">
-        <span class="site-footer-legal">© 2015 <a href="https://github.com/Gummibeer">Tom Witkowski</a></span>
-        <div class="site-footer-right">
-            created with <i class="red-600 icon fa-heart"></i> by <a href="https://github.com/Gummibeer">Gummibeer</a>
-        </div>
-    </footer>
+    @include('partials.footer')
 @endsection
