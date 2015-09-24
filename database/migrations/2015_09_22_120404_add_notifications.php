@@ -13,7 +13,10 @@ class AddNotifications extends Migration
         ],[
             'name' => 'user.role',
             'text' => 'Deine Benutzerrolle wurde von **{extra.role_before}** zu **{extra.role_after}** verändert.',
-        ]
+        ],[
+            'name' => 'coins.added',
+            'text' => 'Deinem Account wurden **{extra.bamboo_amount}** Bamboo-Coins gutgeschrieben.',
+        ],
     ];
 
     public function up()

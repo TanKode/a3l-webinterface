@@ -40,19 +40,17 @@
                                     </li>
                                 </ul>
                                 <a href="mailto:{{ $user->email }}" class="text-success icon fa-send"></a>
-                                <a href="{{ url('app/user/edit/'.$user->id) }}" class="text-warning icon fa-pencil"></a>
-                                <a href="{{ url('app/user/delete/'.$user->id) }}"
-                                   class="text-danger icon fa-trash-o"></a>
+                                @if(\Auth::User()->canAssignRole($user->role))
+                                    <a href="{{ url('app/user/edit/'.$user->id) }}" class="text-warning icon fa-pencil"></a>
+                                @endif
                             </div>
                             <div class="media-right">
                                 @if($user->isSuperAdmin())
                                     <span class="label label-danger label-outline">super-admin</span>
                                 @else
-                                    @foreach($user->roles as $role)
-                                        <span class="label label-default label-outline">
-                                            {{ $role->name }}
-                                        </span>
-                                    @endforeach
+                                <span class="label label-default label-outline">
+                                    {{ $user->role->name }}
+                                </span>
                                 @endif
                             </div>
                         </div>

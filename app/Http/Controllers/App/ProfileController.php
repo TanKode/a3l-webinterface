@@ -15,7 +15,7 @@ class ProfileController extends Controller
         }
 
         return view('app.profile.edit')->with([
-            'user' => User::id($id)->first(),
+            'user' => User::id($id)->firstOrFail(),
         ]);
     }
 
@@ -24,6 +24,20 @@ class ProfileController extends Controller
         if(\Auth::User()->id != $id) {
             abort(403);
         }
+
+        $data = array_filter(\Input::only('email', 'password', 'password_confirmation'));
+        $validator = \Validator::make($data, User::$rules['update']);
+        if($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+        unset($data['password_confirmation']);
+
+        $user = User::id($id)->firstOrFail();
+        foreach($data as $key => $value) {
+            $user->$key = $value;
+        }
+        $user->save();
+        return back();
     }
 
     public function getDisconnect($id, $provider)
@@ -32,7 +46,7 @@ class ProfileController extends Controller
             abort(403);
         }
 
-        $user = User::id($id)->first();
+        $user = User::id($id)->firstOrFail();
         $user->$provider = null;
         $user->save();
         return back();

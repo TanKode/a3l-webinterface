@@ -156,6 +156,8 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Silber\Bouncer\BouncerServiceProvider::class,
         Fenos\Notifynder\NotifynderServiceProvider::class,
+        Invisnik\LaravelSteamAuth\SteamServiceProvider::class,
+        AbsoluteSoftware\Curl\CurlServiceProvider::class,
 
     ],
 
@@ -207,13 +209,14 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         'Form'      => App\Facades\FormBuilderFacade::class,
+        'MarkExtra' => App\Facades\MarkExtraFacade::class,
 
-        'MarkExtra' => Michelf\MarkdownExtra::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Slack'     => Maknz\Slack\Facades\Slack::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Bouncer'   => Silber\Bouncer\BouncerFacade::class,
         'Notifynder'=> Fenos\Notifynder\Facades\Notifynder::class,
+        'Curl'      => AbsoluteSoftware\Curl\Facades\CurlFacade::class,
 
     ],
 

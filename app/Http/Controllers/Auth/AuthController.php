@@ -6,6 +6,7 @@ use App\Events\UserCreated;
 use App\User;
 use Fenos\Notifynder\Builder\NotifynderBuilder;
 use Illuminate\Http\Request;
+use Invisnik\LaravelSteamAuth\SteamAuth;
 use Silber\Bouncer\Database\Role;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -25,6 +26,10 @@ class AuthController extends Controller
         $this->middleware('guest', [
             'except' => [
                 'getLogout',
+                'getSteam',
+                'getSteamcallback',
+                'getSlack',
+                'getSlackcallback',
                 'getFacebook',
                 'getFacebookcallback',
                 'getGithub',
@@ -63,10 +68,98 @@ class AuthController extends Controller
         return view('auth');
     }
 
+    public function getSteam(SteamAuth $steam)
+    {
+        return $steam->redirect();
+    }
+
+    public function getSteamcallback(SteamAuth $steam)
+    {
+        if (\Auth::check()) {
+            if ($steam->validate()) {
+                $info = $steam->getUserInfo();
+                if (!is_null($info)) {
+                    \Auth::User()->saveOauthId('steam', $info->getSteamID64());
+                    return redirect('app/profile/edit/'.\Auth::User()->id);
+                }
+            }
+        }
+        return redirect('/');
+    }
+
+    public function getSlack(Request $request)
+    {
+        if(\Auth::check() && !is_null(\Auth::User()->slack)) {
+            return redirect('auth/slackcallback');
+        } else {
+            $params = [
+                'client_id' => config('services.slack.client_id'),
+                'redirect_uri' => config('services.slack.redirect'),
+                'scope' => 'identify,read',
+                'team' => 'Bambusfarm',
+            ];
+            $url = 'https://slack.com/oauth/authorize?' . http_build_query($params);
+            return redirect($url);
+        }
+    }
+
+    public function getSlackcallback(Request $request)
+    {
+        $code = \Input::get('code', false);
+        if($code) {
+            $data = [
+                'client_id' => config('services.slack.client_id'),
+                'client_secret' => config('services.slack.client_secret'),
+                'redirect_uri' => config('services.slack.redirect'),
+                'code' => $code,
+            ];
+            $url = 'https://slack.com/api/oauth.access?'.http_build_query($data);
+            $response = \Curl::get($url);
+            $response['body'] = json_decode($response['body'], true);
+            if($response['body']['ok']) {
+                $token = $response['body']['access_token'];
+
+                $data = [
+                    'token' => $token,
+                ];
+                $url = 'https://slack.com/api/auth.test?' . http_build_query($data);
+                $response = \Curl::get($url);
+                $response['body'] = json_decode($response['body'], true);
+                if ($response['body']['ok']) {
+                    $userId = $response['body']['user_id'];
+                }
+            }
+        } elseif(\Auth::check() && !is_null(\Auth::User()->slack)) {
+            $userId = \Auth::User()->slack;
+            $token = config('services.slack.token');
+        }
+
+        if(isset($token) && isset($userId)) {
+            $data = [
+                'token' => $token,
+                'user' => $userId,
+            ];
+            $url = 'https://slack.com/api/users.info?' . http_build_query($data);
+            $response = \Curl::get($url);
+            $response['body'] = json_decode($response['body'], true);
+            if ($response['body']['ok']) {
+                $userData = $response['body']['user'];
+                $user = new \Laravel\Socialite\Two\User();
+                $user->id = $userData['id'];
+                $user->nickname = $userData['name'];
+                $user->name = $userData['real_name'];
+                $user->email = $userData['profile']['email'];
+                $user->avatar = $userData['profile']['image_192'];
+                return $this->handleOauthUser($request, 'slack', $user);
+            }
+        }
+    }
+
     public function getFacebook()
     {
         return \Socialite::driver('facebook')->redirect();
     }
+
     public function getFacebookcallback(Request $request)
     {
         $response = \Socialite::driver('facebook')->user();
@@ -77,6 +170,7 @@ class AuthController extends Controller
     {
         return \Socialite::driver('github')->redirect();
     }
+
     public function getGithubcallback(Request $request)
     {
         $response = \Socialite::driver('github')->user();
@@ -85,9 +179,9 @@ class AuthController extends Controller
 
     private function handleOauthUser($request, $provider, $oAuthUser)
     {
-        if(\Auth::check()) {
+        if (\Auth::check()) {
             \Auth::User()->saveOauthId($provider, $oAuthUser->getId());
-            return back();
+            return redirect('app/profile/edit/'.\Auth::User()->id);
         } else {
             $user = User::$provider($oAuthUser->getId())->first();
             if (is_null($user)) {

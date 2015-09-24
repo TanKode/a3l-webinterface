@@ -13,7 +13,7 @@ class SettingController extends Controller
 {
     public function __construct()
     {
-        if(!\Auth::User()->can('manage', Setting::class)) {
+        if(\Auth::check() && !\Auth::User()->can('manage', Setting::class)) {
             abort(403);
         }
     }
@@ -45,7 +45,7 @@ class SettingController extends Controller
         if(empty($value)) {
             return back();
         }
-        $setting = Setting::id($id)->first();
+        $setting = Setting::id($id)->firstOrFail();
         $setting->value = $value;
         $setting->save();
         return back();

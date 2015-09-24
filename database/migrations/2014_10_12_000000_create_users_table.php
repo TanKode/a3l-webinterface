@@ -19,6 +19,9 @@ class CreateUsersTable extends Migration
             $table->string('password', 60)->nullable();
             $table->string('facebook')->nullable();
             $table->string('github')->nullable();
+            $table->string('slack')->nullable();
+            $table->string('steam')->nullable();
+            $table->integer('bamboo_coins')->unsigned()->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

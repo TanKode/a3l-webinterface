@@ -71,6 +71,14 @@ h6,
 .btn-select:focus {
   border-color: #20861f !important;
 }
+textarea.form-control {
+  min-width: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+.form-control.no-border {
+  border: none;
+}
 .dropdown-menu > li > span {
   padding: 8px 15px;
 }
@@ -89,10 +97,39 @@ h6,
 .widget {
   overflow: hidden;
 }
+.social-slack {
+  color: #ffffff;
+  background-color: #4d394b !important;
+}
+.social-slack:hover,
+.social-slack:focus {
+  color: #ffffff;
+  background-color: #6a4f68 !important;
+}
+.social-slack:active,
+.social-slack.active {
+  color: #ffffff;
+  background-color: #30232e !important;
+}
+.social-steam {
+  color: #ffffff;
+  background-color: #799905 !important;
+}
+.social-steam:hover,
+.social-steam:focus {
+  color: #ffffff;
+  background-color: #a0ca07 !important;
+}
+.social-steam:active,
+.social-steam.active {
+  color: #ffffff;
+  background-color: #526803 !important;
+}
 .auth-layout {
   width: 100%;
   height: 100%;
   background: #e0e0e0;
+  background-size: cover;
 }
 .auth-layout .page {
   display: table;
@@ -108,6 +145,13 @@ h6,
   float: none;
   padding: 0;
   min-height: 100%;
+}
+.auth-layout .page .brand {
+  padding-top: 90px;
+  padding-left: 60px;
+}
+.auth-layout .page .brand * {
+  text-shadow: 0 0 10px rgba(66, 66, 66, 0.25);
 }
 .error-layout {
   background-color: #ffffff;

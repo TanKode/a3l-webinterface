@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.17 (LTS) on 2015-09-23.
+ * Generated for Laravel 5.1.17 (LTS) on 2015-09-24.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -13843,6 +13843,191 @@ namespace {
         public static function isMultidimensionalArray($arr){
             //Method inherited from \Fenos\Notifynder\Builder\NotifynderBuilder            
             return \Fenos\Notifynder\NotifynderManager::isMultidimensionalArray($arr);
+        }
+        
+    }
+
+
+    class Curl extends \AbsoluteSoftware\Curl\Facades\CurlFacade{
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function get($url, $headers = array(), $encoding = 'JSON'){
+            return \AbsoluteSoftware\Curl\Curl::get($url, $headers, $encoding);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function delete($url, $headers = array(), $encoding = 'JSON'){
+            return \AbsoluteSoftware\Curl\Curl::delete($url, $headers, $encoding);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function head($url, $headers = array(), $encoding = 'JSON'){
+            return \AbsoluteSoftware\Curl\Curl::head($url, $headers, $encoding);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function options($url, $headers = array(), $encoding = 'JSON'){
+            return \AbsoluteSoftware\Curl\Curl::options($url, $headers, $encoding);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function post($url, $data, $headers = array(), $encoding = 'JSON'){
+            return \AbsoluteSoftware\Curl\Curl::post($url, $data, $headers, $encoding);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function put($url, $data, $headers = array(), $encoding = 'JSON'){
+            return \AbsoluteSoftware\Curl\Curl::put($url, $data, $headers, $encoding);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function patch($url, $data, $headers = array(), $encoding = 'JSON'){
+            return \AbsoluteSoftware\Curl\Curl::patch($url, $data, $headers, $encoding);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setEncoding($encoding){
+            return \AbsoluteSoftware\Curl\Curl::setEncoding($encoding);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setData($data){
+            return \AbsoluteSoftware\Curl\Curl::setData($data);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setHeader($key, $val){
+            return \AbsoluteSoftware\Curl\Curl::setHeader($key, $val);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setHeaders($headers = array()){
+            return \AbsoluteSoftware\Curl\Curl::setHeaders($headers);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function removeHeader($header){
+            return \AbsoluteSoftware\Curl\Curl::removeHeader($header);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function removeHeaders($headers){
+            return \AbsoluteSoftware\Curl\Curl::removeHeaders($headers);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setMethod($method){
+            return \AbsoluteSoftware\Curl\Curl::setMethod($method);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setUrl($url){
+            return \AbsoluteSoftware\Curl\Curl::setUrl($url);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setOption($key, $val){
+            return \AbsoluteSoftware\Curl\Curl::setOption($key, $val);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setOptions($options = array()){
+            return \AbsoluteSoftware\Curl\Curl::setOptions($options);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function removeOption($option){
+            return \AbsoluteSoftware\Curl\Curl::removeOption($option);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function removeOptions($options){
+            return \AbsoluteSoftware\Curl\Curl::removeOptions($options);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function request($method, $url, $data, $headers = array(), $encoding = 'JSON'){
+            return \AbsoluteSoftware\Curl\Curl::request($method, $url, $data, $headers, $encoding);
         }
         
     }

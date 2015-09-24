@@ -48,4 +48,11 @@ return [
         'redirect' => 'http://game.gummibeer.de/auth/githubcallback',
     ],
 
+    'slack' => [
+        'client_id' => env('SLACK_CLIENT_ID', ''),
+        'client_secret' => env('SLACK_CLIENT_SECRET', ''),
+        'token' => env('SLACK_TOKEN', ''),
+        'redirect' => 'http://game.gummibeer.de/auth/slackcallback',
+    ],
+
 ];

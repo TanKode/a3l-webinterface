@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers\App;
 
+use App\Accounting;
 use App\Donation;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -13,7 +15,7 @@ class DonationController extends Controller
 {
     public function __construct()
     {
-        if(!\Auth::User()->can('manage', Donation::class)) {
+        if(\Auth::check() && !\Auth::User()->can('manage', Donation::class)) {
             abort(403);
         }
     }
@@ -28,9 +30,7 @@ class DonationController extends Controller
     public function postStore()
     {
         $data = array_filter(\Input::only('donator_id', 'euro_amount', 'bamboo_amount', 'method', 'description'));
-
         $validator = \Validator::make($data, Donation::$rules);
-
         if($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
@@ -39,6 +39,21 @@ class DonationController extends Controller
         $donation->booker_id = \Auth::User()->id;
         $donation->save();
 
+        $donator = $donation->donator;
+        $donator->bamboo_coins += $donation->bamboo_amount;
+        $donator->save();
+
+        Accounting::create([
+            'booker_id' => \Auth::User()->id,
+            'amount' => $data['euro_amount'],
+            'description' => 'Spende (#'.$donation->id.') über '.$donation->method.' von '.$donator->username.'.'
+        ]);
+        \Notifynder::category('coins.added')
+            ->from($donation->booker_id)
+            ->to($donation->donator_id)
+            ->url('#')
+            ->extra(['bamboo_amount' => $donation->bamboo_amount])
+            ->send();
         return redirect('app/donation');
     }
 }

@@ -21,7 +21,7 @@
                     @foreach($abilities as $ability)
                         <tr>
                             <td>{{ $ability->id }}</td>
-                            <td>{{ full_ability_name($ability) }}</td>
+                            <td>{{ $ability->slug }}</td>
                             <td>
                                 <ul class="list-inline">
                                     @foreach($ability->roles as $role)

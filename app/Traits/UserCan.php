@@ -11,22 +11,19 @@ trait UserCan
 {
     protected $access = [
         'content' => [
-            'manage', User::class,
-        ],
-        'blog' => [
-            'manage', User::class,
+            ['manage', User::class],
         ],
         'administration' => [
-            'manage', User::class,
-            'manage', Role::class,
-            'manage', Ability::class,
-            'manage', Setting::class,
-            'manage', Donation::class,
+            ['manage', User::class],
+            ['manage', Role::class],
+            ['manage', Ability::class],
+            ['manage', Setting::class],
+            ['manage', Donation::class],
         ],
         'access_management' => [
-            'manage', User::class,
-            'manage', Role::class,
-            'manage', Ability::class,
+            ['manage', User::class],
+            ['manage', Role::class],
+            ['manage', Ability::class],
         ],
     ];
 

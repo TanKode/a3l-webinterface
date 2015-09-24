@@ -13,7 +13,7 @@ class AbilityController extends Controller
 {
     public function __construct()
     {
-        if(!\Auth::User()->can('manage', Ability::class)) {
+        if(\Auth::check() && !\Auth::User()->can('manage', Ability::class)) {
             abort(403);
         }
     }

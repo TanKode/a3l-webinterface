@@ -3,7 +3,7 @@
 @section('title', 'Spenden Übersicht')
 
 @section('content')
-    <div class="panel is-collapse">
+    <div class="panel">
         <div class="panel-heading">
             <h3 class="panel-title">neue Spende</h3>
             <div class="panel-actions">
@@ -63,7 +63,7 @@
                             <td>{{ $donation->bamboo_amount }}</td>
                             <td>{{ $donation->method }}</td>
                             <td>{{ $donation->description }}</td>
-                            <td>{{ $donation->created_at->format('d.m.Y H:i') }}</td>
+                            <td>{{ $donation->created_at->setTimezone('Europe/Berlin')->format('d.m.Y H:i') }}</td>
                         </tr>
                     @endforeach
                     </tbody>

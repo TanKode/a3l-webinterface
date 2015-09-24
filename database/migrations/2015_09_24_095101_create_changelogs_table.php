@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServersTable extends Migration
+class CreateChangelogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,12 @@ class CreateServersTable extends Migration
      */
     public function up()
     {
-        Schema::create('servers', function (Blueprint $table) {
+        Schema::create('changelogs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('host');
-            $table->integer('port');
+            $table->string('title')->unique();
+            $table->string('slug')->unique();
+            $table->text('content');
+            $table->integer('author_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +30,6 @@ class CreateServersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('servers');
+        Schema::drop('changelogs');
     }
 }

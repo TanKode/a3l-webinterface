@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
         'assets/vendor/datatables-bootstrap/dataTables.bootstrap.css',
         'assets/vendor/typeahead-js/typeahead.min.css',
         'assets/vendor/bootstrap-datepicker/bootstrap-datepicker.min.css',
-        'assets/vendor/gauge-js/gauge.min.css',
+        'assets/vendor/bootstrap-markdown/bootstrap-markdown.min.css',
 
         'fonts/web-icons/web-icons.min.css',
         'fonts/brand-icons/brand-icons.min.css',
@@ -44,7 +44,9 @@ class AppServiceProvider extends ServiceProvider
             'assets/vendor/typeahead-js/typeahead.bundle.min.js',
             'assets/vendor/bootstrap-datepicker/bootstrap-datepicker.min.js',
             'assets/vendor/masonry/masonry.pkgd.min.js',
-            'assets/vendor/gauge-js/gauge.min.js',
+            'assets/vendor/bootstrap-markdown/bootstrap-markdown.js',
+            'assets/vendor/marked/marked.min.js',
+            'assets/vendor/to-markdown/to-markdown.js',
 
             'assets/js/core.min.js',
             'assets/js/site.min.js',
@@ -61,7 +63,6 @@ class AppServiceProvider extends ServiceProvider
             'assets/js/components/datatables.min.js',
             'assets/js/components/bootstrap-datepicker.min.js',
             'assets/js/components/masonry.min.js',
-            'assets/js/components/gauge-js.min.js',
 
             'js/libs/jquery.jstorage.min.js',
             'js/libs/list.min.js',

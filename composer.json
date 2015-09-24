@@ -14,6 +14,8 @@
         "michelf/php-markdown": "~1.5.0",
         "silber/bouncer": "0.*",
         "fenos/notifynder": "3.*",
+        "invisnik/laravel-steam-auth": "2.*",
+        "absolute-software/laravel-curl": "dev-master",
         "barryvdh/laravel-ide-helper": "^2.1"
     },
     "require-dev": {
@@ -60,5 +62,11 @@
     },
     "config": {
         "preferred-install": "dist"
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Absolute-Software/laravel-curl"
+        }
+    ]
 }

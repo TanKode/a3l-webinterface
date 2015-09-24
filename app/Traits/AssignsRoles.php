@@ -15,9 +15,12 @@ trait AssignsRoles
     public function assignableRoles()
     {
         $roles = Role::all();
-        $abilities = $this->listAbilities();
-        return $roles->reject(function($role) use ($abilities) {
-            if (! $abilities->contains($this->buildRoleAssignmentAbility($role->name))) {
+        $abilities = $this->abilities;
+        return $roles->reject(function ($role) use ($abilities) {
+            if($this->isSuperAdmin()) {
+                return false;
+            }
+            if (!$abilities->contains($this->buildRoleAssignmentAbility($role->name))) {
                 return true;
             };
         });
@@ -31,11 +34,11 @@ trait AssignsRoles
 
     protected function getRoleName($role)
     {
-        if (is_string($role)) {
-            return $role;
-        }
         if (is_integer($role)) {
             return Role::find($role)->name;
+        }
+        if (is_string($role)) {
+            return $role;
         }
         if ($role instanceof Role) {
             return $role->name;
@@ -50,6 +53,6 @@ trait AssignsRoles
 
     protected function buildRoleAssignmentAbility($name)
     {
-        return 'assign-' . Str::slug($name) . '-role';
+        return 'manage-' . Str::slug($name) . '-role';
     }
 }

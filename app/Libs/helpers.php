@@ -31,14 +31,3 @@ if (!function_exists('format_money')) {
         return format_float($float) . ' €';
     }
 }
-
-if (!function_exists('full_ability_name')) {
-    function full_ability_name($ability)
-    {
-        $fullName[] = $ability->name;
-        $fullName[] = class_basename($ability->entity_type);
-        $fullName[] = $ability->entity_id;
-
-        return str_slug(implode(' ', array_filter($fullName)));
-    }
-}
