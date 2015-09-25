@@ -90,6 +90,10 @@ class AppServiceProvider extends ServiceProvider
                     'type' => 'german',
                 ],
                 [
+                    'targets' => 'money',
+                    'type' => 'money',
+                ],
+                [
                     'targets' => 'noindex',
                     'orderable' => false,
                     'searchable' => false,

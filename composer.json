@@ -16,6 +16,7 @@
         "fenos/notifynder": "3.*",
         "invisnik/laravel-steam-auth": "2.*",
         "absolute-software/laravel-curl": "dev-master",
+        "xpaw/php-source-query-class": "dev-master",
         "barryvdh/laravel-ide-helper": "^2.1"
     },
     "require-dev": {

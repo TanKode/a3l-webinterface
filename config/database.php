@@ -58,6 +58,18 @@ return [
             'strict'    => false,
         ],
 
+        'a3l' => [
+            'driver'    => 'mysql',
+            'host'      => env('A3L_DB_HOST', 'localhost'),
+            'database'  => env('A3L_DB_DATABASE', 'forge'),
+            'username'  => env('A3L_DB_USERNAME', 'forge'),
+            'password'  => env('A3L_DB_PASSWORD', ''),
+            'charset'   => 'latin1',
+            'collation' => 'latin1_swedish_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
     ],
 
     /*

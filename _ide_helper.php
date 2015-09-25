@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.17 (LTS) on 2015-09-24.
+ * Generated for Laravel 5.1.17 (LTS) on 2015-09-25.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -12536,7 +12536,40 @@ namespace {
     }
 
 
-    class MarkExtra extends \Michelf\MarkdownExtra{
+    class Filter extends \App\Facades\FilterBuilderFacade{
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function render($fields = array()){
+            return \App\Libs\FilterBuilder::render($fields);
+        }
+        
+    }
+
+
+    class MarkExtra extends \App\Facades\MarkExtraFacade{
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function defaultTransform($text){
+            return \App\Libs\MarkExtra::defaultTransform($text);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function transform($text){
+            //Method inherited from \Michelf\Markdown            
+            return \App\Libs\MarkExtra::transform($text);
+        }
         
     }
 
@@ -13079,7 +13112,7 @@ namespace {
         }
         
         /**
-         * Format the Twitter server configuration.
+         * Format the server configuration.
          *
          * @param array $config
          * @return array 

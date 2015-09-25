@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits;
 
+use App\A3L\Player as A3lPlayer;
 use App\Donation;
 use App\Setting;
 use App\User;
@@ -10,8 +11,8 @@ use Silber\Bouncer\Database\Role;
 trait UserCan
 {
     protected $access = [
-        'content' => [
-            ['manage', User::class],
+        'a3l' => [
+            ['manage', A3lPlayer::class],
         ],
         'administration' => [
             ['manage', User::class],

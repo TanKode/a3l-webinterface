@@ -96,7 +96,7 @@ class AuthController extends Controller
                 'client_id' => config('services.slack.client_id'),
                 'redirect_uri' => config('services.slack.redirect'),
                 'scope' => 'identify,read',
-                'team' => 'Bambusfarm',
+                'team' => 'T0442S8AK',
             ];
             $url = 'https://slack.com/oauth/authorize?' . http_build_query($params);
             return redirect($url);

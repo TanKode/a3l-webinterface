@@ -24,8 +24,8 @@
         @if(\Auth::User()->can('manage', \App\Donation::class))
             <li class="masonry-item">
                 <div class="widget">
-                    <div class="widget-content padding-30 bg-white clearfix">
-                        <div class="counter counter-md pull-left text-left">
+                    <div class="widget-content padding-30 bg-primary-600 clearfix">
+                        <div class="counter counter-md pull-left text-left counter-inverse">
                             <div class="counter-number-group">
                                 <span class="counter-number">{{ $bamboo_coins_sum }}</span>
                                 <span class="counter-number-related text-capitalize">Bamboo-Coins</span>
@@ -33,11 +33,99 @@
                             <div class="counter-label font-size-16">im Umlauf</div>
                         </div>
                         <div class="pull-right white">
-                            <i class="icon icon-circle icon-2x fa-leaf bg-primary-600"></i>
+                            <i class="icon icon-3x fa-leaf"></i>
                         </div>
                     </div>
                 </div>
             </li>
         @endif
+        <li class="masonry-item">
+            <div class="widget">
+                <div class="widget-content padding-30 bg-purple-600 clearfix">
+                    <div class="counter counter-md pull-left text-left counter-inverse">
+                        <div class="counter-number-group">
+                            <span class="counter-number">{{ $a3l['player_count'] }}</span>
+                            <span class="counter-number-related text-capitalize">Spieler</span>
+                        </div>
+                        <div class="counter-label font-size-16">Altis Life</div>
+                    </div>
+                    <div class="pull-right white">
+                        <i class="icon icon-3x fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="masonry-item">
+            <div class="widget">
+                <div class="widget-content padding-30 bg-purple-600 clearfix">
+                    <div class="counter counter-md pull-left text-left counter-inverse">
+                        <div class="counter-number-group">
+                            <span class="counter-number">{{ format_money($a3l['money_sum']) }}</span>
+                        </div>
+                        <div class="counter-label font-size-16">Altis Life</div>
+                    </div>
+                    <div class="pull-right white">
+                        <i class="icon icon-3x fa-money"></i>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="masonry-item">
+            <div class="widget">
+                <div class="widget-content padding-30 bg-purple-600 clearfix">
+                    <div class="counter counter-md pull-left text-left counter-inverse">
+                        <div class="counter-number-group">
+                            <span class="counter-number">{{ $a3l['karma_sum'] }}</span>
+                            <span class="counter-number-related text-capitalize">Karma</span>
+                        </div>
+                        <div class="counter-label font-size-16">Altis Life</div>
+                    </div>
+                    <div class="pull-right white">
+                        <i class="icon icon-3x @if($a3l['karma_sum'] < 0) fa-frown-o @else fa-smile-o @endif"></i>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="masonry-item">
+            <div class="widget">
+                <div class="widget-content padding-30 bg-white">
+                    <div class="counter counter-md text-left">
+                        <div class="counter-label margin-bottom-5 clearfix">
+                            <span class="pull-lefft">89.163.139.86:2302</span>
+                            <span class="pull-right">
+                                @if(is_array($a3l['info']))
+                                    <i class="icon fa-circle text-success"></i>
+                                @else
+                                    <i class="icon fa-circle-o text-danger"></i>
+                                @endif
+                            </span>
+                        </div>
+                        <div class="counter-number-group margin-bottom-10">
+                            <span class="counter-number">Altis Life</span>
+                        </div>
+                        @if(is_array($a3l['info']))
+                        <div class="margin-bottom-15 clearfix">
+                            <span class="pull-left">
+                                <i class="icon fa-clock-o"></i>
+                                {{ $a3l['restart']->format('H:i') }} Uhr
+                            </span>
+                            <span class="badge pull-right">
+                                {{ $a3l['restart']->diffForHumans() }}
+                            </span>
+                        </div>
+                        <div class="counter-label">
+                            <div class="clearfix">
+                                <div class="pull-left">Spieler</div>
+                                <div class="pull-right">{{ $a3l['info']['Players'] }} / {{ $a3l['info']['MaxPlayers'] }}</div>
+                            </div>
+                            <div class="progress progress-xs">
+                                <div class="progress-bar bg-purple-600" style="width: {{ round(($a3l['info']['Players'] / $a3l['info']['MaxPlayers']) * 100) }}%;"></div>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </li>
     </ul>
 @endsection

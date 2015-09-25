@@ -16,6 +16,18 @@
                         </a>
                     </li>
 
+                    @if(\Auth::User()->canAccess('a3l'))
+                    <li class="site-menu-category">Altis Life</li>
+                    @if(\Auth::User()->can('manage', \App\A3L\Player::class))
+                        <li class="site-menu-item @if(Request::is('app/a3l/player*')) active @endif">
+                            <a href="{{ url('app/a3l/player') }}">
+                                <i class="site-menu-icon text-warning fa-user"></i>
+                                <span class="site-menu-title">Spieler</span>
+                            </a>
+                        </li>
+                    @endif
+                    @endif
+
                     @if(\Auth::User()->canAccess('administration'))
                     <li class="site-menu-category">Adminbereich</li>
                     @if(\Auth::User()->can('manage', \App\Donation::class))

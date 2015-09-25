@@ -14,6 +14,16 @@ jQuery.fn.dataTableExt.ofnSearch['german'] = function (a) {
     var b = a.umlauts();
     return a + ' ' + b;
 };
+jQuery.fn.dataTableExt.oSort['money-asc'] = function (a, b) {
+    a = a.plain().money();
+    b = b.plain().money();
+    return (a == b) ? 0 : (a > b) ? 1 : -1;
+};
+jQuery.fn.dataTableExt.oSort['money-desc'] = function (a, b) {
+    a = a.plain().money();
+    b = b.plain().money();
+    return (a == b) ? 0 : (a > b) ? -1 : 1;
+};
 
 jQuery('body').on('site.init', function () {
     var $dataTable = $.fn.dataTable.tables({visible: true, api: false});

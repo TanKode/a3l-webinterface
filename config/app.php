@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'de',
 
     /*
     |--------------------------------------------------------------------------
@@ -209,6 +209,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         'Form'      => App\Facades\FormBuilderFacade::class,
+        'Filter'    => App\Facades\FilterBuilderFacade::class,
         'MarkExtra' => App\Facades\MarkExtraFacade::class,
 
         'Html'      => Collective\Html\HtmlFacade::class,

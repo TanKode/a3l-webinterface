@@ -79,6 +79,10 @@ textarea.form-control {
 .form-control.no-border {
   border: none;
 }
+label.label-license > input:checked + span.label {
+  color: #ffffff;
+  background: #46be8a;
+}
 .dropdown-menu > li > span {
   padding: 8px 15px;
 }

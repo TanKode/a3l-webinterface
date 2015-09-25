@@ -8,6 +8,9 @@ String.prototype.plain = function () {
 String.prototype.umlauts = function () {
     return this.replace(/^\s+|\s+$/g, "").replace(/ä/g, "a").replace(/ö/g, "u").replace(/ü/g, "u").replace(/ß/g, "s");
 };
+String.prototype.money = function () {
+    return this.replace(/\D+/g, "") * 1;
+};
 
 jQuery(window).on('load', function () {
     if(jQuery.jStorage.get('menubar-fold', false)) {

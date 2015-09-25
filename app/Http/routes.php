@@ -19,6 +19,10 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth', 'namespace' => 'App'], 
     Route::controller('profile', 'ProfileController');
     Route::controller('changelog', 'ChangelogController');
 
+    Route::group(['prefix' => 'a3l', 'namespace' => 'A3L'], function() {
+        Route::controller('player', 'PlayerController');
+    });
+
     // ADMINISTRATION
     Route::controller('donation', 'DonationController');
     Route::controller('accounting', 'AccountingController');
