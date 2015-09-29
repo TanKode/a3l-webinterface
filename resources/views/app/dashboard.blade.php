@@ -52,6 +52,7 @@
                     <div class="pull-right white">
                         <i class="icon icon-3x fa-bug"></i>
                     </div>
+                    @if($gitlab['issues']['all']->count() > 0)
                     <div class="clearfix"></div>
                     <div class="clearfix white margin-top-10">
                         <div class="pull-left">Tickets</div>
@@ -60,6 +61,7 @@
                     <div class="progress progress-xs bg-red-600 margin-0">
                         <div class="progress-bar bg-white" style="width: {{ round(($gitlab['issues']['closed']->count() / $gitlab['issues']['all']->count()) * 100) }}%;"></div>
                     </div>
+                    @endif
                 </div>
             </div>
         </li>
