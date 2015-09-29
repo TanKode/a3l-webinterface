@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+use App\A3L\Player as A3lPlayer;
 use App\Traits\AssignsRoles;
 use App\Traits\UserCan;
 use Fenos\Notifynder\Notifable;
@@ -47,6 +48,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'password' => 'confirmed|min:8',
         ],
     ];
+
+    public function a3lPlayer()
+    {
+        if(!is_null($this->steam)) {
+            return A3lPlayer::pid($this->steam)->first();
+        }
+    }
 
     public function can($ability, $arguments = [])
     {

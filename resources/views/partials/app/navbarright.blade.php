@@ -22,4 +22,4 @@
         </ul>
     </li>
 </ul>
-<p class="navbar-text navbar-right" data-toggle="tooltip" data-placement="bottom" title="Bamboo-Coins">{{ \Auth::User()->bamboo_coins }} <i class="icon fa-leaf"></i></p>
+<p class="navbar-text navbar-right padding-horizontal-15" data-toggle="tooltip" data-placement="bottom" title="Bamboo-Coins">{{ \Auth::User()->bamboo_coins }} <i class="icon fa-leaf"></i></p>

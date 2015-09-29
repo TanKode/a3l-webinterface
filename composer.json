@@ -17,7 +17,8 @@
         "invisnik/laravel-steam-auth": "2.*",
         "absolute-software/laravel-curl": "dev-master",
         "xpaw/php-source-query-class": "dev-master",
-        "barryvdh/laravel-ide-helper": "^2.1"
+        "barryvdh/laravel-ide-helper": "^2.1",
+        "vinkla/gitlab": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

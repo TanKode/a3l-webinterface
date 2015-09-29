@@ -23,23 +23,27 @@
         {!! Form::close() !!}
     @endif
     @foreach($changelogs as $changelog)
-        <div class="panel">
+        <div class="panel is-collapse">
             <header class="panel-heading">
-                <h3 class="panel-title">{{ $changelog->title }}</h3>
-                @if(\Auth::User()->can('manage', \App\Changelog::class))
+                <h3 class="panel-title">
+                    {{ $changelog->title }}
+                    <small>{{ $changelog->created_at->format('d.m.Y') }}</small>
+                </h3>
+
                 <div class="panel-actions">
+                    @if(\Auth::User()->can('manage', \App\Changelog::class))
                     <a href="{{ url('app/changelog/delete/'.$changelog->id) }}" class="panel-action icon fa-trash-o"></a>
                     <a href="{{ url('app/changelog/edit/'.$changelog->id) }}" class="panel-action icon fa-pencil"></a>
+                    @endif
+                    <a class="panel-action icon fa-minus" data-toggle="panel-collapse"></a>
                 </div>
-                @endif
             </header>
-            <div class="panel-body max-height-250 scrollable scrollable-shadow is-enabled scrollable-vertical" data-plugin="scrollable" data-skin="scrollable-shadow">
+            <div class="panel-body">
                 <div data-role="container" class="scrollable-container">
                     <article data-role="content" class="scrollable-content">
                         {!! \MarkExtra::defaultTransform($changelog->content) !!}
                     </article>
                 </div>
-                <div class="scrollable-bar scrollable-bar-vertical scrollable-bar-hide" draggable="false"><div class="scrollable-bar-handle"></div></div>
             </div>
         </div>
     @endforeach

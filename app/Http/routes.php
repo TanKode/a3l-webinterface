@@ -21,6 +21,7 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth', 'namespace' => 'App'], 
 
     Route::group(['prefix' => 'a3l', 'namespace' => 'A3L'], function() {
         Route::controller('player', 'PlayerController');
+        Route::controller('vehicle', 'VehicleController');
     });
 
     // ADMINISTRATION

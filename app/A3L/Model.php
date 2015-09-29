@@ -24,18 +24,43 @@ class Model extends EloquentModel
     protected function getGearArray($value)
     {
         $data = $this->getArmaArray($value);
-        dump($data);
+//        dump($data);
+        $inventory = [];
+        foreach($data[8] as $item) {
+            $inventory[] = $item;
+        }
+        foreach($data[9] as $item) {
+            $inventory[] = $item;
+        }
+        foreach($data[10] as $item) {
+            $inventory[] = $item;
+        }
+        foreach($data[11] as $item) {
+            $inventory[] = $item;
+        }
+        foreach($data[12] as $item) {
+            $inventory[] = $item;
+        }
+        foreach($data[13] as $item) {
+            $inventory[] = $item;
+        }
         $gear = [
             'gear' => [
                 'clothing' => $data[0],
+                'vest' => $data[1],
                 'backpack' => $data[2],
                 'goggles' => $data[3],
                 'hat' => $data[4],
-                'map' => $data[5][0],
-                'compass' => $data[5][1],
-                'watch' => $data[5][2],
-                'radio' => $data[5][3],
-                'gps' => $data[5][4],
+                'additionals' => $data[5],
+                'primary_weapon' => [
+                    'type' => $data[6],
+                    'additionals' => $data[14]
+                ],
+                'secondary_weapon' => [
+                    'type' => $data[7],
+                    'additionals' => $data[15]
+                ],
+                'inventory' => array_count_values($inventory),
             ],
             'items' => $data[16],
         ];

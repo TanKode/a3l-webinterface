@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.17 (LTS) on 2015-09-25.
+ * Generated for Laravel 5.1.17 (LTS) on 2015-09-29.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -13230,6 +13230,38 @@ namespace {
         }
         
         /**
+         * Use the given cache instance.
+         *
+         * @param \Illuminate\Contracts\Cache\Store $cache
+         * @return $this 
+         * @static 
+         */
+        public static function cache($cache){
+            return \Silber\Bouncer\Bouncer::cache($cache);
+        }
+        
+        /**
+         * Clear the cache.
+         *
+         * @return $this 
+         * @static 
+         */
+        public static function refresh(){
+            return \Silber\Bouncer\Bouncer::refresh();
+        }
+        
+        /**
+         * Clear the cache for the given user.
+         *
+         * @param \Illuminate\Database\Eloquent\Model $user
+         * @return $this 
+         * @static 
+         */
+        public static function refreshForUser($user){
+            return \Silber\Bouncer\Bouncer::refreshForUser($user);
+        }
+        
+        /**
          * Set the access gate instance.
          *
          * @param \Illuminate\Contracts\Auth\Access\Gate $gate
@@ -14061,6 +14093,128 @@ namespace {
          */
         public static function request($method, $url, $data, $headers = array(), $encoding = 'JSON'){
             return \AbsoluteSoftware\Curl\Curl::request($method, $url, $data, $headers, $encoding);
+        }
+        
+    }
+
+
+    class GitLab extends \Vinkla\GitLab\Facades\GitLab{
+        
+        /**
+         * Get the factory instance.
+         *
+         * @return \Vinkla\GitLab\GitLabFactory 
+         * @static 
+         */
+        public static function getFactory(){
+            return \Vinkla\GitLab\GitLabManager::getFactory();
+        }
+        
+        /**
+         * Get a connection instance.
+         *
+         * @param string $name
+         * @return object 
+         * @static 
+         */
+        public static function connection($name = null){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            return \Vinkla\GitLab\GitLabManager::connection($name);
+        }
+        
+        /**
+         * Reconnect to the given connection.
+         *
+         * @param string $name
+         * @return object 
+         * @static 
+         */
+        public static function reconnect($name = null){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            return \Vinkla\GitLab\GitLabManager::reconnect($name);
+        }
+        
+        /**
+         * Disconnect from the given connection.
+         *
+         * @param string $name
+         * @return void 
+         * @static 
+         */
+        public static function disconnect($name = null){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            \Vinkla\GitLab\GitLabManager::disconnect($name);
+        }
+        
+        /**
+         * Get the configuration for a connection.
+         *
+         * @param string $name
+         * @throws \InvalidArgumentException
+         * @return array 
+         * @static 
+         */
+        public static function getConnectionConfig($name){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            return \Vinkla\GitLab\GitLabManager::getConnectionConfig($name);
+        }
+        
+        /**
+         * Get the default connection name.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getDefaultConnection(){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            return \Vinkla\GitLab\GitLabManager::getDefaultConnection();
+        }
+        
+        /**
+         * Set the default connection name.
+         *
+         * @param string $name
+         * @return void 
+         * @static 
+         */
+        public static function setDefaultConnection($name){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            \Vinkla\GitLab\GitLabManager::setDefaultConnection($name);
+        }
+        
+        /**
+         * Register an extension connection resolver.
+         *
+         * @param string $name
+         * @param callable $resolver
+         * @return void 
+         * @static 
+         */
+        public static function extend($name, $resolver){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            \Vinkla\GitLab\GitLabManager::extend($name, $resolver);
+        }
+        
+        /**
+         * Return all of the created connections.
+         *
+         * @return object[] 
+         * @static 
+         */
+        public static function getConnections(){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            return \Vinkla\GitLab\GitLabManager::getConnections();
+        }
+        
+        /**
+         * Get the config instance.
+         *
+         * @return \Illuminate\Contracts\Config\Repository 
+         * @static 
+         */
+        public static function getConfig(){
+            //Method inherited from \GrahamCampbell\Manager\AbstractManager            
+            return \Vinkla\GitLab\GitLabManager::getConfig();
         }
         
     }

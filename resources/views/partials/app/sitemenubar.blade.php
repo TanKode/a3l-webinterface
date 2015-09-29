@@ -26,6 +26,14 @@
                             </a>
                         </li>
                     @endif
+                    @if(\Auth::User()->can('manage', \App\A3L\Vehicle::class))
+                        <li class="site-menu-item @if(Request::is('app/a3l/vehicle*')) active @endif">
+                            <a href="{{ url('app/a3l/vehicle') }}">
+                                <i class="site-menu-icon text-warning fa-car"></i>
+                                <span class="site-menu-title">Fahrzeuge</span>
+                            </a>
+                        </li>
+                    @endif
                     @endif
 
                     @if(\Auth::User()->canAccess('administration'))

@@ -11,7 +11,7 @@ class ChangelogController extends Controller
     public function getIndex()
     {
         return view('app.changelog.index')->with([
-            'changelogs' => Changelog::all(),
+            'changelogs' => Changelog::orderBy('created_at', 'desc')->get(),
         ]);
     }
 

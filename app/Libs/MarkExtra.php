@@ -14,7 +14,7 @@ class MarkExtra extends MarkdownExtra
 
     protected static function transformChangelog($text)
     {
-        $pattern = '/^(<p>|)\[(?<type>[a-z]+)\] (?<str>[\s\d\w\.\-_,!?\(\);:&]+)(<\/p>|)$/mi';
+        $pattern = '/^(<p>|)\[(?<type>[a-z]+)\] (?<str>[\s\d\w\.\-_,!?\(\);:&öäüßÖÄÜ]+)(<\/p>|)$/mi';
         $text = preg_replace_callback($pattern, function($hits) {
             $type = trim(strtolower($hits['type']));
             switch($type) {

@@ -33,6 +33,26 @@ class Player extends Model
         'donatorlvl' => 'int',
     ];
 
+    public function vehicles()
+    {
+        return $this->hasMany('App\A3L\Vehicle', 'pid', 'playerid');
+    }
+
+    public function civVehicles()
+    {
+        return $this->vehicles()->civ()->get();
+    }
+
+    public function copVehicles()
+    {
+        return $this->vehicles()->cop()->get();
+    }
+
+    public function medVehicles()
+    {
+        return $this->vehicles()->med()->get();
+    }
+
     public function getNameAttribute($value)
     {
         return utf8_encode($value);
@@ -63,6 +83,11 @@ class Player extends Model
         return $this->getLicenseArray($value);
     }
 
+    public function getCopGearAttribute($value)
+    {
+        return $this->getGearArray($value);
+    }
+
     public function getMedLicensesAttribute($value)
     {
         return $this->getLicenseArray($value);
@@ -71,5 +96,10 @@ class Player extends Model
     public function scopeUid($query, $uid)
     {
         return $query->where('uid', $uid);
+    }
+
+    public function scopePid($query, $pid)
+    {
+        return $query->where('playerid', $pid);
     }
 }

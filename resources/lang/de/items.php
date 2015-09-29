@@ -7,4 +7,6 @@ return [
 
     'RyL_inv_lockpick' => 'Dietrich',
     'RyL_inv_handcuffs' => 'Handschellen',
+    'RyL_inv_Schere' => 'Schere',
+    'RyL_inv_spikeStrip' => 'Nagelstreifen',
 ];

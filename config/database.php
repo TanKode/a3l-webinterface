@@ -70,6 +70,18 @@ return [
             'strict'    => false,
         ],
 
+        'a3e' => [
+            'driver'    => 'mysql',
+            'host'      => env('A3E_DB_HOST', 'localhost'),
+            'database'  => env('A3E_DB_DATABASE', 'forge'),
+            'username'  => env('A3E_DB_USERNAME', 'forge'),
+            'password'  => env('A3E_DB_PASSWORD', ''),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
     ],
 
     /*

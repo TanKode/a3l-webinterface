@@ -157,6 +157,7 @@ return [
         Silber\Bouncer\BouncerServiceProvider::class,
         Fenos\Notifynder\NotifynderServiceProvider::class,
         Invisnik\LaravelSteamAuth\SteamServiceProvider::class,
+        Vinkla\GitLab\GitLabServiceProvider::class,
         AbsoluteSoftware\Curl\CurlServiceProvider::class,
 
     ],
@@ -218,6 +219,7 @@ return [
         'Bouncer'   => Silber\Bouncer\BouncerFacade::class,
         'Notifynder'=> Fenos\Notifynder\Facades\Notifynder::class,
         'Curl'      => AbsoluteSoftware\Curl\Facades\CurlFacade::class,
+        'GitLab'    => Vinkla\GitLab\Facades\GitLab::class,
 
     ],
 

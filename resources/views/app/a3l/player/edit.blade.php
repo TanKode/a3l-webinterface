@@ -44,11 +44,11 @@
         </header>
         <section class="panel-body">
             <h4>Ausrüstung</h4>
-            {{ dump($player->civ_gear['gear']) }}
+            <pre><code>{{ json_print($player->civ_gear['gear']) }}</code></pre>
             <h4>Inventar</h4>
             <ul class="list-inline">
             @foreach(array_count_values($player->civ_gear['items']) as $item => $count)
-                <li class="label label-dark">{{ $count }} * {{ trans('items.'.$item) }}</li>
+                <li><span class="label label-dark">{{ $count }} * {{ trans('items.'.$item) }}</span></li>
             @endforeach
             </ul>
             <h4>Lizenzen</h4>
@@ -63,6 +63,12 @@
                 </li>
             @endforeach
             </ul>
+            <h4>Fahrzeuge</h4>
+            <ul class="list-inline">
+                @foreach($player->civVehicles() as $vehicle)
+                    <li><span class="label label-dark">{{ trans('vehicles.'.$vehicle->classname) }}</span></li>
+                @endforeach
+            </ul>
         </section>
     </div>
 @endif
@@ -72,7 +78,32 @@
             <h3 class="panel-title">Polizist</h3>
         </header>
         <section class="panel-body">
-
+            <h4>Ausrüstung</h4>
+            <pre><code>{{ json_print($player->cop_gear['gear']) }}</code></pre>
+            <h4>Inventar</h4>
+            <ul class="list-inline">
+                @foreach(array_count_values($player->cop_gear['items']) as $item => $count)
+                    <li><span class="label label-dark">{{ $count }} * {{ trans('items.'.$item) }}</span></li>
+                @endforeach
+            </ul>
+            <h4>Lizenzen</h4>
+            <ul class="list-inline">
+                @foreach($player->cop_licenses as $key => $value)
+                    <li>
+                        <label class="label-license">
+                            {!! Form::hidden('licenses['.$key.']', $value) !!}
+                            {!! Form::checkbox('licenses['.$key.']', 1, $value, ['class' => 'hidden']) !!}
+                            <span class="label label-dark">{{ trans('licenses.'.$key) }}</span>
+                        </label>
+                    </li>
+                @endforeach
+            </ul>
+            <h4>Fahrzeuge</h4>
+            <ul class="list-inline">
+                @foreach($player->copVehicles() as $vehicle)
+                    <li><span class="label label-dark">{{ trans('vehicles.'.$vehicle->classname) }}</span></li>
+                @endforeach
+            </ul>
         </section>
     </div>
 @endif

@@ -101,6 +101,85 @@
                     {!! Form::close() !!}
                 </div>
             </div>
+
+            @if(!is_null($user->a3lPlayer()))
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Altis Life - {{ $user->a3lPlayer()->name }}</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action icon fa-minus" data-toggle="panel-collapse"></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <strong>Spieler-ID</strong>
+                            <p>{{ $user->a3lPlayer()->playerid }}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Geld</strong>
+                            <p>{{ format_money($user->a3lPlayer()->cash + $user->a3lPlayer()->bankacc) }}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Karma</strong>
+                            <p>{{ $user->a3lPlayer()->Karma }}</p>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <h4>Zivilist</h4>
+                            <strong>Lizenzen</strong>
+                            <ul class="list-inline">
+                                @foreach($user->a3lPlayer()->civ_licenses as $key => $value)
+                                    <li>
+                                        <span class="label label-dark">{{ trans('licenses.'.$key) }}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <strong>Fahrzeuge</strong>
+                            <ul class="list-inline">
+                                @foreach($user->a3lPlayer()->civVehicles() as $vehicle)
+                                    <li><span class="label label-dark">{{ trans('vehicles.'.$vehicle->classname) }}</span></li>
+                                @endforeach
+                            </ul>
+                            @if($user->a3lPlayer()->coplevel > 0)
+                                <h4>Polizist</h4>
+                                <strong>Lizenzen</strong>
+                                <ul class="list-inline">
+                                    @foreach($user->a3lPlayer()->cop_licenses as $key => $value)
+                                        <li>
+                                            <span class="label label-dark">{{ trans('licenses.'.$key) }}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                                <strong>Fahrzeuge</strong>
+                                <ul class="list-inline">
+                                    @foreach($user->a3lPlayer()->copVehicles() as $vehicle)
+                                        <li><span class="label label-dark">{{ trans('vehicles.'.$vehicle->classname) }}</span></li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                            @if($user->a3lPlayer()->mediclevel > 0)
+                                <h4>Medic</h4>
+                                <strong>Lizenzen</strong>
+                                <ul class="list-inline">
+                                    @foreach($user->a3lPlayer()->med_licenses as $key => $value)
+                                        <li>
+                                            <span class="label @if($value) label-success @else label-dark @endif">{{ trans('licenses.'.$key) }}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                                <strong>Fahrzeuge</strong>
+                                <ul class="list-inline">
+                                    @foreach($user->a3lPlayer()->medVehicles() as $vehicle)
+                                        <li><span class="label label-dark">{{ trans('vehicles.'.$vehicle->classname) }}</span></li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 @endsection

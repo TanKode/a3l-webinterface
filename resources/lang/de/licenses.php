@@ -1,5 +1,6 @@
 <?php
 return [
+    // CIV
     'license_civ_driver' => 'Führerschein',
     'license_civ_air' => 'Pilotenschein',
     'license_civ_boat' => 'Bootsschein',
@@ -23,4 +24,9 @@ return [
     'license_civ_cement' => 'Zement',
 
     'license_med_ADAC' => 'license_med_ADAC',
+
+    // COP
+    'license_cop_air' => 'Pilotenschein',
+    'license_cop_swat' => 'SWAT',
+    'license_cop_cg' => 'Küstenwache',
 ];
