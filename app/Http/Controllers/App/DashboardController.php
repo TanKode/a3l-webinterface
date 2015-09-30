@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\App;
 
 use App\A3E\Account as A3eAccount;
+use App\A3E\Vehicle as A3eVehicle;
 use App\A3E\Territory as A3eTerritory;
 use App\A3L\Player as A3lPlayer;
 use App\A3L\Vehicle as A3lVehicle;
@@ -61,6 +62,7 @@ class DashboardController extends Controller
             ],
             'a3e' => [
                 'account_count' => A3eAccount::count(),
+                'vehicle_count' => A3eVehicle::count(),
                 'territory_count' => A3eTerritory::count(),
                 'money_sum' => A3eAccount::sum('money'),
                 'score_sum' => A3eAccount::sum('score'),

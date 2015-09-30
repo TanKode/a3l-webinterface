@@ -21,4 +21,9 @@ class Territory extends Model
         'created_at',
         'last_payed_at',
     ];
+
+    public function owner()
+    {
+        return $this->belongstTo('App\A3E\Account', 'owner_uid', 'uid');
+    }
 }

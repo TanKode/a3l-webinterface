@@ -180,6 +180,66 @@
                 </div>
             </div>
             @endif
+
+
+            @if(!is_null($user->a3eAccount()))
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Exile - {{ $user->a3eAccount()->name }}</h3>
+                    <div class="panel-actions">
+                        <a class="panel-action icon fa-minus" data-toggle="panel-collapse"></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <strong>Spieler-ID</strong>
+                            <p>{{ $user->a3eAccount()->uid }}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Pop Tabs</strong>
+                            <p>{{ format_int($user->a3eAccount()->money) }}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Respekt</strong>
+                            <p>{{ format_int($user->a3eAccount()->score) }}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Gebiete</strong>
+                            <p>
+                                {{ $user->a3eAccount()->territories()->count() }}
+                                |
+                                LvL {{ $user->a3eAccount()->territories()->sum('level') }}
+                                |
+                                Radius  {{ $user->a3eAccount()->territories()->sum('radius') }}
+                            </p>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-3">
+                            <strong>Kills</strong>
+                            <p>{{ $user->a3eAccount()->kills }}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Deaths</strong>
+                            <p>{{ $user->a3eAccount()->deaths }}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>Kills / Deaths</strong>
+                            <p>{{ format_float($user->a3eAccount()->kills / ($user->a3eAccount()->deaths == 0 ? 1 : $user->a3eAccount()->deaths)) }}</p>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-12">
+                            <strong>Fahrzeuge</strong>
+                            <ul class="list-inline">
+                                @foreach($user->a3eAccount()->vehicles as $vehicle)
+                                    <li><span class="label label-dark">{{ trans('vehicles.'.$vehicle->class) }}</span></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 @endsection

@@ -9,10 +9,16 @@
                             <span class="site-menu-title">Dashboard</span>
                         </a>
                     </li>
-                    <li class="site-menu-item @if(Request::is('app/changelog')) active @endif">
+                    <li class="site-menu-item @if(Request::is('app/changelog*')) active @endif">
                         <a href="{{ url('app/changelog') }}">
                             <i class="site-menu-icon text-success fa-list"></i>
                             <span class="site-menu-title">Changelog</span>
+                        </a>
+                    </li>
+                    <li class="site-menu-item @if(Request::is('app/issue*')) active @endif">
+                        <a href="{{ url('app/issue') }}">
+                            <i class="site-menu-icon text-success fa-bug"></i>
+                            <span class="site-menu-title">Tickets</span>
                         </a>
                     </li>
 

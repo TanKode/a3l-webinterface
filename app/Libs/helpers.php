@@ -25,6 +25,13 @@ if (!function_exists('format_float')) {
     }
 }
 
+if (!function_exists('format_int')) {
+    function format_int($float)
+    {
+        return number_format($float, 0, ',', '.');
+    }
+}
+
 if (!function_exists('format_money')) {
     function format_money($float)
     {

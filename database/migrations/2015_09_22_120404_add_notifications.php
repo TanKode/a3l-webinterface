@@ -16,6 +16,9 @@ class AddNotifications extends Migration
         ],[
             'name' => 'coins.added',
             'text' => 'Deinem Account wurden **{extra.bamboo_amount}** Bamboo-Coins gutgeschrieben.',
+        ],[
+            'name' => 'issue.added',
+            'text' => 'Es wurde ein neues Ticket von **{from.username}** angelegt.',
         ],
     ];
 

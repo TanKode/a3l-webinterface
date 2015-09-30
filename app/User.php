@@ -2,6 +2,7 @@
 namespace App;
 
 use App\A3L\Player as A3lPlayer;
+use App\A3E\Account as A3eAccount;
 use App\Traits\AssignsRoles;
 use App\Traits\UserCan;
 use Fenos\Notifynder\Notifable;
@@ -14,7 +15,6 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Silber\Bouncer\Database\Ability;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
-use Silber\Bouncer\Database\Role;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
@@ -53,6 +53,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         if(!is_null($this->steam)) {
             return A3lPlayer::pid($this->steam)->first();
+        }
+    }
+
+    public function a3eAccount()
+    {
+        if(!is_null($this->steam)) {
+            return A3eAccount::uid($this->steam)->first();
         }
     }
 
