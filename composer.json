@@ -18,6 +18,7 @@
         "absolute-software/laravel-curl": "dev-master",
         "xpaw/php-source-query-class": "dev-master",
         "barryvdh/laravel-ide-helper": "^2.1",
+        "fkubis/teamspeak-php-framework": "dev-master",
         "vinkla/gitlab": "^2.0"
     },
     "require-dev": {

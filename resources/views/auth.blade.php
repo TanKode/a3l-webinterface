@@ -48,7 +48,7 @@
 
                 <footer class="clearfix padding-15 text-center">
                     <p>
-                        © 2015 by Bambusfarm | all rights reserved
+                        © 2015 by <a href="http://bambusfarm.net">Bambusfarm</a> | all rights reserved
                         <br/>
                         created by <a href="https://github.com/Gummibeer">Gummibeer</a>
                     </p>

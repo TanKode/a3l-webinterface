@@ -35,24 +35,32 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'teamspeak' => [
+        'user' => env('TS3_USER', 'serveradmin'),
+        'password' => env('TS3_PASSWORD', ''),
+        'host' => env('TS3_HOST', ''),
+        'port' => env('TS3_PORT', 10011),
+        'server_port' => env('TS3_SERVER_PORT', 9987),
+    ],
+
     // oAuth
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID', ''),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET', ''),
-        'redirect' => 'http://game.gummibeer.de/auth/facebookcallback',
+        'redirect' => 'http://bambusfarm.net/auth/facebookcallback',
     ],
 
     'github' => [
         'client_id' => env('GITHUB_CLIENT_ID', ''),
         'client_secret' => env('GITHUB_CLIENT_SECRET', ''),
-        'redirect' => 'http://game.gummibeer.de/auth/githubcallback',
+        'redirect' => 'http://bambusfarm.net/auth/githubcallback',
     ],
 
     'slack' => [
         'client_id' => env('SLACK_CLIENT_ID', ''),
         'client_secret' => env('SLACK_CLIENT_SECRET', ''),
         'token' => env('SLACK_TOKEN', ''),
-        'redirect' => 'http://game.gummibeer.de/auth/slackcallback',
+        'redirect' => 'http://bambusfarm.net/auth/slackcallback',
     ],
 
 ];

@@ -10,6 +10,7 @@ use App\Accounting;
 use App\Gitlab\Issue;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Teamspeak\Server;
 use App\User;
 use Carbon\Carbon;
 
@@ -17,7 +18,20 @@ class DashboardController extends Controller
 {
     public function getIndex()
     {
-        // ALTIS LIFE
+        $this->getTeamspeak();
+
+        return view('app.dashboard')->with([
+            'a3l' => $this->getLife(),
+            'a3e' => $this->getExile(),
+            'gitlab' => $this->getGitlab(),
+            'teamspeak' => $this->getTeamspeak(),
+            'accounting_sum' => Accounting::sum('amount'),
+            'bamboo_coins_sum' => array_sum(array_column(User::all()->toArray(), 'bamboo_coins')),
+        ]);
+    }
+
+    private function getLife()
+    {
         $sourceQuery = new \SourceQuery();
         $sourceQuery->Connect(env('A3L_HOST', ''), env('A3L_PORT', 2303), 1, \SourceQuery::SOURCE);
         $a3lInfo = $sourceQuery->GetInfo();
@@ -31,7 +45,19 @@ class DashboardController extends Controller
         $hours = $hours == 0 ? 6 : $hours;
         $a3lRestart->addHours($hours);
 
-        // EXILE
+        return [
+            'player_count' => A3lPlayer::count(),
+            'vehicle_count' => A3lVehicle::count(),
+            'money_sum' => A3lPlayer::sum('cash') + A3lPlayer::sum('bankacc'),
+            'karma_sum' => A3lPlayer::sum('Karma'),
+            'info' => $a3lInfo,
+            'playersOnline' => $a3lPlayers,
+            'restart' => $a3lRestart,
+        ];
+    }
+
+    private function getExile()
+    {
         $sourceQuery = new \SourceQuery();
         $sourceQuery->Connect(env('A3E_HOST', ''), env('A3E_PORT', 2303), 1, \SourceQuery::SOURCE);
         $a3eInfo = $sourceQuery->GetInfo();
@@ -46,44 +72,44 @@ class DashboardController extends Controller
         }
         $a3eRestart->hour = 6;
 
-        //GITLAB
+        return [
+            'account_count' => A3eAccount::count(),
+            'vehicle_count' => A3eVehicle::count(),
+            'territory_count' => A3eTerritory::count(),
+            'money_sum' => A3eAccount::sum('money'),
+            'score_sum' => A3eAccount::sum('score'),
+            'kills_sum' => A3eAccount::sum('kills'),
+            'deaths_sum' => A3eAccount::sum('deaths'),
+            'info' => $a3eInfo,
+            'playersOnline' => $a3ePlayers,
+            'restart' => $a3eRestart,
+        ];
+    }
+
+    private function getGitlab()
+    {
         $issues = Issue::all();
 
-        return view('app.dashboard')->with([
-            'accounting_sum' => Accounting::sum('amount'),
-            'a3l' => [
-                'player_count' => A3lPlayer::count(),
-                'vehicle_count' => A3lVehicle::count(),
-                'money_sum' => A3lPlayer::sum('cash') + A3lPlayer::sum('bankacc'),
-                'karma_sum' => A3lPlayer::sum('Karma'),
-                'info' => $a3lInfo,
-                'playersOnline' => $a3lPlayers,
-                'restart' => $a3lRestart,
+        return [
+            'issues' => [
+                'all' => $issues,
+                'open' => $issues->reject(function ($item) {
+                    return $item['state'] == 'closed';
+                }),
+                'closed' => $issues->filter(function ($item) {
+                    return $item['state'] == 'closed';
+                }),
             ],
-            'a3e' => [
-                'account_count' => A3eAccount::count(),
-                'vehicle_count' => A3eVehicle::count(),
-                'territory_count' => A3eTerritory::count(),
-                'money_sum' => A3eAccount::sum('money'),
-                'score_sum' => A3eAccount::sum('score'),
-                'kills_sum' => A3eAccount::sum('kills'),
-                'deaths_sum' => A3eAccount::sum('deaths'),
-                'info' => $a3eInfo,
-                'playersOnline' => $a3ePlayers,
-                'restart' => $a3eRestart,
-            ],
-            'gitlab' => [
-                'issues' => [
-                    'all' => $issues,
-                    'open' => $issues->reject(function ($item) {
-                        return $item['state'] == 'closed';
-                    }),
-                    'closed' => $issues->filter(function ($item) {
-                        return $item['state'] == 'closed';
-                    }),
-                ],
-            ],
-            'bamboo_coins_sum' => array_sum(array_column(User::all()->toArray(), 'bamboo_coins')),
-        ]);
+        ];
+    }
+
+    private function getTeamspeak()
+    {
+        $server = new Server();
+        $clients = $server->getClients();
+        return [
+            'server' => $server,
+            'clients' => $clients,
+        ];
     }
 }

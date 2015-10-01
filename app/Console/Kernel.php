@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\Inspire::class,
         \App\Console\Commands\A3lOnline::class,
         \App\Console\Commands\A3eOnline::class,
+        \App\Console\Commands\Ts3Online::class,
     ];
 
     /**
@@ -27,5 +28,6 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('a3l:online')->everyFiveMinutes();
         $schedule->command('a3e:online')->everyFiveMinutes();
+        $schedule->command('ts3:online')->everyFiveMinutes();
     }
 }

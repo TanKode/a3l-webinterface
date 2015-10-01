@@ -30,15 +30,11 @@
 
     <ul class="blocks blocks-100 blocks-xlg-4 blocks-md-3 blocks-sm-2" data-plugin="masonry">
     @foreach($issues as $issue)
+        @if($issue['state'] != 'closed')
         <li class="masonry-item">
             <div class="panel">
                 <header class="panel-heading">
                     <h3 class="panel-title">
-                        @if($issue['state'] == 'closed')
-                            <i class="icon text-success fa-close"></i>
-                        @else
-                            <i class="icon text-warning fa-circle"></i>
-                        @endif
                         {{ $issue['title'] }}
                     </h3>
                 </header>
@@ -47,7 +43,7 @@
                 </article>
                 <section class="panel-footer">
                     <ul class="list-inline">
-                        <li><span class="label label-info">{{ \GitLab::api('projects')->show($issue['project_id'])['name'] }}</span></li>
+                        <li><span class="label label-info @if($issue['project_id'] == 18) bg-brown-600 @elseif($issue['project_id'] == 11) bg-purple-600 @elseif($issue['project_id'] == 16) bg-primary-600 @endif">{{ \GitLab::api('projects')->show($issue['project_id'])['name'] }}</span></li>
                         <li><span class="label label-info">{{ $issue['milestone']['title'] }}</span></li>
                         @foreach($issue['labels'] as $label)
                             <li><span class="label label-dark">{{ $label }}</span></li>
@@ -56,6 +52,7 @@
                 </section>
             </div>
         </li>
+        @endif
     @endforeach
     </ul>
 @endsection

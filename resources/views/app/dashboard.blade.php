@@ -39,6 +39,48 @@
                 </div>
             </li>
         @endif
+
+        {{-- TEAMSPEAK --}}
+        <li class="masonry-item">
+            <div class="widget">
+                <div class="widget-content padding-30 bg-white">
+                    <div class="counter counter-md text-left">
+                        <div class="counter-label margin-bottom-5 clearfix">
+                            <span class="pull-lefft">{{ $teamspeak['server']->host }}:{{ $teamspeak['server']->port }}</span>
+                            <span class="pull-right">
+                                @if($teamspeak['server']->status == 'online')
+                                    <i class="icon fa-circle text-success"></i>
+                                @else
+                                    <i class="icon fa-circle-o text-danger"></i>
+                                @endif
+                            </span>
+                        </div>
+                        <div class="counter-number-group margin-bottom-10">
+                            <span class="counter-number">TeamSpeak 3</span>
+                        </div>
+                        @if($teamspeak['server']->status == 'online')
+                            <div class="counter-label">
+                                <div class="clearfix">
+                                    <div class="pull-left">Clients</div>
+                                    <div class="pull-right">{{ $teamspeak['server']->cur_clients }} / {{ $teamspeak['server']->max_clients }}</div>
+                                </div>
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-blue-600" style="width: {{ round(($teamspeak['server']->cur_clients / $teamspeak['server']->max_clients) * 100) }}%;"></div>
+                                </div>
+                                @if($teamspeak['server']->cur_clients > 0)
+                                    <ul class="list-inline">
+                                        @foreach($teamspeak['clients'] as $client)
+                                            <li class="label label-dark bg-blue-600">{{ $client->nickname }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </li>
+
         <li class="masonry-item">
             <div class="widget">
                 <div class="widget-content padding-30 bg-red-600 clearfix">
@@ -218,7 +260,7 @@
                                 @if($a3e['info']['Players'] > 0)
                                     <ul class="list-inline">
                                         @foreach($a3e['playersOnline'] as $player)
-                                            <li class="label label-dark bg-purple-600">{{ $player['Name'] }}</li>
+                                            <li class="label label-dark bg-brown-600">{{ $player['Name'] }}</li>
                                         @endforeach
                                     </ul>
                                 @endif
