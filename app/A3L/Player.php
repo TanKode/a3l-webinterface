@@ -75,7 +75,7 @@ class Player extends Model
 
     public function getCivGearAttribute($value)
     {
-        return $this->getGearArray($value);
+        return $this->getInventoryArray($value);
     }
 
     public function getCopLicensesAttribute($value)
@@ -85,7 +85,7 @@ class Player extends Model
 
     public function getCopGearAttribute($value)
     {
-        return $this->getGearArray($value);
+        return $this->getInventoryArray($value);
     }
 
     public function getMedLicensesAttribute($value)

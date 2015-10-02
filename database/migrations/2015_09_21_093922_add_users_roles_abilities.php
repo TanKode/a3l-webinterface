@@ -3,6 +3,11 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use App\A3L\Player as A3lPlayer;
+use App\A3L\Vehicle as A3lVehicle;
+use App\A3E\Account as A3eAccount;
+use App\A3E\Player as A3ePlayer;
+use App\A3E\Vehicle as A3eVehicle;
+use App\A3E\Territory as A3eTerritory;
 use App\User;
 use Silber\Bouncer\Database\Role;
 use Silber\Bouncer\Database\Ability;
@@ -19,6 +24,12 @@ class AddUsersRolesAbilities extends Migration
         \Bouncer::allow('member');
 
         \Bouncer::allow('admin')->to('manage', A3lPlayer::class);
+        \Bouncer::allow('admin')->to('manage', A3lVehicle::class);
+
+        \Bouncer::allow('admin')->to('manage', A3eAccount::class);
+        \Bouncer::allow('admin')->to('manage', A3ePlayer::class);
+        \Bouncer::allow('admin')->to('manage', A3eVehicle::class);
+        \Bouncer::allow('admin')->to('manage', A3eTerritory::class);
 
         \Bouncer::allow('admin')->to('manage', User::class);
         \Bouncer::allow('admin')->to('manage', Role::class);

@@ -23,7 +23,6 @@ class Server extends Model
     {
         $this->status = array_get($this->info, 'virtualserver_status', 'offline')->toString();
         $this->name = array_get($this->info, 'virtualserver_name')->toString();
-        $this->cur_clients = array_get($this->info, 'virtualserver_client_connections', 0);
         $this->max_clients = array_get($this->info, 'virtualserver_maxclients', 0);
         $this->host = config('services.teamspeak.host');
         $this->port = config('services.teamspeak.server_port');

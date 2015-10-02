@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.18 (LTS) on 2015-10-01.
+ * Generated for Laravel 5.1.19 (LTS) on 2015-10-02.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -4506,6 +4506,17 @@ namespace {
          */
         public static function avg($column){
             return \Illuminate\Database\Query\Builder::avg($column);
+        }
+        
+        /**
+         * Alias for the "avg" method.
+         *
+         * @param string $column
+         * @return float|int 
+         * @static 
+         */
+        public static function average($column){
+            return \Illuminate\Database\Query\Builder::average($column);
         }
         
         /**

@@ -62,12 +62,12 @@
                             <div class="counter-label">
                                 <div class="clearfix">
                                     <div class="pull-left">Clients</div>
-                                    <div class="pull-right">{{ $teamspeak['server']->cur_clients }} / {{ $teamspeak['server']->max_clients }}</div>
+                                    <div class="pull-right">{{ $teamspeak['clients']->count() }} / {{ $teamspeak['server']->max_clients }}</div>
                                 </div>
                                 <div class="progress progress-xs">
-                                    <div class="progress-bar bg-blue-600" style="width: {{ round(($teamspeak['server']->cur_clients / $teamspeak['server']->max_clients) * 100) }}%;"></div>
+                                    <div class="progress-bar bg-blue-600" style="width: {{ round(($teamspeak['clients']->count() / $teamspeak['server']->max_clients) * 100) }}%;"></div>
                                 </div>
-                                @if($teamspeak['server']->cur_clients > 0)
+                                @if($teamspeak['clients']->count() > 0)
                                     <ul class="list-inline">
                                         @foreach($teamspeak['clients'] as $client)
                                             <li class="label label-dark bg-blue-600">{{ $client->nickname }}</li>

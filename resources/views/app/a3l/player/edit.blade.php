@@ -43,11 +43,9 @@
             <h3 class="panel-title">Zivilist</h3>
         </header>
         <section class="panel-body">
-            <h4>Ausrüstung</h4>
-            <pre><code>{{ json_print($player->civ_gear['gear']) }}</code></pre>
             <h4>Inventar</h4>
             <ul class="list-inline">
-            @foreach(array_count_values($player->civ_gear['items']) as $item => $count)
+            @foreach($player->civ_gear as $item => $count)
                 <li><span class="label label-dark">{{ $count }} * {{ trans('items.'.$item) }}</span></li>
             @endforeach
             </ul>
@@ -78,11 +76,9 @@
             <h3 class="panel-title">Polizist</h3>
         </header>
         <section class="panel-body">
-            <h4>Ausrüstung</h4>
-            <pre><code>{{ json_print($player->cop_gear['gear']) }}</code></pre>
             <h4>Inventar</h4>
             <ul class="list-inline">
-                @foreach(array_count_values($player->cop_gear['items']) as $item => $count)
+                @foreach($player->cop_gear as $item => $count)
                     <li><span class="label label-dark">{{ $count }} * {{ trans('items.'.$item) }}</span></li>
                 @endforeach
             </ul>
