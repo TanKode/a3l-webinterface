@@ -1,6 +1,7 @@
 <?php
 return [
     'B_Quadbike_01_F' => 'Quadbike',
+    'C_Hatchback_01_F' => 'Limousine',
     'C_Hatchback_01_sport_F' => 'Sport-Limousine',
     'C_Offroad_01_F' => 'Geländewagen',
     'C_SUV_01_F' => 'SUV',

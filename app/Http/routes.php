@@ -24,6 +24,10 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth', 'namespace' => 'App'], 
         Route::controller('vehicle', 'VehicleController');
     });
 
+    Route::group(['prefix' => 'a3e', 'namespace' => 'A3E'], function() {
+        Route::controller('account', 'AccountController');
+    });
+
     // ADMINISTRATION
     Route::controller('donation', 'DonationController');
     Route::controller('accounting', 'AccountingController');

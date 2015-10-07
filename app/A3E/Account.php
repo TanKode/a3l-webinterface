@@ -46,6 +46,11 @@ class Account extends Model
         return $this->hasMany('App\A3E\Vehicle', 'account_uid', 'uid');
     }
 
+    public function getKdAttribute()
+    {
+        return $this->kills / ($this->deaths > 0 ? $this->deaths : 1);
+    }
+
     public function scopeUid($query, $uid)
     {
         return $query->where('uid', $uid);

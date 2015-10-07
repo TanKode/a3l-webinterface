@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
 class Model extends EloquentModel
 {
     protected $connection = 'a3l';
+    public $timestamps = false;
 
     protected function getArmaArray($value)
     {

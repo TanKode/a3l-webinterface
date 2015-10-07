@@ -130,9 +130,7 @@
                             <strong>Lizenzen</strong>
                             <ul class="list-inline">
                                 @foreach($user->a3lPlayer()->civ_licenses as $key => $value)
-                                    <li>
-                                        <span class="label label-dark">{{ trans('licenses.'.$key) }}</span>
-                                    </li>
+                                    <li><span class="label @if($value) label-success @else label-dark @endif">{{ trans('licenses.'.$key) }}</span></li>
                                 @endforeach
                             </ul>
                             <strong>Fahrzeuge</strong>
@@ -146,9 +144,7 @@
                                 <strong>Lizenzen</strong>
                                 <ul class="list-inline">
                                     @foreach($user->a3lPlayer()->cop_licenses as $key => $value)
-                                        <li>
-                                            <span class="label label-dark">{{ trans('licenses.'.$key) }}</span>
-                                        </li>
+                                        <li><span class="label @if($value) label-success @else label-dark @endif">{{ trans('licenses.'.$key) }}</span></li>
                                     @endforeach
                                 </ul>
                                 <strong>Fahrzeuge</strong>
@@ -163,9 +159,7 @@
                                 <strong>Lizenzen</strong>
                                 <ul class="list-inline">
                                     @foreach($user->a3lPlayer()->med_licenses as $key => $value)
-                                        <li>
-                                            <span class="label @if($value) label-success @else label-dark @endif">{{ trans('licenses.'.$key) }}</span>
-                                        </li>
+                                        <li><span class="label @if($value) label-success @else label-dark @endif">{{ trans('licenses.'.$key) }}</span></li>
                                     @endforeach
                                 </ul>
                                 <strong>Fahrzeuge</strong>
@@ -206,13 +200,11 @@
                         </div>
                         <div class="col-md-3">
                             <strong>Gebiete</strong>
+                            @foreach($user->a3eAccount()->territories as $territory)
                             <p>
-                                {{ $user->a3eAccount()->territories()->count() }}
-                                |
-                                LvL {{ $user->a3eAccount()->territories()->sum('level') }}
-                                |
-                                Radius  {{ $user->a3eAccount()->territories()->sum('radius') }}
+                                LvL {{ $territory->level }} | Radius  {{ $territory->radius }}
                             </p>
+                            @endforeach
                         </div>
                         <div class="clearfix"></div>
                         <div class="col-md-3">

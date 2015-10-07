@@ -40,20 +40,12 @@ class DonationController extends Controller
         $donation->save();
 
         $donator = $donation->donator;
-        $donator->bamboo_coins += $donation->bamboo_amount;
-        $donator->save();
-
+        $donator->addBambooCoins($donation->bamboo_amount);
         Accounting::create([
             'booker_id' => \Auth::User()->id,
             'amount' => $data['euro_amount'],
             'description' => 'Spende (#'.$donation->id.') über '.$donation->method.' von '.$donator->username.'.'
         ]);
-        \Notifynder::category('coins.added')
-            ->from($donation->booker_id)
-            ->to($donation->donator_id)
-            ->url('#')
-            ->extra(['bamboo_amount' => $donation->bamboo_amount])
-            ->send();
         return redirect('app/donation');
     }
 }

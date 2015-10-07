@@ -42,6 +42,43 @@
                     @endif
                     @endif
 
+
+                    @if(\Auth::User()->canAccess('a3e'))
+                    <li class="site-menu-category">Exile</li>
+                    @if(\Auth::User()->can('manage', \App\A3E\Account::class))
+                        <li class="site-menu-item @if(Request::is('app/a3e/account*')) active @endif">
+                            <a href="{{ url('app/a3e/account') }}">
+                                <i class="site-menu-icon text-danger fa-user"></i>
+                                <span class="site-menu-title">Accounts</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if(\Auth::User()->can('manage', \App\A3E\Player::class))
+                        <li class="site-menu-item @if(Request::is('app/a3e/player*')) active @endif">
+                            <a href="{{ url('app/a3e/player') }}">
+                                <i class="site-menu-icon text-danger fa-user"></i>
+                                <span class="site-menu-title">Spieler</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if(\Auth::User()->can('manage', \App\A3E\Vehicle::class))
+                        <li class="site-menu-item @if(Request::is('app/a3e/vehicle*')) active @endif">
+                            <a href="{{ url('app/a3e/vehicle') }}">
+                                <i class="site-menu-icon text-danger fa-car"></i>
+                                <span class="site-menu-title">Fahrzeuge</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if(\Auth::User()->can('manage', \App\A3E\Territory::class))
+                        <li class="site-menu-item @if(Request::is('app/a3e/territory*')) active @endif">
+                            <a href="{{ url('app/a3e/territory') }}">
+                                <i class="site-menu-icon text-danger fa-map"></i>
+                                <span class="site-menu-title">Gebiete</span>
+                            </a>
+                        </li>
+                    @endif
+                    @endif
+
                     @if(\Auth::User()->canAccess('administration'))
                     <li class="site-menu-category">Adminbereich</li>
                     @if(\Auth::User()->can('manage', \App\Donation::class))

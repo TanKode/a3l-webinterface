@@ -11,7 +11,10 @@
             @if ($post->canDelete)
                 <a class="pull-right" href="{{ $post->deleteRoute }}" data-confirm data-method="delete"><i class="icon fa-trash-o text-danger"></i></a>
             @endif
-			<h4 class="media-heading">{{ $post->authorName }}</h4>
+			<h4 class="media-heading">
+                {{ $post->authorName }}
+                <span class="label label-default label-outline">{{ $post->author->role->name }}</span>
+            </h4>
 			<div>
                 {!! \MarkExtra::defaultTransform(e($post->content)) !!}
             </div>

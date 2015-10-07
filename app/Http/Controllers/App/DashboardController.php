@@ -67,10 +67,9 @@ class DashboardController extends Controller
         $a3eRestart = Carbon::now()->setTimezone('Europe/Berlin');
         $a3eRestart->minute = 0;
         $a3eRestart->second = 0;
-        if($a3eRestart->hour > 6) {
-            $a3eRestart->addDay(1);
-        }
-        $a3eRestart->hour = 6;
+        $hours = (ceil($a3eRestart->hour / 6) * 6) - $a3eRestart->hour;
+        $hours = $hours == 0 ? 6 : $hours;
+        $a3eRestart->addHours($hours);
 
         return [
             'account_count' => A3eAccount::count(),

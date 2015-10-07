@@ -34,6 +34,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'remember_token',
         'facebook',
         'github',
+        'slack',
         'steam',
     ];
 
@@ -92,6 +93,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         }
     }
 
+    public function addBambooCoins($amount)
+    {
+        $this->bamboo_coins += $amount;
+        $this->save();
+        $from = \Auth::check() ? \Auth::User()->id : 1;
+        \Notifynder::category('coins.added')
+            ->from($from)
+            ->to($this->id)
+            ->url('#')
+            ->extra(['bamboo_amount' => $amount])
+            ->send();
+    }
+
     public function getRoleAttribute()
     {
         return $this->roles->first();
@@ -135,6 +149,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function scopeSlack($query, $id)
     {
         return $query->where('slack', $id);
+    }
+
+    public function scopeSteam($query, $id)
+    {
+        return $query->where('steam', $id);
     }
 
     public function scopeEmail($query, $email)

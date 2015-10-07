@@ -1,8 +1,11 @@
 <?php
 namespace App\A3L;
 
+use Carbon\Carbon;
+
 class Player extends Model
 {
+    protected $primaryKey = 'uid';
     protected $table = 'players';
     protected $fillable = [
         'uid',
@@ -101,5 +104,12 @@ class Player extends Model
     public function scopePid($query, $pid)
     {
         return $query->where('playerid', $pid);
+    }
+
+    public function scopeLastDay($query)
+    {
+        $date = Carbon::now();
+        $date->modify('- 24 hours');
+        return $query->where('LastLogin', '>', $date);
     }
 }
