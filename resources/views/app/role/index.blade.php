@@ -44,7 +44,7 @@
                     @foreach($roles as $role)
                         <tr>
                             <td>{{ $role->id }}</td>
-                            <td>{{ $role->name }}</td>
+                            <td><nobr>{{ $role->name }}</nobr></td>
                             <td>
                                 @if($role->name == 'super-admin')
                                     <span class="label label-danger label-outline">alle Berechtigungen</span>
