@@ -15,7 +15,7 @@ class Issue
     public static function all()
     {
         return collect(\GitLab::api('issues')->all())->filter(function ($item) {
-            return in_array($item['project_id'], [503207]);
+            return in_array($item['project_id'], [503343, 503207, 503325]);
         });
     }
 
