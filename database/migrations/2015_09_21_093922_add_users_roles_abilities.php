@@ -15,8 +15,6 @@ use App\Setting;
 use App\Donation;
 use App\Changelog;
 use App\Accounting;
-use Riari\Forum\Models\Thread;
-use Riari\Forum\Models\Post;
 
 class AddUsersRolesAbilities extends Migration
 {
@@ -40,12 +38,6 @@ class AddUsersRolesAbilities extends Migration
         \Bouncer::allow('admin')->to('manage', Donation::class);
         \Bouncer::allow('admin')->to('manage', Changelog::class);
         \Bouncer::allow('admin')->to('manage', Accounting::class);
-
-        \Bouncer::allow('admin')->to('lock', Thread::class);
-        \Bouncer::allow('admin')->to('pin', Thread::class);
-        \Bouncer::allow('admin')->to('delete', Thread::class);
-        \Bouncer::allow('admin')->to('edit', Post::class);
-        \Bouncer::allow('admin')->to('delete', Post::class);
 
         \Bouncer::allow('admin')->to('manage-admin-role');
         \Bouncer::allow('admin')->to('manage-member-role');
