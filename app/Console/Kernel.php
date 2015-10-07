@@ -14,8 +14,11 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\Inspire::class,
         \App\Console\Commands\A3lOnline::class,
+        \App\Console\Commands\A3lSlots::class,
         \App\Console\Commands\A3eOnline::class,
+        \App\Console\Commands\A3eSlots::class,
         \App\Console\Commands\Ts3Online::class,
+        \App\Console\Commands\Ts3Slots::class,
     ];
 
     /**
@@ -27,7 +30,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('a3l:online')->everyFiveMinutes();
+        $schedule->command('a3l:slots')->everyFiveMinutes();
         $schedule->command('a3e:online')->everyFiveMinutes();
+        $schedule->command('a3e:slots')->everyFiveMinutes();
         $schedule->command('ts3:online')->everyFiveMinutes();
+        $schedule->command('ts3:slots')->everyFiveMinutes();
     }
 }
