@@ -9,15 +9,15 @@
                             <span class="site-menu-title">Dashboard</span>
                         </a>
                     </li>
-                    <li class="site-menu-item @if(Request::is('app/changelog*')) active @endif">
-                        <a href="{{ url('app/changelog') }}">
-                            <i class="site-menu-icon text-success fa-list"></i>
-                            <span class="site-menu-title">Changelog</span>
+                    <li class="site-menu-item @if(Request::is('app/forum*')) active @endif">
+                        <a href="{{ url('app/forum') }}">
+                            <i class="site-menu-icon fa-list"></i>
+                            <span class="site-menu-title">Forum</span>
                         </a>
                     </li>
                     <li class="site-menu-item @if(Request::is('app/issue*')) active @endif">
                         <a href="{{ url('app/issue') }}">
-                            <i class="site-menu-icon text-success fa-bug"></i>
+                            <i class="site-menu-icon fa-bug"></i>
                             <span class="site-menu-title">Tickets</span>
                         </a>
                     </li>
@@ -47,7 +47,7 @@
                     @if(\Auth::User()->can('manage', \App\Donation::class))
                     <li class="site-menu-item @if(Request::is('app/donation*')) active @endif">
                         <a href="{{ url('app/donation') }}">
-                            <i class="site-menu-icon text-success fa-money"></i>
+                            <i class="site-menu-icon fa-money"></i>
                             <span class="site-menu-title">Spenden</span>
                         </a>
                     </li>
@@ -55,7 +55,7 @@
                     @if(\Auth::User()->can('manage', \App\Accounting::class))
                         <li class="site-menu-item @if(Request::is('app/accounting*')) active @endif">
                             <a href="{{ url('app/accounting') }}">
-                                <i class="site-menu-icon text-success fa-book"></i>
+                                <i class="site-menu-icon fa-book"></i>
                                 <span class="site-menu-title">Buchhaltung</span>
                             </a>
                         </li>
@@ -63,7 +63,7 @@
                     @if(\Auth::User()->canAccess('access_management'))
                     <li class="site-menu-item has-sub @if(Request::is('app/user*') || Request::is('app/role*') || Request::is('app/ability*')) active open @endif">
                         <a href="javascript:void(0)">
-                            <i class="site-menu-icon text-success fa-lock"></i>
+                            <i class="site-menu-icon fa-lock"></i>
                             <span class="site-menu-title">Zugriffsrechte</span>
                             <span class="site-menu-arrow"></span>
                         </a>
@@ -71,7 +71,7 @@
                             @if(\Auth::User()->can('manage', \App\User::class))
                             <li class="site-menu-item @if(Request::is('app/user*')) active @endif">
                                 <a href="{{ url('app/user') }}">
-                                    <i class="site-menu-icon text-success fa-user"></i>
+                                    <i class="site-menu-icon fa-user"></i>
                                     <span class="site-menu-title">Benutzer</span>
                                 </a>
                             </li>
@@ -79,7 +79,7 @@
                             @if(\Auth::User()->can('manage', \Silber\Bouncer\Database\Role::class))
                             <li class="site-menu-item @if(Request::is('app/role*')) active @endif">
                                 <a href="{{ url('app/role') }}">
-                                    <i class="site-menu-icon text-success fa-group"></i>
+                                    <i class="site-menu-icon fa-group"></i>
                                     <span class="site-menu-title">Rollen</span>
                                 </a>
                             </li>
@@ -87,7 +87,7 @@
                             @if(\Auth::User()->can('manage', \Silber\Bouncer\Database\Ability::class))
                             <li class="site-menu-item @if(Request::is('app/ability*')) active @endif">
                                 <a href="{{ url('app/ability') }}">
-                                    <i class="site-menu-icon text-success fa-key"></i>
+                                    <i class="site-menu-icon fa-key"></i>
                                     <span class="site-menu-title">Berechtigungen</span>
                                 </a>
                             </li>
@@ -97,7 +97,7 @@
                     @if(\Auth::User()->can('manage', \App\Setting::class))
                     <li class="site-menu-item @if(Request::is('app/setting*')) active @endif">
                         <a href="{{ url('app/setting') }}">
-                            <i class="site-menu-icon text-success fa-cogs"></i>
+                            <i class="site-menu-icon fa-cogs"></i>
                             <span class="site-menu-title">Einstellungen</span>
                         </a>
                     </li>

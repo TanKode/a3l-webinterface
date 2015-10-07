@@ -114,7 +114,7 @@
                 <div class="widget-content padding-30 bg-white">
                     <div class="counter counter-md text-left">
                         <div class="counter-label margin-bottom-5 clearfix">
-                            <span class="pull-lefft">89.163.139.86:2302</span>
+                            <span class="pull-lefft">life.bambusfarm.net:2302</span>
                         <span class="pull-right">
                             @if(is_array($a3l['info']))
                                 <i class="icon fa-circle text-success"></i>
@@ -227,7 +227,7 @@
                 <div class="widget-content padding-30 bg-white">
                     <div class="counter counter-md text-left">
                         <div class="counter-label margin-bottom-5 clearfix">
-                            <span class="pull-lefft">89.163.139.86:2312</span>
+                            <span class="pull-lefft">exile.bambusfarm.net:2312</span>
                         <span class="pull-right">
                             @if(is_array($a3e['info']))
                                 <i class="icon fa-circle text-success"></i>

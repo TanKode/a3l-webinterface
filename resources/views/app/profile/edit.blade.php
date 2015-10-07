@@ -50,7 +50,7 @@
                                         Slack
                                     </a>
                                 @else
-                                    <a href="{{ url('auth/steam') }}" class="btn btn-labeled btn-block social-slack">
+                                    <a href="{{ url('auth/slack') }}" class="btn btn-labeled btn-block social-slack">
                                         <span class="btn-label"><i class="icon fa-slack"></i></span>
                                         Slack
                                     </a>

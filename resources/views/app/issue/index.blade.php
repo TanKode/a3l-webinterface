@@ -13,7 +13,7 @@
         <div class="panel-body">
             {!! Form::open(['url' => 'app/issue/store', 'class' => 'row']) !!}
             <div class="col-md-3">
-                {!! Form::selectpicker('project_id', [11 => 'Altis Life', 18 => 'Exile', 16 => 'Webseite'], null, ['label' => 'Projekt']) !!}
+                {!! Form::selectpicker('project_id', [503207 => 'Exile'], null, ['label' => 'Projekt']) !!}
             </div>
             <div class="col-md-9">
                 {!! Form::text('title', null, ['label' => 'Überschrift']) !!}
@@ -43,7 +43,7 @@
                 </article>
                 <section class="panel-footer">
                     <ul class="list-inline">
-                        <li><span class="label label-info @if($issue['project_id'] == 18) bg-brown-600 @elseif($issue['project_id'] == 11) bg-purple-600 @elseif($issue['project_id'] == 16) bg-primary-600 @endif">{{ \GitLab::api('projects')->show($issue['project_id'])['name'] }}</span></li>
+                        <li><span class="label label-info @if($issue['project_id'] == 503207) bg-brown-600 @elseif($issue['project_id'] == 11) bg-purple-600 @elseif($issue['project_id'] == 16) bg-primary-600 @endif">{{ \GitLab::api('projects')->show($issue['project_id'])['name'] }}</span></li>
                         <li><span class="label label-info">{{ $issue['milestone']['title'] }}</span></li>
                         @foreach($issue['labels'] as $label)
                             <li><span class="label label-dark">{{ $label }}</span></li>

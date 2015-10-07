@@ -38,8 +38,8 @@ return [
     'connections' => [
 
         'main' => [
-            'token' => 'BFfaW2agyszVaxAtZs4q',
-            'base_url' => 'http://gitlab.gummibeer.de/api/v3/',
+            'token' => 'QpxEKjL5sPJUkN2J7uaG',
+            'base_url' => 'https://gitlab.com/api/v3/',
         ],
 
     ],

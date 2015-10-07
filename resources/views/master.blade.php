@@ -31,6 +31,7 @@
     </script>
 </head>
 <body class="@yield('bodyClass')" data-datatables-defaults='{{ $dtDefaults }}' data-auto-menubar="false">
+    {!! Form::hidden('csrf_token', Session::getToken()) !!}
     @yield("layout")
 
     @foreach ($js['foot'] as $path)

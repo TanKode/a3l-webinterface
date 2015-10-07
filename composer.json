@@ -19,7 +19,8 @@
         "xpaw/php-source-query-class": "dev-master",
         "barryvdh/laravel-ide-helper": "^2.1",
         "fkubis/teamspeak-php-framework": "dev-master",
-        "vinkla/gitlab": "^2.0"
+        "vinkla/gitlab": "^2.0",
+        "riari/laravel-forum": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

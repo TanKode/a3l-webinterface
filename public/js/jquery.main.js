@@ -16,6 +16,22 @@ jQuery(window).on('load', function () {
     if(jQuery.jStorage.get('menubar-fold', false)) {
         jQuery('body').addClass('site-menubar-fold');
     }
+
+    jQuery('a[data-confirm]').on('click', function(e) {
+        if (!confirm('Löschen?')) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+        }
+    });
+    jQuery("a[data-method='post']").on('click', function(e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        jQuery('<form action="' + jQuery(this).attr('href') + '" method="POST">' +
+            '<input type="hidden" name="_method" value="' + jQuery(this).data('method') + '">' +
+            '<input type="hidden" name="_token" value="' + jQuery("input[name=csrf_token]").val() + '">' +
+            '</form>').submit();
+    });
+
     var Site = window.Site;
     Site.run();
     jQuery('body').trigger('site.init')

@@ -17,7 +17,6 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth', 'namespace' => 'App'], 
     Route::controller('dashboard', 'DashboardController');
     Route::controller('notification', 'NotificationController');
     Route::controller('profile', 'ProfileController');
-    Route::controller('changelog', 'ChangelogController');
     Route::controller('issue', 'IssueController');
 
     Route::group(['prefix' => 'a3l', 'namespace' => 'A3L'], function() {

@@ -159,6 +159,7 @@ return [
         Invisnik\LaravelSteamAuth\SteamServiceProvider::class,
         Vinkla\GitLab\GitLabServiceProvider::class,
         AbsoluteSoftware\Curl\CurlServiceProvider::class,
+        Riari\Forum\ForumServiceProvider::class,
 
     ],
 
