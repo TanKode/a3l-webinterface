@@ -9,7 +9,7 @@
             <div class="col-lg-9 col-md-8 col-sm-6 hidden-xs">
                 <div class="brand">
                     <h1 class="white font-size-80 text-uppercase">Bambusfarm</h1>
-                    <h2 class="white font-size-24 text-uppercase">Arma 3 | Altis Life | Minecraft | Community</h2>
+                    <h2 class="white font-size-24 text-uppercase">Arma 3 | Altis Life | Exile | Minecraft | Community</h2>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 bg-white vertical-align-middle">

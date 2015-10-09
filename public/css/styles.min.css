@@ -129,6 +129,27 @@ label.label-license > input:checked + span.label {
   color: #ffffff;
   background-color: #526803 !important;
 }
+.twemoji-list ul.list-inline * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.twemoji-list ul.list-inline li {
+  font-size: 20px;
+  float: left;
+  padding: 2px;
+  margin: 4px;
+}
+img.twemoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+}
+img.twemoji.clickable {
+  cursor: pointer;
+}
 .auth-layout {
   width: 100%;
   height: 100%;

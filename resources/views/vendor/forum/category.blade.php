@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="col-xs-4">
-            @if ($category->canPost && $category->subcategories->isEmpty())
+            @if (($category->canPost && $category->subcategories->isEmpty()) || \Auth::User()->isSuperAdmin())
                 <a href="{{ $category->newThreadRoute }}" class="btn btn-primary">{{ trans('forum::base.new_thread') }}</a>
             @endif
         </div>

@@ -9,6 +9,7 @@ class MarkExtra extends MarkdownExtra
     {
         $text = parent::defaultTransform($text);
         $text = self::transformChangelog($text);
+        $text = self::transformTwemoji($text);
         return $text;
     }
 
@@ -22,6 +23,9 @@ class MarkExtra extends MarkdownExtra
                     $class = 'fa-bug text-warning';
                     break;
                 case 'bugfix':
+                    $class = 'fa-bug text-warning';
+                    break;
+                case 'fix':
                     $class = 'fa-bug text-warning';
                     break;
                 case 'update':
@@ -52,6 +56,15 @@ class MarkExtra extends MarkdownExtra
             $result .= str_replace('</p>', '</ul>', $hits[4]);
 
             return $result;
+        }, $text);
+        return $text;
+    }
+
+    protected static function transformTwemoji($text)
+    {
+        $pattern = '/:(?<type>.*):/mi';
+        $text = preg_replace_callback($pattern, function($hits) {
+            return Twemoji::create($hits['type']);
         }, $text);
         return $text;
     }

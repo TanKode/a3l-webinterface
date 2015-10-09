@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.1.19 (LTS) on 2015-10-07.
+ * Generated for Laravel 5.1.19 (LTS) on 2015-10-09.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -12626,6 +12626,11 @@ namespace {
     }
 
 
+    class Twemoji extends \App\Libs\Twemoji{
+        
+    }
+
+
     class Html extends \Collective\Html\HtmlFacade{
         
         /**
@@ -13288,18 +13293,19 @@ namespace {
          * @return $this 
          * @static 
          */
-        public static function cache($cache){
+        public static function cache($cache = null){
             return \Silber\Bouncer\Bouncer::cache($cache);
         }
         
         /**
          * Clear the cache.
          *
+         * @param null|\Illuminate\Database\Eloquent\Model $user
          * @return $this 
          * @static 
          */
-        public static function refresh(){
-            return \Silber\Bouncer\Bouncer::refresh();
+        public static function refresh($user = null){
+            return \Silber\Bouncer\Bouncer::refresh($user);
         }
         
         /**
@@ -13309,8 +13315,8 @@ namespace {
          * @return $this 
          * @static 
          */
-        public static function refreshForUser($user){
-            return \Silber\Bouncer\Bouncer::refreshForUser($user);
+        public static function refreshFor($user){
+            return \Silber\Bouncer\Bouncer::refreshFor($user);
         }
         
         /**
@@ -13585,11 +13591,12 @@ namespace {
          * @param null $limit
          * @param null|int $paginate
          * @param string $order
+         * @param \Closure $filterScope
          * @return mixed 
          * @static 
          */
-        public static function getNotRead($to_id, $limit = null, $paginate = null, $order = 'desc'){
-            return \Fenos\Notifynder\NotifynderManager::getNotRead($to_id, $limit, $paginate, $order);
+        public static function getNotRead($to_id, $limit = null, $paginate = null, $order = 'desc', $filterScope = null){
+            return \Fenos\Notifynder\NotifynderManager::getNotRead($to_id, $limit, $paginate, $order, $filterScope);
         }
         
         /**
@@ -13600,11 +13607,12 @@ namespace {
          * @param null $limit
          * @param int|null $paginate
          * @param string $order
+         * @param \Closure $filterScope
          * @return mixed 
          * @static 
          */
-        public static function getAll($to_id, $limit = null, $paginate = null, $order = 'desc'){
-            return \Fenos\Notifynder\NotifynderManager::getAll($to_id, $limit, $paginate, $order);
+        public static function getAll($to_id, $limit = null, $paginate = null, $order = 'desc', $filterScope = null){
+            return \Fenos\Notifynder\NotifynderManager::getAll($to_id, $limit, $paginate, $order, $filterScope);
         }
         
         /**
@@ -13612,11 +13620,12 @@ namespace {
          * of the given entity
          *
          * @param $to_id
+         * @param \Closure $filterScope
          * @return mixed 
          * @static 
          */
-        public static function countNotRead($to_id){
-            return \Fenos\Notifynder\NotifynderManager::countNotRead($to_id);
+        public static function countNotRead($to_id, $filterScope = null){
+            return \Fenos\Notifynder\NotifynderManager::countNotRead($to_id, $filterScope);
         }
         
         /**
@@ -13637,11 +13646,12 @@ namespace {
          *
          * @param $to_id
          * @param null $category
+         * @param \Closure $filterScope
          * @return mixed 
          * @static 
          */
-        public static function getLastNotification($to_id, $category = null){
-            return \Fenos\Notifynder\NotifynderManager::getLastNotification($to_id, $category);
+        public static function getLastNotification($to_id, $category = null, $filterScope = null){
+            return \Fenos\Notifynder\NotifynderManager::getLastNotification($to_id, $category, $filterScope);
         }
         
         /**

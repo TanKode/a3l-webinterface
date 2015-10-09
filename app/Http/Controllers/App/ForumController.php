@@ -9,6 +9,9 @@ class ForumController extends \Riari\Forum\Controllers\BaseController
 {
     public function __construct(Categories $categories, Threads $threads, Posts $posts)
     {
+        if (\Auth::guest()) {
+            redirect()->guest('auth/login')->send();
+        }
         parent::__construct($categories, $threads, $posts);
         $this->collections['categories'] = $this->categories->getAll();
     }

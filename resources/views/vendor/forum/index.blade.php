@@ -17,8 +17,12 @@
                         <h5 class="margin-0">
                             {{ $subcategory->title }}
                             <ul class="pull-right list-inline">
-                                <li><span class="label label-dark"><i class="icon fa-comments-o"></i> {{ $subcategory->threadCount }}</span></li>
-                                <li><span class="label label-dark"><i class="icon fa-comment-o"></i> {{ $subcategory->postCount }}</span></li>
+                                <li>
+                                    <span class="label label-dark"><i class="icon fa-comments-o"></i> {{ $subcategory->threadCount }}</span>
+                                </li>
+                                <li>
+                                    <span class="label label-dark"><i class="icon fa-comment-o"></i> {{ $subcategory->postCount }}</span>
+                                </li>
                             </ul>
                         </h5>
                     </a>

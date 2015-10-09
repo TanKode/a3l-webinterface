@@ -36,7 +36,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('a3l:online')->everyFiveMinutes();
         $schedule->command('a3l:slots')->everyFiveMinutes();
-        $schedule->command('a3l:tax')->daily();
+        $schedule->command('a3l:tax')->dailyAt('12:00');
 
         $schedule->command('a3e:online')->everyFiveMinutes();
         $schedule->command('a3e:slots')->everyFiveMinutes();

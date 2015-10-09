@@ -42,11 +42,11 @@
                         <tr>
                             <td>{{ $account->uid }}</td>
                             <td>{{ $account->name }}</td>
-                            <td>{{ $account->money }}</td>
-                            <td>{{ $account->score }}</td>
-                            <td>{{ $account->kills }}</td>
-                            <td>{{ $account->deaths }}</td>
-                            <td>{{ $account->kd }}</td>
+                            <td class="text-right">{{ $account->money }}</td>
+                            <td class="text-right">{{ $account->score }}</td>
+                            <td class="text-right">{{ $account->kills }}</td>
+                            <td class="text-right">{{ $account->deaths }}</td>
+                            <td class="text-right">{{ format_float($account->kd) }}</td>
                             <td>
                                 <a href="{{ url('app/a3e/account/edit/'.$account->uid) }}"><i class="icon fa-pencil text-warning"></i></a>
                             </td>

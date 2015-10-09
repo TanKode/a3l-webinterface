@@ -13,7 +13,8 @@ class A3eReward extends Command
     protected $signature = 'a3e:reward';
     protected $description = 'Rewards the best KD-Players with Bamboo-Coins.';
     private $excluded = [
-//        '76561198061912622', // Tom
+        '76561198061912622', // Tom
+        '76561198070524133', // Fabi
     ];
     private $maxUsers = 3;
     private $minKd = 2;

@@ -34,7 +34,8 @@ jQuery(window).on('load', function () {
 
     var Site = window.Site;
     Site.run();
-    jQuery('body').trigger('site.init')
+    jQuery('body').trigger('site.init');
+
 });
 
 jQuery('body').on('site.init', function () {

@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://bambusfarm.net',
+    'url' => 'https://bambusfarm.net',
 
     /*
     |--------------------------------------------------------------------------
@@ -213,6 +213,7 @@ return [
         'Form'      => App\Facades\FormBuilderFacade::class,
         'Filter'    => App\Facades\FilterBuilderFacade::class,
         'MarkExtra' => App\Facades\MarkExtraFacade::class,
+        'Twemoji'   => App\Libs\Twemoji::class,
 
         'Html'      => Collective\Html\HtmlFacade::class,
         'Slack'     => Maknz\Slack\Facades\Slack::class,

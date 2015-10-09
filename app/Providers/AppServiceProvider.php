@@ -72,6 +72,7 @@ class AppServiceProvider extends ServiceProvider
             'js/components/jquery.list.js',
             'js/components/jquery.inputs.js',
             'js/components/jquery.filter.js',
+            'js/components/jquery.markdown.js',
 
             'js/bootstrap-datepicker.de.js',
         ],
