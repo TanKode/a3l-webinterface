@@ -5,6 +5,12 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Log extends EloquentModel
 {
+    const LEVEL = [
+        3 => 'error',
+        6 => 'info',
+        7 => 'debug',
+    ];
+
     protected $table = 'logs';
     protected $fillable = [
         'level',

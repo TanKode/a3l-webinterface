@@ -11,7 +11,7 @@
                     </li>
                     <li class="site-menu-item @if(Request::is('app/forum*')) active @endif">
                         <a href="{{ url('app/forum') }}">
-                            <i class="site-menu-icon fa-list"></i>
+                            <i class="site-menu-icon fa-comments-o"></i>
                             <span class="site-menu-title">Forum</span>
                         </a>
                     </li>
@@ -131,6 +131,14 @@
                             @endif
                         </ul>
                     </li>
+                    @if(\Auth::User()->can('manage', \App\Log::class))
+                        <li class="site-menu-item @if(Request::is('app/log*')) active @endif">
+                            <a href="{{ url('app/log') }}">
+                                <i class="site-menu-icon fa-list"></i>
+                                <span class="site-menu-title">Log</span>
+                            </a>
+                        </li>
+                    @endif
                     @if(\Auth::User()->can('manage', \App\Setting::class))
                     <li class="site-menu-item @if(Request::is('app/setting*')) active @endif">
                         <a href="{{ url('app/setting') }}">
