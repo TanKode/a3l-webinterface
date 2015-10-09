@@ -5,9 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
 
-    <title>@yield('title')</title>
+    <title>@yield('title') | Bambusfarm Community</title>
 
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
+    <meta property="og:title" content="Bambusfarm | Arma 3 | Altis Life | Exile | Community" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ Request::url() }}" />
+    <meta property="og:image" content="{{ asset('img/auth-background-2.jpg') }}" />
+
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}" />
 
     @foreach ($css as $path)
         <link rel="stylesheet" href="{{ asset($path) }}" />
