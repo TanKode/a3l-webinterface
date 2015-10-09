@@ -1,23 +1,17 @@
 @extends('app')
 
-@section('title', 'Log Übersicht')
+@section('title', 'Backup Übersicht')
 
 @section('content')
     {!! Filter::render([
-        Form::text('level', null, [
-            'label' => 'Level',
-            'id' => 'levelFilter',
-            'data-typeahead' => true,
-            'data-default' => '',
-        ]),
-        Form::text('log', null, [
-            'label' => 'Log',
-            'id' => 'logFilter',
+        Form::text('database', null, [
+            'label' => 'Datenbank',
+            'id' => 'databaseFilter',
             'data-typeahead' => true,
             'data-default' => '',
         ]),
         Form::text('date', null, [
-            'label' => 'Zeitpunkt',
+            'label' => 'Datum',
             'id' => 'dateFilter',
             'data-typeahead' => true,
             'data-default' => '',
@@ -33,17 +27,17 @@
                 <table class="table table-hover table-striped width-full dtr-inline" data-plugin="dataTable">
                     <thead>
                     <tr>
-                        <th class="german" data-search-key="level">Level</th>
-                        <th class="german" data-search-key="log">Log</th>
-                        <th data-search-key="date">Zeitpunkt</th>
+                        <th class="german" data-search-key="database">Datenbank</th>
+                        <th data-search-key="date">Datum</th>
+                        <th class="noindex"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($logs as $log)
+                    @foreach($backups as $backup)
                         <tr>
-                            <td>{{ array_get(\App\Log::$LEVEL, $log->level) }}</td>
-                            <td>{{ $log->message }}</td>
-                            <td>{{ $log->created_at }}</td>
+                            <td>{{ $backup['database'] }}</td>
+                            <td>{{ $backup['date'] }}</td>
+                            <td><a href="{{ url('app/backup/download/'.$backup['file']) }}" class="btn btn-sm btn-warning">download</a></td>
                         </tr>
                     @endforeach
                     </tbody>

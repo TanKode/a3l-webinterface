@@ -8,6 +8,7 @@ use App\Console\Commands\A3lOnline;
 use App\Console\Commands\A3lSlots;
 use App\Console\Commands\A3lTax;
 use App\Console\Commands\DBackup;
+use App\Console\Commands\GitlabIssues;
 use App\Console\Commands\Inspire;
 use App\Console\Commands\Ts3Online;
 use App\Console\Commands\Ts3Slots;
@@ -20,6 +21,7 @@ class Kernel extends ConsoleKernel
         Inspire::class,
 
         DBackup::class,
+        GitlabIssues::class,
 
         A3lSlots::class,
         A3lOnline::class,
@@ -36,6 +38,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('db:backup')->timezone('Europe/Berlin')->cron('0 */6 * * *');
+        $schedule->command('gitlab:issue')->everyTenMinutes();
 
         $schedule->command('a3l:online')->everyFiveMinutes();
         $schedule->command('a3l:slots')->everyFiveMinutes();

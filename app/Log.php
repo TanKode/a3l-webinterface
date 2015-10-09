@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 class Log extends EloquentModel
 {
-    const LEVEL = [
+    public static $LEVEL = [
         3 => 'error',
         6 => 'info',
         7 => 'debug',

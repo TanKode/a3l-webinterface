@@ -17,7 +17,7 @@ class Issue
         try {
             return \Cache::remember('gitlab.issues', 60, function () {
                 return collect(\GitLab::api('issues')->all())->filter(function ($item) {
-                    return in_array($item['project_id'], Projects::IDS);
+                    return in_array($item['project_id'], Projects::$IDS);
                 });
             });
         } catch (\Exception $e) {

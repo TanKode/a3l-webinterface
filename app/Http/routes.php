@@ -37,6 +37,7 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth', 'namespace' => 'App'], 
     Route::controller('ability', 'AbilityController');
 
     Route::controller('log', 'LogController');
+    Route::controller('backup', 'BackupController');
     Route::controller('setting', 'SettingController');
 });
 

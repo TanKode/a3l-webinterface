@@ -43,6 +43,10 @@
                                 @if(\Auth::User()->canAssignRole($user->role))
                                     <a href="{{ url('app/user/edit/'.$user->id) }}" class="text-warning icon fa-pencil"></a>
                                 @endif
+                                @if(!is_null($user->facebook)) <i class="icon fa-facebook text-info"></i> @endif
+                                @if(!is_null($user->github)) <i class="icon fa-github text-info"></i> @endif
+                                @if(!is_null($user->slack)) <i class="icon fa-slack text-info"></i> @endif
+                                @if(!is_null($user->steam)) <i class="icon fa-steam text-info"></i> @endif
                             </div>
                             <div class="media-right">
                                 @if($user->isSuperAdmin())

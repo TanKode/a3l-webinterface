@@ -29,6 +29,9 @@
                             <a href="{{ url('app/a3l/player') }}">
                                 <i class="site-menu-icon text-warning fa-user"></i>
                                 <span class="site-menu-title">Spieler</span>
+                                <div class="site-menu-badge">
+                                    <span class="badge badge-dark">{{ \App\A3L\Player::count() }}</span>
+                                </div>
                             </a>
                         </li>
                     @endif
@@ -37,6 +40,9 @@
                             <a href="{{ url('app/a3l/vehicle') }}">
                                 <i class="site-menu-icon text-warning fa-car"></i>
                                 <span class="site-menu-title">Fahrzeuge</span>
+                                <div class="site-menu-badge">
+                                    <span class="badge badge-dark">{{ \App\A3L\Vehicle::count() }}</span>
+                                </div>
                             </a>
                         </li>
                     @endif
@@ -50,6 +56,9 @@
                             <a href="{{ url('app/a3e/account') }}">
                                 <i class="site-menu-icon text-danger fa-user"></i>
                                 <span class="site-menu-title">Accounts</span>
+                                <div class="site-menu-badge">
+                                    <span class="badge badge-dark">{{ \App\A3E\Account::count() }}</span>
+                                </div>
                             </a>
                         </li>
                     @endif
@@ -58,6 +67,9 @@
                             <a href="{{ url('app/a3e/player') }}">
                                 <i class="site-menu-icon text-danger fa-user"></i>
                                 <span class="site-menu-title">Spieler</span>
+                                <div class="site-menu-badge">
+                                    <span class="badge badge-dark">{{ \App\A3E\Player::count() }}</span>
+                                </div>
                             </a>
                         </li>
                     @endif
@@ -66,6 +78,9 @@
                             <a href="{{ url('app/a3e/vehicle') }}">
                                 <i class="site-menu-icon text-danger fa-car"></i>
                                 <span class="site-menu-title">Fahrzeuge</span>
+                                <div class="site-menu-badge">
+                                    <span class="badge badge-dark">{{ \App\A3E\Vehicle::count() }}</span>
+                                </div>
                             </a>
                         </li>
                     @endif
@@ -74,6 +89,9 @@
                             <a href="{{ url('app/a3e/territory') }}">
                                 <i class="site-menu-icon text-danger fa-map"></i>
                                 <span class="site-menu-title">Gebiete</span>
+                                <div class="site-menu-badge">
+                                    <span class="badge badge-dark">{{ \App\A3E\Territory::count() }}</span>
+                                </div>
                             </a>
                         </li>
                     @endif
@@ -110,6 +128,9 @@
                                 <a href="{{ url('app/user') }}">
                                     <i class="site-menu-icon fa-user"></i>
                                     <span class="site-menu-title">Benutzer</span>
+                                    <div class="site-menu-badge">
+                                        <span class="badge badge-dark">{{ \App\User::count() }}</span>
+                                    </div>
                                 </a>
                             </li>
                             @endif
@@ -131,6 +152,14 @@
                             @endif
                         </ul>
                     </li>
+                    @if(\Auth::User()->can('manage-backup'))
+                        <li class="site-menu-item @if(Request::is('app/backup*')) active @endif">
+                            <a href="{{ url('app/backup') }}">
+                                <i class="site-menu-icon fa-cloud-download"></i>
+                                <span class="site-menu-title">Backups</span>
+                            </a>
+                        </li>
+                    @endif
                     @if(\Auth::User()->can('manage', \App\Log::class))
                         <li class="site-menu-item @if(Request::is('app/log*')) active @endif">
                             <a href="{{ url('app/log') }}">

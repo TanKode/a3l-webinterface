@@ -3,19 +3,19 @@ namespace App\Gitlab;
 
 class Projects
 {
-    const IDS = [
+    public static $IDS = [
         503343,
         503207,
         503325,
     ];
 
-    const NAMES = [
+    public static $NAMES = [
         503343 => 'Altis Life',
         503207 => 'Exile',
         503325 => 'Webtool',
     ];
 
-    const COLORS = [
+    public static $COLORS = [
         503343 => 'bg-purple-600',
         503207 => 'bg-brown-600',
         503325 => 'bg-primary-600',

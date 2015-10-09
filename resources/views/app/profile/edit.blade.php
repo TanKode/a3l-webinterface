@@ -232,6 +232,43 @@
                 </div>
             </div>
             @endif
+
+            @if($user->postedThreads()->count() > 0)
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Forenaktivitäten</h3>
+                        <div class="panel-actions">
+                            <a class="panel-action icon fa-minus" data-toggle="panel-collapse"></a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            @foreach($user->postedThreads() as $thread)
+                                <a class="list-group-item padding-15" href="{{ $thread->route }}">
+                                    <h5 class="margin-0">
+                                        @if($thread->locked)
+                                            <i class="icon fa-lock text-danger"></i>
+                                        @endif
+                                        @if($thread->pinned)
+                                            <i class="icon fa-thumb-tack text-info"></i>
+                                            <strong>
+                                                @endif
+                                                {{ $thread->title }}
+                                                @if($thread->pinned)
+                                            </strong>
+                                        @endif
+                                        <ul class="pull-right list-inline">
+                                            <li><span class="label label-dark"><i class="icon fa-comment-o"></i> {{ $thread->replyCount }}</span></li>
+                                            <li><span class="label label-default"><i class="icon fa-eye"></i> {{ $thread->viewCount }}</span></li>
+                                            <li><span class="label label-default">{{ $thread->authorName }} {{ $thread->lastPost->created_at->diffForHumans() }}</span></li>
+                                        </ul>
+                                    </h5>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 @endsection

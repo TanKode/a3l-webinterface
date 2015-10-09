@@ -13,7 +13,7 @@
         <div class="panel-body">
             {!! Form::open(['url' => 'app/issue/store', 'class' => 'row']) !!}
             <div class="col-md-3">
-                {!! Form::selectpicker('project_id', \App\Gitlab\Projects::NAMES, null, ['label' => 'Projekt']) !!}
+                {!! Form::selectpicker('project_id', \App\Gitlab\Projects::$NAMES, null, ['label' => 'Projekt']) !!}
             </div>
             <div class="col-md-9">
                 {!! Form::text('title', null, ['label' => 'Überschrift']) !!}
@@ -43,7 +43,7 @@
                 </article>
                 <section class="panel-footer">
                     <ul class="list-inline">
-                        <li><span class="label label-info {{ array_get(\App\Gitlab\Projects::COLORS, $issue['project_id']) }}">{{ array_get(\App\Gitlab\Projects::NAMES, $issue['project_id']) }}</span></li>
+                        <li><span class="label label-info {{ array_get(\App\Gitlab\Projects::$COLORS, $issue['project_id']) }}">{{ array_get(\App\Gitlab\Projects::$NAMES, $issue['project_id']) }}</span></li>
                         <li><span class="label label-info">{{ $issue['milestone']['title'] }}</span></li>
                         @foreach($issue['labels'] as $label)
                             <li><span class="label label-dark">{{ $label }}</span></li>
