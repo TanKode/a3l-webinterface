@@ -10,7 +10,7 @@ class AddTaxNotification extends Migration
     {
         NotificationCategory::create([
             'name' => 'a3l.tax',
-            'text' => 'Es wurden gerade **{extra.amount}** von deinem Altis Life Konto eingezogen.',
+            'text' => 'Es wurden gerade **{extra.amount}** Steuern von deinem Altis Life Konto eingezogen.',
         ]);
     }
 
