@@ -11,7 +11,7 @@ class IssueController extends Controller
     public function getIndex()
     {
         return view('app.issue.index')->with([
-            'issues' => Issue::all()->sortByDesc('state'),
+            'issues' => Issue::all()->sortBy('project_id'),
         ]);
     }
 
