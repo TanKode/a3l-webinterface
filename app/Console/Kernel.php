@@ -7,6 +7,7 @@ use App\Console\Commands\A3eSlots;
 use App\Console\Commands\A3lOnline;
 use App\Console\Commands\A3lSlots;
 use App\Console\Commands\A3lTax;
+use App\Console\Commands\DBackup;
 use App\Console\Commands\Inspire;
 use App\Console\Commands\Ts3Online;
 use App\Console\Commands\Ts3Slots;
@@ -17,6 +18,8 @@ class Kernel extends ConsoleKernel
 {
     protected $commands = [
         Inspire::class,
+
+        DBackup::class,
 
         A3lSlots::class,
         A3lOnline::class,
@@ -33,6 +36,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('cache:clear')->everyTenMinutes();
+        $schedule->command('db:backup')->cron('0 */6 * * *');
 
         $schedule->command('a3l:online')->everyFiveMinutes();
         $schedule->command('a3l:slots')->everyFiveMinutes();
