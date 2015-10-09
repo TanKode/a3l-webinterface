@@ -52,9 +52,9 @@ class A3eReward extends Command
                 $i++;
             }
             $now = Carbon::now();
-            $content = 'Die Gewinner des KD-Highscores im ' . $now->formatLocalized('%B') . ' ' . $now->year . ' sind:' . PHP_EOL . PHP_EOL;
+            $content = ':1f3c6: Die **Gewinner** des KD-Highscores im ' . $now->formatLocalized('%B') . ' ' . $now->year . ' sind:' . PHP_EOL . PHP_EOL;
             foreach ($rewarded as $user) {
-                $content .= '+ **' . $user->username . '** (_' . $user->a3eAccount()->name . '_) KD: ' . round($user->a3eAccount()->kd, 2) . PHP_EOL;
+                $content .= '+ :1f52b: **' . $user->username . '** (_' . $user->a3eAccount()->name . '_) KD: ' . round($user->a3eAccount()->kd, 2) . PHP_EOL;
             }
 
             \Slack::from('A3E-Server')->to('#exile')->withIcon(':gift:')->send(str_replace('**', '*', $content));
