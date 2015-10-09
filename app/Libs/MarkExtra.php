@@ -62,7 +62,7 @@ class MarkExtra extends MarkdownExtra
 
     protected static function transformTwemoji($text)
     {
-        $pattern = '/:(?<type>.*):/mi';
+        $pattern = '/:(?<type>[0-9abcdef]*):/mi';
         $text = preg_replace_callback($pattern, function($hits) {
             return Twemoji::create($hits['type']);
         }, $text);
