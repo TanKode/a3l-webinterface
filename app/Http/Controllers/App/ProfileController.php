@@ -19,6 +19,13 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function getShow($id)
+    {
+        return view('app.profile.show')->with([
+            'user' => User::id($id)->firstOrFail(),
+        ]);
+    }
+
     public function postUpdate(Request $request, $id)
     {
         if(\Auth::User()->id != $id) {

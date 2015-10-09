@@ -155,7 +155,7 @@
                                 </ul>
                             @endif
                             @if($user->a3lPlayer()->mediclevel > 0)
-                                <h4>Medic</h4>
+                                <h4>THW</h4>
                                 <strong>Lizenzen</strong>
                                 <ul class="list-inline">
                                     @foreach($user->a3lPlayer()->med_licenses as $key => $value)

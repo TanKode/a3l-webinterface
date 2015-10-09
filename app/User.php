@@ -13,6 +13,9 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Collection;
+use Riari\Forum\Models\Post;
+use Riari\Forum\Models\Thread;
 use Silber\Bouncer\Database\Ability;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 
@@ -49,6 +52,26 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'password' => 'confirmed|min:8',
         ],
     ];
+
+    public function threads()
+    {
+        return $this->hasMany(Thread::class, 'author_id', 'id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'author_id', 'id');
+    }
+
+    public function postedThreads()
+    {
+        $posts = $this->posts;
+        $threads = new Collection();
+        foreach($posts as $post) {
+            $threads->put($post->thread->id, $post->thread);
+        }
+        return $threads;
+    }
 
     public function a3lPlayer()
     {

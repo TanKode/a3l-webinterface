@@ -1,7 +1,7 @@
 <li class="list-group-item">
 	<div class="media">
 		<div class="media-left">
-            <img src="{{ $post->author->avatar() }}" alt="{{ $post->authorName }}" class="avatar" />
+            <a href="{{ url('app/profile/show/'.$post->author->id) }}"><img src="{{ $post->author->avatar() }}" alt="{{ $post->authorName }}" class="avatar" /></a>
 		</div>
 		<div class="media-body">
 			<small class="text-muted pull-right">{{ $post->created_at->diffForHumans() }}</small>
@@ -12,7 +12,7 @@
                 <a class="pull-right" href="{{ $post->deleteRoute }}" data-confirm data-method="delete"><i class="icon fa-trash-o text-danger"></i></a>
             @endif
 			<h4 class="media-heading">
-                {{ $post->authorName }}
+                <a href="{{ url('app/profile/show/'.$post->author->id) }}">{{ $post->authorName }}</a>
                 <span class="label label-default label-outline">{{ $post->author->role->name }}</span>
             </h4>
 			<div>
