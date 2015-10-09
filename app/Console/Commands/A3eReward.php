@@ -2,6 +2,7 @@
 namespace App\Console\Commands;
 
 use App\A3E\Account;
+use App\Log;
 use App\User;
 use Carbon\Carbon;
 use DB;
@@ -29,39 +30,44 @@ class A3eReward extends Command
 
     public function handle()
     {
-        $accounts = Account::orderBy(DB::raw('kills / deaths'), 'desc')->get();
-        $i = 0;
-        $lastKd = 0;
-        $rewarded = [];
-        foreach($accounts as $account) {
-            if(in_array($account->uid, $this->excluded)) continue;
-            if($account->kd < $this->minKd) continue;
-            if($i >= $this->maxUsers && $account->kd < $lastKd) continue;
-            $lastKd = $account->kd;
-            $user = User::steam($account->uid)->first();
-            if(is_null($user)) continue;
+        Log::artisan($this->signature);
+        try {
+            $accounts = Account::orderBy(DB::raw('kills / deaths'), 'desc')->get();
+            $i = 0;
+            $lastKd = 0;
+            $rewarded = [];
+            foreach ($accounts as $account) {
+                if (in_array($account->uid, $this->excluded)) continue;
+                if ($account->kd < $this->minKd) continue;
+                if ($i >= $this->maxUsers && $account->kd < $lastKd) continue;
+                $lastKd = $account->kd;
+                $user = User::steam($account->uid)->first();
+                if (is_null($user)) continue;
 
-            $reward = round($account->kd * $this->reward);
-            $reward = $reward < $this->minReward ? $this->minReward : $reward;
-            $reward = $reward > $this->maxReward ? $this->maxReward : $reward;
-            $user->addBambooCoins($reward);
-            $rewarded[] = $user;
-            $i++;
+                $reward = round($account->kd * $this->reward);
+                $reward = $reward < $this->minReward ? $this->minReward : $reward;
+                $reward = $reward > $this->maxReward ? $this->maxReward : $reward;
+                $user->addBambooCoins($reward);
+                $rewarded[] = $user;
+                $i++;
+            }
+            $now = Carbon::now();
+            $content = 'Die Gewinner des KD-Highscores im ' . $now->formatLocalized('%B') . ' ' . $now->year . ' sind:' . PHP_EOL . PHP_EOL;
+            foreach ($rewarded as $user) {
+                $content .= '+ **' . $user->username . '** (_' . $user->a3eAccount()->name . '_) KD: ' . round($user->a3eAccount()->kd, 2) . PHP_EOL;
+            }
+
+            \Slack::from('A3E-Server')->to('#exile')->withIcon(':gift:')->send(str_replace('**', '*', $content));
+
+            $post = [
+                'parent_thread' => 5,
+                'author_id' => 1,
+                'content' => $content,
+            ];
+            $post = Post::create($post);
+            $post->thread->touch();
+        } catch(\Exception $e) {
+            Log::error($e->getTraceAsString());
         }
-        $now = Carbon::now();
-        $content = 'Die Gewinner des KD-Highscores im '.$now->formatLocalized('%B') . ' ' . $now->year . ' sind:' . PHP_EOL . PHP_EOL;
-        foreach($rewarded as $user) {
-            $content .= '+ **' . $user->username . '** (_' . $user->a3eAccount()->name . '_) KD: ' . round($user->a3eAccount()->kd, 2) . PHP_EOL;
-        }
-
-        \Slack::from('A3E-Server')->to('#exile')->withIcon(':gift:')->send(str_replace('**', '*', $content));
-
-        $post = [
-            'parent_thread' => 5,
-            'author_id'     => 1,
-            'content'       => $content,
-        ];
-        $post = Post::create($post);
-        $post->thread->touch();
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace App\Console\Commands;
 
+use App\Log;
 use Illuminate\Console\Command;
 
 class A3eSlots extends Command
@@ -15,6 +16,7 @@ class A3eSlots extends Command
 
     public function handle()
     {
+        Log::artisan($this->signature);
         $sourceQuery = new \SourceQuery();
         $sourceQuery->Connect(env('A3E_HOST', ''), env('A3E_PORT', 2303), 1, \SourceQuery::SOURCE);
         $info = $sourceQuery->GetInfo();

@@ -1,6 +1,7 @@
 <?php
 namespace App\Console\Commands;
 
+use App\Log;
 use App\Teamspeak\Server;
 use Illuminate\Console\Command;
 
@@ -16,6 +17,7 @@ class Ts3Online extends Command
 
     public function handle()
     {
+        Log::artisan($this->signature);
         $server = new Server();
         if($server->status != 'online') {
             $this->error('TS3-Server is offline.');

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Log;
 use Illuminate\Console\Command;
 
 class A3lSlots extends Command
@@ -16,6 +17,7 @@ class A3lSlots extends Command
 
     public function handle()
     {
+        Log::artisan($this->signature);
         $sourceQuery = new \SourceQuery();
         $sourceQuery->Connect(env('A3L_HOST', ''), env('A3L_PORT', 2303), 1, \SourceQuery::SOURCE);
         $info = $sourceQuery->GetInfo();
