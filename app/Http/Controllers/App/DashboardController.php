@@ -18,8 +18,6 @@ class DashboardController extends Controller
 {
     public function getIndex()
     {
-        $this->getTeamspeak();
-
         return view('app.dashboard')->with([
             'a3l' => $this->getLife(),
             'a3e' => $this->getExile(),
