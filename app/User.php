@@ -131,6 +131,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         $this->save();
     }
 
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
+
+    public function getEmailAttribute($value)
+    {
+        return strtolower($value);
+    }
+
     public function scopeId($query, $id)
     {
         return $query->where('id', $id);
