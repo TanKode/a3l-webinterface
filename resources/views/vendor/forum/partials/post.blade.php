@@ -16,7 +16,7 @@
                 <span class="label label-default label-outline">{{ $post->author->role->name }}</span>
             </h4>
 			<div>
-                {!! \MarkExtra::defaultTransform(e($post->content)) !!}
+                {!! \MarkExtra::defaultTransform(e($post->content.PHP_EOL.PHP_EOL.PHP_EOL.$post->author->signature)) !!}
             </div>
 		</div>
 	</div>
