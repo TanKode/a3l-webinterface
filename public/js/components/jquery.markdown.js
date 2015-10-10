@@ -32,6 +32,6 @@ jQuery('body').on('site.init', function () {
 
     jQuery('.twemoji.clickable').on('click', function() {
         var $this = jQuery(this);
-        insert_code('textareaFieldContent','',$this.data('alt'));
+        insert_code('textareaFieldContent', '', $this.data('alt'));
     });
 });

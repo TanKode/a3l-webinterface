@@ -32,7 +32,9 @@ class ProfileController extends Controller
             abort(403);
         }
 
-        $data = array_filter(\Input::only('email', 'password', 'password_confirmation'));
+        $data = array_filter(\Input::only('email', 'password', 'password_confirmation', 'content'));
+        $data['signature'] = array_get($data, 'content', '');
+        unset($data['content']);
         $validator = \Validator::make($data, User::$rules['update']);
         if($validator->fails()) {
             return back()->withErrors($validator)->withInput();

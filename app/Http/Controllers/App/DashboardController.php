@@ -30,57 +30,84 @@ class DashboardController extends Controller
 
     private function getLife()
     {
-        $sourceQuery = new \SourceQuery();
-        $sourceQuery->Connect(env('A3L_HOST', ''), env('A3L_PORT', 2303), 1, \SourceQuery::SOURCE);
-        $a3lInfo = $sourceQuery->GetInfo();
-        $a3lPlayers = collect($sourceQuery->GetPlayers());
-        $sourceQuery->Disconnect();
+        try {
+            $sourceQuery = new \SourceQuery();
+            $sourceQuery->Connect(env('A3L_HOST', ''), env('A3L_PORT', 2303), 1, \SourceQuery::SOURCE);
+            $a3lInfo = $sourceQuery->GetInfo();
+            $a3lPlayers = collect($sourceQuery->GetPlayers());
+            $sourceQuery->Disconnect();
 
-        $a3lRestart = Carbon::now()->setTimezone('Europe/Berlin');
-        $a3lRestart->minute = 0;
-        $a3lRestart->second = 0;
-        $hours = (ceil($a3lRestart->hour / 6) * 6) - $a3lRestart->hour;
-        $hours = $hours == 0 ? 6 : $hours;
-        $a3lRestart->addHours($hours);
+            $a3lRestart = Carbon::now()->setTimezone('Europe/Berlin');
+            $a3lRestart->minute = 0;
+            $a3lRestart->second = 0;
+            $hours = (ceil($a3lRestart->hour / 6) * 6) - $a3lRestart->hour;
+            $hours = $hours == 0 ? 6 : $hours;
+            $a3lRestart->addHours($hours);
 
-        return [
-            'player_count' => A3lPlayer::count(),
-            'vehicle_count' => A3lVehicle::count(),
-            'money_sum' => A3lPlayer::sum('cash') + A3lPlayer::sum('bankacc'),
-            'karma_sum' => A3lPlayer::sum('Karma'),
-            'info' => $a3lInfo,
-            'playersOnline' => $a3lPlayers,
-            'restart' => $a3lRestart,
-        ];
+            return [
+                'player_count' => A3lPlayer::count(),
+                'vehicle_count' => A3lVehicle::count(),
+                'money_sum' => A3lPlayer::sum('cash') + A3lPlayer::sum('bankacc'),
+                'karma_sum' => A3lPlayer::sum('Karma'),
+                'info' => $a3lInfo,
+                'playersOnline' => $a3lPlayers,
+                'restart' => $a3lRestart,
+            ];
+        } catch (\Exception $e) {
+            return [
+                'player_count' => 0,
+                'vehicle_count' => 0,
+                'money_sum' => 0,
+                'karma_sum' => 0,
+                'info' => null,
+                'playersOnline' => 0,
+                'restart' => null,
+            ];
+        }
     }
 
     private function getExile()
     {
-        $sourceQuery = new \SourceQuery();
-        $sourceQuery->Connect(env('A3E_HOST', ''), env('A3E_PORT', 2303), 1, \SourceQuery::SOURCE);
-        $a3eInfo = $sourceQuery->GetInfo();
-        $a3ePlayers = collect($sourceQuery->GetPlayers());
-        $sourceQuery->Disconnect();
+        try {
+            $sourceQuery = new \SourceQuery();
+            $sourceQuery->Connect(env('A3E_HOST', ''), env('A3E_PORT', 2303), 1, \SourceQuery::SOURCE);
+            $a3eInfo = $sourceQuery->GetInfo();
+            $a3ePlayers = collect($sourceQuery->GetPlayers());
+            $sourceQuery->Disconnect();
 
-        $a3eRestart = Carbon::now()->setTimezone('Europe/Berlin');
-        $a3eRestart->minute = 0;
-        $a3eRestart->second = 0;
-        $hours = (ceil($a3eRestart->hour / 6) * 6) - $a3eRestart->hour;
-        $hours = $hours == 0 ? 6 : $hours;
-        $a3eRestart->addHours($hours);
+            $a3eRestart = Carbon::now()->setTimezone('Europe/Berlin');
+            $a3eRestart->minute = 0;
+            $a3eRestart->second = 0;
+            $hours = (ceil($a3eRestart->hour / 6) * 6) - $a3eRestart->hour;
+            $hours = $hours == 0 ? 6 : $hours;
+            $a3eRestart->addHours($hours);
 
-        return [
-            'account_count' => A3eAccount::count(),
-            'vehicle_count' => A3eVehicle::count(),
-            'territory_count' => A3eTerritory::count(),
-            'money_sum' => A3eAccount::sum('money'),
-            'score_sum' => A3eAccount::sum('score'),
-            'kills_sum' => A3eAccount::sum('kills'),
-            'deaths_sum' => A3eAccount::sum('deaths'),
-            'info' => $a3eInfo,
-            'playersOnline' => $a3ePlayers,
-            'restart' => $a3eRestart,
-        ];
+            return [
+                'account_count' => A3eAccount::count(),
+                'vehicle_count' => A3eVehicle::count(),
+                'territory_count' => A3eTerritory::count(),
+                'money_sum' => A3eAccount::sum('money'),
+                'score_sum' => A3eAccount::sum('score'),
+                'kills_sum' => A3eAccount::sum('kills'),
+                'deaths_sum' => A3eAccount::sum('deaths'),
+                'info' => $a3eInfo,
+                'playersOnline' => $a3ePlayers,
+                'restart' => $a3eRestart,
+            ];
+        } catch (\Exception $e) {
+            return [
+                'account_count' => 0,
+                'vehicle_count' => 0,
+                'territory_count' => 0,
+                'money_sum' => 0,
+                'score_sum' => 0,
+                'kills_sum' => 0,
+                'deaths_sum' => 0,
+                'info' => null,
+                'playersOnline' => 0,
+                'restart' => null,
+            ];
+        }
     }
 
     private function getGitlab()
