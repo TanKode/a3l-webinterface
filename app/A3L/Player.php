@@ -109,7 +109,9 @@ class Player extends Model
     public function scopeLastDay($query)
     {
         $date = Carbon::now();
-        $date->modify('- 24 hours');
+        $date->second = 0;
+        $date->minute = 0;
+        $date->modify('- 23 hours');
         return $query->where('LastLogin', '>', $date);
     }
 }

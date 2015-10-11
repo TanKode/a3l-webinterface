@@ -2,6 +2,7 @@
 namespace App\Gitlab;
 
 use Fenos\Notifynder\Builder\NotifynderBuilder;
+use Illuminate\Support\Collection;
 use Silber\Bouncer\Database\Role;
 
 class Issue
@@ -12,13 +13,28 @@ class Issue
         'description' => 'required|string',
     ];
 
-    public static function all()
+    public static function all($update = false)
     {
         try {
+            if ($update) {
+                $issues = new Collection();
+                foreach (Projects::$IDS as $projectId) {
+                    $tmp = \GitLab::api('issues')->all($projectId, 1, 100);
+                    foreach ($tmp as $issue) {
+                        $issues->put($issue['id'], $issue);
+                    }
+                }
+                \Cache::put('gitlab.issues', $issues, 60);
+            }
             return \Cache::remember('gitlab.issues', 60, function () {
-                return collect(\GitLab::api('issues')->all())->filter(function ($item) {
-                    return in_array($item['project_id'], Projects::$IDS);
-                });
+                $issues = new Collection();
+                foreach (Projects::$IDS as $projectId) {
+                    $tmp = \GitLab::api('issues')->all($projectId, 1, 100);
+                    foreach ($tmp as $issue) {
+                        $issues->put($issue['id'], $issue);
+                    }
+                }
+                return $issues;
             });
         } catch (\Exception $e) {
             return collect([]);

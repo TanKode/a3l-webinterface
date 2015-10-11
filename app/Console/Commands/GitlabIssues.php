@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Gitlab\Issue;
 use App\Gitlab\Projects;
+use App\Log;
 use Illuminate\Console\Command;
 
 class GitlabIssues extends Command
@@ -17,13 +19,9 @@ class GitlabIssues extends Command
 
     public function handle()
     {
+        Log::artisan($this->signature);
         try {
-            $issues = collect(\GitLab::api('issues')->all())->filter(function ($item) {
-                return in_array($item['project_id'], Projects::$IDS);
-            });
-            if(!is_null($issues)) {
-                \Cache::put('gitlab.issues', $issues, 60);
-            }
+            $issues = Issue::all(true);
         } catch(\Exception $e) {
             $this->error('Gitlab is unreachable.');
         }

@@ -2,9 +2,11 @@
 namespace App\Http\Controllers\App;
 
 use App\Gitlab\Issue;
+use App\Gitlab\Projects;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
 
 class IssueController extends Controller
 {
