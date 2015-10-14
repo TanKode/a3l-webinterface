@@ -2,6 +2,11 @@
     <li>
         <a href="https://bambusfarm.slack.com" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Slack Community & Chat"><i class="icon fa-slack"></i></a>
     </li>
+    @if(\Auth::User()->can('manage', \App\Accounting::class))
+        <li>
+            <a href="http://webmail.bambusfarm.net" target="_blank" data-toggle="tooltip" data-placement="bottom" title="E-Mail Client"><i class="icon fa-envelope-o"></i></a>
+        </li>
+    @endif
     @include('partials.app.notifications')
     <li class="dropdown">
         <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
