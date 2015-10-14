@@ -96,7 +96,7 @@
                         {!! Form::password('password_confirmation', ['label' => 'Passwort Wiederholung']) !!}
                     </div>
                     <div class="col-md-12">
-                        {!! Form::textarea('content', $user->signature, ['label' => 'Signatur', 'data-provide' => 'markdown', 'data-iconlibrary' => 'fa']) !!}
+                        {!! Form::textarea('content', $user->signature, ['label' => 'Signatur', 'data-provide' => 'markdown', 'data-iconlibrary' => 'fa', 'class' => 'suggest']) !!}
                         <div class="form-group">
                             <div class="nav-tabs-horizontal emoji-list">
                                 <ul class="nav nav-tabs nav-tabs-solid font-size-24" data-plugin="nav-tabs">
