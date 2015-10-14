@@ -38,7 +38,7 @@ class FormBuilder extends IlluminateFormBuilder
             $options['checked'] = 'checked';
         }
         $options['id'] = array_get($options, 'id', $this->id($type, $name));
-        return parent::input($type, $name, $value, $this->clearOptions($options));
+        return $this->constructHTML(parent::input($type, $name, $value, $this->clearOptions($options)), $options);
     }
 
     public function textarea($name, $value = null, $options = [])

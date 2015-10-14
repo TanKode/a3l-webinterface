@@ -43,17 +43,17 @@ class Player extends Model
 
     public function civVehicles()
     {
-        return $this->vehicles()->civ()->get();
+        return $this->vehicles()->civ()->alive()->get();
     }
 
     public function copVehicles()
     {
-        return $this->vehicles()->cop()->get();
+        return $this->vehicles()->cop()->alive()->get();
     }
 
     public function medVehicles()
     {
-        return $this->vehicles()->med()->get();
+        return $this->vehicles()->med()->alive()->get();
     }
 
     public function getNameAttribute($value)

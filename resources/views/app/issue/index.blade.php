@@ -12,16 +12,19 @@
         </div>
         <div class="panel-body">
             {!! Form::open(['url' => 'app/issue/store', 'class' => 'row']) !!}
-            <div class="col-md-3">
+            <div class="col-md-2">
                 {!! Form::selectpicker('project_id', \App\Gitlab\Projects::$NAMES, null, ['label' => 'Projekt']) !!}
             </div>
-            <div class="col-md-9">
+            <div class="col-md-10">
                 {!! Form::text('title', null, ['label' => 'Überschrift']) !!}
             </div>
             <div class="col-md-12">
                 {!! Form::textarea('description', null, ['label' => 'Beschreibung', 'rows' => 3]) !!}
             </div>
-            <div class="col-md-12">
+            <div class="col-md-2 col-md-offset-8">
+                {!! Form::checkbox('forum', 1, null, ['label' => 'Forum-Post anlegen', 'class' => 'pull-right']) !!}
+            </div>
+            <div class="col-md-2">
                 {!! Form::submit('speichern', ['class' => 'btn-primary pull-right']) !!}
             </div>
             {!! Form::close() !!}
