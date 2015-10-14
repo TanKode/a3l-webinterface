@@ -30,6 +30,8 @@ class DonationController extends Controller
     public function postStore()
     {
         $data = array_filter(\Input::only('donator_id', 'euro_amount', 'bamboo_amount', 'method', 'description'));
+        $data['bamboo_amount'] = array_get($data, 'bamboo_amount', 0);
+        $data['euro_amount'] = str_replace(',', '.', array_get($data, 'bamboo_amount', 0)) * 1;
         $validator = \Validator::make($data, Donation::$rules);
         if($validator->fails()) {
             return back()->withErrors($validator)->withInput();

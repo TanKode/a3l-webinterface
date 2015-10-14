@@ -1,6 +1,7 @@
 <?php
 namespace App\Libs;
 
+use App\User;
 use Michelf\MarkdownExtra;
 
 class MarkExtra extends MarkdownExtra
@@ -10,6 +11,7 @@ class MarkExtra extends MarkdownExtra
         $text = parent::defaultTransform($text);
         $text = self::transformChangelog($text);
         $text = self::transformTwemoji($text);
+        $text = self::transformUserlinks($text);
         return $text;
     }
 
@@ -65,6 +67,22 @@ class MarkExtra extends MarkdownExtra
         $pattern = '/:(?<type>[0-9abcdef]*):/mi';
         $text = preg_replace_callback($pattern, function($hits) {
             return Twemoji::create($hits['type']);
+        }, $text);
+        return $text;
+    }
+
+    protected static function transformUserlinks($text)
+    {
+        $users = User::all();
+
+        $pattern = '/@(?<slug>[0-9a-z\-]*)/mi';
+        $text = preg_replace_callback($pattern, function($hits) use($users) {
+            if(in_array($hits['slug'], $users->pluck('slug')->toArray())) {
+                $user = $users->where('slug', $hits['slug'])->first();
+                return '<a href="'.url('app/profile/show/'.$user->id).'">@'.$hits['slug'].'</a>';
+            } else {
+                return '@'.$hits['slug'];
+            }
         }, $text);
         return $text;
     }

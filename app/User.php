@@ -165,6 +165,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return strtolower($value);
     }
 
+    public function getSlugAttribute()
+    {
+        return str_slug($this->username);
+    }
+
     public function scopeId($query, $id)
     {
         return $query->where('id', $id);

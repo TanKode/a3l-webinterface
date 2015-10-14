@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\User;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\ServiceProvider;
 
@@ -66,6 +67,7 @@ class AppServiceProvider extends ServiceProvider
 
             'js/libs/jquery.jstorage.min.js',
             'js/libs/list.min.js',
+            'js/libs/jquery.bootstrap-suggest.js',
             'js/jquery.main.js',
             'js/components/jquery.datatable.js',
             'js/components/jquery.menubar.js',
@@ -73,6 +75,7 @@ class AppServiceProvider extends ServiceProvider
             'js/components/jquery.inputs.js',
             'js/components/jquery.filter.js',
             'js/components/jquery.markdown.js',
+            'js/components/jquery.suggest.js',
 
             'js/bootstrap-datepicker.de.js',
         ],
@@ -128,6 +131,11 @@ class AppServiceProvider extends ServiceProvider
         view()->share('css', $this->css);
         view()->share('js', $this->js);
         view()->share('dtDefaults', json_encode($this->dtDefaults));
+        view()->share('usersJson', User::lists('username')->map(function ($user) {
+            $tmp['username'] = $user;
+            $tmp['slug'] = str_slug($user);
+            return $tmp;
+        })->toJson());
     }
 
     public function register()

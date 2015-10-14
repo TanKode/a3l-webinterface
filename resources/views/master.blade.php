@@ -33,6 +33,7 @@
 
     <script type="text/javascript">
         Breakpoints();
+        var USERS = {!! $usersJson !!};
     </script>
 </head>
 <body class="@yield('bodyClass')" data-datatables-defaults='{{ $dtDefaults }}' data-auto-menubar="false">

@@ -111,7 +111,7 @@ class Player extends Model
         $date = Carbon::now();
         $date->second = 0;
         $date->minute = 0;
-        $date->modify('- 23 hours');
+        $date->modify('- 20 hours');
         return $query->where('LastLogin', '>', $date);
     }
 }

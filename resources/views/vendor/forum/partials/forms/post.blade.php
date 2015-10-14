@@ -8,7 +8,7 @@
 @endif
 
 <div class="form-group">
-    {!! Form::textarea('content', $post_content, ['data-provide' => 'markdown', 'data-iconlibrary' => 'fa']) !!}
+    {!! Form::textarea('content', $post_content, ['data-provide' => 'markdown', 'data-iconlibrary' => 'fa', 'class' => 'suggest']) !!}
 </div>
 <div class="form-group">
     <div class="nav-tabs-horizontal emoji-list">
