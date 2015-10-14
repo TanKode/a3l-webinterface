@@ -36,7 +36,7 @@
         </div>
         <div class="panel-body">
             <div class="table-responsive">
-                <table class="table table-hover table-striped width-full dtr-inline" data-plugin="dataTable">
+                <table class="table table-hover table-striped width-full dtr-inline" data-plugin="dataTable" data-order='[[ 4, "desc" ]]'>
                     <thead>
                     <tr>
                         <th class="german">#</th>
