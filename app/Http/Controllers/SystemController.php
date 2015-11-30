@@ -5,6 +5,7 @@ use A3LWebInterface\Http\Controllers\Controller;
 
 use A3LWebInterface\Sysload;
 use Illuminate\Http\Request;
+use Linfo\Laravel\Models\Linfo;
 
 class SystemController extends Controller
 {
@@ -33,7 +34,7 @@ class SystemController extends Controller
                 \Setting::set('system.os', $return['os']);
                 \Setting::set('system.cpu', $return['cpu']);
                 \Setting::set('system.ram', round(number_format($return['ram'] / 1024 / 1024 / 1024, 0)) . ' GB');
-                foreach ($return['hdds'] as $id => $hdd) {
+                foreach (array_get($return, 'hdds', []) as $id => $hdd) {
                     \Setting::set('system.hdd.' . $id, round($hdd['size'] / 1024 / 1024 / 1024) . ' GB');
                 }
                 \Setting::save();
@@ -71,12 +72,8 @@ class SystemController extends Controller
 
     private static function getLinfoData()
     {
-        $ds = DIRECTORY_SEPARATOR;
-        $path = realpath(__DIR__ . $ds . '..' . $ds . '..' . $ds . '..' . $ds . 'vendor' . $ds . 'linfo' . $ds . 'linfo') . $ds;
-        require_once($path . 'init.php');
-        $linfo = new \Linfo();
-        $linfo->scan();
-        $return = $linfo->getInfo();
+        $linfo = new Linfo();
+        $return = $linfo->getOriginals();
 
         $result['timestamp'] = strtotime($return['timestamp']);
 
@@ -96,7 +93,11 @@ class SystemController extends Controller
             $result['hdds'][$id]['size'] = $mount['size'] * 1;
             $hddload[] = round(number_format(100 - $mount['free'] / ($mount['size'] / 100), 2) * 1);
         }
-        $result['hddsload'] = array_sum($hddload) / count($hddload);
+        if(count($hddload) == 0) {
+            $result['hddsload'] = 0;
+        } else {
+            $result['hddsload'] = array_sum($hddload) / count($hddload);
+        }
 
         unset($return['Load']);
         unset($return['RAM']);

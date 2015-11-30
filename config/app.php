@@ -149,6 +149,7 @@ return [
 		'anlutro\LaravelSettings\ServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
         'Invisnik\LaravelSteamAuth\SteamServiceProvider',
+		Linfo\Laravel\LinfoServiceProvider::class,
 
 	],
 

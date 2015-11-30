@@ -13,7 +13,7 @@
 						<li><span class="label label-default">{{ \Setting::get('system.os') }}</span></li>
 						<li><span class="label label-danger">CPU: {{ \Setting::get('system.cpu') }}</span></li>
 						<li><span class="label label-warning">RAM: {{ \Setting::get('system.ram') }}</span></li>
-                        @foreach(\Setting::get('system.hdd') as $id => $hdd)
+                        @foreach(\Setting::get('system.hdd', []) as $id => $hdd)
                             <li><span class="label label-success">HDD-{{ $id }}: {{ $hdd }}</span></li>
                         @endforeach
 					</ul>
