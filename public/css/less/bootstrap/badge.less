@@ -1,0 +1,18 @@
+.badge {
+	color: @color-white;
+	background: @color-medium-grey;
+	border: none;
+	border-radius: 0;
+}
+
+a.badge {
+	background: @color-primary;
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: @color-white;
+		background: lighten(@color-primary, 10%);
+		text-decoration: none;
+	}
+}
