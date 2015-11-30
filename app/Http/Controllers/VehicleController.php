@@ -10,66 +10,67 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
-class VehicleController extends Controller {
+class VehicleController extends Controller
+{
 
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		$this->middleware('auth');
-	}
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		if(!\Auth::User()->isAllowed('view_vehicles')) {
-			return Redirect::to('/');
-		}
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        if (!\Auth::User()->isAllowed('view_vehicles')) {
+            return Redirect::to('/');
+        }
 
-		return view('vehicle/list');
-	}
+        return view('vehicle/list');
+    }
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        //
+    }
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-        if(!\Auth::User()->isAllowed('edit_vehicle')) {
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        if (!\Auth::User()->isAllowed('edit_vehicle')) {
             return Redirect::to('/');
         }
 
         return view('vehicle/edit')->with(array('vehicle' => Vehicle::find($id)));
-	}
+    }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-        if(!\Auth::User()->isAllowed('edit_vehicle')) {
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function update($id)
+    {
+        if (!\Auth::User()->isAllowed('edit_vehicle')) {
             return Redirect::to('/');
         }
 
@@ -77,7 +78,7 @@ class VehicleController extends Controller {
         $rules['comment'] = 'required';
 
         $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator->errors());
         }
 
@@ -95,17 +96,17 @@ class VehicleController extends Controller {
         \Event::fire(new \A3LWebInterface\Events\VehicleUpdated($vehicle, Input::get('comment')));
 
         return redirect()->route('vehicle.list');
-	}
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-        if(!\Auth::User()->isAllowed('delete_vehicle')) {
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        if (!\Auth::User()->isAllowed('delete_vehicle')) {
             return Redirect::to('/');
         }
 
@@ -113,7 +114,7 @@ class VehicleController extends Controller {
         $rules['comment'] = 'required';
 
         $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator->errors());
         }
 
@@ -122,6 +123,6 @@ class VehicleController extends Controller {
         $vehicle->delete();
 
         return redirect()->route('vehicle.list');
-	}
+    }
 
 }

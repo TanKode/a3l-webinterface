@@ -4,18 +4,19 @@ use A3LWebInterface\Events\Event;
 
 use Illuminate\Queue\SerializesModels;
 
-class BackupCreated extends Event {
+class BackupCreated extends Event
+{
 
-	use SerializesModels;
+    use SerializesModels;
 
-	/**
-	 * Create a new event instance.
-	 *
-	 * @return void
-	 */
-	public function __construct($filename)
-	{
-		$this->filename = $filename;
-	}
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct($filename)
+    {
+        $this->filename = $filename;
+    }
 
 }

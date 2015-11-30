@@ -7,7 +7,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 use PhpParser\Node\Expr\Cast\Object_;
 
-class EmailLogAction {
+class EmailLogAction
+{
 
     /**
      * Create the event handler.
@@ -21,7 +22,7 @@ class EmailLogAction {
     /**
      * Handle the event.
      *
-     * @param  UserDeleted  $event
+     * @param  UserDeleted $event
      * @return void
      */
     public function handle($event)
@@ -30,7 +31,7 @@ class EmailLogAction {
         $setting_name = strtolower('email.' . $table . '_' . $event->action);
         $email_setting = \Setting::get($setting_name, false);
         $receiver = \Setting::get('email.receiver', false);
-        if($email_setting != false && $receiver != false) {
+        if ($email_setting != false && $receiver != false) {
             $object = false;
             $owner = false;
             $receiver = \A3LWebInterface\User::find($receiver)->first();

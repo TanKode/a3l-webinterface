@@ -4,20 +4,21 @@ use A3LWebInterface\Events\Event;
 
 use Illuminate\Queue\SerializesModels;
 
-class UserDeleted extends Event {
+class UserDeleted extends Event
+{
 
-	use SerializesModels;
+    use SerializesModels;
 
-	/**
-	 * Create a new event instance.
-	 *
-	 * @return void
-	 */
-	public function __construct($model, $comment)
-	{
-		$this->model = $model;
-		$this->action = 'DELETE';
-		$this->comment = $comment;
-	}
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct($model, $comment)
+    {
+        $this->model = $model;
+        $this->action = 'DELETE';
+        $this->comment = $comment;
+    }
 
 }

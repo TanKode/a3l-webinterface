@@ -1,7 +1,8 @@
 <?php namespace A3LWebInterface\Events;
 
-abstract class Event {
+abstract class Event
+{
 
-	//
+    //
 
 }

@@ -5,7 +5,8 @@ use A3LWebInterface\User;
 use Illuminate\Support\Facades\Redirect;
 use Invisnik\LaravelSteamAuth\SteamAuth;
 
-class SteamController extends Controller {
+class SteamController extends Controller
+{
 
     /**
      * @var SteamAuth
@@ -19,7 +20,7 @@ class SteamController extends Controller {
 
     public function getLogin()
     {
-        if($this->steam->validate()) {
+        if ($this->steam->validate()) {
             return redirect(url('auth/register'))->with('player_id', $this->steam->getSteamId());
         } else {
             return $this->steam->redirect();

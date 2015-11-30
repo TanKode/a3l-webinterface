@@ -6,7 +6,8 @@ use A3LWebInterface\Http\Controllers\Controller;
 use A3LWebInterface\Sysload;
 use Illuminate\Http\Request;
 
-class SystemController extends Controller {
+class SystemController extends Controller
+{
 
     /**
      * Create a new controller instance.
@@ -19,33 +20,33 @@ class SystemController extends Controller {
         $this->middleware('curl', ['only' => ['load']]);
     }
 
-	public static function info()
-	{
-        if(\Setting::get('system.show', false)) {
+    public static function info()
+    {
+        if (\Setting::get('system.show', false)) {
             $system[] = \Setting::get('system.os', false);
             $system[] = \Setting::get('system.cpu', false);
             $system[] = \Setting::get('system.ram', false);
             $system[] = \Setting::get('system.hdd', false);
-            if(in_array(false, $system)) {
+            if (in_array(false, $system)) {
                 $return = self::getLinfoData();
 
                 \Setting::set('system.os', $return['os']);
                 \Setting::set('system.cpu', $return['cpu']);
                 \Setting::set('system.ram', round(number_format($return['ram'] / 1024 / 1024 / 1024, 0)) . ' GB');
-                foreach($return['hdds'] as $id => $hdd) {
-                    \Setting::set('system.hdd.'.$id, round($hdd['size'] / 1024 / 1024 / 1024) . ' GB');
+                foreach ($return['hdds'] as $id => $hdd) {
+                    \Setting::set('system.hdd.' . $id, round($hdd['size'] / 1024 / 1024 / 1024) . ' GB');
                 }
                 \Setting::save();
             }
         }
-	}
+    }
 
     public static function getLastLoads()
     {
         $sysloads = Sysload::take(30)->orderBy('created_at', 'asc')->get();
 
         $return = array();
-        foreach($sysloads as $id => $sysload) {
+        foreach ($sysloads as $id => $sysload) {
             $return[$id]['time'] = date('H:i:s', strtotime($sysload->created_at));
             $return[$id]['cpu'] = $sysload->cpu_load;
             $return[$id]['ram'] = $sysload->ram_load;
@@ -55,9 +56,9 @@ class SystemController extends Controller {
         return $return;
     }
 
-	public static function load()
-	{
-        if(\Setting::get('system.show', false)) {
+    public static function load()
+    {
+        if (\Setting::get('system.show', false)) {
             $return = self::getLinfoData();
 
             $sysload = new Sysload;
@@ -66,9 +67,10 @@ class SystemController extends Controller {
             $sysload->hdd_load = $return['hddsload'];
             $sysload->save();
         }
-	}
+    }
 
-    private static function getLinfoData() {
+    private static function getLinfoData()
+    {
         $ds = DIRECTORY_SEPARATOR;
         $path = realpath(__DIR__ . $ds . '..' . $ds . '..' . $ds . '..' . $ds . 'vendor' . $ds . 'linfo' . $ds . 'linfo') . $ds;
         require_once($path . 'init.php');
@@ -90,11 +92,11 @@ class SystemController extends Controller {
         $result['cpuload'] = number_format(preg_replace('/[^\d]/', '', $return['Load']) * 1, 2) * 1;
 
         $hddload = array();
-        foreach($return['Mounts'] as $id => $mount) {
+        foreach ($return['Mounts'] as $id => $mount) {
             $result['hdds'][$id]['size'] = $mount['size'] * 1;
             $hddload[] = round(number_format(100 - $mount['free'] / ($mount['size'] / 100), 2) * 1);
         }
-        $result['hddsload'] =  array_sum($hddload) / count($hddload);
+        $result['hddsload'] = array_sum($hddload) / count($hddload);
 
         unset($return['Load']);
         unset($return['RAM']);

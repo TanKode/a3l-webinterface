@@ -4,20 +4,21 @@ use A3LWebInterface\Events\Event;
 
 use Illuminate\Queue\SerializesModels;
 
-class VehicleDeleted extends Event {
+class VehicleDeleted extends Event
+{
 
-	use SerializesModels;
+    use SerializesModels;
 
-	/**
-	 * Create a new event instance.
-	 *
-	 * @return void
-	 */
-	public function __construct($model, $comment)
-	{
-		$this->model = $model;
-		$this->action = 'DELETE';
-		$this->comment = $comment;
-	}
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct($model, $comment)
+    {
+        $this->model = $model;
+        $this->action = 'DELETE';
+        $this->comment = $comment;
+    }
 
 }

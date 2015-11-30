@@ -4,20 +4,21 @@ use A3LWebInterface\Events\Event;
 
 use Illuminate\Queue\SerializesModels;
 
-class RoleUpdated extends Event {
+class RoleUpdated extends Event
+{
 
-	use SerializesModels;
+    use SerializesModels;
 
-	/**
-	 * Create a new event instance.
-	 *
-	 * @return void
-	 */
-	public function __construct($model, $comment)
-	{
-		$this->model = $model;
-		$this->action = 'UPDATE';
-		$this->comment = $comment;
-	}
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct($model, $comment)
+    {
+        $this->model = $model;
+        $this->action = 'UPDATE';
+        $this->comment = $comment;
+    }
 
 }

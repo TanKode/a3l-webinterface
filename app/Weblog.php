@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Weblog extends Model {
+class Weblog extends Model
+{
 
     /**
      * The database table used by the model.

@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Sysload extends Model {
+class Sysload extends Model
+{
 
     /**
      * The database table used by the model.

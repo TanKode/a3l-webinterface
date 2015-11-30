@@ -8,35 +8,36 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 use Illuminate\Support\Facades\Auth;
 
-class WebLogAction {
+class WebLogAction
+{
 
-	/**
-	 * Create the event handler.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-	}
+    /**
+     * Create the event handler.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+    }
 
-	/**
-	 * Handle the event.
-	 *
-	 * @param  LoggableActionDone  $event
-	 * @return void
-	 */
-	public function handle($event)
-	{
+    /**
+     * Handle the event.
+     *
+     * @param  LoggableActionDone $event
+     * @return void
+     */
+    public function handle($event)
+    {
         $table = $event->model->getTable();
         $weblog = new Weblog();
-        if($table == 'users' && $event->action == 'CREATE') {
+        if ($table == 'users' && $event->action == 'CREATE') {
             $weblog->editor_id = 0;
             $weblog->editor_name = 'Server';
         } else {
             $weblog->editor_id = Auth::User()->id;
             $weblog->editor_name = Auth::User()->name;
         }
-        switch($table):
+        switch ($table):
             case 'players':
                 $weblog->object_id = $event->model->uid;
                 $weblog->object_name = $event->model->name;
@@ -57,6 +58,6 @@ class WebLogAction {
         $weblog->type = $event->action;
         $weblog->comment = $event->comment;
         $weblog->save();
-	}
+    }
 
 }

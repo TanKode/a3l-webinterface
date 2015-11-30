@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
-class SettingController extends Controller {
+class SettingController extends Controller
+{
 
     /**
      * Create a new controller instance.
@@ -20,28 +21,28 @@ class SettingController extends Controller {
         $this->middleware('auth');
     }
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		if(!\Auth::User()->isAllowed('manage_settings')) {
-			return Redirect::to('/');
-		}
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        if (!\Auth::User()->isAllowed('manage_settings')) {
+            return Redirect::to('/');
+        }
 
-		return view('setting/list');
-	}
+        return view('setting/list');
+    }
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-        if(!\Auth::User()->isAllowed('manage_settings')) {
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        if (!\Auth::User()->isAllowed('manage_settings')) {
             return Redirect::to('/');
         }
 
@@ -51,7 +52,7 @@ class SettingController extends Controller {
         );
 
         $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator->errors());
         }
 
@@ -59,44 +60,44 @@ class SettingController extends Controller {
         \Setting::save();
 
         return redirect()->back();
-	}
+    }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		if(!\Auth::User()->isAllowed('manage_settings')) {
-			return Redirect::to('/');
-		}
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function update($id)
+    {
+        if (!\Auth::User()->isAllowed('manage_settings')) {
+            return Redirect::to('/');
+        }
 
-		$rules = array(
-			'value' => 'required'
-		);
+        $rules = array(
+            'value' => 'required'
+        );
 
-		$validator = Validator::make(Input::all(), $rules);
-		if($validator->fails()) {
-			return redirect()->back()->withInput()->withErrors($validator->errors());
-		}
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator->errors());
+        }
 
-		\Setting::set($id, Input::get('value'));
-		\Setting::save();
+        \Setting::set($id, Input::get('value'));
+        \Setting::save();
 
-		return redirect()->back();
-	}
+        return redirect()->back();
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-        if(!\Auth::User()->isAllowed('manage_settings')) {
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        if (!\Auth::User()->isAllowed('manage_settings')) {
             return Redirect::to('/');
         }
 
@@ -104,6 +105,6 @@ class SettingController extends Controller {
         \Setting::save();
 
         return redirect()->back();
-	}
+    }
 
 }

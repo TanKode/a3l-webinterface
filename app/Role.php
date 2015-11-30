@@ -2,7 +2,8 @@
 
 use Zizaco\Entrust\EntrustRole;
 
-class Role extends EntrustRole {
+class Role extends EntrustRole
+{
 
     /**
      * The attributes that are mass assignable.
