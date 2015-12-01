@@ -150,6 +150,8 @@ return [
 		'Zizaco\Entrust\EntrustServiceProvider',
         'Invisnik\LaravelSteamAuth\SteamServiceProvider',
 		Linfo\Laravel\LinfoServiceProvider::class,
+		Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+		Barryvdh\Debugbar\ServiceProvider::class,
 
 	],
 
