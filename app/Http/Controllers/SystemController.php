@@ -72,6 +72,7 @@ class SystemController extends Controller
 
     private static function getLinfoData()
     {
+        // TODO: use everywhere the linfo model
         $linfo = new Linfo();
         $return = $linfo->getOriginals();
 
@@ -86,7 +87,7 @@ class SystemController extends Controller
         $return['CPU'] = array_unique($return['CPU'], SORT_REGULAR);
         $return['CPU'][0]['Cores'] = $cores;
         $result['cpu'] = $return['CPU'][0]['Model'] . ' - ' . $return['CPU'][0]['Cores'] . ' Cores';
-        $result['cpuload'] = number_format(preg_replace('/[^\d]/', '', $return['Load']) * 1, 2) * 1;
+        $result['cpuload'] = $linfo->getProcessed('cpu.usage_percentage', 0);
 
         $hddload = array();
         foreach ($return['Mounts'] as $id => $mount) {
