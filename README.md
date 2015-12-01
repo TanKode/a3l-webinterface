@@ -23,11 +23,7 @@
 * `view_vehicles`
 * `view_weblog`
 
-
-
 * `add_donator`
-
-
 
 * `edit_player`
     * `_name`
@@ -39,14 +35,31 @@
 * `edit_user`
 * `edit_vehicle`
 
-
-
 * `delete_donator`
 * `delete_user`
 * `delete_vehicle`
 
-
-
 * `manage_permissions`
 * `manage_roles`
 * `manage_settings`
+
+## ToDo
+
+### Refactoring
+
+* Routes
+* Auth
+* ~~Database~~
+    * ~~Controller~~
+    * ~~View~~
+* DonatorHistory
+* Gang
+* Home
+* Permission
+* Player
+* Role
+* Setting
+* System
+* User
+* Vehicle
+* Weblog
