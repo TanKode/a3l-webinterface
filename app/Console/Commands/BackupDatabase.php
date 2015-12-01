@@ -105,7 +105,7 @@ class BackupDatabase extends Command
 
     protected function getValue($value)
     {
-        if(is_null($value)) {
+        if (is_null($value)) {
             return 'null';
         }
         $value = str_replace("\n", "\\n", addslashes($value));
