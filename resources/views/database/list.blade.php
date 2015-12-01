@@ -18,7 +18,7 @@
 			$rows = 0;
 			$size = 0;
 			?>
-			@foreach( DB::select('SELECT table_name, table_rows, Round((data_length + index_length) / 1024, 1) "table_size" FROM information_schema.tables WHERE table_schema = "' . \Config::get('database.connections.mysql.database') . '";') as $table )
+			@foreach($tables as $table )
 				<tr>
 					<td>{{ $table->table_name }}</td>
 					<td>{{ $table->table_rows }} Einträge</td>
@@ -49,7 +49,7 @@
 				<th></th>
 			</tr>
 			</thead>
-			@foreach( \Storage::disk('local')->allFiles('backups') as $backup )
+			@foreach($backups as $backup )
 				<tr>
 					<td>{{ explode('_-_', $backup)[1] }}</td>
 					<td>{{ str_replace('.sql', '', explode('_-_', $backup)[2]) }}</td>
