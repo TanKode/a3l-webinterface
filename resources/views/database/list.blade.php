@@ -39,22 +39,12 @@
 
 	<div class="panel panel-info">
 		<div class="panel-heading"><h3 class="panel-title">Datenbank Backups</h3></div>
-		<div class="row">
-			<div class="col-md-10">
-				@include('forms/datatables_search')
-			</div>
-			<div class="col-md-2">
-				<div class="panel-body">
-					<a href="{{ url('db/backup') }}" class="btn btn-danger btn-block" target="_blank">Backup erstellen</a>
-				</div>
-			</div>
-		</div>
+		@include('forms/datatables_search')
 		<table class="table table-hover" data-order='[[ 1, "desc" ],[ 2, "desc" ]]'>
 			<thead>
 			<tr>
 				<th>Datenbank</th>
 				<th>Datum</th>
-				<th>Uhrzeit</th>
                 <th>Größe</th>
 				<th></th>
 			</tr>
@@ -62,8 +52,7 @@
 			@foreach( \Storage::disk('local')->allFiles('backups') as $backup )
 				<tr>
 					<td>{{ explode('_-_', $backup)[1] }}</td>
-					<td>{{ explode('_-_', $backup)[3] }}</td>
-					<td>{{ str_replace('.sql', '', explode('_-_', $backup)[4]) }}</td>
+					<td>{{ str_replace('.sql', '', explode('_-_', $backup)[2]) }}</td>
                     <td>{{ number_format(\Storage::size($backup) / 1024 / 1024, 2) . ' MB' }}</td>
 					<td>
                         <a href="{{ url('db/delete/'.str_replace('backups'.DIRECTORY_SEPARATOR, '', $backup)) }}" class="btn btn-sm btn-danger pull-right">Backup löschen</a>

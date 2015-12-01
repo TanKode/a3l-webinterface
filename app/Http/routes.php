@@ -23,7 +23,6 @@ Route::group(['prefix' => 'sys'], function () {
 
 Route::group(['prefix' => 'db'], function () {
     Route::get('status', ['as' => 'db.list', 'uses' => 'DatabaseController@index']);
-    Route::get('backup', ['as' => 'db.backup', 'uses' => 'DatabaseController@backup']);
     Route::get('download/{filename}', ['as' => 'db.download', 'uses' => 'DatabaseController@download']);
     Route::get('delete/{filename}', ['as' => 'db.delete', 'uses' => 'DatabaseController@delete']);
 });

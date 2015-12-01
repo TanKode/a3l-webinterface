@@ -1,14 +1,12 @@
-<?php namespace A3LWebInterface\Console\Commands;
+<?php
+namespace A3LWebInterface\Console\Commands;
 
 use A3LWebInterface\Events\BackupCreated;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
 class BackupDatabase extends Command
 {
-
     protected $name = 'db:backup';
     protected $description = 'Creates a backup of the whole database.';
 
@@ -117,5 +115,4 @@ class BackupDatabase extends Command
             return '""';
         }
     }
-
 }
