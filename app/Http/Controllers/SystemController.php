@@ -94,7 +94,7 @@ class SystemController extends Controller
             $result['hdds'][$id]['size'] = $mount['size'] * 1;
             $hddload[] = round(number_format(100 - $mount['free'] / ($mount['size'] / 100), 2) * 1);
         }
-        if(count($hddload) == 0) {
+        if (count($hddload) == 0) {
             $result['hddsload'] = 0;
         } else {
             $result['hddsload'] = array_sum($hddload) / count($hddload);
