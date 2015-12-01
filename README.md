@@ -45,6 +45,16 @@
 
 ## ToDo
 
+### System
+
+* use gulp - less
+* update app config - ::class
+* seeder in migration
+* add permissions migration
+* use trans function for vehicle & license names
+* update frontend to new theme
+* artisan command for regular sysload saves
+
 ### Refactoring
 
 * Routes
