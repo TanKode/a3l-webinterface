@@ -114,16 +114,9 @@
 		<span class="pull-left">
 			Arma 3 Altis Life WebInterface v{{ \Config::get('a3lwebinterface.version') }} |
             developed by <a href="https://github.com/Gummibeer" target="_blank">Gummibeer</a> &copy; 2015
-            <br />
-            <a href="https://bitbucket.org/Gummibeer/a3lwebinterface" target="_blank">A3L WebInterface Tickets</a>
 		</span>
 
-		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="pull-right">
-			<input type="hidden" name="cmd" value="_s-xclick">
-			<input type="hidden" name="hosted_button_id" value="TZAAFRENXZ7ZU">
-			<button type="submit" name="submit" class="btn btn-primary btn-sm" data-toggle="tooltip" data-title="Paypal-Gebühren: 1,2% + 0,35€"><i class="icon-paypal"></i> Weiterentwicklung unterstützen</button>
-			<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1" style="display: none" />
-		</form>
+		<a href="https://www.paypal.me/gummibeer/5" target="_blank" class="btn btn-primary btn-sm pull-right" data-toggle="tooltip" data-title="Paypal-Gebühren: 1,2% + 0,35€"><i class="icon-paypal"></i> Weiterentwicklung unterstützen</a>
 	</footer>
 
 	<!-- Scripts -->
