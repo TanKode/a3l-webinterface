@@ -1,23 +1,13 @@
-<?php namespace A3LWebInterface;
+<?php
+namespace A3LWebInterface;
 
 use Zizaco\Entrust\EntrustRole;
 
 class Role extends EntrustRole
 {
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = ['*'];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
     protected $hidden = [''];
+    protected $guarded = [''];
 
     public static $rules = array(
         'name' => 'required|alpha_dash|max:255|unique:permissions',

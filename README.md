@@ -19,7 +19,6 @@
 * `view_donators`
 * `view_gangs`
 * `view_players`
-* `view_system`
 * `view_users`
 * `view_vehicles`
 * `view_weblog`
@@ -51,13 +50,12 @@
 * ~~use gulp - less~~
 * ~~update app config - ::class~~
 * seeder in migration
-* add permissions migration
+* ~~add permissions migration~~
 * use trans function for vehicle & license names
     * ~~add transd() function~~
     * ~~vehicles~~
     * licenses
 * update frontend to new theme
-* artisan command for regular sysload saves
 
 ### Refactoring
 
