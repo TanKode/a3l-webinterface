@@ -47,7 +47,7 @@
 
 ### System
 
-* use gulp - less
+* ~~use gulp - less~~
 * ~~update app config - ::class~~
 * seeder in migration
 * add permissions migration
