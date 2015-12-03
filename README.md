@@ -48,7 +48,7 @@
 ### System
 
 * use gulp - less
-* update app config - ::class
+* ~~update app config - ::class~~
 * seeder in migration
 * add permissions migration
 * use trans function for vehicle & license names
