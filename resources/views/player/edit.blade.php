@@ -54,7 +54,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<ul class="list-inline">
-				@foreach(\A3LWebInterface\Helper\Formatter::decodeDBArray($player->civ_licenses) as $licence)
+				@foreach(\A3LWebInterface\Libs\Formatter::decodeDBArray($player->civ_licenses) as $licence)
 					<li>
 						<label for="civ_licenses-{{ $licence[0] }}" class="licenses">
 						@if($licence[1])
@@ -80,7 +80,7 @@
                 </div>
                 <div class="col-md-8">
                     <ul class="list-inline">
-                        @foreach(\A3LWebInterface\Helper\Formatter::decodeDBArray($player->cop_licenses) as $licence)
+                        @foreach(\A3LWebInterface\Libs\Formatter::decodeDBArray($player->cop_licenses) as $licence)
                             <li>
                                 <label for="cop_licenses-{{ $licence[0] }}" class="licenses">
                                 @if($licence[1])
@@ -107,7 +107,7 @@
                 </div>
                 <div class="col-md-8">
                     <ul class="list-inline">
-                        @foreach(\A3LWebInterface\Helper\Formatter::decodeDBArray($player->med_licenses) as $licence)
+                        @foreach(\A3LWebInterface\Libs\Formatter::decodeDBArray($player->med_licenses) as $licence)
                             <li>
                                 <label for="med_licenses-{{ $licence[0] }}" class="licenses">
                                     @if($licence[1])

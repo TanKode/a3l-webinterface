@@ -1,7 +1,7 @@
 <?php namespace A3LWebInterface\Http\Controllers;
 
 use A3LWebInterface\Gang;
-use A3LWebInterface\Helper\Formatter;
+use A3LWebInterface\Libs\Formatter;
 use A3LWebInterface\Http\Requests;
 use A3LWebInterface\Player;
 

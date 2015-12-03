@@ -1,11 +1,9 @@
 <?php namespace A3LWebInterface\Http\Controllers;
 
-use A3LWebInterface\Helper\Formatter;
-use A3LWebInterface\Helper\Log;
+use A3LWebInterface\Libs\Formatter;
 use A3LWebInterface\Http\Requests;
 use A3LWebInterface\Player;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;

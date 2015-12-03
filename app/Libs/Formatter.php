@@ -1,4 +1,4 @@
-<?php namespace A3LWebInterface\Helper;
+<?php namespace A3LWebInterface\Libs;
 
 class Formatter
 {
