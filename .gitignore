@@ -4,4 +4,5 @@
 /vendor
 composer.phar
 /.env
+/node_modules
 composer.lock
