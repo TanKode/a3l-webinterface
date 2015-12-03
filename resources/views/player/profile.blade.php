@@ -17,7 +17,7 @@
 			</li>
 			<li class="list-group-item">
 				Geld
-				<span class="badge">{{ \A3LWebInterface\Helper\Formatter::money(Auth::User()->player->cash + Auth::User()->player->bankacc) }}</span>
+				<span class="badge">{{ \A3LWebInterface\Libs\Formatter::money(Auth::User()->player->cash + Auth::User()->player->bankacc) }}</span>
 			</li>
 			@if(count(Auth::User()->player->gang()) == 1)
 				<li class="list-group-item">
@@ -70,12 +70,12 @@
 				</li>
 			@endif
 
-			@if(count(\A3LWebInterface\Helper\Formatter::decodeDBArray($player->civ_licenses)) > 0)
+			@if(count(\A3LWebInterface\Libs\Formatter::decodeDBArray($player->civ_licenses)) > 0)
 				<li class="list-group-item">
 					Civ Lizenzen
 					<div class="list-group-item-text">
 						<ul class="list-inline">
-							@foreach(\A3LWebInterface\Helper\Formatter::decodeDBArray($player->civ_licenses) as $licence)
+							@foreach(\A3LWebInterface\Libs\Formatter::decodeDBArray($player->civ_licenses) as $licence)
 								<li>
 									<span class="licenses">
 										@if($licence[1])
@@ -92,12 +92,12 @@
 					</div>
 				</li>
 			@endif
-			@if(count(\A3LWebInterface\Helper\Formatter::decodeDBArray($player->cop_licenses)) > 0)
+			@if(count(\A3LWebInterface\Libs\Formatter::decodeDBArray($player->cop_licenses)) > 0)
 				<li class="list-group-item">
 					Cop Lizenzen
 					<div class="list-group-item-text">
 						<ul class="list-inline">
-							@foreach(\A3LWebInterface\Helper\Formatter::decodeDBArray($player->cop_licenses) as $licence)
+							@foreach(\A3LWebInterface\Libs\Formatter::decodeDBArray($player->cop_licenses) as $licence)
 								<li>
 									<span class="licenses">
 										@if($licence[1])
@@ -114,12 +114,12 @@
 					</div>
 				</li>
 			@endif
-			@if(count(\A3LWebInterface\Helper\Formatter::decodeDBArray($player->med_licenses)) > 0)
+			@if(count(\A3LWebInterface\Libs\Formatter::decodeDBArray($player->med_licenses)) > 0)
 				<li class="list-group-item">
 					Med Lizenzen
 					<div class="list-group-item-text">
 						<ul class="list-inline">
-							@foreach(\A3LWebInterface\Helper\Formatter::decodeDBArray($player->med_licenses) as $licence)
+							@foreach(\A3LWebInterface\Libs\Formatter::decodeDBArray($player->med_licenses) as $licence)
 								<li>
 									<span class="licenses">
 										@if($licence[1])

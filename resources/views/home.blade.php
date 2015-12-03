@@ -41,7 +41,7 @@
                     </li>
                     <li class="list-group-item">
                         Geld
-                        <span class="badge">{{ \A3LWebInterface\Helper\Formatter::money(Auth::User()->player->cash + Auth::User()->player->bankacc) }}</span>
+                        <span class="badge">{{ \A3LWebInterface\Libs\Formatter::money(Auth::User()->player->cash + Auth::User()->player->bankacc) }}</span>
                     </li>
                     @if(count(Auth::User()->player->gang()) == 1)
                         <li class="list-group-item">

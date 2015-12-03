@@ -52,7 +52,7 @@
 			<div class="col-md-12">
 				<ul class="list-inline">
 					<?php
-					$members = array_unique(\A3LWebInterface\Helper\Formatter::decodeDBArray($gang->members));
+					$members = array_unique(\A3LWebInterface\Libs\Formatter::decodeDBArray($gang->members));
 					?>
 					@foreach($members as $member)
 						@if(is_numeric($member))
