@@ -29,7 +29,10 @@
     ],
     "psr-4": {
       "A3LWebInterface\\": "app/"
-    }
+    },
+    "files": [
+      "app/Libs/helpers.php"
+    ]
   },
   "autoload-dev": {
     "classmap": [

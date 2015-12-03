@@ -4,27 +4,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vehicle extends Model
 {
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
     protected $table = 'vehicles';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = ['*'];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
     protected $hidden = [''];
+
+    protected $appends = [
+        'display_name',
+    ];
 
     public static $rules = array(
         'side' => 'required',
@@ -40,4 +27,8 @@ class Vehicle extends Model
         return $this->hasOne('A3LWebInterface\Player', 'playerid', 'pid');
     }
 
+    public function getDisplayNameAttribute()
+    {
+        return transd('vehicle.' . $this->classname);
+    }
 }

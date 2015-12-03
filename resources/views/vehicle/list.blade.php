@@ -24,6 +24,7 @@
 				<th>Spieler-ID</th>
 				<th>Seite</th>
 				<th>Typ</th>
+				<th>Klasse</th>
 				<th>Name</th>
 				<th></th>
 			</tr>
@@ -34,7 +35,8 @@
 					<td>{{ $vehicle->pid }}</td>
 					<td>{{ $vehicle->side }}</td>
 					<td>{{ $vehicle->type }}</td>
-					<td>{{ Setting::get('vehicle.'.$vehicle->classname, $vehicle->classname) }}</td>
+					<td>{{ $vehicle->classname }}</td>
+					<td>{{ $vehicle->display_name }}</td>
 					@if(Auth::User()->isAllowed('edit_vehicle') || Auth::User()->isAllowed('delete_vehicle'))
 						<td>
 							@if(Auth::User()->isAllowed('delete_vehicle'))
