@@ -75,3 +75,6 @@
 * User
 * Vehicle
 * Weblog
+* Formatter
+    * class in Libs namespace
+    * HelperServiceProvider & Facade
