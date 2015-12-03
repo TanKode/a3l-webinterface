@@ -29,6 +29,6 @@ class Vehicle extends Model
 
     public function getDisplayNameAttribute()
     {
-        return transd('vehicle.' . $this->classname);
+        return transd('vehicles.' . $this->classname);
     }
 }
