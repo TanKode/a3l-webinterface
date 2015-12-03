@@ -2,7 +2,8 @@
 /.idea
 *.iml
 /vendor
-composer.phar
+/composer.phar
 /.env
 /node_modules
-composer.lock
+/public/css/style.*
+/composer.lock
