@@ -10,6 +10,8 @@
 * `info.*`                  _String_ - dashboard "Serveradressen" uses the key as label
 * `licence.{key}`           _String_ - the human translation for this licence
 * `system.show`             _Boolean_ - display the system stats on the dashboard for allowed users
+* `player`
+    * `max_donator_level`   _Integer_ - the Donatorlevel that is used for new Donators
 
 ## Permissions
 
@@ -66,7 +68,9 @@
     * ~~View~~
 * DonatorHistory
 * Gang
-* Home
+* ~~Home~~
+    * ~~Controller~~
+    * ~~View~~
 * Permission
 * Player
 * Role

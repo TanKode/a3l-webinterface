@@ -1,31 +1,20 @@
-<?php namespace A3LWebInterface;
+<?php
+namespace A3LWebInterface;
 
+use A3LWebInterface\Libs\Formatter;
 use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
 {
-
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
     protected $table = 'players';
     protected $primaryKey = 'uid';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = ['*'];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
     protected $hidden = [''];
+
+    protected $appends = [
+        'total_money',
+    ];
 
     public static $rules = array(
         'name' => 'required|max:255',
@@ -38,22 +27,22 @@ class Player extends Model
 
     public function vehicles()
     {
-        return $this->hasMany('A3LWebInterface\Vehicle', 'pid', 'playerid')->where('alive', 1);
+        return $this->hasMany(Vehicle::class, 'pid', 'playerid')->alive();
     }
 
     public function civVehicles()
     {
-        return $this->hasMany('A3LWebInterface\Vehicle', 'pid', 'playerid')->where('alive', 1)->where('side', 'civ');
+        return $this->vehicles()->civ();
     }
 
     public function copVehicles()
     {
-        return $this->hasMany('A3LWebInterface\Vehicle', 'pid', 'playerid')->where('alive', 1)->where('side', 'cop');
+        return $this->vehicles()->cop();
     }
 
     public function medVehicles()
     {
-        return $this->hasMany('A3LWebInterface\Vehicle', 'pid', 'playerid')->where('alive', 1)->where('side', 'med');
+        return $this->vehicles()->med();
     }
 
     public function gang()
@@ -63,7 +52,7 @@ class Player extends Model
 
     public function isGangOwner()
     {
-        return count(Gang::where('owner', $this->attributes['playerid'])->first()) > 0 ? true : false;
+        return (bool)($this->gang()->owner == $this->playerid);
     }
 
     public function getNameAttribute($value)
@@ -71,4 +60,8 @@ class Player extends Model
         return utf8_encode($value);
     }
 
+    public function getTotalMoneyAttribute()
+    {
+        return Formatter::money($this->cash + $this->bankacc);
+    }
 }

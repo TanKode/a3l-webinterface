@@ -14,7 +14,7 @@
 Route::get('steam/login', ['as' => 'steam.login', 'uses' => 'Auth\SteamController@getLogin']);
 
 // FINISHED
-Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+Route::get('/', ['uses' => 'HomeController@index']);
 
 Route::group(['prefix' => 'sys'], function () {
     Route::get('info', ['as' => 'db.list', 'uses' => 'SystemController@info']);

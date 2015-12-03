@@ -13,29 +13,19 @@ use Illuminate\Support\Facades\Validator;
 class DonatorHistoryController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
     public function index()
     {
         if (!\Auth::User()->isAllowed('view_donators')) {
-            return Redirect::to('/');
+            return redirect('/');
         }
 
         return view('donator/list');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
     public function store()
     {
         if (!\Auth::User()->isAllowed('add_donator')) {
-            return Redirect::to('/');
+            return redirect('/');
         }
 
         $validator = Validator::make(Input::all(), Donatorhistory::$rules);
@@ -65,24 +55,18 @@ class DonatorHistoryController extends Controller
     public function history($id)
     {
         if (!\Auth::User()->isAllowed('view_donators')) {
-            return Redirect::to('/');
+            return redirect('/');
         }
 
-        $player = Player::find($id);
-
-        return view('donator/history')->with(array('player' => $player));
+        return view('donator/history')->with([
+            'player' => Player::find($id),
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
     public function destroy($id)
     {
         if (!\Auth::User()->isAllowed('delete_donator')) {
-            return Redirect::to('/');
+            return redirect('/');
         }
 
         $player = Player::find($id);

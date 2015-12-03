@@ -31,4 +31,24 @@ class Vehicle extends Model
     {
         return transd('vehicles.' . $this->classname);
     }
+
+    public function scopeAlive($query)
+    {
+        return $query->where('alive', 1);
+    }
+
+    public function scopeCiv($query)
+    {
+        return $query->where('side', 'civ');
+    }
+
+    public function scopeCop($query)
+    {
+        return $query->where('side', 'cop');
+    }
+
+    public function scopeMed($query)
+    {
+        return $query->where('side', 'med');
+    }
 }
