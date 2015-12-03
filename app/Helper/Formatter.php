@@ -31,9 +31,9 @@ class Formatter
         return $return;
     }
 
-    public static function money($integer)
+    public static function money($number)
     {
-        return number_format($integer, \Setting::get('formatter.decimals', 0), \Setting::get('formatter.decimal_seperator', ','), \Setting::get('formatter.thousand_seperator', '.')) . \Setting::get('formatter.currency', ' €');
+        return number_format($number, \Setting::get('formatter.decimals', 0), \Setting::get('formatter.decimal_seperator', ','), \Setting::get('formatter.thousand_seperator', '.')) . ' ' . trim(\Setting::get('formatter.currency', '€'));
     }
 
 }

@@ -10,7 +10,6 @@
 * `info.*`                  _String_ - dashboard "Serveradressen" uses the key as label
 * `licence.{key}`           _String_ - the human translation for this licence
 * `system.show`             _Boolean_ - display the system stats on the dashboard for allowed users
-* `vehicle.{classname}`     _String_ - the human translation for this vehicle
 
 ## Permissions
 
