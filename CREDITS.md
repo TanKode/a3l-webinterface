@@ -5,6 +5,7 @@
 * https://github.com/anlutro/laravel-settings
 * https://github.com/Zizaco/entrust
 * https://github.com/thomasfw/RolesAndPermissionsSeeder
+* https://github.com/JosephSilber/bouncer
 
 ## JavaScript Plugins
 

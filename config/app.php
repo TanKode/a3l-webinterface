@@ -148,6 +148,7 @@ return [
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Silber\Bouncer\BouncerServiceProvider::class
 
     ],
 
@@ -199,6 +200,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         'Helper'	=> App\Facades\HelperFacade::class,
+
+        'Bouncer'   => Silber\Bouncer\BouncerFacade::class
 
     ],
 
