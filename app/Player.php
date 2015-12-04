@@ -1,7 +1,7 @@
 <?php
-namespace A3LWebInterface;
+namespace App;
 
-use A3LWebInterface\Libs\Formatter;
+use App\Libs\Formatter;
 use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model

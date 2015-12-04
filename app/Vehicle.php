@@ -1,4 +1,5 @@
-<?php namespace A3LWebInterface;
+<?php
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,7 +25,7 @@ class Vehicle extends Model
 
     public function owner()
     {
-        return $this->hasOne('A3LWebInterface\Player', 'playerid', 'pid');
+        return $this->hasOne(Player::class, 'playerid', 'pid');
     }
 
     public function getDisplayNameAttribute()

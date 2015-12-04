@@ -7,3 +7,5 @@
 /node_modules
 /public/css/style.*
 /composer.lock
+Homestead.yaml
+Homestead.json

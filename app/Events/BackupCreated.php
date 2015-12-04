@@ -1,22 +1,10 @@
-<?php namespace A3LWebInterface\Events;
-
-use A3LWebInterface\Events\Event;
-
-use Illuminate\Queue\SerializesModels;
+<?php
+namespace App\Events;
 
 class BackupCreated extends Event
 {
-
-    use SerializesModels;
-
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
     public function __construct($filename)
     {
         $this->filename = $filename;
     }
-
 }

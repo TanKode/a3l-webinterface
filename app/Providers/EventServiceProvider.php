@@ -1,88 +1,91 @@
-<?php namespace A3LWebInterface\Providers;
+<?php
+namespace App\Providers;
 
+use App\Events\BackupCreated;
+use App\Events\GangUpdated;
+use App\Events\PermissionCreated;
+use App\Events\PermissionUpdated;
+use App\Events\PlayerUpdated;
+use App\Events\RoleCreated;
+use App\Events\RoleUpdated;
+use App\Events\UserCreated;
+use App\Events\UserDeleted;
+use App\Events\UserUpdated;
+use App\Events\VehicleDeleted;
+use App\Events\VehicleUpdated;
+use App\Listeners\EmailBackup;
+use App\Listeners\EmailLogAction;
+use App\Listeners\WebLogAction;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
-
-    /**
-     * The event handler mappings for the application.
-     *
-     * @var array
-     */
     protected $listen = [
         // Vehicle
-        'A3LWebInterface\Events\VehicleUpdated' => [
-            'A3LWebInterface\Handlers\Events\WebLogAction',
-            'A3LWebInterface\Handlers\Events\EmailLogAction',
+        VehicleUpdated::class => [
+            WebLogAction::class,
+            EmailLogAction::class,
         ],
-        'A3LWebInterface\Events\VehicleDeleted' => [
-            'A3LWebInterface\Handlers\Events\WebLogAction',
-            'A3LWebInterface\Handlers\Events\EmailLogAction',
+        VehicleDeleted::class => [
+            WebLogAction::class,
+            EmailLogAction::class,
         ],
 
         // Player
-        'A3LWebInterface\Events\PlayerUpdated' => [
-            'A3LWebInterface\Handlers\Events\WebLogAction',
-            'A3LWebInterface\Handlers\Events\EmailLogAction',
+        PlayerUpdated::class => [
+            WebLogAction::class,
+            EmailLogAction::class,
         ],
 
         // Gang
-        'A3LWebInterface\Events\GangUpdated' => [
-            'A3LWebInterface\Handlers\Events\WebLogAction',
-            'A3LWebInterface\Handlers\Events\EmailLogAction',
+        GangUpdated::class => [
+            WebLogAction::class,
+            EmailLogAction::class,
         ],
 
         // User
-        'A3LWebInterface\Events\UserCreated' => [
-            'A3LWebInterface\Handlers\Events\WebLogAction',
-            'A3LWebInterface\Handlers\Events\EmailLogAction',
+        UserCreated::class => [
+            WebLogAction::class,
+            EmailLogAction::class,
         ],
-        'A3LWebInterface\Events\UserUpdated' => [
-            'A3LWebInterface\Handlers\Events\WebLogAction',
-            'A3LWebInterface\Handlers\Events\EmailLogAction',
+        UserUpdated::class => [
+            WebLogAction::class,
+            EmailLogAction::class,
         ],
-        'A3LWebInterface\Events\UserDeleted' => [
-            'A3LWebInterface\Handlers\Events\WebLogAction',
-            'A3LWebInterface\Handlers\Events\EmailLogAction',
+        UserDeleted::class => [
+            WebLogAction::class,
+            EmailLogAction::class,
         ],
 
         // Role
-        'A3LWebInterface\Events\RoleCreated' => [
-            'A3LWebInterface\Handlers\Events\WebLogAction',
-            'A3LWebInterface\Handlers\Events\EmailLogAction',
+        RoleCreated::class => [
+            WebLogAction::class,
+            EmailLogAction::class,
         ],
-        'A3LWebInterface\Events\RoleUpdated' => [
-            'A3LWebInterface\Handlers\Events\WebLogAction',
-            'A3LWebInterface\Handlers\Events\EmailLogAction',
+        RoleUpdated::class => [
+            WebLogAction::class,
+            EmailLogAction::class,
         ],
 
         // Permission
-        'A3LWebInterface\Events\PermissionCreated' => [
-            'A3LWebInterface\Handlers\Events\WebLogAction',
-            'A3LWebInterface\Handlers\Events\EmailLogAction',
+        PermissionCreated::class => [
+            WebLogAction::class,
+            EmailLogAction::class,
         ],
-        'A3LWebInterface\Events\PermissionUpdated' => [
-            'A3LWebInterface\Handlers\Events\WebLogAction',
-            'A3LWebInterface\Handlers\Events\EmailLogAction',
+        PermissionUpdated::class => [
+            WebLogAction::class,
+            EmailLogAction::class,
         ],
 
         // Backup
-        'A3LWebInterface\Events\BackupCreated' => [
-            'A3LWebInterface\Handlers\Events\EmailBackup',
+        BackupCreated::class => [
+            EmailBackup::class,
         ],
     ];
 
-    /**
-     * Register any other events for your application.
-     *
-     * @param  \Illuminate\Contracts\Events\Dispatcher $events
-     * @return void
-     */
     public function boot(DispatcherContract $events)
     {
         parent::boot($events);
     }
-
 }

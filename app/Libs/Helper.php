@@ -1,5 +1,5 @@
 <?php
-namespace A3LWebInterface\Libs;
+namespace App\Libs;
 
 class Helper
 {

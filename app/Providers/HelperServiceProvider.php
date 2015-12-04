@@ -1,7 +1,7 @@
 <?php
-namespace A3LWebInterface\Providers;
+namespace App\Providers;
 
-use A3LWebInterface\Libs\Helper;
+use App\Libs\Helper;
 use Illuminate\Support\ServiceProvider;
 
 class HelperServiceProvider extends ServiceProvider

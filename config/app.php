@@ -80,7 +80,7 @@ return [
 
     'key' => env('APP_KEY', 'SomeRandomString'),
 
-    'cipher' => MCRYPT_RIJNDAEL_128,
+    'cipher' => 'AES-256-CBC',
 
     /*
     |--------------------------------------------------------------------------
@@ -115,6 +115,7 @@ return [
          */
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
+        Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
         Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
@@ -135,22 +136,16 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Illuminate\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
-        A3LWebInterface\Providers\AppServiceProvider::class,
-        A3LWebInterface\Providers\BusServiceProvider::class,
-        A3LWebInterface\Providers\ConfigServiceProvider::class,
-        A3LWebInterface\Providers\EventServiceProvider::class,
-        A3LWebInterface\Providers\RouteServiceProvider::class,
-        A3LWebInterface\Providers\HelperServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
 
-        anlutro\LaravelSettings\ServiceProvider::class,
-        Zizaco\Entrust\EntrustServiceProvider::class,
-        Invisnik\LaravelSteamAuth\SteamServiceProvider::class,
-        Linfo\Laravel\LinfoServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
 
@@ -182,6 +177,7 @@ return [
         'Eloquent'  => Illuminate\Database\Eloquent\Model::class,
         'Event'     => Illuminate\Support\Facades\Event::class,
         'File'      => Illuminate\Support\Facades\File::class,
+        'Gate'      => Illuminate\Support\Facades\Gate::class,
         'Hash'      => Illuminate\Support\Facades\Hash::class,
         'Input'     => Illuminate\Support\Facades\Input::class,
         'Inspiring' => Illuminate\Foundation\Inspiring::class,
@@ -201,14 +197,8 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Form'		=> Illuminate\Html\FormFacade::class,
-        'HTML'		=> Illuminate\Html\HtmlFacade::class,
 
-        'Helper'	=> A3LWebInterface\Facades\HelperFacade::class,
-
-        'Setting'	=> anlutro\LaravelSettings\Facade::class,
-        'Entrust'	=> Zizaco\Entrust\EntrustFacade::class,
-        'SteamAuth' => Invisnik\LaravelSteamAuth\Facades\SteamAuth::class,
+        'Helper'	=> App\Facades\HelperFacade::class,
 
     ],
 

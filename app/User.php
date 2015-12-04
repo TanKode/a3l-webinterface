@@ -1,22 +1,30 @@
 <?php
-namespace A3LWebInterface;
+namespace App;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Support\Facades\Auth;
-use Zizaco\Entrust\Traits\EntrustUserTrait;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword, EntrustUserTrait;
+    use Authenticatable, Authorizable, CanResetPassword;
 
     protected $table = 'users';
 
-    protected $fillable = ['name', 'email', 'password', 'player_id'];
-    protected $hidden = ['password', 'remember_token'];
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'player_id',
+    ];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
     public static $rules = array(
         'name' => 'required|alpha_dash|max:255|unique:users',
@@ -29,16 +37,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasOne(Player::class, 'playerid', 'player_id');
     }
-
-    public function isAllowed($permission, $strict = false)
-    {
-        if (Auth::User()->hasRole('super_admin')) {
-            return true;
-        } elseif (Auth::User()->can($permission, $strict)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }

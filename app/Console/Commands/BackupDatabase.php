@@ -1,7 +1,6 @@
 <?php
-namespace A3LWebInterface\Console\Commands;
+namespace App\Console\Commands;
 
-use A3LWebInterface\Events\BackupCreated;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -10,12 +9,7 @@ class BackupDatabase extends Command
     protected $name = 'db:backup';
     protected $description = 'Creates a backup of the whole database.';
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    public function fire()
+    public function handle()
     {
         $now = Carbon::now(config('app.timezone'));
         $date = $now->toW3cString();
@@ -65,7 +59,6 @@ class BackupDatabase extends Command
         $filename = "backups/db_-_{$config['database']}_-_{$date}.sql";
 
         \Storage::put($filename, $content);
-        \Event::fire(new BackupCreated($filename));
     }
 
     protected function getComment(array $comments)

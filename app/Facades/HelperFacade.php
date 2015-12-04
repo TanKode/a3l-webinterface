@@ -1,5 +1,5 @@
 <?php
-namespace A3LWebInterface\Facades;
+namespace App\Facades;
 
 use Illuminate\Support\Facades\Facade as IlluminateFacade;
 
