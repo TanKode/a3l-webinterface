@@ -46,12 +46,24 @@ return [
 
     'connections' => [
 
-		'mysql' => [
+        'mysql' => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_HOST'),
+            'database'  => env('DB_DATABASE'),
+            'username'  => env('DB_USERNAME'),
+            'password'  => env('DB_PASSWORD'),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_general_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
+		'arma' => [
 			'driver'    => 'mysql',
-			'host'      => env('DB_HOST'),
-			'database'  => env('DB_DATABASE'),
-			'username'  => env('DB_USERNAME'),
-			'password'  => env('DB_PASSWORD'),
+			'host'      => env('DB_A3_HOST'),
+			'database'  => env('DB_A3_DATABASE'),
+			'username'  => env('DB_A3_USERNAME'),
+			'password'  => env('DB_A3_PASSWORD'),
 			'charset'   => 'latin1',
 			'collation' => 'latin1_swedish_ci',
 			'prefix'    => '',

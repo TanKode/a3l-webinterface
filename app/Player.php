@@ -1,67 +1,107 @@
 <?php
 namespace App;
 
-use App\Libs\Formatter;
 use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
 {
+    protected $connection = 'arma';
     protected $table = 'players';
     protected $primaryKey = 'uid';
 
-    protected $fillable = ['*'];
-    protected $hidden = [''];
+    protected $fillable = [
+        'cash',
+        'bankacc',
+        'civ_licenses',
+        'civ_gear',
+        'coplevel',
+        'cop_licenses',
+        'cop_gear',
+        'mediclevel',
+        'med_licenses',
+        'med_gear',
+        'adminlevel',
+        'donatorlevel',
+    ];
+    protected $hidden = [];
 
     protected $appends = [
+        'alias',
         'total_money',
     ];
 
-    public static $rules = array(
-        'name' => 'required|max:255',
-        'playerid' => 'required|numeric',
-        'cash' => 'required|numeric',
-        'bankacc' => 'required|numeric',
-        'cop_level' => 'numeric',
-        'medic_level' => 'numeric',
-    );
-
-    public function vehicles()
-    {
-        return $this->hasMany(Vehicle::class, 'pid', 'playerid')->alive();
-    }
-
-    public function civVehicles()
-    {
-        return $this->vehicles()->civ();
-    }
-
-    public function copVehicles()
-    {
-        return $this->vehicles()->cop();
-    }
-
-    public function medVehicles()
-    {
-        return $this->vehicles()->med();
-    }
-
-    public function gang()
-    {
-        return Gang::where('members', 'LIKE', '%' . $this->attributes['playerid'] . '%')->first();
-    }
-
-    public function isGangOwner()
-    {
-        return (bool)($this->gang()->owner == $this->playerid);
-    }
+    protected $casts = [
+        'uid' => 'int',
+        'cash' => 'int',
+        'coplevel' => 'int',
+        'bankacc' => 'int',
+        'mediclevel' => 'int',
+        'adminlevel' => 'int',
+        'donatorlvl' => 'int',
+    ];
 
     public function getNameAttribute($value)
     {
         return utf8_encode($value);
     }
 
+    public function getAliasesAttribute($value)
+    {
+        return \Formatter::decodeDBArray($value);
+    }
+
+    public function getAliasAttribute()
+    {
+        return $this->aliases[0];
+    }
+
     public function getTotalMoneyAttribute()
     {
-        return Formatter::money($this->cash + $this->bankacc);
+        return \Formatter::money($this->cash + $this->bankacc);
+    }
+
+    public function getCivLicensesAttribute($value)
+    {
+        return \Formatter::decodeDBArray($value);
+    }
+
+    public function setCivLicensesAttribute($value)
+    {
+        return \Formatter::encodeDBArray($value);
+    }
+
+    public function getCivGearAttribute($value)
+    {
+        return \Formatter::decodeDBArray($value);
+    }
+
+    public function getCopLicensesAttribute($value)
+    {
+        return \Formatter::decodeDBArray($value);
+    }
+
+    public function setCopLicensesAttribute($value)
+    {
+        return \Formatter::encodeDBArray($value);
+    }
+
+    public function getCopGearAttribute($value)
+    {
+        return \Formatter::decodeDBArray($value);
+    }
+
+    public function getMedLicensesAttribute($value)
+    {
+        return \Formatter::decodeDBArray($value);
+    }
+
+    public function setMedLicensesAttribute($value)
+    {
+        return \Formatter::encodeDBArray($value);
+    }
+
+    public function getMedGearAttribute($value)
+    {
+        return \Formatter::decodeDBArray($value);
     }
 }

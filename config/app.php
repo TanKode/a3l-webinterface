@@ -145,10 +145,15 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
+        App\Providers\HtmlBuilderServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Silber\Bouncer\BouncerServiceProvider::class
+        Silber\Bouncer\BouncerServiceProvider::class,
+        Maknz\Slack\SlackServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Fenos\Notifynder\NotifynderServiceProvider::class,
 
     ],
 
@@ -200,8 +205,15 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         'Helper'	=> App\Facades\HelperFacade::class,
+        'Formatter'	=> App\Facades\FormatterFacade::class,
+        'Alert'     => App\Facades\AlertBuilderFacade::class,
+        'Form'      => App\Facades\FormBuilderFacade::class,
 
-        'Bouncer'   => Silber\Bouncer\BouncerFacade::class
+        'Bouncer'   => Silber\Bouncer\BouncerFacade::class,
+        'Slack'     => Maknz\Slack\Facades\Slack::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
+        'Notify'    => Fenos\Notifynder\Facades\Notifynder::class,
 
     ],
 

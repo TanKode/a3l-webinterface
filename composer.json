@@ -7,7 +7,13 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "silber/bouncer": "v0.0.25"
+        "laravel/socialite": "2.0.*",
+        "laravelcollective/html": "~5.0",
+        "maknz/slack": "1.7.0",
+        "silber/bouncer": "0.*",
+        "michelf/php-markdown": "1.5.0",
+        "fenos/notifynder": "3.1.*",
+        "doctrine/dbal": "2.6.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -36,12 +42,14 @@
     "scripts": {
         "post-install-cmd": [
             "php artisan clear-compiled",
+            "php artisan ide-helper:generate",
             "php artisan optimize"
         ],
         "pre-update-cmd": [
         ],
         "post-update-cmd": [
             "php artisan clear-compiled",
+            "php artisan ide-helper:generate",
             "php artisan optimize"
         ],
         "post-root-package-install": [

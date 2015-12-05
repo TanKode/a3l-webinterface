@@ -33,7 +33,7 @@ class Formatter
 
     public static function money($number)
     {
-        return number_format($number, \Setting::get('formatter.decimals', 0), \Setting::get('formatter.decimal_seperator', ','), \Setting::get('formatter.thousand_seperator', '.')) . ' ' . trim(\Setting::get('formatter.currency', '€'));
+        return number_format($number, config('a3lwebinterface.formatter.decimals', 0), config('a3lwebinterface.formatter.decimal_seperator', ','), config('a3lwebinterface.formatter.thousand_seperator', '.')) . ' ' . config('a3lwebinterface.formatter.currency', '€');
     }
 
 }

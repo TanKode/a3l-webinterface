@@ -27,15 +27,20 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'remember_token',
     ];
 
-    public static $rules = array(
+    public static $rules = [
         'name' => 'required|alpha_dash|max:255|unique:users',
         'email' => 'required|email|max:255|unique:users',
         'player_id' => 'required|numeric|unique:users',
         'password' => 'required|confirmed|min:6'
-    );
+    ];
 
     public function player()
     {
         return $this->hasOne(Player::class, 'playerid', 'player_id');
+    }
+
+    public function avatar($size = 64)
+    {
+        return 'https://gravatar.com/avatar/' . md5($this->email) . '?d=mm&s=' . $size;
     }
 }
