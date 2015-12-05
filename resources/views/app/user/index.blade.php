@@ -1,12 +1,16 @@
 @extends('app')
 
 @section('content')
-    <div class="panel panel-primary">
+    <div class="panel panel-alt4">
         <div class="panel-heading">
             <div class="tools"></div>
             <span class="title">{{ trans('menu.users') }}</span>
         </div>
-        <input type="search" class="form-control"/>
+        <div class="margin-top-20 margin-horizontal-20">
+            {!! Form::text('datatable-search', '', [
+                'icon' => 'wh-search'
+            ]) !!}
+        </div>
 
         <div class="table-responsive">
             <table class="table table-striped table-hover table-fw-widget datatable">
@@ -44,6 +48,9 @@
                                 @endif
                                 @if(\Auth::User()->can('delete', $user))
                                     <a href="{{ url('app/user/delete/'.$user->getKey()) }}" class="btn btn-pure btn-icon btn-danger"><i class="icon wh-trash"></i></a>
+                                @endif
+                                @if(\Auth::User()->can('view', $user->player))
+                                    <a href="{{ url('app/player/'.$user->player->getKey()) }}" class="btn btn-pure btn-icon btn-success"><i class="icon wh-boardgame"></i></a>
                                 @endif
                             </div>
                         </td>

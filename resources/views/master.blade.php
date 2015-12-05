@@ -18,7 +18,7 @@
 </head>
 <body class="@yield('body-class')">
 
-<div class="am-wrapper">
+<div class="am-wrapper am-fixed-sidebar am-white-header">
     @yield('pre-content')
     <div class="am-content">
         <div class="main-content">
@@ -43,12 +43,14 @@
 <script src="{{ asset('js/main.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/modules/masonry.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/modules/datatable.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/modules/licenses.js') }}" type="text/javascript"></script>
 @yield('scripts')
 <script type="text/javascript">
     jQuery(window).on('load', function() {
         App.init();
         App.masonry();
         App.dataTable();
+        App.licenses();
     });
 </script>
 </body>

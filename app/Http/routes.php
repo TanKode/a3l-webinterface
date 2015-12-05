@@ -17,5 +17,17 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
 
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', 'UserController@getIndex');
+        Route::get('/{user}', 'UserController@getShow');
+        Route::get('/edit/{user}', 'UserController@getEdit');
+        Route::post('/edit/{user}', 'UserController@postEdit');
+        Route::get('/delete/{user}', 'UserController@getDelete');
+    });
+
+    Route::group(['prefix' => 'player'], function () {
+        Route::get('/', 'PlayerController@getIndex');
+        Route::get('/{player}', 'PlayerController@getShow');
+        Route::get('/edit/{player}', 'PlayerController@getEdit');
+        Route::post('/edit/{player}', 'PlayerController@postEdit');
+        Route::get('/delete/{player}', 'PlayerController@getDelete');
     });
 });

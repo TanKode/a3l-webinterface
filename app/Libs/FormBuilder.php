@@ -8,12 +8,26 @@ class FormBuilder extends CollectiveFormBuilder
     public function input($type, $name, $value = null, $options = [])
     {
         $options['id'] = $this->getId($options, $type, $name);
+        if($type == 'hidden') {
+            $options['container'] = false;
+        }
         $options['class'] = $this->getClass($options, 'form-control');
-        $icon = array_get($options, 'icon', null);
-        $errors = array_get($options, 'errors', []);
-        $container = array_get($options, 'container', true);
+        if(!array_get($options, 'readonly', false)) {
+            unset($options['readonly']);
+        }
 
-        return $this->constructHtml(parent::input($type, $name, $value, $this->clearOptions($options)), $icon, $errors, $container);
+        return $this->constructHtml(parent::input($type, $name, $value, $this->clearOptions($options)), $options);
+    }
+
+    public function select($name, $list = [], $selected = null, $options = [])
+    {
+        $options['id'] = $this->getId($options, 'select', $name);
+        $options['class'] = $this->getClass($options, 'form-control');
+        if(!array_get($options, 'readonly', false)) {
+            unset($options['readonly']);
+        }
+
+        return $this->constructHtml(parent::select($name, $list, $selected, $this->clearOptions($options)), $options);
     }
 
     public function submit($value = null, $options = [])
@@ -50,12 +64,18 @@ class FormBuilder extends CollectiveFormBuilder
         return parent::checkable($type, $name, $value, $checked, $options);
     }
 
-    protected function constructHtml($input, $icon = null, $errors = [], $container = true)
+    protected function constructHtml($input, array $options = [])
     {
+        $icon = array_get($options, 'icon', null);
+        $errors = array_get($options, 'errors', []);
+        $container = array_get($options, 'container', true);
+        $label = array_get($options, 'label', null);
+
         if(!$container) return $input;
 
         $html = '';
         $html .= '<div class="form-group">';
+        $html .= $this->label($options['id'], $label);
         $html .= empty($icon) ? '' : '<div class="input-group">';
         $html .= empty($icon) ? '' : '<span class="input-group-addon"><i class="icon ' . $icon . '"></i></span>';
         $html .= $input;

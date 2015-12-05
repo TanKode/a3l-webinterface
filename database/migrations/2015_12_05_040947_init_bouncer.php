@@ -10,6 +10,10 @@ class InitBouncer extends Migration
         Bouncer::allow('super-admin')->to('view', \App\User::class);
         Bouncer::allow('super-admin')->to('edit', \App\User::class);
         Bouncer::allow('super-admin')->to('delete', \App\User::class);
+
+        Bouncer::allow('super-admin')->to('view', \App\Player::class);
+        Bouncer::allow('super-admin')->to('edit', \App\Player::class);
+        Bouncer::allow('super-admin')->to('delete', \App\Player::class);
     }
 
     public function down()

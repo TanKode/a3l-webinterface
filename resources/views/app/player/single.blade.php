@@ -1,0 +1,132 @@
+@extends('app')
+
+@section('content')
+    {!! Form::model($player, [
+        'url' => $readonly ? 'dont/do/this' : 'app/player/edit/'.$player->getKey(),
+    ]) !!}
+    <div class="panel @if($readonly) panel-success @else panel-warning @endif">
+        <div class="panel-heading">
+            <h4 class="panel-title">{{ $player->name }}</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    {!! Form::text('name', null, [
+                        'label' => trans('messages.name'),
+                        'readonly' => true,
+                    ]) !!}
+                </div>
+                <div class="col-md-4">
+                    {!! Form::text('playerid', null, [
+                        'label' => trans('messages.player_id'),
+                        'readonly' => true,
+                    ]) !!}
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-4">
+                    {!! Form::number('cash', null, [
+                        'label' => trans('messages.cash'),
+                        'readonly' => $readonly,
+                        'errors' => $errors->get('cash'),
+                    ]) !!}
+                </div>
+                <div class="col-md-4">
+                    {!! Form::number('bankacc', null, [
+                        'label' => trans('messages.bankacc'),
+                        'readonly' => $readonly,
+                        'errors' => $errors->get('bankacc'),
+                    ]) !!}
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-3">
+                    {!! Form::select('coplevel', trans('messages.coplevel'), null, [
+                        'label' => trans('messages.cop'),
+                        'readonly' => $readonly,
+                        'errors' => $errors->get('coplevel'),
+                    ]) !!}
+                </div>
+                <div class="col-md-3">
+                    {!! Form::select('mediclevel', trans('messages.mediclevel'), null, [
+                        'label' => trans('messages.cop'),
+                        'readonly' => $readonly,
+                        'errors' => $errors->get('mediclevel'),
+                    ]) !!}
+                </div>
+                <div class="col-md-3">
+                    {!! Form::number('adminlevel', null, [
+                        'label' => trans('messages.admin'),
+                        'readonly' => $readonly,
+                        'errors' => $errors->get('adminlevel'),
+                    ]) !!}
+                </div>
+                <div class="col-md-3">
+                    {!! Form::number('donatorlvl', null, [
+                        'label' => trans('messages.donator'),
+                        'readonly' => true,
+                    ]) !!}
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12">
+                    <label>{{ trans('messages.civlicenses') }}</label>
+                    <ul class="list-inline">
+                        @foreach($player->civ_licenses as $license)
+                            <li>
+                                <p>
+                                    <label for="civ_licenses-{{ $license[0] }}" class="cursor-pointer license label @if($license[1]) label-success @else label-dark @endif">
+                                        {!! Form::hidden('civ_licenses['.$license[0].']', ($license[1] ? 1 : 0)) !!}
+                                        {{ trans('licenses.'.$license[0]) }}
+                                    </label>
+                                </p>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                @if($player->coplevel > 0)
+                    <div class="col-md-12">
+                        <label>{{ trans('messages.coplicenses') }}</label>
+                        <ul class="list-inline">
+                            @foreach($player->cop_licenses as $license)
+                                <li>
+                                    <p>
+                                        <label for="cop_licenses-{{ $license[0] }}" class="cursor-pointer license label @if($license[1]) label-success @else label-dark @endif">
+                                            {!! Form::hidden('cop_licenses['.$license[0].']', ($license[1] ? 1 : 0)) !!}
+                                            {{ trans('licenses.'.$license[0]) }}
+                                        </label>
+                                    </p>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if($player->mediclevel > 0)
+                    <div class="col-md-12">
+                        <label>{{ trans('messages.mediclicenses') }}</label>
+                        <ul class="list-inline">
+                            @foreach($player->med_licenses as $license)
+                                <li>
+                                    <p>
+                                        <label for="med_licenses-{{ $license[0] }}" class="cursor-pointer license label @if($license[1]) label-success @else label-dark @endif">
+                                            {!! Form::hidden('med_licenses['.$license[0].']', ($license[1] ? 1 : 0)) !!}
+                                            {{ trans('licenses.'.$license[0]) }}
+                                        </label>
+                                    </p>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if(!$readonly)
+                    <div class="clearfix"></div>
+                    <div class="col-md-12">
+                        {!! Form::submit(trans('messages.save'), [
+                            'class' => 'btn-warning pull-right',
+                        ]) !!}
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+    {!! Form::close() !!}
+
+    @include('partials.revisions', ['model' => $player])
+@endsection

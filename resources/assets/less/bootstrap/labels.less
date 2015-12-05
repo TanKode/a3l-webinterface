@@ -6,7 +6,7 @@
   display: inline;
   padding: .2em .6em .3em;
   font-size: 75%;
-  font-weight: bold;
+  font-weight: 400;
   line-height: 1;
   color: @label-color;
   text-align: center;
@@ -41,6 +41,11 @@
 
 .label-default {
   .label-variant(@label-default-bg);
+}
+
+.label-dark {
+  color: @inverse;
+  .label-variant(@label-dark-bg);
 }
 
 .label-primary {

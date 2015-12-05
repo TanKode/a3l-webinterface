@@ -23,18 +23,49 @@ return [
     'players'       => 'Spieler',
     'vehicles'      => 'Fahrzeuge',
     'player_stats'  => 'Spieler Werte',
+    'revision_log'  => 'Veränderungen',
 
     'name'          => 'Name',
     'money'         => 'Geld',
+    'cash'          => 'Bargeld',
+    'bankacc'       => 'Bank',
+
+    'user'          => 'Benutzer',
+    'action'        => 'Aktion',
+    'field'         => 'Feld',
+    'old_value'     => 'vorher',
+    'new_value'     => 'nachher',
+    'date'          => 'Datum',
+    'create'        => 'Create',
+    'update'        => 'Update',
+    'system'        => 'System',
 
     'cop'           => 'Polizist',
-    'coplevel'      => [
-        1 => 'Rekrut',
-    ],
-
     'medic'         => 'Sanitäter',
-    'mediclevel'    => [
+    'admin'         => 'Admin',
+    'donator'       => 'Donator',
+    'civlicenses'   => 'Civ-Lizenzen',
+    'coplicenses'   => 'Cop-Lizenzen',
+    'mediclicenses' => 'Medic-Lizenzen',
+
+    'coplevel'      => [
+        0 => 'Zivilist',
         1 => 'Rekrut',
+        2 => 'Wachtmeister',
+        3 => 'Komimissaranwärter',
+        4 => 'Komimissar',
+        5 => 'Hauptkomimissar',
+        6 => 'SEK',
+        7 => 'Polizeichef',
+    ],
+    'mediclevel'    => [
+        0 => 'Zivilist',
+        1 => 'Rettungsassistent',
+        2 => 'Rettunssanitäter',
+        3 => 'Stationsarzt',
+        4 => 'Notarzt',
+        5 => 'Co-Chefarzt',
+        6 => 'Chefarzt',
     ],
 
     'errors' => [

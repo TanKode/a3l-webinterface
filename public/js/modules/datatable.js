@@ -6,8 +6,7 @@ var App = (function () {
             buttons: [
                 'copy', 'excel', 'pdf', 'print'
             ],
-            dom: "<f>" +
-            "<tr>" +
+            dom: "<tr>" +
             "<'row am-datatable-footer'<'col-sm-5'i><'col-sm-7'p>>",
             columnDefs: [
                 {
@@ -18,7 +17,11 @@ var App = (function () {
             ]
         });
 
-        jQuery(".datatable").dataTable();
+        var datatable = jQuery(".datatable").first().DataTable();
+
+        jQuery('[name=datatable-search]').on('keyup', function () {
+            datatable.search( jQuery(this).val() ).draw();
+        });
     };
     return App;
 })(App || {});

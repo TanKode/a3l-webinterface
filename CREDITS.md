@@ -6,6 +6,7 @@
 * https://github.com/Zizaco/entrust
 * https://github.com/thomasfw/RolesAndPermissionsSeeder
 * https://github.com/JosephSilber/bouncer
+* https://github.com/VentureCraft/revisionable
 
 ## JavaScript Plugins
 

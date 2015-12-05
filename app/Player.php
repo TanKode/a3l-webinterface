@@ -1,8 +1,6 @@
 <?php
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Player extends Model
 {
     protected $connection = 'arma';
@@ -33,12 +31,32 @@ class Player extends Model
     protected $casts = [
         'uid' => 'int',
         'cash' => 'int',
-        'coplevel' => 'int',
         'bankacc' => 'int',
+        'coplevel' => 'int',
         'mediclevel' => 'int',
         'adminlevel' => 'int',
         'donatorlvl' => 'int',
     ];
+
+    public static $rules = [
+        'update' => [
+            'cash' => 'required|integer',
+            'bankacc' => 'required|integer',
+            'coplevel' => 'required|integer',
+            'mediclevel' => 'required|integer',
+            'adminlevel' => 'required|integer',
+        ],
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'playerid', 'player_id');
+    }
+
+    public function hasUser()
+    {
+        return !is_null($this->user);
+    }
 
     public function getNameAttribute($value)
     {
@@ -67,7 +85,7 @@ class Player extends Model
 
     public function setCivLicensesAttribute($value)
     {
-        return \Formatter::encodeDBArray($value);
+        $this->attributes['civ_licenses'] = \Formatter::encodeDBArray($value);
     }
 
     public function getCivGearAttribute($value)
@@ -77,7 +95,7 @@ class Player extends Model
 
     public function getCopLicensesAttribute($value)
     {
-        return \Formatter::decodeDBArray($value);
+        $this->attributes['cop_licenses'] = \Formatter::decodeDBArray($value);
     }
 
     public function setCopLicensesAttribute($value)
@@ -97,7 +115,7 @@ class Player extends Model
 
     public function setMedLicensesAttribute($value)
     {
-        return \Formatter::encodeDBArray($value);
+        return $this->attributes['med_licenses'] = \Formatter::encodeDBArray($value);
     }
 
     public function getMedGearAttribute($value)
