@@ -6,7 +6,8 @@ var App = (function () {
             buttons: [
                 'copy', 'excel', 'pdf', 'print'
             ],
-            dom: "<tr>" +
+            dom: "<f>" +
+            "<tr>" +
             "<'row am-datatable-footer'<'col-sm-5'i><'col-sm-7'p>>",
             columnDefs: [
                 {

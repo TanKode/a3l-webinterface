@@ -17,6 +17,8 @@ return [
     'save'          => 'speichern',
     'back'          => 'zurück',
 
+    'roles'         => 'Rollen',
+
     'backups'       => 'Backups',
     'players'       => 'Spieler',
     'vehicles'      => 'Fahrzeuge',

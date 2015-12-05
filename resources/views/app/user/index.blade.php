@@ -6,6 +6,8 @@
             <div class="tools"></div>
             <span class="title">{{ trans('menu.users') }}</span>
         </div>
+        <input type="search" class="form-control"/>
+
         <div class="table-responsive">
             <table class="table table-striped table-hover table-fw-widget datatable">
                 <thead>
@@ -14,6 +16,7 @@
                     <th>{{ trans('messages.name') }}</th>
                     <th>{{ trans('messages.player_id') }}</th>
                     <th>{{ trans('messages.email') }}</th>
+                    <th>{{ trans('messages.roles') }}</th>
                     <th class="noindex"></th>
                 </tr>
                 </thead>
@@ -23,8 +26,27 @@
                         <td>{{ $user->getKey() }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->player_id }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td></td>
+                        <td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
+                        <td>
+                            <ul class="list-inline">
+                            @foreach($user->roles as $role)
+                                <li><span class="label label-info font-weight-400">{{ $role->name }}</span></li>
+                            @endforeach
+                            </ul>
+                        </td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                @if(\Auth::User()->can('view', $user))
+                                    <a href="{{ url('app/user/'.$user->getKey()) }}" class="btn btn-pure btn-icon btn-success"><i class="icon wh-eye-view"></i></a>
+                                @endif
+                                @if(\Auth::User()->can('edit', $user))
+                                    <a href="{{ url('app/user/edit/'.$user->getKey()) }}" class="btn btn-pure btn-icon btn-warning"><i class="icon wh-edit"></i></a>
+                                @endif
+                                @if(\Auth::User()->can('delete', $user))
+                                    <a href="{{ url('app/user/delete/'.$user->getKey()) }}" class="btn btn-pure btn-icon btn-danger"><i class="icon wh-trash"></i></a>
+                                @endif
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
