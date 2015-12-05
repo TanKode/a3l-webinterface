@@ -57,7 +57,7 @@ class Player extends Model
 
     public function getTotalMoneyAttribute()
     {
-        return \Formatter::money($this->cash + $this->bankacc);
+        return $this->cash + $this->bankacc;
     }
 
     public function getCivLicensesAttribute($value)

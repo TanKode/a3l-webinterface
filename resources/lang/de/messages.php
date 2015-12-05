@@ -15,6 +15,7 @@ return [
     'signout'       => 'abmelden',
 
     'save'          => 'speichern',
+    'back'          => 'zurück',
 
     'backups'       => 'Backups',
     'players'       => 'Spieler',
@@ -33,4 +34,9 @@ return [
     'mediclevel'    => [
         1 => 'Rekrut',
     ],
+
+    'errors' => [
+        403 => 'nicht berechtigt',
+        404 => 'nicht gefunden',
+    ]
 ];

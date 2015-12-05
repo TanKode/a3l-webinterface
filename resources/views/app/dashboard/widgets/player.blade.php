@@ -14,7 +14,7 @@
         </li>
         <li class="list-group-item">
             <strong class="list-group-item-heading">{{ trans('messages.money') }}</strong>
-            <span class="pull-right">{{ \Auth::User()->player->total_money }}</span>
+            <span class="pull-right">{{ \Formatter::money(\Auth::User()->player->total_money) }}</span>
         </li>
         @if(\Auth::User()->player->coplevel)
             <li class="list-group-item">

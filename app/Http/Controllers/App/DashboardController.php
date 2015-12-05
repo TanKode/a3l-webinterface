@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function getIndex()
     {
         return view('app.dashboard.index');
     }

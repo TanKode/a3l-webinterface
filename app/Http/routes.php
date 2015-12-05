@@ -13,5 +13,9 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 });
 
 Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], function () {
-    Route::get('dashboard', 'DashboardController@index');
+    Route::get('dashboard', 'DashboardController@getIndex');
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/', 'UserController@getIndex');
+    });
 });
