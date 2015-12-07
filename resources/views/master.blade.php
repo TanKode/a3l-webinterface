@@ -32,6 +32,7 @@
 <script src="{{ asset('js/jquery.nanoscroller.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/jquery.bootstrap.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/jquery.masonry.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/jquery.multi-select.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/jquery.countdown.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/moment.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/moment-timezone.js') }}" type="text/javascript"></script>
@@ -42,6 +43,7 @@
 
 <script src="{{ asset('js/main.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/modules/masonry.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/modules/multiselect.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/modules/datatable.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/modules/licenses.js') }}" type="text/javascript"></script>
 @yield('scripts')
@@ -49,6 +51,7 @@
     jQuery(window).on('load', function() {
         App.init();
         App.masonry();
+        App.multiselect();
         App.dataTable();
         App.licenses();
     });

@@ -5,15 +5,25 @@ use Illuminate\Database\Migrations\Migration;
 
 class InitBouncer extends Migration
 {
+    protected $abilities = [
+        'view',
+        'edit',
+        'delete',
+    ];
+
+    protected $models = [
+        \App\User::class,
+        \App\Player::class,
+        \Silber\Bouncer\Database\Role::class,
+    ];
+
     public function up()
     {
-        Bouncer::allow('super-admin')->to('view', \App\User::class);
-        Bouncer::allow('super-admin')->to('edit', \App\User::class);
-        Bouncer::allow('super-admin')->to('delete', \App\User::class);
-
-        Bouncer::allow('super-admin')->to('view', \App\Player::class);
-        Bouncer::allow('super-admin')->to('edit', \App\Player::class);
-        Bouncer::allow('super-admin')->to('delete', \App\Player::class);
+        foreach($this->models as $model) {
+            foreach($this->abilities as $ability) {
+                Bouncer::allow('super-admin')->to($ability, $model);
+            }
+        }
     }
 
     public function down()

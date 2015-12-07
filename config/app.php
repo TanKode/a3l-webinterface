@@ -137,6 +137,14 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Silber\Bouncer\BouncerServiceProvider::class,
+        Maknz\Slack\SlackServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Fenos\Notifynder\NotifynderServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -146,14 +154,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
         App\Providers\HtmlBuilderServiceProvider::class,
-
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
-        Silber\Bouncer\BouncerServiceProvider::class,
-        Maknz\Slack\SlackServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
-        Fenos\Notifynder\NotifynderServiceProvider::class,
 
     ],
 

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="text-center">
-        <h1 class="white font-size-80">404</h1>
+        <h1 class="white font-size-80"><i class="icon wh-search text-danger"></i> 404</h1>
         <h2 class="white">{{ trans('messages.errors.404') }}</h2>
 
         <p>

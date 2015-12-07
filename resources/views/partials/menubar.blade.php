@@ -8,6 +8,17 @@
                     <span>{{ trans('menu.dashboard') }}</span>
                 </a>
             </li>
+            @can('view', App\Player::class)
+            <li class="@if(Request::is('app/player*')) active @endif">
+                <a href="{{ url('app/player') }}" class="text-center">
+                    <i class="icon wh-boardgame"></i>
+                    <span>{{ trans('menu.players') }}</span>
+                </a>
+            </li>
+            @endcan
+
+
+
             @can('view', App\User::class)
             <li class="@if(Request::is('app/user*')) active @endif">
                 <a href="{{ url('app/user') }}" class="text-center">
@@ -16,11 +27,11 @@
                 </a>
             </li>
             @endcan
-            @can('view', App\Player::class)
-            <li class="@if(Request::is('app/player*')) active @endif">
-                <a href="{{ url('app/player') }}" class="text-center">
-                    <i class="icon wh-boardgame"></i>
-                    <span>{{ trans('menu.players') }}</span>
+            @can('view', Silber\Bouncer\Database\Role::class)
+            <li class="@if(Request::is('app/role*')) active @endif">
+                <a href="{{ url('app/role') }}" class="text-center">
+                    <i class="icon wh-firewall"></i>
+                    <span>{{ trans('menu.roles') }}</span>
                 </a>
             </li>
             @endcan

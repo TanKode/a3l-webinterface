@@ -29,6 +29,7 @@ return [
     'money'         => 'Geld',
     'cash'          => 'Bargeld',
     'bankacc'       => 'Bank',
+    'abilities'     => 'Berechtigungen',
 
     'user'          => 'Benutzer',
     'action'        => 'Aktion',

@@ -6,6 +6,7 @@ use App\Player;
 use App\User;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Silber\Bouncer\Database\Role;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->model('user', User::class);
         $router->model('player', Player::class);
+        $router->model('role', Role::class);
     }
 
     public function map(Router $router)

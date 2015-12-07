@@ -30,4 +30,10 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::post('/edit/{player}', 'PlayerController@postEdit');
         Route::get('/delete/{player}', 'PlayerController@getDelete');
     });
+
+    Route::group(['prefix' => 'role'], function () {
+        Route::get('/', 'RoleController@getIndex');
+        Route::get('/{role}', 'RoleController@getShow');
+        Route::get('/edit/{role}', 'RoleController@getEdit');
+    });
 });
