@@ -30,6 +30,22 @@ class FormBuilder extends CollectiveFormBuilder
         return $this->constructHtml(parent::select($name, $list, $selected, $this->clearOptions($options)), $options);
     }
 
+    public function multiselect($name, $list = [], $selected = null, $options = [])
+    {
+        $options['id'] = $this->getId($options, 'multiselect', $name);
+        $options['class'] = $this->getClass($options, 'multi-select');
+        if(array_get($options, 'readonly', false)) {
+            $options['disabled'] = true;
+        }
+        if(!array_get($options, 'multiple', true)) {
+            unset($options['multiple']);
+        } else {
+            $options['multiple'] = true;
+        }
+
+        return $this->select($name, $list, $selected, $this->clearOptions($options));
+    }
+
     public function submit($value = null, $options = [])
     {
         $options['type'] = 'submit';

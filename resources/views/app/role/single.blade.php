@@ -18,11 +18,9 @@
                     ]) !!}
                 </div>
                 <div class="col-md-8">
-                    {!! Form::select('abilites[]', $abilities, null, [
+                    {!! Form::multiselect('abilites[]', $abilities, $role->abilities()->lists('id')->toArray(), [
                         'label' => trans('messages.name'),
-                        'class' => 'multi-select',
                         'readonly' => $readonly,
-                        'multiple' => true,
                         'errors' => $errors->get('abilites'),
                     ]) !!}
                 </div>
