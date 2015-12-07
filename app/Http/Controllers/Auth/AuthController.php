@@ -30,7 +30,7 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
         $user->assign('member');
-        $user->allow('edit', $user);
+        \Bouncer::allow($user)->to('edit', $user);
         return $user;
     }
 }
