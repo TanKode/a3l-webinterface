@@ -144,9 +144,9 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Fenos\Notifynder\NotifynderServiceProvider::class,
-        Riari\Forum\ForumServiceProvider::class,
-        Riari\Forum\Frontend\ForumFrontendServiceProvider::class,
-        Kordy\Ticketit\TicketitServiceProvider::class,
+//        Riari\Forum\ForumServiceProvider::class,
+//        Riari\Forum\Frontend\ForumFrontendServiceProvider::class,
+//        Kordy\Ticketit\TicketitServiceProvider::class,
 
         /*
          * Application Service Providers...

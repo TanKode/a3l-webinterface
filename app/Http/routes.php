@@ -43,5 +43,8 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::get('/', 'RoleController@getIndex');
         Route::get('/{role}', 'RoleController@getShow');
         Route::get('/edit/{role}', 'RoleController@getEdit');
+        Route::post('/edit/{role}', 'RoleController@postEdit');
+        Route::get('/create', 'RoleController@getCreate');
+        Route::post('/create', 'RoleController@postCreate');
     });
 });

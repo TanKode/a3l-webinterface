@@ -15,6 +15,19 @@ class Role extends BouncerRole
         'ability',
     ];
 
+    public static $rules = [
+        'create' => [
+            'name' => 'required_without:display_name',
+            'display_name' => 'required_without:name',
+            'ability' => 'required|array',
+        ],
+        'update' => [
+            'name' => 'required_without:display_name',
+            'display_name' => 'required_without:name',
+            'ability' => 'required|array',
+        ],
+    ];
+
     public function getDisplayNameAttribute()
     {
         return studly_case($this->attributes['name']);

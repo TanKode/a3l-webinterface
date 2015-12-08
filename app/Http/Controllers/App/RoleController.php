@@ -41,4 +41,43 @@ class RoleController extends Controller
             'readonly' => false,
         ]);
     }
+
+    public function getCreate()
+    {
+        $this->authorize('edit', Role::class);
+
+        return view('app.role.single')->with([
+            'role' => new Role(),
+            'abilities' => Ability::getList(),
+            'readonly' => false,
+        ]);
+    }
+
+    public function postEdit(Role $role)
+    {
+        $this->authorize('edit', $role);
+
+        $data = \Input::all();
+        $validator = \Validator::make($data, Role::$rules['update']);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $role->update($data);
+        return redirect('app/role/edit/' . $role->getKey());
+    }
+
+    public function postCreate()
+    {
+        $this->authorize('edit', Role::class);
+
+        $data = \Input::all();
+        $validator = \Validator::make($data, Role::$rules['create']);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $role = Role::create($data);
+        return redirect('app/role/edit/' . $role->getKey());
+    }
 }

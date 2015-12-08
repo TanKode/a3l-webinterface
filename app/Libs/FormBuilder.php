@@ -43,7 +43,7 @@ class FormBuilder extends CollectiveFormBuilder
             $options['multiple'] = true;
         }
 
-        return $this->select($name, $list, $selected, $this->clearOptions($options));
+        return $this->select($name, $list, $selected, $options);
     }
 
     public function submit($value = null, $options = [])
