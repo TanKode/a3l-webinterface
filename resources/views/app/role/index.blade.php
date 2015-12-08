@@ -26,7 +26,7 @@
                 @foreach($roles as $role)
                     <tr>
                         <td>{{ $role->getKey() }}</td>
-                        <td>{{ $role->name }}</td>
+                        <td>{{ $role->display_name }}</td>
                         <td>
                             <ul class="list-inline">
                             @foreach($role->abilities as $ability)

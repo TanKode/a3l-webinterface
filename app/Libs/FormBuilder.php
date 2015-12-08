@@ -8,11 +8,11 @@ class FormBuilder extends CollectiveFormBuilder
     public function input($type, $name, $value = null, $options = [])
     {
         $options['id'] = $this->getId($options, $type, $name);
-        if($type == 'hidden') {
+        if ($type == 'hidden') {
             $options['container'] = false;
         }
         $options['class'] = $this->getClass($options, 'form-control');
-        if(!array_get($options, 'readonly', false)) {
+        if (!array_get($options, 'readonly', false)) {
             unset($options['readonly']);
         }
 
@@ -23,7 +23,7 @@ class FormBuilder extends CollectiveFormBuilder
     {
         $options['id'] = $this->getId($options, 'select', $name);
         $options['class'] = $this->getClass($options, 'form-control');
-        if(!array_get($options, 'readonly', false)) {
+        if (!array_get($options, 'readonly', false)) {
             unset($options['readonly']);
         }
 
@@ -34,10 +34,10 @@ class FormBuilder extends CollectiveFormBuilder
     {
         $options['id'] = $this->getId($options, 'multiselect', $name);
         $options['class'] = $this->getClass($options, 'multi-select');
-        if(array_get($options, 'readonly', false)) {
+        if (array_get($options, 'readonly', false)) {
             $options['disabled'] = true;
         }
-        if(!array_get($options, 'multiple', true)) {
+        if (!array_get($options, 'multiple', true)) {
             unset($options['multiple']);
         } else {
             $options['multiple'] = true;
@@ -67,7 +67,7 @@ class FormBuilder extends CollectiveFormBuilder
 
     public function label($name, $value = null, $options = [])
     {
-        if(!empty($name) && !empty($value)) {
+        if (!empty($name) && !empty($value)) {
             return parent::label($name, $value, $options);
         } else {
             return '';
@@ -87,7 +87,7 @@ class FormBuilder extends CollectiveFormBuilder
         $container = array_get($options, 'container', true);
         $label = array_get($options, 'label', null);
 
-        if(!$container) return $input;
+        if (!$container) return $input;
 
         $html = '';
         $html .= '<div class="form-group">';
@@ -109,14 +109,14 @@ class FormBuilder extends CollectiveFormBuilder
 
     private function getId($options, $type, $name)
     {
-        return array_get($options, 'id', camel_case($type.'-field-'.$name));
+        return array_get($options, 'id', camel_case($type . '-field-' . $name));
     }
 
     protected function getClass(array $options, $defaults)
     {
         $defaults = is_string($defaults) ? explode(' ', $defaults) : $defaults;
         $classes = collect(explode(' ', array_get($options, 'class', '')));
-        foreach($defaults as $default) {
+        foreach ($defaults as $default) {
             $classes->push($default);
         }
         return $classes->unique()->sort()->implode(' ');

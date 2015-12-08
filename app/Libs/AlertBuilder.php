@@ -39,7 +39,7 @@ class AlertBuilder
 
         $classes = [
             'alert',
-            'alert-'.strtolower($type),
+            'alert-' . strtolower($type),
             $this->getOption($options, 'class'),
             $this->getOption($options, 'dismiss', null, 'alert-dismiss'),
             $this->getOption($options, 'icon', null, 'alert-icon'),
@@ -47,11 +47,11 @@ class AlertBuilder
         ];
         $options['class'] = implode(' ', array_filter($classes));
 
-        if(is_array($text)) {
+        if (is_array($text)) {
             $text = implode('</p><p>', $text);
         }
 
-        return '<div'.$this->html->attributes($options).'>'.$this->getDismiss($options).$this->getIcon($options).$this->getTitle($options).'<p>'.$text.'</p></div>';
+        return '<div' . $this->html->attributes($options) . '>' . $this->getDismiss($options) . $this->getIcon($options) . $this->getTitle($options) . '<p>' . $text . '</p></div>';
     }
 
     private function getDismiss(array $options)
@@ -61,17 +61,17 @@ class AlertBuilder
 
     private function getIcon(array $options)
     {
-        return isset($options['icon']) ? '<i class="icon '.$options['icon'].'"></i>' : '';
+        return isset($options['icon']) ? '<i class="icon ' . $options['icon'] . '"></i>' : '';
     }
 
     private function getTitle(array $options)
     {
-        return isset($options['title']) ? '<h4>'.$options['title'].'</h4>' : '';
+        return isset($options['title']) ? '<h4>' . $options['title'] . '</h4>' : '';
     }
 
     private function getOption(array $options, $key, $default = null, $value = null)
     {
-        if(is_null($value)) {
+        if (is_null($value)) {
             return array_get($options, $key, $default);
         } else {
             return isset($options[$key]) && $options[$key] ? $value : $default;

@@ -44,12 +44,12 @@ class UserController extends Controller
 
         $data = \Input::all();
         $validator = \Validator::make($data, User::$rules['update']);
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
         $user->update($data);
-        return redirect('app/user/edit/'.$user->getKey());
+        return redirect('app/user/edit/' . $user->getKey());
     }
 
     public function getDelete(User $user)

@@ -37,5 +37,5 @@
     </div>
     {!! Form::close() !!}
 
-    {{--@include('partials.revisions', ['model' => $role])--}}
+    @include('partials.revisions', ['model' => $role])
 @endsection

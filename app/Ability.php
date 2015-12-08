@@ -18,18 +18,20 @@ class Ability extends BouncerAbility
     {
         return self::all()
             ->groupBy('entity_type')
-            ->keyBy(function($abilities) {
+            ->keyBy(function ($abilities) {
                 return class_basename($abilities->first()->entity_type);
             })
-            ->map(function($ability) {return $ability->pluck('display_name', 'id');})
+            ->map(function ($ability) {
+                return $ability->pluck('display_name', 'id');
+            })
             ->toArray();
     }
 
     public function getDisplayNameAttribute()
     {
-        $slug[] = $this->attributes['name'];
-        if ($this->attributes['entity_type']) $slug[] = class_basename($this->attributes['entity_type']);
-        if ($this->attributes['entity_id']) $slug[] = $this->attributes['entity_id'];
-        return str_slug(implode('-', $slug));
+        $slug = strtolower($this->attributes['name']);
+        if ($this->attributes['entity_type']) $slug .= ' ' . ucfirst(class_basename($this->attributes['entity_type']));
+        if ($this->attributes['entity_id']) $slug .= '[' . $this->attributes['entity_id'] . ']';
+        return $slug;
     }
 }

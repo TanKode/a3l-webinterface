@@ -15,7 +15,7 @@ class HtmlBuilderServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->bindShared('alertbuilder', function($app) {
+        $this->app->bindShared('alertbuilder', function ($app) {
             return new AlertBuilder($app['html']);
         });
         $this->app->bindShared('formbuilder', function ($app) {

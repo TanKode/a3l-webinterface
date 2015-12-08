@@ -16,7 +16,7 @@ class Formatter
 
     public static function encodeDBArray($array, $ints = false)
     {
-        $array = collect($array)->map(function($bool, $license) {
+        $array = collect($array)->map(function ($bool, $license) {
             return [$license, $bool];
         })->toArray();
         sort($array);

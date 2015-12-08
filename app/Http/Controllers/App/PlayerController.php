@@ -44,12 +44,12 @@ class PlayerController extends Controller
 
         $data = \Input::all();
         $validator = \Validator::make($data, Player::$rules['update']);
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
         $player->update($data);
-        return redirect('app/player/edit/'.$player->getKey());
+        return redirect('app/player/edit/' . $player->getKey());
     }
 
     public function getDelete(Player $player)
