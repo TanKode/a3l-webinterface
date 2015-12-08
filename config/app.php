@@ -146,6 +146,7 @@ return [
         Fenos\Notifynder\NotifynderServiceProvider::class,
         Riari\Forum\ForumServiceProvider::class,
         Riari\Forum\Frontend\ForumFrontendServiceProvider::class,
+        Kordy\Ticketit\TicketitServiceProvider::class,
 
         /*
          * Application Service Providers...
