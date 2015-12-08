@@ -14,7 +14,7 @@ class InitBouncer extends Migration
     protected $models = [
         \App\User::class,
         \App\Player::class,
-        \Silber\Bouncer\Database\Role::class,
+        \App\Role::class,
     ];
 
     public function up()

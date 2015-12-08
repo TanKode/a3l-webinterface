@@ -11,14 +11,14 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-4">
-                    {!! Form::text('name', null, [
+                    {!! Form::text('display_name', null, [
                         'label' => trans('messages.name'),
                         'readonly' => $readonly,
-                        'errors' => $errors->get('name'),
+                        'errors' => $errors->get('display_name'),
                     ]) !!}
                 </div>
                 <div class="col-md-8">
-                    {!! Form::multiselect('abilites[]', $abilities, $role->abilities()->lists('id')->toArray(), [
+                    {!! Form::multiselect('ability[]', $abilities, null, [
                         'label' => trans('messages.name'),
                         'readonly' => $readonly,
                         'errors' => $errors->get('abilites'),

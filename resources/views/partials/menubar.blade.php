@@ -27,7 +27,7 @@
                 </a>
             </li>
             @endcan
-            @can('view', Silber\Bouncer\Database\Role::class)
+            @can('view', App\Role::class)
             <li class="@if(Request::is('app/role*')) active @endif">
                 <a href="{{ url('app/role') }}" class="text-center">
                     <i class="icon wh-firewall"></i>

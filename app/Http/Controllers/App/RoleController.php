@@ -2,12 +2,12 @@
 namespace App\Http\Controllers\App;
 
 use App\Ability;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Silber\Bouncer\Database\Role;
 
 class RoleController extends Controller
 {

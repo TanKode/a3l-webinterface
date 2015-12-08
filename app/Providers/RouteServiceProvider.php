@@ -3,10 +3,10 @@
 namespace App\Providers;
 
 use App\Player;
+use App\Role;
 use App\User;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Silber\Bouncer\Database\Role;
 
 class RouteServiceProvider extends ServiceProvider
 {

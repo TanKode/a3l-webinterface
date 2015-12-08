@@ -12,10 +12,31 @@ class Role extends BouncerRole
 
     protected $appends = [
         'display_name',
+        'ability',
     ];
 
     public function getDisplayNameAttribute()
     {
         return studly_case($this->attributes['name']);
+    }
+
+    public function setDisplayNameAttribute($value)
+    {
+        $this->name = $value;
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = str_slug($value);
+    }
+
+    public function getAbilityAttribute()
+    {
+        return $this->abilities()->lists('id')->toArray();
+    }
+
+    public function setAbilityAttribute($value)
+    {
+        $this->abilities()->sync($value);
     }
 }
