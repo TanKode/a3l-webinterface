@@ -14,7 +14,9 @@
     "michelf/php-markdown": "1.5.0",
     "fenos/notifynder": "3.1.*",
     "venturecraft/revisionable": "1.*",
-    "doctrine/dbal": "2.6.x-dev"
+    "doctrine/dbal": "2.6.x-dev",
+    "riari/laravel-forum": "~3.0",
+    "riari/laravel-forum-frontend": "~1.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
