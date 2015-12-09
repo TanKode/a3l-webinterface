@@ -22,6 +22,6 @@ return [
     |
     */
 
-    'root' => 'forum'
+    'root' => 'app/forum'
 
 ];

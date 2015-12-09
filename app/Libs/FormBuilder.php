@@ -59,6 +59,7 @@ class FormBuilder extends CollectiveFormBuilder
         $options['class'] = $this->getClass($options, 'icheck');
 
         $html = '<div class="am-checkbox">';
+        $html .= $this->hidden($name, $value);
         $html .= parent::checkbox($name, $value, $checked, $options);
         $html .= $this->label($options['id'], array_get($options, 'label'));
         $html .= '</div>';

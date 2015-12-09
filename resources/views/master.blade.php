@@ -21,6 +21,7 @@
 <div class="am-wrapper am-fixed-sidebar am-white-header">
     @yield('pre-content')
     <div class="am-content">
+        @yield('page-head')
         <div class="main-content">
             @yield('layout')
         </div>

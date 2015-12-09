@@ -1,6 +1,6 @@
 <?php
 return [
-    'version' => '3.0.0-alpha',
+    'version' => '3.0.2-alpha',
 
     'formatter' => [
         'decimals' => 0,

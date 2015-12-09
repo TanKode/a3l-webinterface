@@ -6,4 +6,5 @@ return [
     'players' => 'Spieler',
     'roles' => 'Rollen',
     'vehicles' => 'Fahrzeuge',
+    'forum' => 'Forum',
 ];

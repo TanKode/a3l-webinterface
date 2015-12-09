@@ -1,50 +1,56 @@
-<form action="{{ route('forum.category.store') }}" method="POST">
-    {!! csrf_field() !!}
-
-    <div class="panel panel-default">
+{!! Form::open([
+    'route' => 'forum.category.store',
+]) !!}
+    <div class="panel panel-alt4">
         <div class="panel-heading">
-            <span class="glyphicon glyphicon-plus"></span>
-            <a href="#" data-toggle="collapse" data-target=".collapse.create-category">{{ trans('forum::categories.create') }}</a>
+            <div class="tools"></div>
+            <span class="title" data-toggle="collapse" data-target=".collapse.create-category">{{ trans('forum::categories.create') }}</span>
         </div>
+
         <div class="collapse create-category">
             <div class="panel-body">
-                <div class="form-group">
-                    <label for="title">{{ trans('forum::general.title') }}</label>
-                    <input type="text" name="title" value="{{ old('title') }}" class="form-control">
+                <div class="row">
+                    <div class="col-md-6">
+                        {!! Form::text('title', null, [
+                            'label' => trans('forum::general.title'),
+                            'errors' => $errors->get('title'),
+                        ]) !!}
+                    </div>
+                    <div class="col-md-6">
+                        {!! Form::text('description', null, [
+                            'label' => trans('forum::general.description'),
+                            'errors' => $errors->get('description'),
+                        ]) !!}
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="category-id">{{ trans_choice('forum::categories.category', 1) }}</label>
+                            <select name="category_id" id="category-id" class="form-control">
+                                <option value="">({{ trans('forum::general.none') }})</option>
+                                @include('forum::category.partials.options')
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        {!! Form::number('weight', null, [
+                            'label' => trans('forum::general.weight'),
+                            'errors' => $errors->get('weight'),
+                        ]) !!}
+                    </div>
+                    <div class="col-md-4">
+                        {!! Form::checkbox('enable_threads', 1, null, [
+                            'label' => trans('forum::categories.enable_threads'),
+                            'errors' => $errors->get('enable_threads'),
+                        ]) !!}
+                    </div>
+                    <div class="col-md-8">
+                        {!! Form::hidden('private', 0) !!}
+                        {!! Form::submit(trans('messages.save'), [
+                            'class' => 'btn-warning pull-right',
+                        ]) !!}
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="description">{{ trans('forum::general.description') }}</label>
-                    <input type="text" name="description" value="{{ old('description') }}" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="category-id">{{ trans_choice('forum::categories.category', 1) }}</label>
-                    <select name="category_id" id="category-id" class="form-control">
-                        <option value="">({{ trans('forum::general.none') }})</option>
-                        @include ('forum::category.partials.options')
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="weight">{{ trans('forum::general.weight') }}</label>
-                    <input type="number" id="weight" name="weight" value="{{ !empty(old('weight')) ? old('weight') : 0 }}" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>
-                        <input type="hidden" name="enable_threads" value="0">
-                        <input type="checkbox" name="enable_threads" value="1" checked>
-                        {{ trans('forum::categories.enable_threads') }}
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>
-                        <input type="hidden" name="private" value="0">
-                        <input type="checkbox" name="private" value="1">
-                        {{ trans('forum::categories.make_private') }}
-                    </label>
-                </div>
-            </div>
-            <div class="panel-footer clearfix">
-                <button type="submit" class="btn btn-default pull-right">{{ trans('forum::general.create') }}</button>
             </div>
         </div>
     </div>
-</form>
+{!! Form::close() !!}

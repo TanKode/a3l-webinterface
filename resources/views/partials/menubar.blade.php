@@ -8,6 +8,12 @@
                     <span>{{ trans('menu.dashboard') }}</span>
                 </a>
             </li>
+            <li class="@if(Request::is('app/forum*')) active @endif">
+                <a href="{{ url('app/forum') }}" class="text-center">
+                    <i class="icon wh-forumsalt"></i>
+                    <span>{{ trans('menu.forum') }}</span>
+                </a>
+            </li>
             @can('view', App\Player::class)
             <li class="@if(Request::is('app/player*')) active @endif">
                 <a href="{{ url('app/player') }}" class="text-center">
@@ -24,7 +30,6 @@
                 </a>
             </li>
             @endcan
-
 
 
             @can('view', App\User::class)
