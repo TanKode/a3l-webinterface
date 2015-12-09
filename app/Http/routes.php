@@ -31,6 +31,15 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::get('/{user}', 'UserController@getShow');
     });
 
+    Route::group(['prefix' => 'role'], function () {
+        Route::get('/', 'RoleController@getIndex');
+        Route::get('/edit/{role}', 'RoleController@getEdit');
+        Route::post('/edit/{role}', 'RoleController@postEdit');
+        Route::get('/create', 'RoleController@getCreate');
+        Route::post('/create', 'RoleController@postCreate');
+        Route::get('/{role}', 'RoleController@getShow');
+    });
+
     Route::group(['prefix' => 'player'], function () {
         Route::get('/', 'PlayerController@getIndex');
         Route::get('/edit/{player}', 'PlayerController@getEdit');
@@ -39,12 +48,11 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::get('/{player}', 'PlayerController@getShow');
     });
 
-    Route::group(['prefix' => 'role'], function () {
-        Route::get('/', 'RoleController@getIndex');
-        Route::get('/edit/{role}', 'RoleController@getEdit');
-        Route::post('/edit/{role}', 'RoleController@postEdit');
-        Route::get('/create', 'RoleController@getCreate');
-        Route::post('/create', 'RoleController@postCreate');
-        Route::get('/{role}', 'RoleController@getShow');
+    Route::group(['prefix' => 'vehicle'], function () {
+        Route::get('/', 'VehicleController@getIndex');
+        Route::get('/edit/{vehicle}', 'VehicleController@getEdit');
+        Route::post('/edit/{vehicle}', 'VehicleController@postEdit');
+        Route::get('/delete/{vehicle}', 'VehicleController@getDelete');
+        Route::get('/{vehicle}', 'VehicleController@getShow');
     });
 });

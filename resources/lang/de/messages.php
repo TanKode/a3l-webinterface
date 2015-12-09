@@ -30,6 +30,10 @@ return [
     'cash'          => 'Bargeld',
     'bankacc'       => 'Bank',
     'abilities'     => 'Berechtigungen',
+    'type'          => 'Typ',
+    'classname'     => 'Klassenname',
+    'alive'         => 'ganz',
+    'active'        => 'aktiv',
 
     'user'          => 'Benutzer',
     'action'        => 'Aktion',
@@ -72,5 +76,10 @@ return [
     'errors' => [
         403 => 'nicht berechtigt',
         404 => 'nicht gefunden',
-    ]
+    ],
+
+    'confirm' => [
+        0 => 'Nein',
+        1 => 'Ja',
+    ],
 ];

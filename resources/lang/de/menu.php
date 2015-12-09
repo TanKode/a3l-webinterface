@@ -5,4 +5,5 @@ return [
     'users' => 'Benutzer',
     'players' => 'Spieler',
     'roles' => 'Rollen',
+    'vehicles' => 'Fahrzeuge',
 ];

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Player;
 use App\Role;
 use App\User;
+use App\Vehicle;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -17,8 +18,10 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot($router);
 
         $router->model('user', User::class);
-        $router->model('player', Player::class);
         $router->model('role', Role::class);
+
+        $router->model('player', Player::class);
+        $router->model('vehicle', Vehicle::class);
     }
 
     public function map(Router $router)

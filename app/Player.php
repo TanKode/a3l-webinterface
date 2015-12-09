@@ -53,6 +53,11 @@ class Player extends Model
         return $this->belongsTo(User::class, 'playerid', 'player_id');
     }
 
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class, 'pid', 'playerid');
+    }
+
     public function hasUser()
     {
         return !is_null($this->user);
@@ -95,12 +100,12 @@ class Player extends Model
 
     public function getCopLicensesAttribute($value)
     {
-        $this->attributes['cop_licenses'] = \Formatter::decodeDBArray($value);
+        return \Formatter::decodeDBArray($value);
     }
 
     public function setCopLicensesAttribute($value)
     {
-        return \Formatter::encodeDBArray($value);
+        $this->attributes['cop_licenses'] = \Formatter::encodeDBArray($value);
     }
 
     public function getCopGearAttribute($value)

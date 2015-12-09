@@ -16,6 +16,14 @@
                 </a>
             </li>
             @endcan
+            @can('view', App\Vehicle::class)
+            <li class="@if(Request::is('app/vehicle*')) active @endif">
+                <a href="{{ url('app/vehicle') }}" class="text-center">
+                    <i class="icon wh-automobile-car"></i>
+                    <span>{{ trans('menu.vehicles') }}</span>
+                </a>
+            </li>
+            @endcan
 
 
 
