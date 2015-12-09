@@ -17,7 +17,7 @@
     "doctrine/dbal": "2.6.x-dev",
     "riari/laravel-forum": "~3.0",
     "riari/laravel-forum-frontend": "~1.0",
-    "kordy/ticketit": "0.*"
+    "kordy/ticketit": "0.2.1.x-dev"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
