@@ -3,7 +3,9 @@
 @section('content')
     <div class="panel panel-alt4">
         <div class="panel-heading">
-            <div class="tools"></div>
+            <div class="tools">
+                <a href="{{ url('app/role/create') }}"><i class="icon wh-selectionadd"></i></a>
+            </div>
             <span class="title">{{ trans('menu.roles') }}</span>
         </div>
         <div class="margin-top-20 margin-horizontal-20">

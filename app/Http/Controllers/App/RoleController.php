@@ -39,6 +39,7 @@ class RoleController extends Controller
             'role' => $role,
             'abilities' => Ability::getList(),
             'readonly' => false,
+            'action' => 'edit',
         ]);
     }
 
@@ -50,6 +51,7 @@ class RoleController extends Controller
             'role' => new Role(),
             'abilities' => Ability::getList(),
             'readonly' => false,
+            'action' => 'create',
         ]);
     }
 
@@ -63,7 +65,9 @@ class RoleController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        $role->update($data);
+        $role->display_name = array_get($data, 'display_name', '');
+        $role->ability = array_get($data, 'ability', []);
+        $role->save();
         return redirect('app/role/edit/' . $role->getKey());
     }
 
@@ -77,7 +81,10 @@ class RoleController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        $role = Role::create($data);
+        $role = new Role();
+        $role->display_name = array_get($data, 'display_name', '');
+        $role->ability = array_get($data, 'ability', []);
+        $role->save();
         return redirect('app/role/edit/' . $role->getKey());
     }
 }

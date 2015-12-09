@@ -2,11 +2,11 @@
 
 @section('content')
     {!! Form::model($role, [
-        'url' => $readonly ? 'dont/do/this' : 'app/role/edit/'.$role->getKey(),
+        'url' => $readonly ? 'dont/do/this' : (is_null($role->getKey()) ? 'app/role/create' : 'app/role/edit/'.$role->getKey()),
     ]) !!}
     <div class="panel @if($readonly) panel-success @else panel-warning @endif">
         <div class="panel-heading">
-            <h4 class="panel-title">{{ $role->name }}</h4>
+            <h4 class="panel-title">{{ object_get($role, 'name', trans('messages.new_role')) }}</h4>
         </div>
         <div class="panel-body">
             <div class="row">

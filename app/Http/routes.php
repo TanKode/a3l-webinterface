@@ -25,26 +25,26 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
 
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', 'UserController@getIndex');
-        Route::get('/{user}', 'UserController@getShow');
         Route::get('/edit/{user}', 'UserController@getEdit');
         Route::post('/edit/{user}', 'UserController@postEdit');
         Route::get('/delete/{user}', 'UserController@getDelete');
+        Route::get('/{user}', 'UserController@getShow');
     });
 
     Route::group(['prefix' => 'player'], function () {
         Route::get('/', 'PlayerController@getIndex');
-        Route::get('/{player}', 'PlayerController@getShow');
         Route::get('/edit/{player}', 'PlayerController@getEdit');
         Route::post('/edit/{player}', 'PlayerController@postEdit');
         Route::get('/delete/{player}', 'PlayerController@getDelete');
+        Route::get('/{player}', 'PlayerController@getShow');
     });
 
     Route::group(['prefix' => 'role'], function () {
         Route::get('/', 'RoleController@getIndex');
-        Route::get('/{role}', 'RoleController@getShow');
         Route::get('/edit/{role}', 'RoleController@getEdit');
         Route::post('/edit/{role}', 'RoleController@postEdit');
         Route::get('/create', 'RoleController@getCreate');
         Route::post('/create', 'RoleController@postCreate');
+        Route::get('/{role}', 'RoleController@getShow');
     });
 });

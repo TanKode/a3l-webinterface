@@ -30,7 +30,7 @@ class Role extends BouncerRole
 
     public function getDisplayNameAttribute()
     {
-        return studly_case($this->attributes['name']);
+        return studly_case(array_get($this->attributes, 'name'));
     }
 
     public function setDisplayNameAttribute($value)
