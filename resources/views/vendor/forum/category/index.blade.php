@@ -20,14 +20,14 @@
             </thead>
             <tbody>
                 <tr>
-                    @include('forum::category.partials.list', ['titleClass' => 'lead'])
+{{--                    @include('forum::category.partials.list', ['titleClass' => 'lead'])--}}
                 </tr>
                 @if(!$category->children->isEmpty())
                     <tr>
                         <th colspan="5">{{ trans('forum::categories.subcategories') }}</th>
                     </tr>
                     @foreach($category->children as $subcategory)
-                        @include('forum::category.partials.list', ['category' => $subcategory])
+{{--                        @include('forum::category.partials.list', ['category' => $subcategory])--}}
                     @endforeach
                 @endif
             </tbody>

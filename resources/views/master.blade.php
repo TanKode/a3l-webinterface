@@ -18,9 +18,9 @@
 </head>
 <body class="@yield('body-class')">
 
-<div class="am-wrapper am-fixed-sidebar am-white-header">
+<div class="am-wrapper am-fixed-sidebar am-white-header @yield('body-class')">
     @yield('pre-content')
-    <div class="am-content">
+    <div class="am-content @yield('content-class')">
         @yield('page-head')
         <div class="main-content">
             @yield('layout')
@@ -47,6 +47,7 @@
 <script src="{{ asset('js/modules/multiselect.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/modules/datatable.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/modules/licenses.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/modules/forum.js') }}" type="text/javascript"></script>
 @yield('scripts')
 <script type="text/javascript">
     jQuery(window).on('load', function() {
@@ -55,6 +56,7 @@
         App.multiselect();
         App.dataTable();
         App.licenses();
+        App.forum();
     });
 </script>
 </body>
