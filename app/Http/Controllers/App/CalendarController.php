@@ -20,29 +20,8 @@ class CalendarController extends Controller
                     'right' => 'prev,today,next',
                 ],
             ])->setCallbacks([
-                'viewRender' => "function() {
-                    jQuery('.fc-right').addClass('btn-toolbar');
-                    jQuery('.fc-button-group').addClass('btn-group').removeClass('fc-button-group');
-                    jQuery('.fc-button').addClass('btn btn-primary').removeClass('fc-button fc-state-default fc-corner-left fc-state-disabled fc-state-active');
-                }",
-                'eventClick' => "function(calEvent, jsEvent, view) {
-                    console.log('Event: ', calEvent);
-                    var \$modal = $('#md-event');
-                    \$modal.find('.event-name').text(calEvent.title);
-                    \$modal.find('.event-start').text(calEvent.start.format('DD.MM.YYYY'));
-                    \$modal.find('.event-end').text(calEvent.end == null ? calEvent.start.format('DD.MM.YYYY') : calEvent.end.format('DD.MM.YYYY'));
-                    \$modal.find('.event-link').html('<a href=\"' + calEvent.url + '\" target=\"_blank\">' + calEvent.url + '</a>');
-                    \$modal.find('.event-description').html(calEvent.description);
-                    \$modal.find('.modal-header').css({backgroundColor: calEvent.backgroundColor})
-                        .find('.modal-title').css({color: calEvent.textColor}).text(calEvent.title);
-
-                    var \$delete = \$modal.find('.event-delete');
-                    if(\$delete.length == 1) {
-                        \$delete.attr('href', \$delete.data('href') + '/' + calEvent.id);
-                    }
-                    \$modal.modal('show');
-                    return false;
-                }",
+                'viewRender' => "function(){ calendar.fn.viewRender(); }",
+                'eventClick' => "function(calEvent, jsEvent, view){ calendar.fn.eventClick(calEvent, jsEvent, view); }",
             ]);
 
         return view('app.calendar.index')->with([
