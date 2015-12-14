@@ -17,6 +17,7 @@ return [
     'save'          => 'speichern',
     'back'          => 'zurück',
     'delete'        => 'löschen',
+    'close'         => 'schließen',
 
     'roles'         => 'Rollen',
 

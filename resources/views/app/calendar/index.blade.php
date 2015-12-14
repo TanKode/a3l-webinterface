@@ -94,7 +94,7 @@
                     @can('delete', \App\Event::class)
                         <a href="#" class="event-delete btn btn-danger" data-href="{{ url('app/calendar/delete-event') }}">{{ trans('messages.delete') }}</a>
                     @endcan
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">{{ trans('messages.close') }}</button>
                 </div>
             </div>
         </div>
