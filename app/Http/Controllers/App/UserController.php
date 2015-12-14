@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\App;
 
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,7 @@ class UserController extends Controller
 
         return view('app.user.single')->with([
             'user' => $user,
+            'roles' => Role::getList(),
             'readonly' => true,
         ]);
     }
@@ -34,6 +36,7 @@ class UserController extends Controller
 
         return view('app.user.single')->with([
             'user' => $user,
+            'roles' => Role::getList(),
             'readonly' => false,
         ]);
     }
@@ -48,7 +51,9 @@ class UserController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        $user->update($data);
+        $user->fill($data);
+        $user->role = array_get($data, 'role', []);
+        $user->save();
         return redirect('app/user/edit/' . $user->getKey());
     }
 

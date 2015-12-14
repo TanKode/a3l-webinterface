@@ -4,7 +4,7 @@
     <div class="panel panel-alt4">
         <div class="panel-heading">
             <div class="tools"></div>
-            <span class="title">{{ trans('menu.users') }}</span>
+            <span class="title">{{ trans('menu.players') }}</span>
         </div>
         <div class="margin-top-20 margin-horizontal-20">
             {!! Form::text('datatable-search', '', [

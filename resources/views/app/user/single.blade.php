@@ -55,6 +55,14 @@
                     ]) !!}
                 </div>
                 <div class="clearfix"></div>
+                <div class="col-md-12">
+                    {!! Form::multiselect('role[]', $roles, null, [
+                        'label' => trans('messages.roles'),
+                        'readonly' => $readonly,
+                        'errors' => $errors->get('role'),
+                    ]) !!}
+                </div>
+                <div class="clearfix"></div>
                 @if(!$readonly)
                     <div class="col-md-4">
                         {!! Form::password('password', [

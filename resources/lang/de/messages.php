@@ -19,6 +19,7 @@ return [
     'delete'        => 'löschen',
     'close'         => 'schließen',
 
+    'role'          => 'Rolle',
     'roles'         => 'Rollen',
 
     'backups'       => 'Backups',

@@ -52,4 +52,9 @@ class Role extends BouncerRole
     {
         $this->abilities()->sync($value);
     }
+
+    public static function getList()
+    {
+        return self::all()->pluck('display_name', 'id')->toArray();
+    }
 }
