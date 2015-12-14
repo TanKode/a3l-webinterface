@@ -31,6 +31,6 @@ class CreateForumTablePosts extends Migration
      */
     public function down()
     {
-        Schema::drop('forum_posts');
+        Schema::dropIfExists('forum_posts');
     }
 }

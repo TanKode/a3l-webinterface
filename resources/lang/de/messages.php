@@ -16,6 +16,7 @@ return [
 
     'save'          => 'speichern',
     'back'          => 'zurück',
+    'delete'        => 'löschen',
 
     'roles'         => 'Rollen',
 
@@ -24,6 +25,7 @@ return [
     'vehicles'      => 'Fahrzeuge',
     'player_stats'  => 'Spieler Werte',
     'revision_log'  => 'Veränderungen',
+    'new_event'     => 'neues Event',
 
     'name'          => 'Name',
     'money'         => 'Geld',
@@ -44,6 +46,14 @@ return [
     'create'        => 'Create',
     'update'        => 'Update',
     'system'        => 'System',
+
+    'event'         => 'Event',
+    'url'           => 'Link',
+    'all_day'       => 'ganztägig',
+    'color'         => 'Farbe',
+    'start'         => 'Start',
+    'end'           => 'Ende',
+    'description'   => 'Beschreibung',
 
     'cop'           => 'Polizist',
     'medic'         => 'Sanitäter',
@@ -78,8 +88,25 @@ return [
         404 => 'nicht gefunden',
     ],
 
-    'confirm' => [
-        0 => 'Nein',
+    'confirms' => [
         1 => 'Ja',
+        0 => 'Nein',
+    ],
+
+    'colors' => [
+        '#E9595B' => 'red',
+        '#F44C87' => 'pink',
+        '#7C51D1' => 'purple',
+        '#5166D6' => 'indigo',
+        '#4E97D9' => 'blue',
+        '#47B8C6' => 'cyan',
+        '#269B8F' => 'teal',
+        '#36AB7A' => 'green',
+        '#83B944' => 'light-green',
+        '#F9CD48' => 'yellow',
+        '#EC9940' => 'orange',
+        '#7D5B4F' => 'brown',
+        '#616161' => 'grey',
+        '#37474F' => 'blue-grey',
     ],
 ];

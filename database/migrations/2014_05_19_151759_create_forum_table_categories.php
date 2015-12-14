@@ -29,6 +29,6 @@ class CreateForumTableCategories extends Migration
      */
     public function down()
     {
-        Schema::drop('forum_categories');
+        Schema::dropIfExists('forum_categories');
     }
 }

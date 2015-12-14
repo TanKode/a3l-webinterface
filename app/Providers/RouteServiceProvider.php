@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Event;
 use App\Player;
 use App\Role;
 use App\User;
@@ -17,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot($router);
 
+        $router->model('event', Event::class);
         $router->model('user', User::class);
         $router->model('role', Role::class);
 

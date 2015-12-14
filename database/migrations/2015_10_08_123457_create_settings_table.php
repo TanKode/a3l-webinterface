@@ -26,6 +26,6 @@ class CreateSettingsTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::drop('ticketit_settings');
+		Schema::dropIfExists('ticketit_settings');
 	}
 }

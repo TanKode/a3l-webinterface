@@ -71,11 +71,11 @@ class CreateBouncerTables extends Migration
      */
     public function down()
     {
-        Schema::drop('role_abilities');
-        Schema::drop('user_abilities');
-        Schema::drop('user_roles');
-        Schema::drop($this->table(Role::class));
-        Schema::drop($this->table(Ability::class));
+        Schema::dropIfExists('role_abilities');
+        Schema::dropIfExists('user_abilities');
+        Schema::dropIfExists('user_roles');
+        Schema::dropIfExists($this->table(Role::class));
+        Schema::dropIfExists($this->table(Ability::class));
     }
 
     /**

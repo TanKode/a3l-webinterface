@@ -32,6 +32,6 @@ class CreateQueueJobsOpenTable extends Migration
      */
     public function down()
     {
-        Schema::drop('queue_jobs_open');
+        Schema::dropIfExists('queue_jobs_open');
     }
 }

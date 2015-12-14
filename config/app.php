@@ -146,7 +146,9 @@ return [
         Fenos\Notifynder\NotifynderServiceProvider::class,
         Riari\Forum\ForumServiceProvider::class,
         Riari\Forum\Frontend\ForumFrontendServiceProvider::class,
-//        Kordy\Ticketit\TicketitServiceProvider::class,
+        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+        Kordy\Ticketit\TicketitServiceProvider::class,
+        AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -217,6 +219,8 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Notify'    => Fenos\Notifynder\Facades\Notifynder::class,
+        'Calendar'  => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+        'Markdown'  => AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra::class
 
     ],
 

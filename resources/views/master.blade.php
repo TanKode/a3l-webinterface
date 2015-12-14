@@ -9,6 +9,9 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/nanoscroller.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dataTables.bootstrap.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/fullcalendar.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/whhg.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/whhg.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
     <!--[if lt IE 9]>
@@ -37,10 +40,14 @@
 <script src="{{ asset('js/jquery.countdown.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/moment.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/moment-timezone.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/jquery.fullcalendar.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/jquery.fullcalendar.lang-all.js') }}" type="text/javascript"></script>
 
 <script src="{{ asset('js/lib/chartjs/Chart.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/lib/datatable/jquery.dataTables.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/lib/datatable/dataTables.bootstrap.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/lib/datetimepicker/jquery.bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/lib/datetimepicker/locales/bootstrap-datetimepicker.'.config('app.locale').'.js') }}" type="text/javascript"></script>
 
 <script src="{{ asset('js/main.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/modules/masonry.js') }}" type="text/javascript"></script>

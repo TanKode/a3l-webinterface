@@ -27,6 +27,6 @@ class CreateForumTableThreadsRead extends Migration
      */
     public function down()
     {
-        Schema::drop('forum_threads_read');
+        Schema::dropIfExists('forum_threads_read');
     }
 }

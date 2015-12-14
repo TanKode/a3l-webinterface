@@ -8,6 +8,12 @@
                     <span>{{ trans('menu.dashboard') }}</span>
                 </a>
             </li>
+            <li class="@if(Request::is('app/calendar*')) active @endif">
+                <a href="{{ url('app/calendar') }}" class="text-center">
+                    <i class="icon wh-calendarthree"></i>
+                    <span>{{ trans('menu.calendar') }}</span>
+                </a>
+            </li>
             <li class="@if(Request::is('app/forum*')) active @endif">
                 <a href="{{ url('app/forum') }}" class="text-center">
                     <i class="icon wh-forumsalt"></i>

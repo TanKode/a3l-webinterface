@@ -71,12 +71,12 @@ class CreateTicketitTables extends Migration
      */
     public function down()
     {
-        Schema::drop('ticketit_audits');
-        Schema::drop('ticketit_comments');
-        Schema::drop('ticketit');
-        Schema::drop('ticketit_categories_users');
-        Schema::drop('ticketit_categories');
-        Schema::drop('ticketit_priorities');
-        Schema::drop('ticketit_statuses');
+        Schema::dropIfExists('ticketit_audits');
+        Schema::dropIfExists('ticketit_comments');
+        Schema::dropIfExists('ticketit');
+        Schema::dropIfExists('ticketit_categories_users');
+        Schema::dropIfExists('ticketit_categories');
+        Schema::dropIfExists('ticketit_priorities');
+        Schema::dropIfExists('ticketit_statuses');
     }
 }

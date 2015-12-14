@@ -7,4 +7,5 @@ return [
     'roles' => 'Rollen',
     'vehicles' => 'Fahrzeuge',
     'forum' => 'Forum',
+    'calendar' => 'Kalender',
 ];

@@ -19,6 +19,17 @@ class FormBuilder extends CollectiveFormBuilder
         return $this->constructHtml(parent::input($type, $name, $value, $this->clearOptions($options)), $options);
     }
 
+    public function textarea($name, $value = null, $options = [])
+    {
+        $options['id'] = $this->getId($options, 'textarea', $name);
+        $options['class'] = $this->getClass($options, 'form-control');
+        if (!array_get($options, 'readonly', false)) {
+            unset($options['readonly']);
+        }
+
+        return $this->constructHtml(parent::textarea($name, $value, $this->clearOptions($options)), $options);
+    }
+
     public function select($name, $list = [], $selected = null, $options = [])
     {
         $options['id'] = $this->getId($options, 'select', $name);
@@ -79,6 +90,19 @@ class FormBuilder extends CollectiveFormBuilder
     {
         $options['container'] = false;
         return parent::checkable($type, $name, $value, $checked, $options);
+    }
+
+    protected function option($display, $value, $selected)
+    {
+        $selected = $this->getSelectedValue($value, $selected);
+
+        $options = [
+            'value' => $value,
+            'selected' => $selected,
+            'style' => starts_with($value, '#') && strlen($value) == 7 ? 'color:' . \Helper::getContrastColor($value) . ';background:' . $value . ';' : '',
+        ];
+
+        return '<option' . $this->html->attributes($options) . '>' . e($display) . '</option>';
     }
 
     protected function constructHtml($input, array $options = [])

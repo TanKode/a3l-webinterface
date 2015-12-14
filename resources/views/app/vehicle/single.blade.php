@@ -40,14 +40,14 @@
                     ]) !!}
                 </div>
                 <div class="col-md-2">
-                    {!! Form::select('alive', trans('messages.confirm'), null, [
+                    {!! Form::select('alive', trans('messages.confirms'), null, [
                         'label' => trans('messages.alive'),
                         'readonly' => $readonly,
                         'errors' => $errors->get('alive'),
                     ]) !!}
                 </div>
                 <div class="col-md-2">
-                    {!! Form::select('active', trans('messages.confirm'), null, [
+                    {!! Form::select('active', trans('messages.confirms'), null, [
                         'label' => trans('messages.active'),
                         'readonly' => $readonly,
                         'errors' => $errors->get('active'),

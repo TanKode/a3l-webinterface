@@ -8,7 +8,7 @@
                 <span class="icon-bar"><span></span><span></span><span></span></span>
             </a>
             <a href="{{ url('/') }}" class="navbar-brand text-center">
-                <i class="icon wh-pokemon icon-2x"></i>
+                <i class="icon wh-warmedal icon-2x"></i>
             </a>
         </div>
         <a href="#" data-toggle="collapse" data-target="#am-navbar-collapse" class="am-toggle-top-header-menu collapsed">

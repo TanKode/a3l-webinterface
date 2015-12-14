@@ -17,7 +17,9 @@
     "doctrine/dbal": "2.6.x-dev",
     "riari/laravel-forum": "~3.0",
     "riari/laravel-forum-frontend": "~1.0",
-    "kordy/ticketit": "0.2.1.x-dev"
+    "kordy/ticketit": "0.2.1.x-dev",
+    "maddhatter/laravel-fullcalendar": "^1.2",
+    "alfredo-ramos/parsedown-extra-laravel": "0.3.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

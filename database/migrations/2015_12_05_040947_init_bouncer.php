@@ -16,6 +16,7 @@ class InitBouncer extends Migration
         \App\Player::class,
         \App\Role::class,
         \App\Vehicle::class,
+        \App\Event::class,
     ];
 
     public function up()

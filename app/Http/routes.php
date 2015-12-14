@@ -23,6 +23,12 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'DashboardController@getIndex');
 
+    Route::group(['prefix' => 'calendar'], function () {
+        Route::get('/', 'CalendarController@getIndex');
+        Route::post('/add-event', 'CalendarController@postAddEvent');
+        Route::get('/delete-event/{event}', 'CalendarController@getDeleteEvent');
+    });
+
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', 'UserController@getIndex');
         Route::get('/edit/{user}', 'UserController@getEdit');
