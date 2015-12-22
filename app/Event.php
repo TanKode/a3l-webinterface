@@ -1,6 +1,8 @@
 <?php
 namespace App;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use MaddHatter\LaravelFullcalendar\IdentifiableEvent;
 
 class Event extends Model implements IdentifiableEvent
@@ -70,5 +72,17 @@ class Event extends Model implements IdentifiableEvent
             'textColor' => \Helper::getContrastColor($this->color),
             'description' => \Markdown::text($this->description),
         ];
+    }
+
+    public function scopeToday(Builder $query)
+    {
+        return $query->byDay(Carbon::now());
+    }
+
+    public function scopeByDay(Builder $query, Carbon $carbon)
+    {
+        return $query
+            ->where('starting_at', '<=', $carbon->format('Y-m-d'))
+            ->where('ending_at', '>=', $carbon->format('Y-m-d'));
     }
 }

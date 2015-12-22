@@ -220,7 +220,8 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Notify'    => Fenos\Notifynder\Facades\Notifynder::class,
         'Calendar'  => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
-        'Markdown'  => AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra::class
+        'Markdown'  => AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra::class,
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
 
     ],
 

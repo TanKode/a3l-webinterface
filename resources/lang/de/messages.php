@@ -28,6 +28,7 @@ return [
     'player_stats'  => 'Spieler Werte',
     'revision_log'  => 'Veränderungen',
     'new_event'     => 'neues Event',
+    'events_today'  => 'Events heute',
 
     'name'          => 'Name',
     'money'         => 'Geld',
