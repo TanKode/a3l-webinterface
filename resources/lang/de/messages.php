@@ -18,6 +18,7 @@ return [
     'back'          => 'zurück',
     'delete'        => 'löschen',
     'close'         => 'schließen',
+    'send'          => 'absenden',
 
     'role'          => 'Rolle',
     'roles'         => 'Rollen',
@@ -57,6 +58,9 @@ return [
     'start'         => 'Start',
     'end'           => 'Ende',
     'description'   => 'Beschreibung',
+
+    'new_chat'      => 'neuer Chat',
+    'recipients'    => 'Empfänger',
 
     'cop'           => 'Polizist',
     'medic'         => 'Sanitäter',

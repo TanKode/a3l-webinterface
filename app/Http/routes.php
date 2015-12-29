@@ -29,6 +29,14 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::get('/delete-event/{event}', 'CalendarController@getDeleteEvent');
     });
 
+    Route::group(['prefix' => 'chat'], function () {
+        Route::get('/', 'ChatController@getIndex');
+        Route::get('/create', 'ChatController@getCreate');
+        Route::post('/create', 'ChatController@postCreate');
+        Route::get('/{chat_thread}', 'ChatController@getShow');
+        Route::post('/{chat_thread}', 'ChatController@postReply');
+    });
+
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', 'UserController@getIndex');
         Route::get('/edit/{user}', 'UserController@getEdit');

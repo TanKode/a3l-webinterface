@@ -7,6 +7,7 @@ use App\Player;
 use App\Role;
 use App\User;
 use App\Vehicle;
+use Cmgmyr\Messenger\Models\Thread as ChatThread;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -17,6 +18,8 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         parent::boot($router);
+
+        $router->model('chat_thread', ChatThread::class);
 
         $router->model('event', Event::class);
         $router->model('user', User::class);

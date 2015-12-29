@@ -149,6 +149,7 @@ return [
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         Kordy\Ticketit\TicketitServiceProvider::class,
         AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider::class,
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
 
         /*
          * Application Service Providers...

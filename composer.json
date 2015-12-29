@@ -19,7 +19,8 @@
     "riari/laravel-forum-frontend": "~1.0",
     "kordy/ticketit": "0.2.1.x-dev",
     "maddhatter/laravel-fullcalendar": "^1.2",
-    "alfredo-ramos/parsedown-extra-laravel": "0.3.0"
+    "alfredo-ramos/parsedown-extra-laravel": "0.3.0",
+    "cmgmyr/messenger": "~2.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

@@ -8,4 +8,5 @@ return [
     'vehicles' => 'Fahrzeuge',
     'forum' => 'Forum',
     'calendar' => 'Kalender',
+    'chat' => 'Nachrichten',
 ];

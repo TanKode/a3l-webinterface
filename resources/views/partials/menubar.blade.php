@@ -14,6 +14,12 @@
                     <span>{{ trans('menu.calendar') }}</span>
                 </a>
             </li>
+            <li class="@if(Request::is('app/chat*')) active @endif">
+                <a href="{{ url('app/chat') }}" class="text-center">
+                    <i class="icon wh-chat"></i>
+                    <span>{{ trans('menu.chat') }}</span>
+                </a>
+            </li>
             <li class="@if(Request::is('app/forum*')) active @endif">
                 <a href="{{ url('app/forum') }}" class="text-center">
                     <i class="icon wh-forumsalt"></i>

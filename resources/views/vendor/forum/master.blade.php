@@ -25,9 +25,20 @@
                     <p class="title">{{ trans_choice('forum::categories.category', 2) }}</p>
                     <ul class="nav">
                         @foreach($categories as $category)
-                            <li><a href="#"><i class="icon wh-bookmark"></i> {{ $category->title }}</a></li>
+                            <li><a href="{{ \Forum::route('category.show', $category) }}"><i class="icon wh-bookmark"></i> {{ $category->title }}</a></li>
+                            @if(!$category->children->isEmpty())
+                                @foreach($category->children as $subcategory)
+                                    <li><a href="{{ \Forum::route('category.show', $subcategory) }}"><i class="icon wh-tag"></i> {{ $subcategory->title }}</a></li>
+                                @endforeach
+                            @endif
                         @endforeach
                     </ul>
+
+                    @can('createCategories')
+                        <div class="aside-compose">
+                            <a href="#" class="btn btn-primary btn-block">{{ trans('forum::categories.create') }}</a>
+                        </div>
+                    @endcan
                 </div>
             </div>
         </div>
