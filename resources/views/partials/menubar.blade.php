@@ -10,12 +10,18 @@
             </li>
             <li class="@if(Request::is('app/calendar*')) active @endif">
                 <a href="{{ url('app/calendar') }}" class="text-center">
+                    @if(\App\Event::today()->count())
+                        <span class="badge badge-primary white">{{ \App\Event::today()->count() }}</span>
+                    @endif
                     <i class="icon wh-calendarthree"></i>
                     <span>{{ trans('menu.calendar') }}</span>
                 </a>
             </li>
             <li class="@if(Request::is('app/chat*')) active @endif">
                 <a href="{{ url('app/chat') }}" class="text-center">
+                    @if(\Auth::User()->newMessagesCount())
+                        <span class="badge badge-primary white">{{ \Auth::User()->newMessagesCount() }}</span>
+                    @endif
                     <i class="icon wh-chat"></i>
                     <span>{{ trans('menu.chat') }}</span>
                 </a>

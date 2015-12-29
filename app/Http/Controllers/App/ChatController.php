@@ -19,8 +19,11 @@ class ChatController extends Controller
 
     public function getIndex()
     {
+        $thread = Thread::getAllLatest()->first();
+        $thread->markAsRead(\Auth::id());
+
         return view('app.chat.index')->with([
-            'display_thread' => Thread::getAllLatest()->first(),
+            'display_thread' => $thread,
         ]);
     }
 
@@ -36,6 +39,8 @@ class ChatController extends Controller
         if(!$thread->hasParticipant(\Auth::id())) {
             abort(404);
         }
+
+        $thread->markAsRead(\Auth::id());
 
         return view('app.chat.index')->with([
             'display_thread' => $thread,
@@ -54,6 +59,8 @@ class ChatController extends Controller
         if(!$thread->hasParticipant(\Auth::id())) {
             abort(404);
         }
+
+        $thread->activateAllParticipants();
 
         Message::create([
             'thread_id' => $thread->getKey(),

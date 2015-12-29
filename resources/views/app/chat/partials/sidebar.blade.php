@@ -12,7 +12,7 @@
                     @foreach($threads as $thread)
                         <li>
                             <a href="{{ url('app/chat/' . $thread->getKey()) }}">
-                                <i class="icon wh-bookmark"></i>
+                                <i class="icon wh-bookmark @if($thread->isUnread(\Auth::id())) text-primary @endif"></i>
                                 {{ \App\User::whereIn('id', collect($thread->participantsUserIds())->keyBy(function($id){return $id;})->forget(\Auth::id())->toArray())->lists('name')->implode(', ') }}
                             </a>
                         </li>
