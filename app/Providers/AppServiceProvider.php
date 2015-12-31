@@ -16,8 +16,6 @@ class AppServiceProvider extends ServiceProvider
         \Bouncer::useAbilityModel(Ability::class);
 
         Carbon::setLocale(config('app.locale'));
-
-        view()->share('categoryList', Category::all());
     }
 
     public function register()

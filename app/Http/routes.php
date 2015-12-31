@@ -37,6 +37,15 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::post('/{chat_thread}', 'ChatController@postReply');
     });
 
+    Route::group(['prefix' => 'forum', 'namespace' => 'Forum'], function () {
+        Route::get('/', 'CategoryController@getIndex');
+        Route::group(['prefix' => 'category'], function () {
+            Route::get('/', 'CategoryController@getIndex');
+            Route::get('/create', 'CategoryController@getCreate');
+            Route::get('/{forum_category}', 'CategoryController@getShow');
+        });
+    });
+
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', 'UserController@getIndex');
         Route::get('/edit/{user}', 'UserController@getEdit');

@@ -10,6 +10,7 @@ use App\Vehicle;
 use Cmgmyr\Messenger\Models\Thread as ChatThread;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Riari\Forum\Models\Category as ForumCategory;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,8 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot($router);
 
         $router->model('chat_thread', ChatThread::class);
+
+        $router->model('forum_category', ForumCategory::class);
 
         $router->model('event', Event::class);
         $router->model('user', User::class);

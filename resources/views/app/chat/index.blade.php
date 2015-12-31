@@ -14,7 +14,7 @@
         ]) !!}
         <div class="row">
             <div class="col-md-12">
-                <div class="padding-10">
+                <div class="padding-35 padding-bottom-0">
                     {!! Form::multiselect('recipients[]', $recipients, null, [
                         'label' => trans('messages.recipients'),
                         'errors' => $errors->get('recipients'),
@@ -41,7 +41,7 @@
         {!! Form::open([
             'url' => 'app/chat/' . $display_thread->getKey(),
         ]) !!}
-        <div class="clearfix padding-10">
+        <div class="clearfix padding-35 padding-bottom-0">
             <div class="input-group">
                 {!! Form::text('body', null, [
                     'container' => false,
@@ -55,7 +55,7 @@
         </div>
         {!! Form::close() !!}
 
-        <div class="clearfix padding-10">
+        <div class="clearfix padding-35 padding-top-15">
             <div class="row">
                 @foreach($display_thread->messages()->orderBy('created_at', 'desc')->get() as $message)
                     <div class="col-md-8 @if($message->user->getKey() == \Auth::id()) col-md-offset-4 @endif">

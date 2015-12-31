@@ -26,15 +26,17 @@
                     <span>{{ trans('menu.chat') }}</span>
                 </a>
             </li>
-            <li class="@if(Request::is('app/forum*')) active @endif">
-                <a href="{{ url('app/forum') }}" class="text-center">
-                    <i class="icon wh-forumsalt"></i>
-                    <span>{{ trans('menu.forum') }}</span>
-                </a>
-            </li>
+            {{--<li class="@if(Request::is('app/forum*')) active @endif">--}}
+                {{--<a href="{{ url('app/forum') }}" class="text-center">--}}
+                    {{--<i class="icon wh-forumsalt"></i>--}}
+                    {{--<span>{{ trans('menu.forum') }}</span>--}}
+                {{--</a>--}}
+            {{--</li>--}}
+
             @can('view', App\Player::class)
             <li class="@if(Request::is('app/player*')) active @endif">
                 <a href="{{ url('app/player') }}" class="text-center">
+                    <span class="badge">{{ \App\Player::count() }}</span>
                     <i class="icon wh-boardgame"></i>
                     <span>{{ trans('menu.players') }}</span>
                 </a>
@@ -43,16 +45,17 @@
             @can('view', App\Vehicle::class)
             <li class="@if(Request::is('app/vehicle*')) active @endif">
                 <a href="{{ url('app/vehicle') }}" class="text-center">
+                    <span class="badge">{{ \App\Vehicle::count() }}</span>
                     <i class="icon wh-automobile-car"></i>
                     <span>{{ trans('menu.vehicles') }}</span>
                 </a>
             </li>
             @endcan
 
-
             @can('view', App\User::class)
             <li class="@if(Request::is('app/user*')) active @endif">
                 <a href="{{ url('app/user') }}" class="text-center">
+                    <span class="badge">{{ \App\User::count() }}</span>
                     <i class="icon wh-user"></i>
                     <span>{{ trans('menu.users') }}</span>
                 </a>
