@@ -28,6 +28,17 @@ class CategoryController extends Controller
 
     public function getCreate()
     {
+        $this->authorize('edit', Category::class);
+
         return view('app.forum.category.create');
+    }
+
+    public function postCreate(Request $request)
+    {
+        $this->authorize('edit', Category::class);
+
+        $category = $this->api('category.store')->parameters($request->all())->post();
+
+        return redirect('app/forum/category/' . $category->getKey());
     }
 }

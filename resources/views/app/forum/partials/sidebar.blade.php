@@ -22,7 +22,7 @@
                 </ul>
                 @endforeach
 
-                @can('createCategories')
+                @can('edit', Riari\Forum\Models\Category::class)
                 <div class="aside-compose">
                     <a href="{{ url('app/forum/category/create') }}" class="btn btn-primary btn-block">{{ trans('forum::categories.create') }}</a>
                 </div>

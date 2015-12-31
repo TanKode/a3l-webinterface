@@ -42,6 +42,7 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::group(['prefix' => 'category'], function () {
             Route::get('/', 'CategoryController@getIndex');
             Route::get('/create', 'CategoryController@getCreate');
+            Route::post('/create', 'CategoryController@postCreate');
             Route::get('/{forum_category}', 'CategoryController@getShow');
         });
     });
