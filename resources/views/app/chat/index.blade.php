@@ -12,49 +12,40 @@
         {!! Form::open([
             'url' => 'app/chat/create',
         ]) !!}
-        <div class="row">
-            <div class="col-md-12">
-                <div class="padding-35 padding-bottom-0">
-                    {!! Form::multiselect('recipients[]', $recipients, null, [
-                        'label' => trans('messages.recipients'),
-                        'errors' => $errors->get('recipients'),
-                    ]) !!}
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="padding-10">
-                    <div class="input-group">
-                        {!! Form::text('body', null, [
-                            'container' => false,
-                        ]) !!}
-                        <span class="input-group-btn">
-                        {!! Form::submit(trans('messages.send'), [
-                            'class' => 'btn-info',
-                        ]) !!}
-                    </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {!! Form::close() !!}
     @else
         {!! Form::open([
             'url' => 'app/chat/' . $display_thread->getKey(),
         ]) !!}
+    @endif
         <div class="clearfix padding-35 padding-bottom-0">
-            <div class="input-group">
-                {!! Form::text('body', null, [
-                    'container' => false,
-                ]) !!}
-                <span class="input-group-btn">
-                    {!! Form::submit(trans('messages.send'), [
-                        'class' => 'btn-info',
+            <div class="row">
+                @if(is_null($display_thread))
+                    <div class="col-md-12">
+                        {!! Form::multiselect('recipients[]', $recipients, null, [
+                            'label' => trans('messages.recipients'),
+                            'errors' => $errors->get('recipients'),
+                        ]) !!}
+                    </div>
+                @endif
+                <div class="col-md-10 col-lg-11">
+                    {!! Form::textarea('body', null, [
+                        'rows' => 1,
+                        'class' => 'markdown',
                     ]) !!}
-                </span>
+                </div>
+                <div class="col-md-2 col-lg-1">
+                    {!! Form::submit(trans('messages.send'), [
+                        'class' => 'btn-info pull-right btn-block',
+                    ]) !!}
+                </div>
+                <div class="col-md-12">
+                    @include('partials.twemoji')
+                </div>
             </div>
         </div>
-        {!! Form::close() !!}
+    {!! Form::close() !!}
 
+    @if(!is_null($display_thread))
         <div class="clearfix padding-35 padding-top-15">
             <div class="row">
                 @foreach($display_thread->messages()->orderBy('created_at', 'desc')->get() as $message)
@@ -68,7 +59,7 @@
                             <div class="media-body padding-10 bg-white">
                                 <small><strong>{!! $message->user->name !!}</strong></small>
                                 <small class="pull-right">{{ $message->created_at->diffForHumans() }}</small>
-                                <div>{!! $message->body !!}</div>
+                                <div>{!! \MarkExtra::parse($message->body) !!}</div>
                             </div>
                             @if($message->user->getKey() == \Auth::id())
                                 <div class="media-right">

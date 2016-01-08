@@ -49,8 +49,13 @@
                     {!! Form::textarea('description', null, [
                         'label' => trans('messages.description'),
                         'errors' => $errors->get('description'),
-                        'rows' => '5',
+                        'rows' => 5,
+                        'class' => 'markdown',
                     ]) !!}
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12">
+                    @include('partials.twemoji')
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-md-12">

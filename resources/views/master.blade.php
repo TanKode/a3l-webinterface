@@ -55,6 +55,7 @@
 <script src="{{ asset('js/modules/datatable.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/modules/licenses.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/modules/forum.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/modules/markdown.js') }}" type="text/javascript"></script>
 @yield('scripts')
 <script type="text/javascript">
     jQuery(window).on('load', function() {
@@ -64,6 +65,7 @@
         App.dataTable();
         App.licenses();
         App.forum();
+        App.markdown();
     });
 </script>
 </body>

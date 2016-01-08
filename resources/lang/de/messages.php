@@ -20,6 +20,7 @@ return [
     'close'         => 'schließen',
     'send'          => 'absenden',
 
+    'new_role'      => 'neue Rolle',
     'role'          => 'Rolle',
     'roles'         => 'Rollen',
 

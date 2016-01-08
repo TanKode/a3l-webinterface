@@ -65,7 +65,7 @@ class RoleController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        $role->display_name = array_get($data, 'display_name', '');
+        $role->name = array_get($data, 'display_name', '');
         $role->ability = array_get($data, 'ability', []);
         $role->save();
         return redirect('app/role/edit/' . $role->getKey());
@@ -81,8 +81,7 @@ class RoleController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        $role = new Role();
-        $role->display_name = array_get($data, 'display_name', '');
+        $role = Role::create(['name' => array_get($data, 'display_name', '')]);
         $role->ability = array_get($data, 'ability', []);
         $role->save();
         return redirect('app/role/edit/' . $role->getKey());

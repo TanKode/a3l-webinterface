@@ -82,6 +82,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         $this->roles()->sync($value);
     }
 
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
+
     public function createThread($participants, $body)
     {
         if(is_array($participants)) $participants = collect($participants);

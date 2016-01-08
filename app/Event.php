@@ -70,7 +70,7 @@ class Event extends Model implements IdentifiableEvent
             'backgroundColor' => $this->color,
             'borderColor' => $this->color,
             'textColor' => \Helper::getContrastColor($this->color),
-            'description' => \Markdown::text($this->description),
+            'description' => \MarkExtra::parse($this->description),
         ];
     }
 

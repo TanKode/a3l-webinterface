@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-md-3">
                     {!! Form::select('mediclevel', trans('messages.mediclevel'), null, [
-                        'label' => trans('messages.cop'),
+                        'label' => trans('messages.medic'),
                         'readonly' => $readonly,
                         'errors' => $errors->get('mediclevel'),
                     ]) !!}

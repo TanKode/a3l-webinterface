@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Libs\AlertBuilder;
 use App\Libs\FormBuilder;
+use App\Libs\MarkExtra;
 use Illuminate\Support\ServiceProvider;
 
 class HtmlBuilderServiceProvider extends ServiceProvider
@@ -22,6 +23,9 @@ class HtmlBuilderServiceProvider extends ServiceProvider
             $form = new FormBuilder($app['html'], $app['url'], $app['session.store']->getToken());
             return $form->setSessionStore($app['session.store']);
         });
+        $this->app->bindShared('markextra', function($app) {
+            return new MarkExtra();
+        });
     }
 
     public function provides()
@@ -29,6 +33,7 @@ class HtmlBuilderServiceProvider extends ServiceProvider
         return [
             'alertbuilder',
             'formbuilder',
+            'markextra',
         ];
     }
 }

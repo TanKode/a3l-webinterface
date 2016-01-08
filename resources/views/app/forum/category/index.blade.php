@@ -7,7 +7,7 @@
             <header class="panel-heading">
                 <h3 class="panel-title">{{ $category->title }}</h3>
                 @if(!empty($category->description))
-                    <p class="text-muted">{!! \Markdown::parse($category->description) !!}</p>
+                    <p class="text-muted">{!! \MarkExtra::parse($category->description) !!}</p>
                 @endif
             </header>
             @if(!$category->children->isEmpty())
@@ -28,7 +28,7 @@
                                 <td>
                                     <a href="{{ url('app/forum/category/' . $subcategory->getKey()) }}">{{ $subcategory->title }}</a>
                                     @if(!empty($subcategory->description))
-                                        <p class="text-muted">{!! \Markdown::parse($subcategory->description) !!}</p>
+                                        <p class="text-muted">{!! \MarkExtra::parse($subcategory->description) !!}</p>
                                     @endif
                                 </td>
                                 @if ($subcategory->threadsEnabled)

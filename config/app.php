@@ -214,6 +214,8 @@ return [
         'Formatter'	=> App\Facades\FormatterFacade::class,
         'Alert'     => App\Facades\AlertBuilderFacade::class,
         'Form'      => App\Facades\FormBuilderFacade::class,
+        'MarkExtra' => App\Facades\MarkExtraFacade::class,
+        'Twemoji'   => App\Libs\Twemoji::class,
 
         'Bouncer'   => Silber\Bouncer\BouncerFacade::class,
         'Slack'     => Maknz\Slack\Facades\Slack::class,

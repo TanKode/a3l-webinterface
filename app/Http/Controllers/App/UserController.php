@@ -51,6 +51,12 @@ class UserController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
+        if(empty($data['password'])) {
+            unset($data['password']);
+        } else {
+            $data['password'] = bcrypt($data['password']);
+        }
+
         $user->fill($data);
         $user->role = array_get($data, 'role', []);
         $user->save();
