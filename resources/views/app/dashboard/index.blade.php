@@ -9,6 +9,9 @@
             @include('app.dashboard.widgets.vehicles')
         </div>
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
+            @include('app.dashboard.widgets.houses')
+        </div>
+        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
             @include('app.dashboard.widgets.users')
         </div>
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
