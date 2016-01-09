@@ -17,7 +17,7 @@ return [
     'license_civ_copper'    => 'Kupferlizenz',
     'license_civ_iron'    => 'Eisenlizenz',
     'license_civ_sand'    => 'Glaslizenz',
-    'license_civ_salt'        =>Salzlizenz',
+    'license_civ_salt'        =>'Salzlizenz',
     'license_civ_cement'    => 'Steinlizenz',
     'license_civ_home'    => 'Eigentumsurkunde',
     'license_civ_uranium'    => 'Uranlizenz',
