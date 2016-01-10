@@ -23,24 +23,23 @@
                         @foreach ($category->threadsPaginated as $thread)
                             <tr class="{{ $thread->trashed() ? "deleted" : "" }}">
                                 <td>
-                                        <span class="pull-right">
-                                            @if ($thread->locked)
-                                                <span class="label label-warning">{{ trans('forum::threads.locked') }}</span>
-                                            @endif
-                                            @if ($thread->pinned)
-                                                <span class="label label-info">{{ trans('forum::threads.pinned') }}</span>
-                                            @endif
-                                            @if ($thread->userReadStatus && !$thread->trashed())
-                                                <span class="label label-primary">{{ trans($thread->userReadStatus) }}</span>
-                                            @endif
-                                            @if ($thread->trashed())
-                                                <span class="label label-danger">{{ trans('forum::general.deleted') }}</span>
-                                            @endif
-                                        </span>
+                                    <span class="pull-right">
+                                        @if ($thread->locked)
+                                            <span class="label label-warning">{{ trans('forum::threads.locked') }}</span>
+                                        @endif
+                                        @if ($thread->pinned)
+                                            <span class="label label-info">{{ trans('forum::threads.pinned') }}</span>
+                                        @endif
+                                        @if ($thread->userReadStatus && !$thread->trashed())
+                                            <span class="label label-primary">{{ trans($thread->userReadStatus) }}</span>
+                                        @endif
+                                        @if ($thread->trashed())
+                                            <span class="label label-danger">{{ trans('forum::general.deleted') }}</span>
+                                        @endif
+                                    </span>
                                     <p class="lead">
-                                        <a href="{{ $thread->route }}">{{ $thread->title }}</a>
+                                        <a href="{{ url('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey()) }}">{{ $thread->title }}</a>
                                     </p>
-                                    <p>{{ $thread->authorName }} <span class="text-muted">({{ $thread->posted }})</span></p>
                                 </td>
                                 @if ($thread->trashed())
                                     <td colspan="2">&nbsp;</td>
@@ -51,7 +50,6 @@
                                     <td class="text-right">
                                         {{ $thread->lastPost->authorName }}
                                         <p class="text-muted">({{ $thread->lastPost->posted }})</p>
-                                        <a href="{{ $thread->lastPostUrl }}" class="btn btn-primary btn-xs">{{ trans('forum::posts.view') }} &raquo;</a>
                                     </td>
                                 @endif
                             </tr>
@@ -63,7 +61,7 @@
                             </td>
                             <td class="text-right" colspan="3">
                                 @can ('createThreads', $category)
-                                <a href="{{ $category->newThreadRoute }}">{{ trans('forum::threads.post_the_first') }}</a>
+                                    <a href="{{ url('app/forum/category/'.$category->getKey().'/thread/create') }}">{{ trans('forum::threads.post_the_first') }}</a>
                                 @endcan
                             </td>
                         </tr>

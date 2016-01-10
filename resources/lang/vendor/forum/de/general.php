@@ -38,5 +38,6 @@ return [
     'title'             => "Titel",
     'weight'            => "Gewichtung",
     'with_selection'    => "Mit Auswahl…",
+    'content'           => "Inhalt",
 
 ];

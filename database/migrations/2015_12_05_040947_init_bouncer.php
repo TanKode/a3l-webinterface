@@ -18,6 +18,7 @@ class InitBouncer extends Migration
         \App\Vehicle::class,
         \App\Event::class,
         \Riari\Forum\Models\Category::class,
+        \Riari\Forum\Models\Thread::class,
     ];
 
     public function up()
