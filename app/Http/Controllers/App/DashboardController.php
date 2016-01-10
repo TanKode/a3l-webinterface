@@ -10,6 +10,13 @@ class DashboardController extends Controller
 {
     public function getIndex()
     {
-        return view('app.dashboard.index');
+        return view('app.dashboard.index')->with([
+            'dynmarket' => collect(json_decode(\DB::connection('arma')->table('dynmarket')->first()->prices))->unique(0)->sortByDesc(1),
+        ]);
+    }
+
+    public function getTest()
+    {
+        abort(403);
     }
 }

@@ -24,6 +24,7 @@ return [
     'role'          => 'Rolle',
     'roles'         => 'Rollen',
 
+    'dynmarket'     => 'Markt-System',
     'backups'       => 'Backups',
     'players'       => 'Spieler',
     'vehicles'      => 'Fahrzeuge',

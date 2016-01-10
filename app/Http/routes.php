@@ -22,6 +22,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 
 Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], function () {
     Route::get('dashboard', 'DashboardController@getIndex');
+    Route::get('test', 'DashboardController@getTest');
 
     Route::group(['prefix' => 'calendar'], function () {
         Route::get('/', 'CalendarController@getIndex');
