@@ -41,6 +41,7 @@ return [
     'classname'     => 'Klassenname',
     'alive'         => 'ganz',
     'active'        => 'aktiv',
+    'gangbank'      => 'Gang-Bank',
 
     'user'          => 'Benutzer',
     'action'        => 'Aktion',
