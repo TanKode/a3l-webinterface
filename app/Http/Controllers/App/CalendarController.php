@@ -21,7 +21,7 @@ class CalendarController extends Controller
                 ],
             ])->setCallbacks([
                 'viewRender' => "function(){ calendar.fn.viewRender(); }",
-                'eventClick' => "function(calEvent, jsEvent, view){ calendar.fn.eventClick(calEvent, jsEvent, view); }",
+                'eventClick' => "function(calEvent, jsEvent, view){ return calendar.fn.eventClick(calEvent, jsEvent, view); }",
             ]);
 
         return view('app.calendar.index')->with([
