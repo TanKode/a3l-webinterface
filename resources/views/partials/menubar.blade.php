@@ -45,7 +45,7 @@
             @can('view', App\Vehicle::class)
             <li class="@if(Request::is('app/vehicle*')) active @endif">
                 <a href="{{ url('app/vehicle') }}" class="text-center">
-                    <span class="badge">{{ \App\Vehicle::count() }}</span>
+                    <span class="badge">{{ \App\Vehicle::alive()->count() }}</span>
                     <i class="icon wh-automobile-car"></i>
                     <span>{{ trans('menu.vehicles') }}</span>
                 </a>
