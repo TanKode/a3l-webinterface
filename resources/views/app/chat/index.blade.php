@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-md-2 col-lg-1">
                     {!! Form::submit(trans('messages.send'), [
-                        'class' => 'btn-info pull-right btn-block',
+                        'class' => 'btn-info btn-block',
                     ]) !!}
                 </div>
                 <div class="col-md-12">
