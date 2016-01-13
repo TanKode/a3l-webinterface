@@ -26,14 +26,14 @@
                 <div class="col-md-4">
                     {!! Form::number('cash', null, [
                         'label' => trans('messages.cash'),
-                        'readonly' => $readonly,
+                        'readonly' => $readonly || !\Auth::User()->can('edit-money', $player),
                         'errors' => $errors->get('cash'),
                     ]) !!}
                 </div>
                 <div class="col-md-4">
                     {!! Form::number('bankacc', null, [
                         'label' => trans('messages.bankacc'),
-                        'readonly' => $readonly,
+                        'readonly' => $readonly || !\Auth::User()->can('edit-money', $player),
                         'errors' => $errors->get('bankacc'),
                     ]) !!}
                 </div>
@@ -41,21 +41,21 @@
                 <div class="col-md-3">
                     {!! Form::select('coplevel', trans('messages.coplevel'), null, [
                         'label' => trans('messages.cop'),
-                        'readonly' => $readonly,
+                        'readonly' => $readonly || !\Auth::User()->can('edit-cop', $player),
                         'errors' => $errors->get('coplevel'),
                     ]) !!}
                 </div>
                 <div class="col-md-3">
                     {!! Form::select('mediclevel', trans('messages.mediclevel'), null, [
                         'label' => trans('messages.medic'),
-                        'readonly' => $readonly,
+                        'readonly' => $readonly || !\Auth::User()->can('edit-medic', $player),
                         'errors' => $errors->get('mediclevel'),
                     ]) !!}
                 </div>
                 <div class="col-md-3">
                     {!! Form::number('adminlevel', null, [
                         'label' => trans('messages.admin'),
-                        'readonly' => $readonly,
+                        'readonly' => $readonly || !\Auth::User()->can('edit-admin', $player),
                         'errors' => $errors->get('adminlevel'),
                     ]) !!}
                 </div>
@@ -72,10 +72,16 @@
                         @foreach($player->civ_licenses as $license)
                             <li>
                                 <p>
-                                    <label for="civ_licenses-{{ $license[0] }}" class="cursor-pointer license label @if($license[1]) label-success @else label-dark @endif">
-                                        {!! Form::hidden('civ_licenses['.$license[0].']', ($license[1] ? 1 : 0)) !!}
-                                        {{ trans('licenses.'.$license[0]) }}
-                                    </label>
+                                    @if(!$readonly && \Auth::User()->can('edit-civ', $player))
+                                        <label for="civ_licenses-{{ $license[0] }}" class="cursor-pointer license label @if($license[1]) label-success @else label-dark @endif">
+                                            {!! Form::hidden('civ_licenses['.$license[0].']', ($license[1] ? 1 : 0)) !!}
+                                            {{ trans('licenses.'.$license[0]) }}
+                                        </label>
+                                    @else
+                                        <span class="label @if($license[1]) label-success @else label-dark @endif">
+                                            {{ trans('licenses.'.$license[0]) }}
+                                        </span>
+                                    @endif
                                 </p>
                             </li>
                         @endforeach
@@ -88,10 +94,16 @@
                             @foreach($player->cop_licenses as $license)
                                 <li>
                                     <p>
-                                        <label for="cop_licenses-{{ $license[0] }}" class="cursor-pointer license label @if($license[1]) label-success @else label-dark @endif">
-                                            {!! Form::hidden('cop_licenses['.$license[0].']', ($license[1] ? 1 : 0)) !!}
-                                            {{ trans('licenses.'.$license[0]) }}
-                                        </label>
+                                        @if(!$readonly && \Auth::User()->can('edit-cop', $player))
+                                            <label for="cop_licenses-{{ $license[0] }}" class="cursor-pointer license label @if($license[1]) label-success @else label-dark @endif">
+                                                {!! Form::hidden('cop_licenses['.$license[0].']', ($license[1] ? 1 : 0)) !!}
+                                                {{ trans('licenses.'.$license[0]) }}
+                                            </label>
+                                        @else
+                                            <span class="label @if($license[1]) label-success @else label-dark @endif">
+                                                {{ trans('licenses.'.$license[0]) }}
+                                            </span>
+                                        @endif
                                     </p>
                                 </li>
                             @endforeach
@@ -105,10 +117,16 @@
                             @foreach($player->med_licenses as $license)
                                 <li>
                                     <p>
-                                        <label for="med_licenses-{{ $license[0] }}" class="cursor-pointer license label @if($license[1]) label-success @else label-dark @endif">
-                                            {!! Form::hidden('med_licenses['.$license[0].']', ($license[1] ? 1 : 0)) !!}
-                                            {{ trans('licenses.'.$license[0]) }}
-                                        </label>
+                                        @if(!$readonly && \Auth::User()->can('edit-medic', $player))
+                                            <label for="med_licenses-{{ $license[0] }}" class="cursor-pointer license label @if($license[1]) label-success @else label-dark @endif">
+                                                {!! Form::hidden('med_licenses['.$license[0].']', ($license[1] ? 1 : 0)) !!}
+                                                {{ trans('licenses.'.$license[0]) }}
+                                            </label>
+                                        @else
+                                            <span class="label @if($license[1]) label-success @else label-dark @endif">
+                                                {{ trans('licenses.'.$license[0]) }}
+                                            </span>
+                                        @endif
                                     </p>
                                 </li>
                             @endforeach

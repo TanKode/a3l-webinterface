@@ -10,12 +10,14 @@ use App\Http\Controllers\Controller;
 
 class VehicleController extends Controller
 {
-    public function getIndex()
+    public function getIndex(Request $request)
     {
         $this->authorize('view', Vehicle::class);
 
+        $vehicles = is_null($request->get('player')) ? Vehicle::all() : Player::findOrFail($request->get('player'))->vehicles;
+
         return view('app.vehicle.index')->with([
-            'vehicles' => Vehicle::all(),
+            'vehicles' => $vehicles,
         ]);
     }
 

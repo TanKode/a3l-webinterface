@@ -51,6 +51,9 @@
                                         <a href="{{ url('app/user/'.$player->user->getKey()) }}" class="btn btn-pure btn-icon btn-success"><i class="icon wh-user"></i></a>
                                     @endcan
                                 @endif
+                                @can('view', \App\Vehicle::class)
+                                    <a href="{{ url('app/vehicle/?player='.$player->getKey()) }}" class="btn btn-pure btn-icon btn-success"><i class="icon wh-automobile-car"></i></a>
+                                @endcan
                             </div>
                         </td>
                     </tr>

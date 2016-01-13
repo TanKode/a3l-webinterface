@@ -46,4 +46,9 @@ class Vehicle extends Model
     {
         return $query->where('alive', 1);
     }
+
+    public function scopePid($query, $pid)
+    {
+        return $query->where('pid', $pid);
+    }
 }

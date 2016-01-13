@@ -12,7 +12,9 @@ class FormBuilder extends CollectiveFormBuilder
             $options['container'] = false;
         }
         $options['class'] = $this->getClass($options, 'form-control');
-        if (!array_get($options, 'readonly', false)) {
+        if (array_get($options, 'readonly', false)) {
+            $options['disabled'] = true;
+        } else {
             unset($options['readonly']);
         }
 
@@ -23,7 +25,9 @@ class FormBuilder extends CollectiveFormBuilder
     {
         $options['id'] = $this->getId($options, 'textarea', $name);
         $options['class'] = $this->getClass($options, 'form-control');
-        if (!array_get($options, 'readonly', false)) {
+        if (array_get($options, 'readonly', false)) {
+            $options['disabled'] = true;
+        } else {
             unset($options['readonly']);
         }
 
@@ -34,7 +38,9 @@ class FormBuilder extends CollectiveFormBuilder
     {
         $options['id'] = $this->getId($options, 'select', $name);
         $options['class'] = $this->getClass($options, 'form-control');
-        if (!array_get($options, 'readonly', false)) {
+        if (array_get($options, 'readonly', false)) {
+            $options['disabled'] = true;
+        } else {
             unset($options['readonly']);
         }
 
@@ -47,6 +53,8 @@ class FormBuilder extends CollectiveFormBuilder
         $options['class'] = $this->getClass($options, 'multi-select');
         if (array_get($options, 'readonly', false)) {
             $options['disabled'] = true;
+        } else {
+            unset($options['readonly']);
         }
         if (!array_get($options, 'multiple', true)) {
             unset($options['multiple']);

@@ -23,11 +23,11 @@ class BouncerSeeder
         Player::class => [
             'view',
             'edit',
+            'edit-money',
             'edit-civ',
             'edit-cop',
             'edit-medic',
             'edit-admin',
-            'edit-money',
             'delete',
         ],
         Vehicle::class => [
@@ -38,6 +38,7 @@ class BouncerSeeder
         Role::class => [
             'view',
             'edit',
+            'delete',
         ],
         ForumCategory::class => [
             'edit',
@@ -48,7 +49,7 @@ class BouncerSeeder
     {
         foreach($this->models as $model => $abilities) {
             foreach($abilities as $ability) {
-                \Bouncer::allow('super-admin')->to($ability, $model);
+                \Bouncer::allow('superadmin')->to($ability, $model);
             }
         }
     }

@@ -86,4 +86,18 @@ class RoleController extends Controller
         $role->save();
         return redirect('app/role/edit/' . $role->getKey());
     }
+
+    public function getDelete(Role $role)
+    {
+        $this->authorize('delete', $role);
+
+        foreach($role->users as $user) {
+            $user->retract($role->name);
+        }
+        foreach($role->abilities as $ability) {
+            \Bouncer::disallow($role)->to($ability);
+        }
+        $role->delete();
+        return redirect('app/role');
+    }
 }
