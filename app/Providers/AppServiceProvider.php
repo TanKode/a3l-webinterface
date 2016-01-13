@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Ability;
+use App\Libs\BouncerSeeder;
 use App\Role;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
@@ -12,6 +13,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        \Bouncer::seeder(BouncerSeeder::class);
         \Bouncer::useRoleModel(Role::class);
         \Bouncer::useAbilityModel(Ability::class);
 
