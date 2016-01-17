@@ -68,5 +68,6 @@
         App.markdown();
     });
 </script>
+@include('partials.piwik')
 </body>
 </html>
