@@ -23,6 +23,7 @@
                     ]) !!}
                 </div>
                 <div class="clearfix"></div>
+                @can('edit-money', $player)
                 <div class="col-md-4">
                     {!! Form::number('cash', null, [
                         'label' => trans('messages.cash'),
@@ -30,6 +31,8 @@
                         'errors' => $errors->get('cash'),
                     ]) !!}
                 </div>
+                @endcan
+                @can('edit-money', $player)
                 <div class="col-md-4">
                     {!! Form::number('bankacc', null, [
                         'label' => trans('messages.bankacc'),
@@ -37,6 +40,7 @@
                         'errors' => $errors->get('bankacc'),
                     ]) !!}
                 </div>
+                @endcan
                 <div class="clearfix"></div>
                 <div class="col-md-3">
                     {!! Form::select('coplevel', trans('messages.coplevel'), null, [
