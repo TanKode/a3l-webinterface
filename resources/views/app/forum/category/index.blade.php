@@ -5,10 +5,20 @@
     @foreach($categories as $category)
         <div class="panel">
             <header class="panel-heading">
+                <div class="btn-group pull-right">
+                    @can('edit', $category)
+                    <a href="{{ url('app/forum/category/edit/'.$category->getKey()) }}" class="btn btn-warning">{{ trans('forum::general.edit') }}</a>
+                    @endcan
+                    @can('delete', $category)
+                    <a href="{{ url('app/forum/category/delete/'.$category->getKey()) }}" class="btn btn-danger">{{ trans('forum::general.delete') }}</a>
+                    @endcan
+                </div>
+                <div class="pull-left">
                 <h3 class="panel-title">{{ $category->title }}</h3>
                 @if(!empty($category->description))
-                    <p class="text-muted">{!! \MarkExtra::parse($category->description) !!}</p>
+                    <div class="text-muted">{!! \MarkExtra::parse($category->description) !!}</div>
                 @endif
+                </div>
             </header>
             @if(!$category->children->isEmpty())
                 <div class="padding-horizontal-15 clearfix">
