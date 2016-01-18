@@ -44,6 +44,9 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
             Route::get('/', 'CategoryController@getIndex');
             Route::get('/create', 'CategoryController@getCreate');
             Route::post('/create', 'CategoryController@postCreate');
+            Route::get('/edit/{forum_category}', 'CategoryController@getEdit');
+            Route::post('/edit/{forum_category}', 'CategoryController@postEdit');
+            Route::get('/delete/{forum_category}', 'CategoryController@getDelete');
             Route::get('/{forum_category}', 'CategoryController@getShow');
 
             Route::group(['prefix' => '{forum_category}/thread'], function() {

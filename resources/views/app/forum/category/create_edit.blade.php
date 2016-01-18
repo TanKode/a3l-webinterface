@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="padding-35">
-        {!! Form::open([
-            'url' => 'app/forum/category/create',
+        {!! Form::model($category, [
+            'url' => $action == 'edit' ? 'app/forum/category/edit/'.$category->getKey() : 'app/forum/category/create',
         ]) !!}
         <div class="panel">
             <header class="panel-heading">
@@ -18,7 +18,7 @@
                         ]) !!}
                     </div>
                     <div class="col-md-6">
-                        {!! Form::select('category_id', \Riari\Forum\Models\Category::all()->pluck('title', 'id')->prepend(trans('forum::general.none'), '')->toArray(), '', [
+                        {!! Form::select('category_id', \Riari\Forum\Models\Category::all()->pluck('title', 'id')->prepend(trans('forum::general.none'), '')->toArray(), null, [
                             'label' => trans_choice('forum::categories.category', 1),
                             'errors' => $errors->get('category_id'),
                         ]) !!}

@@ -42,6 +42,7 @@ class BouncerSeeder
         ],
         ForumCategory::class => [
             'edit',
+            'delete',
         ],
     ];
 
