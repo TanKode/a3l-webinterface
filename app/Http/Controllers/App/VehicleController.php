@@ -15,6 +15,7 @@ class VehicleController extends Controller
         $this->authorize('view', Vehicle::class);
 
         $vehicles = is_null($request->get('player')) ? Vehicle::all() : Player::findOrFail($request->get('player'))->vehicles;
+        $vehicles->load('owner');
 
         return view('app.vehicle.index')->with([
             'vehicles' => $vehicles,

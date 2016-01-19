@@ -14,7 +14,7 @@ class PlayerController extends Controller
         $this->authorize('view', Player::class);
 
         return view('app.player.index')->with([
-            'players' => Player::all(),
+            'players' => Player::all()->load('user'),
         ]);
     }
 

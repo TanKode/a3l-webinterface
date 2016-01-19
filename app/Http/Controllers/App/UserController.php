@@ -15,7 +15,7 @@ class UserController extends Controller
         $this->authorize('view', User::class);
 
         return view('app.user.index')->with([
-            'users' => User::all(),
+            'users' => User::all()->load('player'),
         ]);
     }
 
