@@ -21,6 +21,12 @@ class CategoryController extends Controller
 
     public function getShow(Category $category)
     {
+        $this->authorize('view', $category);
+        dump(\Auth::User()->can('view', $category));
+        dd(\Auth::User()->getAbilities()->where('name', 'view')->where('entity_type', Category::class)->search(function($ability) use ($category) {
+            return is_null($ability->entity_id) || $ability->entity_id == $category->getKey();
+        }));
+
         return view('app.forum.category.show')->with([
             'category' => $category,
         ]);
@@ -52,13 +58,19 @@ class CategoryController extends Controller
 
         $category = $this->api('category.store')->parameters(\Input::all())->post();
 
+        \Bouncer::allow('superadmin')->to('view', $category);
+
         return redirect('app/forum/category/' . $category->getKey());
     }
 
     public function postEdit(Category $category)
     {
         $category = $this->api("category.rename", $category->getKey())->parameters(\Input::all())->patch();
-        $category = $this->api("category.move", $category->getKey())->parameters(\Input::all())->patch();
+        if(\Input::get('category_id')) {
+            $category = $this->api("category.move", $category->getKey())->parameters(\Input::all())->patch();
+        }
+
+        \Bouncer::allow('superadmin')->to('view', $category);
 
         return redirect('app/forum/category/' . $category->getKey());
     }

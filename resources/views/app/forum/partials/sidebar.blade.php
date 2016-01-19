@@ -12,14 +12,18 @@
                     <li><a href="{{ url('app/forum') }}"><i class="icon wh-forumsalt"></i> {{ trans('forum::general.index') }}</a></li>
                 </ul>
                 @foreach($categoryList as $category)
-                <p class="title">{{ $category->title }}</p>
-                <ul class="nav">
-                    @if(!$category->children->isEmpty())
-                        @foreach($category->children as $subcategory)
-                            <li><a href="{{ url('app/forum/category/' . $subcategory->getKey()) }}"><i class="icon wh-forumsalt"></i> {{ $subcategory->title }}</a></li>
-                        @endforeach
-                    @endif
-                </ul>
+                    @can('view', $category)
+                        <p class="title">{{ $category->title }}</p>
+                        <ul class="nav">
+                            @if(!$category->children->isEmpty())
+                                @foreach($category->children as $subcategory)
+                                    @can('view', $subcategory)
+                                        <li><a href="{{ url('app/forum/category/' . $subcategory->getKey()) }}"><i class="icon wh-forumsalt"></i> {{ $subcategory->title }}</a></li>
+                                    @endcan
+                                @endforeach
+                            @endif
+                        </ul>
+                    @endcan
                 @endforeach
 
                 @can('edit', Riari\Forum\Models\Category::class)

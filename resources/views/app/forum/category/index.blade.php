@@ -3,6 +3,7 @@
 @section('content')
     <div class="padding-35">
     @foreach($categories as $category)
+        @can('view', $category)
         <div class="panel">
             <header class="panel-heading">
                 <div class="btn-group pull-right">
@@ -34,6 +35,7 @@
                         </thead>
                         <tbody>
                         @foreach($category->children as $subcategory)
+                            @can('view', $subcategory)
                             <tr>
                                 <td>
                                     <a href="{{ url('app/forum/category/' . $subcategory->getKey()) }}">{{ $subcategory->title }}</a>
@@ -62,12 +64,14 @@
                                     </td>
                                 @endif
                             </tr>
+                            @endcan
                         @endforeach
                         </tbody>
                     </table>
                 </div>
             @endif
         </div>
+        @endcan
     @endforeach
     </div>
 @endsection
