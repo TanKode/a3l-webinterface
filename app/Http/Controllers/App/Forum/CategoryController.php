@@ -22,10 +22,6 @@ class CategoryController extends Controller
     public function getShow(Category $category)
     {
         $this->authorize('view', $category);
-        dump(\Auth::User()->can('view', $category));
-        dd(\Auth::User()->getAbilities()->where('name', 'view')->where('entity_type', Category::class)->search(function($ability) use ($category) {
-            return is_null($ability->entity_id) || $ability->entity_id == $category->getKey();
-        }));
 
         return view('app.forum.category.show')->with([
             'category' => $category,

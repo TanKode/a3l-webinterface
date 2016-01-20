@@ -11,6 +11,8 @@ class ThreadController extends Controller
 {
     public function getShow(Category $category, Thread $thread)
     {
+        $this->authorize('view', $category);
+
         if($category->getKey() != $thread->category_id) abort(404);
 
         return view('app.forum.thread.show')->with([
@@ -21,6 +23,8 @@ class ThreadController extends Controller
 
     public function getCreate(Category $category)
     {
+        $this->authorize('view', $category);
+
         return view('app.forum.thread.create', [
             'category' => $category,
         ]);
@@ -28,6 +32,8 @@ class ThreadController extends Controller
 
     public function postCreate(Category $category)
     {
+        $this->authorize('view', $category);
+
         $thread = $this->api('thread.store')->parameters([
             'author_id'     => \Auth::id(),
             'category_id'   => $category->getKey(),
@@ -40,6 +46,8 @@ class ThreadController extends Controller
 
     public function postReply(Category $category, Thread $thread)
     {
+        $this->authorize('view', $category);
+
         $post = $this->api('post.store')->parameters([
             'thread_id' => $thread->getKey(),
             'author_id' => \Auth::User()->getKey(),
