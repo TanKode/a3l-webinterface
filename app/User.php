@@ -44,14 +44,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'create' => [
             'name' => 'required|alpha_dash|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
-            'player_id' => 'required|numeric|unique:users',
+            'player_id' => 'required|numeric|unique:users|exists:arma.players,playerid',
             'password' => 'required|confirmed|min:6',
             'role' => 'array',
         ],
         'update' => [
             'name' => 'required|alpha_dash|max:255',
             'email' => 'required|email|max:255',
-            'player_id' => 'required|numeric',
+            'player_id' => 'required|numeric|exists:arma.players,playerid',
             'password' => 'confirmed|min:6',
             'role' => 'required|array',
         ],
