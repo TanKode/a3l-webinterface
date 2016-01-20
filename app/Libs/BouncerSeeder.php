@@ -53,5 +53,9 @@ class BouncerSeeder
                 \Bouncer::allow('superadmin')->to($ability, $model);
             }
         }
+
+        foreach(User::all() as $user) {
+            $user->assign('member');
+        }
     }
 }

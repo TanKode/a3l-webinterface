@@ -60,6 +60,7 @@ class UserController extends Controller
         $user->fill($data);
         $user->role = array_get($data, 'role', []);
         $user->save();
+        $user->assign('member');
         return redirect('app/user/edit/' . $user->getKey());
     }
 
