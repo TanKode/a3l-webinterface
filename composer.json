@@ -21,7 +21,7 @@
     "maddhatter/laravel-fullcalendar": "^1.2",
     "alfredo-ramos/parsedown-extra-laravel": "0.3.0",
     "cmgmyr/messenger": "~2.0",
-    "ignited/flysystem-google-drive": "dev-master"
+    "google/apiclient": "2.x-dev"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

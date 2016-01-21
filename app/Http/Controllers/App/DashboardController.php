@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\App;
 
+use App\Libs\GoogleDriveAdapter;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -20,18 +21,29 @@ class DashboardController extends Controller
     {
         \Config::set('app.debug', true);
 
-//        $client = new \Google_Client();
-//        $credentials = $client->loadServiceAccountJson(storage_path('app/A3L-Backup-474d4bbe7ac8.json'), 'https://www.googleapis.com/auth/drive');
-//        $client->setAssertionCredentials($credentials);
-//
-//        $service = new \Google_Service_Drive($client);
-//        dd($service->about->get());
-//        $adapter = new \Ignited\Flysystem\GoogleDrive\GoogleDriveAdapter($service);
-//
-//        $filesystem = new Filesystem($adapter);
-//
-//        dd($filesystem->read('/test/test.txt'));
-//        dd($filesystem->write('/test/test.txt', 'Hallo Welt'));
+        $client = new \Google_Client();
+        $client->setAuthConfig(storage_path('app/A3L-Backup-01fd4f2e57e4.json'));
+        $client->addScope('https://www.googleapis.com/auth/drive');
+        $client->setSubject('a3lwebinterface@gmail.com');
+
+        $service = new \Google_Service_Drive($client);
+        $adapter = new GoogleDriveAdapter($service);
+
+        $filesystem = new Filesystem($adapter);
+
+        dump($filesystem->has('/test/test.txt'));
+        try {
+            dump($filesystem->read('/test/test.txt'));
+        } catch(\Exception $e) {
+            dump($e);
+        }
+        try {
+            dump($filesystem->delete('/test/test.txt'));
+        } catch(\Exception $e) {
+            dump($e);
+        }
+        dump($filesystem->put('/test/test.txt', 'updated_at: ' . date('Y-m-d H:i:s')));
+        dd('end');
 
         abort(403);
     }
