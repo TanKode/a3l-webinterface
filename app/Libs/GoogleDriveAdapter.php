@@ -1,6 +1,7 @@
 <?php
 namespace App\Libs;
 
+use Carbon\Carbon;
 use Google_Service_Drive;
 use Google_Service_Drive_DriveFile;
 
@@ -12,11 +13,9 @@ use League\Flysystem\FileExistsException;
 
 class GoogleDriveAdapter extends AbstractAdapter
 {
-
     protected $service;
     protected $baseFolderId = null;
 
-    // DONE
     public function __construct(Google_Service_Drive $service, $prefix = null)
     {
         $this->service = $service;
@@ -26,13 +25,24 @@ class GoogleDriveAdapter extends AbstractAdapter
 
     public function setPathPrefix($prefix)
     {
+        parent::setPathPrefix($prefix);
+
         if ($prefix !== null) {
-            $this->prefix = $prefix;
             $this->baseFolderId = $this->getDirectory($prefix);
         }
     }
 
-    // DONE
+    /*
+    |--------------------------------------------------------------------------
+    | File actions
+    |--------------------------------------------------------------------------
+    */
+
+    public function has($path)
+    {
+        return $this->getFileId($path) !== null;
+    }
+
     public function write($path, $contents, Config $config)
     {
         $fileName = $this->getFilenameByPath($path);
@@ -62,10 +72,9 @@ class GoogleDriveAdapter extends AbstractAdapter
         // ToDo
     }
 
-    // DONE
     public function update($path, $contents, Config $config)
     {
-        if(!$this->has($path)) {
+        if (!$this->has($path)) {
             return false;
         }
         $fileName = $this->getFilenameByPath($path);
@@ -84,7 +93,7 @@ class GoogleDriveAdapter extends AbstractAdapter
 
 
         $fileId = $this->getFileId($path);
-        if(!is_null($fileId)) {
+        if (!is_null($fileId)) {
             $result = $this->service->files->update($fileId, $file, array(
                 'data' => $contents,
                 'uploadType' => 'media',
@@ -100,88 +109,35 @@ class GoogleDriveAdapter extends AbstractAdapter
         // ToDo
     }
 
-    public function rename($path, $newpath)
-    {
-        // ToDo
-    }
-
-    //
-    public function copy($path, $newpath)
-    {
-        // ToDo
-    }
-
-    // DONE
     public function delete($path)
     {
-        if(!$this->has($path)) {
+        if (!$this->has($path)) {
             return false;
         }
 
         $fileId = $this->getFileId($path);
-        if(!is_null($fileId)) {
+        if (!is_null($fileId)) {
             $result = $this->service->files->trash($fileId);
             return $this->normalizeResponse($result->getLabels()->getTrashed(), $path);
         }
         return false;
-
     }
 
-    // ToDo
-    public function deleteDir($dirname)
-    {
-        $folderId = $this->getDirectory($dirname, false);
-
-        if ($folderId == null) {
-            throw new FileNotFoundException($dirname);
-        }
-
-        /*
-            Need to create config as to whether to 'delete' or 'trash'
-         */
-        return $this->service->files->delete($folderId);
-    }
-
-    // ToDo
-    public function createDir($dirname, Config $config)
-    {
-        $folderId = $this->getDirectory($dirname, false);
-
-        if ($folderId !== null) {
-            throw new FileExistsException($dirname);
-        }
-
-        return $this->getDirectory($dirname);
-    }
-    
-    public function setVisibility($path, $visibility)
-    {
-        // ToDo
-    }
-
-    // DONE
-    public function has($path)
-    {
-        return $this->getFileId($path) !== null;
-    }
-
-    // DONE
     public function read($path)
     {
-        $contents = null;
-        if($this->has($path)) {
+        if ($this->has($path)) {
             $fileId = $this->getFileId($path);
-            if(!is_null($fileId)) {
+            if (!is_null($fileId)) {
                 $response = $this->service->files->get($fileId, [
                     'alt' => 'media'
                 ]);
                 if ($response->getStatusCode() == 200) {
-                    $contents = $response->getBody()->__toString();
+                    return ['contents' => $response->getBody()->__toString()];
                 }
             }
         }
 
-        return ['contents' => $contents];
+        return false;
     }
 
     public function readStream($path)
@@ -189,17 +145,12 @@ class GoogleDriveAdapter extends AbstractAdapter
         // ToDo
     }
 
-    public function listContents($directory = '', $recursive = false)
+    public function rename($path, $newpath)
     {
         // ToDo
     }
 
-    public function getMetadata($path)
-    {
-        // ToDo
-    }
-
-    public function getSize($path)
+    public function copy($path, $newpath)
     {
         // ToDo
     }
@@ -214,13 +165,105 @@ class GoogleDriveAdapter extends AbstractAdapter
         // ToDo
     }
 
+    public function setVisibility($path, $visibility)
+    {
+        // ToDo
+    }
 
     public function getVisibility($path)
     {
         // ToDo
     }
 
-    // DONE
+    /*
+    |--------------------------------------------------------------------------
+    | Folder & Combined actions
+    |--------------------------------------------------------------------------
+    */
+
+    public function listContents($directory = '', $recursive = false)
+    {
+        $parentId = null;
+
+        if (!empty($directory)) {
+            $parentId = $this->getDirectory($directory, false);
+        }
+
+        if (is_null($parentId) && $this->baseFolderId !== null) {
+            $parentId = $this->baseFolderId;
+        }
+
+        $q = vsprintf('trashed = false and "%s" in parents', [
+            $parentId,
+        ]);
+
+        $result = $this->service->files->listFiles(array(
+            'q' => $q,
+        ))->getItems();
+
+        $files = [];
+        foreach($result as $file) {
+            if($file instanceof Google_Service_Drive_DriveFile) {
+                $parents = $file->getParents();
+                $folder = '';
+                foreach($parents as $parent) {
+                    if ($parent instanceof \Google_Service_Drive_ParentReference) {
+                        $parent = $this->service->files->get($parent->getId());
+                        if($parent instanceof Google_Service_Drive_DriveFile) {
+                            $folder .= $parent->getTitle() . '/';
+                        }
+                    }
+                }
+                $folder = str_replace(trim($directory, '/') . '/', '', $folder);
+                $files[] = [
+                    'type' => 'file',
+                    'path' => $folder . $file->getOriginalFilename(),
+                    'size' => $file->getFileSize() * 1,
+                    'timestamp' => strtotime($file->getModifiedDate()),
+                ];
+            }
+        }
+        return $files;
+    }
+
+    public function createDir($dirname, Config $config)
+    {
+        $folderId = $this->getDirectory($dirname, false);
+
+        if ($folderId) {
+            throw new FileExistsException($dirname);
+        }
+
+        return $this->getDirectory($dirname);
+    }
+
+    public function deleteDir($dirname)
+    {
+        $folderId = $this->getDirectory($dirname, false);
+
+        if (!$folderId) {
+            throw new FileNotFoundException($dirname);
+        }
+
+        return $this->service->files->trash($folderId);
+    }
+
+    public function getMetadata($path)
+    {
+        // ToDo
+    }
+
+    public function getSize($path)
+    {
+        // ToDo
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helper
+    |--------------------------------------------------------------------------
+    */
+
     protected function getDirectory($path, $create = true)
     {
         $parts = explode('/', trim($path, '/'));
@@ -235,7 +278,7 @@ class GoogleDriveAdapter extends AbstractAdapter
                     $folder = $this->createDirectory($name, $parentFolderId);
                     $folderId = $folder->id;
                 } else {
-                    return;
+                    return false;
                 }
             }
 
@@ -243,7 +286,7 @@ class GoogleDriveAdapter extends AbstractAdapter
         }
 
         if (!$folderId) {
-            return;
+            return false;
         }
 
         return $folderId;
@@ -272,9 +315,9 @@ class GoogleDriveAdapter extends AbstractAdapter
         }
     }
 
-    // DONE
     protected function getFileId($path)
     {
+        $parentId = null;
         $fileName = $this->getFilenameByPath($path);
         $pathInfo = pathinfo($path);
 
@@ -286,14 +329,16 @@ class GoogleDriveAdapter extends AbstractAdapter
             $parentId = $this->baseFolderId;
         }
 
-        $q = 'title = "' . $fileName . '" and trashed = false';
-        $q .= sprintf(' and "%s" in parents', $parentId);
+        $q = vsprintf('title = "%s" and trashed = false and "%s" in parents', [
+            $fileName,
+            $parentId,
+        ]);
 
         try {
             $files = $this->service->files->listFiles(array(
                 'q' => $q,
             ))->getItems();
-        } catch(\Google_Service_Exception $e) {
+        } catch (\Google_Service_Exception $e) {
             return null;
         }
 
@@ -324,10 +369,8 @@ class GoogleDriveAdapter extends AbstractAdapter
         return $this->service->files->insert($file);
     }
 
-    // DONE
     protected function normalizeResponse($response, $path = null)
     {
         return $response;
     }
-
 }
