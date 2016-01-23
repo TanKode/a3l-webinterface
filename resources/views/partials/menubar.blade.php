@@ -69,6 +69,14 @@
                 </a>
             </li>
             @endcan
+            @can('view-backups')
+            <li class="@if(Request::is('app/backup*')) active @endif">
+                <a href="{{ url('app/backup') }}" class="text-center">
+                    <i class="icon wh-backup-vault"></i>
+                    <span>{{ trans('menu.backups') }}</span>
+                </a>
+            </li>
+            @endcan
         </ul>
     </div>
 </div>

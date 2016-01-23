@@ -11,4 +11,5 @@ return [
     'forum' => 'Forum',
     'calendar' => 'Kalender',
     'chat' => 'Nachrichten',
+    'backups' => 'Backups',
 ];

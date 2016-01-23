@@ -3,7 +3,7 @@ namespace App\Libs;
 
 class Formatter
 {
-    public static function decodeDBArray($string)
+    public function decodeDBArray($string)
     {
         $return = array();
         if (!empty($string)):
@@ -14,7 +14,7 @@ class Formatter
         return $return;
     }
 
-    public static function encodeDBArray($array, $ints = false)
+    public function encodeDBArray($array, $ints = false)
     {
         $array = collect($array)->map(function ($bool, $license) {
             return [$license, $bool];
@@ -35,8 +35,13 @@ class Formatter
         return $return;
     }
 
-    public static function money($number)
+    public function money($number)
     {
         return number_format($number, config('a3lwebinterface.formatter.decimals', 0), config('a3lwebinterface.formatter.decimal_seperator', ','), config('a3lwebinterface.formatter.thousand_seperator', '.')) . ' ' . config('a3lwebinterface.formatter.currency', '€');
+    }
+
+    public function getMBbyB($bytes)
+    {
+        return number_format($bytes / 1024 / 1024, 2, config('a3lwebinterface.formatter.decimal_seperator', ','), config('a3lwebinterface.formatter.thousand_seperator', '.'));
     }
 }

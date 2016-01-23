@@ -46,12 +46,22 @@ class BouncerSeeder
         ],
     ];
 
+    protected $abilities = [
+        'view-backups',
+        'download-backups',
+        'delete-backups',
+    ];
+
     public function seed()
     {
         foreach($this->models as $model => $abilities) {
             foreach($abilities as $ability) {
                 \Bouncer::allow('superadmin')->to($ability, $model);
             }
+        }
+
+        foreach($this->abilities as $ability) {
+            \Bouncer::allow('superadmin')->to($ability);
         }
 
         foreach(User::all() as $user) {

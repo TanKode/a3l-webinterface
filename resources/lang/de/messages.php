@@ -62,6 +62,8 @@ return [
     'end'           => 'Ende',
     'description'   => 'Beschreibung',
 
+    'size'          => 'Größe',
+
     'new_chat'      => 'neuer Chat',
     'recipients'    => 'Empfänger',
 

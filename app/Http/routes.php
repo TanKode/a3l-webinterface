@@ -91,4 +91,10 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::get('/delete/{vehicle}', 'VehicleController@getDelete');
         Route::get('/{vehicle}', 'VehicleController@getShow');
     });
+
+    Route::group(['prefix' => 'backup'], function () {
+        Route::get('/', 'BackupController@getIndex');
+        Route::get('/download', 'BackupController@getDownload');
+        Route::get('/delete', 'BackupController@getDelete');
+    });
 });

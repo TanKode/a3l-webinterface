@@ -47,9 +47,7 @@
                                             <span class="label label-danger">{{ trans('forum::general.deleted') }}</span>
                                         @endif
                                     </span>
-                                    <p class="lead">
-                                        <a href="{{ url('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey()) }}">{{ $thread->title }}</a>
-                                    </p>
+                                    <a href="{{ url('app/forum/category/' . $category->getKey().'/thread/'.$thread->getKey()) }}">{{ $thread->title }}</a>
                                 </td>
                                 @if ($thread->trashed())
                                     <td colspan="2">&nbsp;</td>
