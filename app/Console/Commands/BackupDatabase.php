@@ -3,6 +3,7 @@ namespace App\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputOption;
 
 class BackupDatabase extends Command
 {
@@ -11,10 +12,31 @@ class BackupDatabase extends Command
 
     public function handle()
     {
+        $connections = array_filter(array_map('trim', explode(',', $this->input->getOption('connection'))));
+        $connections = count($connections) ? $connections : array_keys(config('database.connections'));
+        foreach($connections as $connection) {
+            if(array_key_exists($connection, config('database.connections'))) {
+                $this->comment('Start backup for DB-Connection ['.$connection.']');
+                $this->createBackup($connection);
+                $this->info('Backup for DB-Connection ['.$connection.'] created successfully');
+            } else {
+                $this->error('DB-Connection ['.$connection.'] does not exist.');
+            }
+        }
+    }
+
+    protected function getOptions()
+    {
+        return [
+            ['connection', null, InputOption::VALUE_OPTIONAL, 'The database connection(s) to use.'],
+        ];
+    }
+
+    public function createBackup($connection)
+    {
         $now = Carbon::now(config('app.timezone'));
         $date = $now->toW3cString();
-        $default = \DB::getDefaultConnection();
-        $config = config("database.connections.{$default}");
+        $config = config("database.connections.{$connection}");
 
         $content = $this->getComment([
             'DB-Backup',
@@ -33,16 +55,16 @@ class BackupDatabase extends Command
             "USE `{$config['database']}`;",
         ]);
 
-        $tables = \DB::select('SHOW TABLES');
+        $tables = \DB::connection($connection)->select('SHOW TABLES');
         foreach ($tables as $table) {
             $table = collect($table)->values()->first();
-            $tableData = \DB::table($table)->get();
+            $tableData = \DB::connection($connection)->table($table)->get();
             $content .= $this->getComment([
                 "table structure for '{$table}'",
             ]);
             $content .= $this->getCommand([
                 "DROP TABLE IF EXISTS `{$table}`;",
-                \DB::select("SHOW CREATE TABLE {$table}")[0]->{'Create Table'} . ';',
+                \DB::connection($connection)->select("SHOW CREATE TABLE {$table}")[0]->{'Create Table'} . ';',
             ]);
             $content .= $this->getComment([
                 "table data for '{$table}'",
@@ -58,7 +80,7 @@ class BackupDatabase extends Command
 
         $filename = "backups/db_-_{$config['database']}_-_{$date}.sql";
 
-        \Storage::put($filename, $content);
+        \Storage::disk('gdrive')->put($filename, $content);
     }
 
     protected function getComment(array $comments)
