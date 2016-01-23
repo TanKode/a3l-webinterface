@@ -214,7 +214,7 @@ class GoogleDriveAdapter extends AbstractAdapter
                         }
                     }
                 }
-                $folder = str_replace(trim($directory, '/') . '/', '', $folder);
+                $folder = trim($folder, '/') . '/';
                 $files[] = [
                     'type' => 'file',
                     'path' => $folder . $file->getOriginalFilename(),

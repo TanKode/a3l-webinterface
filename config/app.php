@@ -160,6 +160,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
         App\Providers\HtmlBuilderServiceProvider::class,
+        App\Providers\GoogleDriveServiceProvider::class,
 
     ],
 
