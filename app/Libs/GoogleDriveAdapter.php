@@ -132,7 +132,8 @@ class GoogleDriveAdapter extends AbstractAdapter
                     'alt' => 'media'
                 ]);
                 if ($response->getStatusCode() == 200) {
-                    return ['contents' => $response->getBody()->__toString()];
+                    $contents = $response->getBody()->__toString();
+                    return compact('contents', 'path');
                 }
             }
         }
