@@ -147,7 +147,6 @@ return [
         Riari\Forum\ForumServiceProvider::class,
         Riari\Forum\Frontend\ForumFrontendServiceProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
-        Kordy\Ticketit\TicketitServiceProvider::class,
         AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider::class,
         Cmgmyr\Messenger\MessengerServiceProvider::class,
 
