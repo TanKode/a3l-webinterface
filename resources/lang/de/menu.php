@@ -12,4 +12,5 @@ return [
     'calendar' => 'Kalender',
     'chat' => 'Nachrichten',
     'backups' => 'Backups',
+    'messages' => 'SMS',
 ];

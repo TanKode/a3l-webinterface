@@ -38,6 +38,11 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::post('/{chat_thread}', 'ChatController@postReply');
     });
 
+    Route::group(['prefix' => 'message'], function() {
+        Route::get('/', 'MessageController@getIndex');
+        Route::get('/{player}', 'MessageController@getShow');
+    });
+
     Route::group(['prefix' => 'forum', 'namespace' => 'Forum'], function () {
         Route::get('/', 'CategoryController@getIndex');
         Route::group(['prefix' => 'category'], function () {

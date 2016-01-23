@@ -26,6 +26,12 @@
                     <span>{{ trans('menu.chat') }}</span>
                 </a>
             </li>
+            <li class="@if(Request::is('app/message*')) active @endif">
+                <a href="{{ url('app/message') }}" class="text-center">
+                    <i class="icon wh-iphone"></i>
+                    <span>{{ trans('menu.messages') }}</span>
+                </a>
+            </li>
             <li class="@if(Request::is('app/forum*')) active @endif">
                 <a href="{{ url('app/forum') }}" class="text-center">
                     <i class="icon wh-forumsalt"></i>

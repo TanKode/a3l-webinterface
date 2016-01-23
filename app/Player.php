@@ -58,6 +58,37 @@ class Player extends Model
         return $this->hasMany(Vehicle::class, 'pid', 'playerid');
     }
 
+    public function messages()
+    {
+        return Message::where('fromID', $this->playerid)->orWhere('toID', $this->playerid)->orderBy('time', 'desc')->get();
+    }
+
+    public function messagesWithPlayer($player)
+    {
+        $playerId = $this->playerid;
+        if($player instanceof Player) $player = $player->playerid;
+        return Message::where(function($query) use ($playerId) {
+            return $query->where('fromID', $playerId)->orWhere('toID', $playerId);
+        })->where(function($query) use ($player) {
+            return $query->where('fromID', $player)->orWhere('toID', $player);
+        })->orderBy('time', 'desc')->get();
+    }
+
+    public function getMessageParticipants()
+    {
+        $playerId = $this->playerid;
+        return $this->messages()->map(function($message) {
+            return [
+                'from' => $message->fromID,
+                'to' => $message->toID,
+            ];
+        })->flatten()->toBase()->unique()->reject(function($pid) use ($playerId) {
+            return $pid == $playerId;
+        })->map(function($pid) {
+            return Player::pid($pid)->first();
+        });
+    }
+
     public function hasUser()
     {
         return !is_null($this->user);
@@ -126,5 +157,10 @@ class Player extends Model
     public function getMedGearAttribute($value)
     {
         return \Formatter::decodeDBArray($value);
+    }
+
+    public function scopePid($query, $pid)
+    {
+        return $query->where('playerid', $pid);
     }
 }
