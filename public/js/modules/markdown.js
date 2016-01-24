@@ -48,7 +48,7 @@ var App = (function () {
 
         jQuery('.twemoji.clickable').on('click', function () {
             var $this = jQuery(this);
-            insert_code('textarea.markdown', '', $this.data('alt'));
+            insert_code('textarea.markdown', '', ':'+$this.data('alt')+':');
         });
 
     };
