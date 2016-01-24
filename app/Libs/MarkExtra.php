@@ -855,6 +855,7 @@ class MarkExtra
     {
         $text = addslashes(htmlentities($text));
         $text = \Markdown::parse($text);
+        $text = str_replace('<img ', '<img class="img-responsive" ', $text);
         $text = self::transformTwemoji($text);
         return $text;
     }
@@ -866,7 +867,7 @@ class MarkExtra
             if (isset(self::$emojiCodes[$hits[1]])) {
                 return Twemoji::create(self::$emojiCodes[$hits[1]]);
             }
-            return $hits[1];
+            return ':'.$hits[1].':';
         }, $text);
 
         $pattern = '/:(?<type>[0-9abcdef]*):/mi';
