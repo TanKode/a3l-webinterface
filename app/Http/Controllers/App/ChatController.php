@@ -20,7 +20,9 @@ class ChatController extends Controller
     public function getIndex()
     {
         $thread = Thread::forUser(\Auth::id())->latest('updated_at')->first();
-        $thread->markAsRead(\Auth::id());
+        if(!is_null($thread)) {
+            $thread->markAsRead(\Auth::id());
+        }
 
         return view('app.chat.index')->with([
             'display_thread' => $thread,
