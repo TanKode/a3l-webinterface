@@ -43,6 +43,31 @@ $app->singleton(
 
 /*
 |--------------------------------------------------------------------------
+| Configure Monolog
+|--------------------------------------------------------------------------
+*/
+
+$app->configureMonologUsing(function (Monolog\Logger $monolog) {
+    $slackHandler = new \App\Libs\SlackHandler();
+    $monolog->pushHandler($slackHandler);
+
+    $monolog->pushProcessor(new \Monolog\Processor\WebProcessor($_SERVER));
+    $monolog->pushProcessor(function ($record) {
+        try {
+            $record['extra']['session_id'] = Cookie::get(Config::get('session.cookie'));
+            if (\Auth::check()) {
+                $record['extra']['account_id'] = \Auth::id();
+                $record['extra']['account_email'] = \Auth::User()->email;
+            }
+        } catch(Exception $e) {
+            // ignore it
+        }
+        return $record;
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
 | Return The Application
 |--------------------------------------------------------------------------
 |
