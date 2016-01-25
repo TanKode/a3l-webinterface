@@ -851,6 +851,14 @@ class MarkExtra
         'zzz' => '1f4a4',
     ];
 
+    protected static $shortCodes = [
+        ':)' => ':smile:',
+        ';)' => ':wink:',
+        ':D' => ':laughing:',
+        ':P' => ':stuck_out_tongue:',
+        ';P' => ':stuck_out_tongue_winking_eye:',
+    ];
+
     public static function parse($text)
     {
         $text = addslashes(htmlentities($text));
@@ -862,6 +870,10 @@ class MarkExtra
 
     protected static function transformTwemoji($text)
     {
+        collect(self::$shortCodes)->each(function($value, $key) use(&$text) {
+            $text = str_replace($key, $value, $text);
+        });
+
         $pattern = '/:([a-z0-9\+\-_]*):(?=[^>]*(<|$))/mi';
         $text = preg_replace_callback($pattern, function ($hits) {
             if (isset(self::$emojiCodes[$hits[1]])) {
