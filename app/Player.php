@@ -86,7 +86,7 @@ class Player extends Model
             return $pid == $playerId;
         })->map(function($pid) {
             return Player::pid($pid)->first();
-        });
+        })->filter();
     }
 
     public function hasUser()
