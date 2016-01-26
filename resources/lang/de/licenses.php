@@ -1,6 +1,7 @@
 <?php
 return [
     'license_civ_driver'        => 'Führerschein',
+    'license_civ_grab'          => 'Grabbeilagenlizenz',
     'license_civ_air'           => 'Pilotenschein',
     'license_civ_heroin'        => 'Heroinlizenz',
     'license_civ_marijuana'     => 'Marihuanakurs',
