@@ -27,6 +27,15 @@
             @include('app.dashboard.widgets.players')
         </div>
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
+            @include('app.dashboard.widgets.cops')
+        </div>
+        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
+            @include('app.dashboard.widgets.medics')
+        </div>
+        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
+            @include('app.dashboard.widgets.atacs')
+        </div>
+        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
             @include('app.dashboard.widgets.money')
         </div>
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
