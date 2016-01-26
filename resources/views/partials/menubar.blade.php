@@ -41,7 +41,7 @@
                 </a>
             </li>
 
-            @can('view', App\Player::class)
+            @can('view-list', App\Player::class)
             <li class="@if(Request::is('app/player*')) active @endif">
                 <a href="{{ url('app/player') }}" class="text-center">
                     <span class="badge">{{ \App\Player::count() }}</span>

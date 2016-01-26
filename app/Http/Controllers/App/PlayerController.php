@@ -11,7 +11,7 @@ class PlayerController extends Controller
 {
     public function getIndex()
     {
-        $this->authorize('view', Player::class);
+        $this->authorize('view-list', Player::class);
 
         return view('app.player.index')->with([
             'players' => Player::all()->load('user'),

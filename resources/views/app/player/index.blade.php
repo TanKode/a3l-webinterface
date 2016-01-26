@@ -19,7 +19,9 @@
                     <th>#</th>
                     <th>{{ trans('messages.name') }}</th>
                     <th>{{ trans('messages.player_id') }}</th>
-                    <th>{{ trans('messages.money') }}</th>
+                    @can('edit-money', App\Player::class)
+                        <th>{{ trans('messages.money') }}</th>
+                    @endcan
                     <th>{{ trans('messages.cop') }}</th>
                     <th>{{ trans('messages.medic') }}</th>
                     <th class="noindex"></th>
@@ -31,7 +33,9 @@
                         <td>{{ $player->getKey() }}</td>
                         <td>{{ $player->name }}</td>
                         <td>{{ $player->playerid }}</td>
-                        <td>{{ \Formatter::money($player->total_money) }}</td>
+                        @can('edit-money', App\Player::class)
+                            <td>{{ \Formatter::money($player->total_money) }}</td>
+                        @endcan
                         <td>{{ trans('messages.coplevel.'.$player->coplevel) }}</td>
                         <td>{{ trans('messages.mediclevel.'.$player->mediclevel) }}</td>
 

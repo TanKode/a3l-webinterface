@@ -22,6 +22,7 @@ class BouncerSeeder
         ],
         Player::class => [
             'view',
+            'view-list',
             'edit',
             'edit-money',
             'edit-civ',
