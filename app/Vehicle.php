@@ -55,7 +55,7 @@ class Vehicle extends Model
     public function scopeSearch($query, $string)
     {
         $search = collect(array_map('trim', explode(';', $string)))->map(function($string) {
-            return explode('=', $string);
+            return array_map('trim', explode('=', $string));
         })->pluck(1, 0);
 
         $searchable = [
@@ -68,6 +68,7 @@ class Vehicle extends Model
         ];
 
         foreach($search as $key => $value) {
+            $key = strtolower($key);
             if(array_key_exists($key, $searchable)) {
                 $query->where($key, $searchable[$key], ($searchable[$key] == 'LIKE' ? '%'.$value.'%' : $value));
             }

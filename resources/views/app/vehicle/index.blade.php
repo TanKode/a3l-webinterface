@@ -8,7 +8,8 @@
         </div>
         <div class="margin-top-20 margin-horizontal-20">
             {!! Form::text('datatable-search', is_null($player) ? '' : 'pid='.$player->playerid.';', [
-                'icon' => 'wh-search'
+                'icon' => 'wh-search',
+                'placeholder' => 'pid=1234;side=civ;type=car;active=0;alive=1;classname=C_Kart_01_Blu_F;'
             ]) !!}
         </div>
 
