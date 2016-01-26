@@ -20,7 +20,9 @@
     "maddhatter/laravel-fullcalendar": "^1.2",
     "alfredo-ramos/parsedown-extra-laravel": "0.3.0",
     "cmgmyr/messenger": "~2.0",
-    "google/apiclient": "2.x-dev"
+    "google/apiclient": "2.x-dev",
+    "xpaw/php-source-query-class": "dev-master",
+    "fkubis/teamspeak-php-framework": "dev-master"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
