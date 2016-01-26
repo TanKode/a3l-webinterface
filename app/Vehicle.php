@@ -51,4 +51,14 @@ class Vehicle extends Model
     {
         return $query->where('pid', $pid);
     }
+
+    public function scopeSearch($query, $string)
+    {
+        $string = '%'.$string.'%';
+        return $query
+            ->where('pid', 'LIKE', $string)
+            ->orWhere('side', 'LIKE', $string)
+            ->orWhere('classname', 'LIKE', $string)
+            ->orWhere('type', 'LIKE', $string);
+    }
 }

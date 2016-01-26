@@ -91,6 +91,7 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
 
     Route::group(['prefix' => 'vehicle'], function () {
         Route::get('/', 'VehicleController@getIndex');
+        Route::get('/datatable', 'VehicleController@getDatatable');
         Route::get('/edit/{vehicle}', 'VehicleController@getEdit');
         Route::post('/edit/{vehicle}', 'VehicleController@postEdit');
         Route::get('/delete/{vehicle}', 'VehicleController@getDelete');

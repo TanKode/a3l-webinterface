@@ -41,6 +41,7 @@ return [
     'bankacc'       => 'Bank',
     'abilities'     => 'Berechtigungen',
     'type'          => 'Typ',
+    'side'          => 'Seite',
     'classname'     => 'Klassenname',
     'alive'         => 'ganz',
     'active'        => 'aktiv',
