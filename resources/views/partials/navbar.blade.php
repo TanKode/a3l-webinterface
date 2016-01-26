@@ -20,6 +20,11 @@
                     <img src="{{ \Auth::User()->avatar(50) }}" class="img-circle padding-15" data-toggle="tooltip" data-placement="bottom" title="{{ \Auth::User()->name }}" />
                 </li>
                 <li>
+                    <a href="https://gummibeer.freshdesk.com/support/tickets/new" target="_blank" data-toggle="tooltip" data-placement="bottom" title="{{ trans('messages.support') }}">
+                        <i class="icon wh-supportalt icon-2x"></i>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ url('auth/logout') }}" data-toggle="tooltip" data-placement="bottom" title="{{ trans('messages.signout') }}">
                         <i class="icon wh-off"></i>
                     </a>

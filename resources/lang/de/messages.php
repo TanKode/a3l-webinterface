@@ -3,6 +3,8 @@
 return [
     'title'         => 'A3L-WebInterface',
 
+    'support'       => 'Support für das WebInterface',
+
     'username'      => 'Benutzername',
     'email'         => 'E-Mail',
     'password'      => 'Passwort',
