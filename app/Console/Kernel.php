@@ -13,10 +13,10 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('db:backup')->timezone(config('app.timezone'))->dailyAt('06:00');
-        $schedule->command('db:backup')->timezone(config('app.timezone'))->dailyAt('12:00');
-        $schedule->command('db:backup')->timezone(config('app.timezone'))->dailyAt('18:00');
-        $schedule->command('db:backup')->timezone(config('app.timezone'))->dailyAt('00:00');
+        $schedule->command('db:backup')->timezone(config('app.timezone'))->dailyAt('02:00');
+        $schedule->command('db:backup')->timezone(config('app.timezone'))->dailyAt('08:00');
+        $schedule->command('db:backup')->timezone(config('app.timezone'))->dailyAt('14:00');
+        $schedule->command('db:backup')->timezone(config('app.timezone'))->dailyAt('20:00');
         $schedule->command('bouncer:seed')->everyThirtyMinutes();
     }
 }
