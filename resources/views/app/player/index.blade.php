@@ -24,6 +24,7 @@
                     @endcan
                     <th>{{ trans('messages.cop') }}</th>
                     <th>{{ trans('messages.medic') }}</th>
+                    <th>{{ trans('messages.atac') }}</th>
                     <th class="noindex"></th>
                 </tr>
                 </thead>
@@ -38,6 +39,7 @@
                         @endcan
                         <td>{{ trans('messages.coplevel.'.$player->coplevel) }}</td>
                         <td>{{ trans('messages.mediclevel.'.$player->mediclevel) }}</td>
+                        <td>{{ trans('messages.ataclevel.'.$player->ataclevel) }}</td>
 
                         <td>
                             <div class="btn-group pull-right">

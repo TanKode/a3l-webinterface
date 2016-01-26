@@ -71,12 +71,17 @@ return [
     'recipients'    => 'Empfänger',
 
     'cop'           => 'Polizist',
+    'cops'          => 'Polizisten',
     'medic'         => 'Sanitäter',
+    'medics'        => 'Sanitäter',
+    'atac'          => 'ATAC',
+    'atacs'         => 'ATACs',
     'admin'         => 'Admin',
     'donator'       => 'Donator',
     'civlicenses'   => 'Civ-Lizenzen',
     'coplicenses'   => 'Cop-Lizenzen',
     'mediclicenses' => 'Medic-Lizenzen',
+    'ataclicenses'  => 'ATAC-Lizenzen',
 
     'coplevel'      => [
         0 => 'Zivilist',
@@ -103,6 +108,15 @@ return [
         4 => 'Notarzt',
         5 => 'Co-Chefarzt',
         6 => 'Chefarzt',
+    ],
+    'ataclevel'    => [
+        0 => 'Zivilist',
+        1 => 'Praktikant',
+        2 => 'Lehrling',
+        3 => 'Abschleper',
+        4 => 'Mechaniker',
+        5 => 'Meisterschüler',
+        6 => 'Meister',
     ],
 
     'errors' => [

@@ -18,6 +18,9 @@ class Player extends Model
         'mediclevel',
         'med_licenses',
         'med_gear',
+        'ataclevel',
+        'atac_licenses',
+        'atac_gear',
         'adminlevel',
         'donatorlevel',
     ];
@@ -159,8 +162,38 @@ class Player extends Model
         return \Formatter::decodeDBArray($value);
     }
 
+    public function getAtacLicensesAttribute($value)
+    {
+        return \Formatter::decodeDBArray($value);
+    }
+
+    public function setAtacLicensesAttribute($value)
+    {
+        return $this->attributes['atac_licenses'] = \Formatter::encodeDBArray($value);
+    }
+
+    public function getAtacGearAttribute($value)
+    {
+        return \Formatter::decodeDBArray($value);
+    }
+
     public function scopePid($query, $pid)
     {
         return $query->where('playerid', $pid);
+    }
+
+    public function scopeCop($query)
+    {
+        return $query->where('coplevel', '>', 0);
+    }
+
+    public function scopeMedic($query)
+    {
+        return $query->where('mediclevel', '>', 0);
+    }
+
+    public function scopeAtac($query)
+    {
+        return $query->where('ataclevel', '>', 0);
     }
 }

@@ -28,6 +28,7 @@ class BouncerSeeder
             'edit-civ',
             'edit-cop',
             'edit-medic',
+            'edit-atac',
             'edit-admin',
             'delete',
         ],

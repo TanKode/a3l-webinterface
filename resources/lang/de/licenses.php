@@ -38,4 +38,5 @@ return [
     'license_cop_swat'          => 'SWAT',
     'license_cop_cg'            => 'Küstenwache',
     'license_med_air'           => 'Pilotenschein',
+    'license_atac_air'          => 'Pilotenschein',
 ];
