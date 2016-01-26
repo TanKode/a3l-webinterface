@@ -83,8 +83,8 @@ class VehicleController extends Controller
                 'type' => $vehicle->type,
                 'name' => $vehicle->display_name,
                 'classname' => $vehicle->classname,
-                'alive' => $vehicle->alive,
-                'active' => $vehicle->active,
+                'alive' => trans('messages.confirms.'.$vehicle->alive),
+                'active' => trans('messages.confirms.'.$vehicle->active),
                 'btns' => $this->getBtnsForVehicle($vehicle),
             ];
         });
