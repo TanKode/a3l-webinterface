@@ -7,7 +7,7 @@
             <span class="title">{{ trans('menu.vehicles') }}</span>
         </div>
         <div class="margin-top-20 margin-horizontal-20">
-            {!! Form::text('datatable-search', is_null($player) ? '' : $player->playerid, [
+            {!! Form::text('datatable-search', is_null($player) ? '' : 'pid='.$player->playerid.';', [
                 'icon' => 'wh-search'
             ]) !!}
         </div>

@@ -35,7 +35,7 @@ var App = (function () {
         });
 
         var $searchField = jQuery('[name=datatable-search]');
-        $searchField.on('keyup', function () {
+        $searchField.on('keyup change blur', function () {
             datatable.search(jQuery(this).val()).draw();
             vehicleDatatable.search(jQuery(this).val()).draw();
         });

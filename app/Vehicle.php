@@ -54,11 +54,25 @@ class Vehicle extends Model
 
     public function scopeSearch($query, $string)
     {
-        $string = '%'.$string.'%';
-        return $query
-            ->where('pid', 'LIKE', $string)
-            ->orWhere('side', 'LIKE', $string)
-            ->orWhere('classname', 'LIKE', $string)
-            ->orWhere('type', 'LIKE', $string);
+        $search = collect(array_map('trim', explode(';', $string)))->map(function($string) {
+            return explode('=', $string);
+        })->pluck(1, 0);
+
+        $searchable = [
+            'pid' => 'LIKE',
+            'side' => 'LIKE',
+            'classname' => 'LIKE',
+            'type' => 'LIKE',
+            'alive' => '=',
+            'active' => '=',
+        ];
+
+        foreach($search as $key => $value) {
+            if(array_key_exists($key, $searchable)) {
+                $query->where($key, $searchable[$key], ($searchable[$key] == 'LIKE' ? '%'.$value.'%' : $value));
+            }
+        }
+
+        return $query;
     }
 }
