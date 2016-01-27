@@ -21,8 +21,8 @@
     "alfredo-ramos/parsedown-extra-laravel": "0.3.0",
     "cmgmyr/messenger": "~2.0",
     "google/apiclient": "2.x-dev",
-    "xpaw/php-source-query-class": "dev-master",
-    "fkubis/teamspeak-php-framework": "dev-master"
+    "fkubis/teamspeak-php-framework": "dev-master",
+    "xpaw/php-source-query-class": "1.0.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

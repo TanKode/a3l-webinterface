@@ -31,18 +31,25 @@ class DashboardController extends Controller
     {
         try {
             $sourceQuery = new SourceQuery();
-            $sourceQuery->Connect(env('A3L_HOST', ''), env('A3L_PORT', 2302), 1, SourceQuery::SOURCE);
+            $sourceQuery->Connect(env('A3L_HOST', ''), env('A3L_PORT', 2303), 1, SourceQuery::SOURCE);
             $a3lInfo = $sourceQuery->GetInfo();
-            dd($a3lInfo);
             $a3lPlayers = collect($sourceQuery->GetPlayers());
             $sourceQuery->Disconnect();
 
-            $a3lRestart = Carbon::now()->setTimezone('Europe/Berlin');
-            $a3lRestart->minute = 0;
-            $a3lRestart->second = 0;
-            $hours = (ceil($a3lRestart->hour / 6) * 6) - $a3lRestart->hour;
-            $hours = $hours == 0 ? 6 : $hours;
-            $a3lRestart->addHours($hours);
+            $now = Carbon::now()->setTimezone('Europe/Berlin');
+            $restarts = collect([]);
+            foreach(config('a3lwebinterface.restarts') as $time) {
+                $parts = explode(':', $time);
+                $carbon = Carbon::now()->setTimezone('Europe/Berlin')->setTime($parts[0], $parts[1], 0);
+                $restarts->put($time, [
+                    'carbon' => $carbon,
+                    'diff' => $now->diffInSeconds($carbon, false),
+                ]);
+            }
+
+            $a3lRestart = $restarts->reject(function($restart) {
+                return $restart['diff'] <= 0;
+            })->sortBy('diff')->first()['carbon'];
 
             return [
                 'info' => $a3lInfo,
