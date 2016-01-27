@@ -15,6 +15,7 @@ class DashboardController extends Controller
     {
         return view('app.dashboard.index')->with([
             'dynmarket' => collect(json_decode(\DB::connection('arma')->table('dynmarket')->first()->prices))->unique(0)->sortByDesc(1),
+            'a3lserver' => $this->getLife(),
         ]);
     }
 
@@ -36,11 +37,11 @@ class DashboardController extends Controller
             $a3lPlayers = collect($sourceQuery->GetPlayers());
             $sourceQuery->Disconnect();
 
-            $now = Carbon::now()->setTimezone('Europe/Berlin');
+            $now = Carbon::now()->setTimezone(config('app.timezone'));
             $restarts = collect([]);
             foreach(config('a3lwebinterface.restarts') as $time) {
                 $parts = explode(':', $time);
-                $carbon = Carbon::now()->setTimezone('Europe/Berlin')->setTime($parts[0], $parts[1], 0);
+                $carbon = Carbon::now()->setTimezone(config('app.timezone'))->setTime($parts[0], $parts[1], 0);
                 $restarts->put($time, [
                     'carbon' => $carbon,
                     'diff' => $now->diffInSeconds($carbon, false),
@@ -55,12 +56,14 @@ class DashboardController extends Controller
                 'info' => $a3lInfo,
                 'playersOnline' => $a3lPlayers,
                 'restart' => $a3lRestart,
+                'online' => true,
             ];
         } catch (\Exception $e) {
             return [
                 'info' => null,
                 'playersOnline' => 0,
                 'restart' => null,
+                'online' => false,
             ];
         }
     }
