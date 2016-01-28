@@ -1,4 +1,4 @@
-@if($a3lserver['online'])
+@if($a3lserver['online'] && $a3lserver['info'])
 <div class="panel panel-primary">
     <div class="panel-heading">
         <div class="tools"></div>
