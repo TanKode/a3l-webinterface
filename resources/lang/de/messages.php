@@ -5,6 +5,11 @@ return [
 
     'support'       => 'Support für das WebInterface',
 
+    'host'          => 'Host',
+    'map'           => 'Karte',
+    'next_restart'  => 'nächster Restart',
+    'clock'         => 'Uhr',
+
     'username'      => 'Benutzername',
     'email'         => 'E-Mail',
     'password'      => 'Passwort',

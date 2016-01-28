@@ -26,7 +26,7 @@
         </li>
         <li class="list-group-item">
             <strong class="list-group-item-heading">{{ trans('messages.next_restart') }}</strong>
-            <span class="pull-right">{{ array_get($a3lserver, 'restart') }}</span>
+            <span class="pull-right">{{ array_get($a3lserver, 'restart')->format('H:i') }} {{ trans('messages.clock') }}</span>
         </li>
     </ul>
 </div>
