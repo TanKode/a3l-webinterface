@@ -23,7 +23,7 @@ class DashboardController extends Controller
     {
         \Config::set('app.debug', true);
 
-        dd($this->getLife());
+        dd($this->getTeamspeak());
 
         abort(403);
     }

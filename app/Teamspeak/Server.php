@@ -11,7 +11,7 @@ class Server extends Model
     public function __construct()
     {
         try {
-            $this->instance = TeamSpeak3::factory('serverquery://'.config('services.teamspeak.user').':'.config('services.teamspeak.password').'@'.config('services.teamspeak.host').':'.config('services.teamspeak.port').'/?server_port='.config('services.teamspeak.server_port').'');
+            $this->instance = TeamSpeak3::factory('serverquery://'.config('services.teamspeak.host').':'.config('services.teamspeak.port').'/?server_port='.config('services.teamspeak.server_port').'');
             $this->info = $this->instance->getInfo();
             $this->prepareAttributes();
         } catch(\Exception $e) {
