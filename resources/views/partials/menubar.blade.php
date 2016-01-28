@@ -41,48 +41,84 @@
                 </a>
             </li>
 
-            @can('view-list', App\Player::class)
-            <li class="@if(Request::is('app/player*')) active @endif">
-                <a href="{{ url('app/player') }}" class="text-center">
-                    <span class="badge">{{ \App\Player::count() }}</span>
-                    <i class="icon wh-boardgame"></i>
-                    <span>{{ trans('menu.players') }}</span>
+            @can('access-support')
+            <li class="parent">
+                <a href="#">
+                    <i class="icon wh-supportalt"></i>
+                    <span>{{ trans('menu.support') }}</span>
                 </a>
-            </li>
-            @endcan
-            @can('view', App\Vehicle::class)
-            <li class="@if(Request::is('app/vehicle*')) active @endif">
-                <a href="{{ url('app/vehicle') }}" class="text-center">
-                    <span class="badge">{{ \App\Vehicle::alive()->count() }}</span>
-                    <i class="icon wh-automobile-car"></i>
-                    <span>{{ trans('menu.vehicles') }}</span>
-                </a>
+                <ul class="sub-menu">
+                    <li class="title">{{ trans('menu.support') }}</li>
+                    <li class="nav-items">
+                        <div class="am-scroller nano has-scrollbar"><div class="content nano-content">
+                                <ul>
+                                    @can('view-list', App\Player::class)
+                                    <li class="@if(Request::is('app/player*')) active @endif">
+                                        <a href="{{ url('app/player') }}" class="white">
+                                            <span class="badge badge-primary white">{{ \App\Player::count() }}</span>
+                                            <i class="icon wh-boardgame"></i>
+                                            <span>{{ trans('menu.players') }}</span>
+                                        </a>
+                                    </li>
+                                    @endcan
+                                    @can('view', App\Vehicle::class)
+                                    <li class="@if(Request::is('app/vehicle*')) active @endif">
+                                        <a href="{{ url('app/vehicle') }}" class="white">
+                                            <span class="badge badge-primary white">{{ \App\Vehicle::alive()->count() }}</span>
+                                            <i class="icon wh-automobile-car"></i>
+                                            <span>{{ trans('menu.vehicles') }}</span>
+                                        </a>
+                                    </li>
+                                    @endcan
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </li>
             @endcan
 
-            @can('view', App\User::class)
-            <li class="@if(Request::is('app/user*')) active @endif">
-                <a href="{{ url('app/user') }}" class="text-center">
-                    <span class="badge">{{ \App\User::count() }}</span>
-                    <i class="icon wh-user"></i>
-                    <span>{{ trans('menu.users') }}</span>
+            @can('access-admin')
+            <li class="parent">
+                <a href="#">
+                    <i class="icon wh-lock"></i>
+                    <span>{{ trans('menu.admin') }}</span>
                 </a>
-            </li>
-            @endcan
-            @can('view', App\Role::class)
-            <li class="@if(Request::is('app/role*')) active @endif">
-                <a href="{{ url('app/role') }}" class="text-center">
-                    <i class="icon wh-firewall"></i>
-                    <span>{{ trans('menu.roles') }}</span>
-                </a>
-            </li>
-            @endcan
-            @can('view-backups')
-            <li class="@if(Request::is('app/backup*')) active @endif">
-                <a href="{{ url('app/backup') }}" class="text-center">
-                    <i class="icon wh-backup-vault"></i>
-                    <span>{{ trans('menu.backups') }}</span>
-                </a>
+                <ul class="sub-menu">
+                    <li class="title">{{ trans('menu.admin') }}</li>
+                    <li class="nav-items">
+                        <div class="am-scroller nano has-scrollbar"><div class="content nano-content">
+                                <ul>
+                                    @can('view', App\User::class)
+                                    <li class="@if(Request::is('app/user*')) active @endif">
+                                        <a href="{{ url('app/user') }}" class="white">
+                                            <span class="badge badge-primary white">{{ \App\User::count() }}</span>
+                                            <i class="icon wh-user"></i>
+                                            <span>{{ trans('menu.users') }}</span>
+                                        </a>
+                                    </li>
+                                    @endcan
+                                    @can('view', App\Role::class)
+                                    <li class="@if(Request::is('app/role*')) active @endif">
+                                        <a href="{{ url('app/role') }}" class="white">
+                                            <i class="icon wh-firewall"></i>
+                                            <span>{{ trans('menu.roles') }}</span>
+                                        </a>
+                                    </li>
+                                    @endcan
+                                    @can('view-backups')
+                                    <li class="@if(Request::is('app/backup*')) active @endif">
+                                        <a href="{{ url('app/backup') }}" class="white">
+                                            <i class="icon wh-backup-vault"></i>
+                                            <span>{{ trans('menu.backups') }}</span>
+                                        </a>
+                                    </li>
+                                    @endcan
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </li>
             @endcan
         </ul>
