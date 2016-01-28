@@ -11,16 +11,18 @@
         </li>
         <li class="list-group-item">
             <strong class="list-group-item-heading">{{ trans('messages.map') }}</strong>
-            <span class="pull-right">{{ array_get($a3lserver, 'info.Map') }}</span>
+            <span class="pull-right">{{ ucwords(array_get($a3lserver, 'info.Map')) }}</span>
         </li>
         <li class="list-group-item">
             <strong class="list-group-item-heading">{{ trans('messages.players') }}</strong>
             <span class="pull-right">{{ array_get($a3lserver, 'info.Players').' / '.array_get($a3lserver, 'info.MaxPlayers') }}</span>
-            <ul class="list-inline">
-                @foreach(array_get($a3lserver, 'playersOnline') as $player)
-                    <li><span class="label label-success">{{ $player['Name'] }}</span></li>
-                @endforeach
-            </ul>
+            @if(array_get($a3lserver, 'playersOnline', collect([]))->count())
+                <ul class="list-inline">
+                    @foreach(array_get($a3lserver, 'playersOnline', []) as $player)
+                        <li><p><span class="label label-success">{{ $player['Name'] }}</span></p></li>
+                    @endforeach
+                </ul>
+            @endif
         </li>
         <li class="list-group-item">
             <strong class="list-group-item-heading">{{ trans('messages.next_restart') }}</strong>
