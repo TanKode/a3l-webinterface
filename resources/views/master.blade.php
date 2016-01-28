@@ -21,7 +21,7 @@
 </head>
 <body class="@yield('body-class')">
 
-<div class="am-wrapper am-fixed-sidebar am-white-header @yield('body-class')">
+<div class="am-wrapper am-fixed-sidebar @yield('body-class')">
     @yield('pre-content')
     <div class="am-content @yield('content-class')">
         @yield('page-head')

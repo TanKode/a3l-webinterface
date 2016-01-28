@@ -1,5 +1,5 @@
 @if($a3lserver['online'] && $a3lserver['info'])
-<div class="panel panel-primary">
+<div class="panel panel-alt4">
     <div class="panel-heading">
         <div class="tools"></div>
         <span class="title">{{ array_get($a3lserver, 'info.HostName') }}</span>

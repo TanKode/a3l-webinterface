@@ -1,4 +1,4 @@
-<div class="panel panel-primary">
+<div class="panel panel-alt4">
     <div class="panel-heading">
         <div class="tools"></div>
         <span class="title">{{ trans('messages.player_stats') }}</span>
