@@ -44,7 +44,7 @@ class DashboardController extends Controller
                 $carbon = Carbon::now()->setTimezone(config('app.timezone'))->setTime($parts[0], $parts[1], 0);
                 $restarts->put($time, [
                     'carbon' => $carbon,
-                    'diff' => $now->diffInSeconds($carbon, false),
+                    'diff' => $now->diffInSeconds($carbon, false) > 0 ? $now->diffInSeconds($carbon, false) : $now->diffInSeconds($carbon->addDay(), false),
                 ]);
             }
 
