@@ -857,6 +857,7 @@ class MarkExtra
         ':D' => ':laughing:',
         ':P' => ':stuck_out_tongue:',
         ';P' => ':stuck_out_tongue_winking_eye:',
+        ':/' => ':confused:',
     ];
 
     public static function parse($text)
