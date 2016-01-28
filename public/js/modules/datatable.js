@@ -14,33 +14,36 @@ var App = (function () {
             ]
         });
 
-        var datatable = jQuery(".datatable").first().DataTable();
-        var vehicleDatatable = jQuery('#datatable-vehicle').first().DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax": {
-                "url": "vehicle/datatable"
-            },
-            "columns": [
-                {"data": "id"},
-                {"data": "pid"},
-                {"data": "side"},
-                {"data": "type"},
-                {"data": "name"},
-                {"data": "classname"},
-                {"data": "alive"},
-                {"data": "active"},
-                {"data": "btns"}
-            ]
-        });
+        var $table =jQuery(".datatable").first();
+        if($table.length == 1) {
+            var datatable = $table.DataTable();
+            var vehicleDatatable = jQuery('#datatable-vehicle').first().DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "vehicle/datatable"
+                },
+                "columns": [
+                    {"data": "id"},
+                    {"data": "pid"},
+                    {"data": "side"},
+                    {"data": "type"},
+                    {"data": "name"},
+                    {"data": "classname"},
+                    {"data": "alive"},
+                    {"data": "active"},
+                    {"data": "btns"}
+                ]
+            });
 
-        var $searchField = jQuery('[name=datatable-search]');
-        $searchField.on('keyup change blur', function () {
-            datatable.search(jQuery(this).val()).draw();
-            vehicleDatatable.search(jQuery(this).val()).draw();
-        });
-        datatable.search($searchField.val()).draw();
-        vehicleDatatable.search($searchField.val()).draw();
+            var $searchField = jQuery('[name=datatable-search]');
+            $searchField.on('keyup change blur', function () {
+                datatable.search(jQuery(this).val()).draw();
+                vehicleDatatable.search(jQuery(this).val()).draw();
+            });
+            datatable.search($searchField.val()).draw();
+            vehicleDatatable.search($searchField.val()).draw();
+        }
     };
     return App;
 })(App || {});
