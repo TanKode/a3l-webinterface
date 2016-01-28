@@ -15,9 +15,10 @@ var App = (function () {
         });
 
         var $table =jQuery(".datatable").first();
-        if($table.length == 1) {
+        var $vehicleTable = jQuery('#datatable-vehicle').first();
+        if($table.length == 1 || $vehicleTable.length == 1) {
             var datatable = $table.DataTable();
-            var vehicleDatatable = jQuery('#datatable-vehicle').first().DataTable({
+            var vehicleDatatable = $vehicleTable.DataTable({
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
