@@ -4,6 +4,7 @@ return [
     'title'         => 'A3L-WebInterface',
 
     'support'       => 'Support für das WebInterface',
+    'unread_messages' => 'ungelesene Nachrichten',
 
     'host'          => 'Host',
     'map'           => 'Karte',

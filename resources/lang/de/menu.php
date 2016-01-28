@@ -13,4 +13,6 @@ return [
     'chat' => 'Nachrichten',
     'backups' => 'Backups',
     'messages' => 'SMS',
+    'support' => 'Support',
+    'admin' => 'Admin',
 ];
