@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title'         => 'A3L-WebInterface',
+    'title'         => 'Pyro-Life',
 
     'support'       => 'Support für das WebInterface',
     'unread_messages' => 'ungelesene Nachrichten',

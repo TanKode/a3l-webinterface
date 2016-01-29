@@ -51,6 +51,10 @@ var App = (function () {
             insert_code('textarea.markdown', '', ':'+$this.data('alt')+':');
         });
 
+        jQuery('body').on('change keyup keydown paste cut', 'textarea.markdown', function () {
+            jQuery(this).height(0).height(this.scrollHeight);
+        }).find('textarea.markdown').change();
+
     };
     return App;
 })(App || {});
