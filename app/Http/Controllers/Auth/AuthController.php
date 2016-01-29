@@ -33,4 +33,20 @@ class AuthController extends Controller
         $user->allow('edit', $user);
         return $user;
     }
+
+    public function getLogin()
+    {
+        return view('auth')->with([
+            'a3lserver' => $this->getLife(),
+            'ts3server' => $this->getTeamspeak(),
+        ]);
+    }
+
+    public function getRegister()
+    {
+        return view('auth')->with([
+            'a3lserver' => $this->getLife(),
+            'ts3server' => $this->getTeamspeak(),
+        ]);
+    }
 }
