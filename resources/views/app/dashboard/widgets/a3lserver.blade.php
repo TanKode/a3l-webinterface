@@ -29,13 +29,9 @@
         <li class="list-group-item">
             <strong class="list-group-item-heading">{{ trans('messages.players') }}</strong>
             <span class="pull-right">{{ array_get($a3lserver, 'info.Players').' / '.array_get($a3lserver, 'info.MaxPlayers') }}</span>
-
-
             <div class="progress">
                 <div class="progress-bar progress-bar-primary" style="width: {{ array_get($a3lserver, 'info.Players') / (array_get($a3lserver, 'info.MaxPlayers') / 100)}}%;"></div>
             </div>
-
-
             @if(array_get($a3lserver, 'playersOnline', collect([]))->count())
                 <ul class="list-inline">
                     @foreach(array_get($a3lserver, 'playersOnline', []) as $player)

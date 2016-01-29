@@ -5,8 +5,11 @@
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
             @include('app.dashboard.widgets.dynmarket')
         </div>
-        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
+        <div class="col-md-6 col-xs-12 masonry-item masonry-sizer">
             @include('app.dashboard.widgets.a3lserver')
+        </div>
+        <div class="col-md-6 col-xs-12 masonry-item masonry-sizer">
+            @include('app.dashboard.widgets.ts3server')
         </div>
         @if(\Auth::User()->player)
             <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">

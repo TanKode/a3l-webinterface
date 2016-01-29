@@ -10,6 +10,7 @@ return [
     'map'           => 'Karte',
     'next_restart'  => 'nächster Restart',
     'clock'         => 'Uhr',
+    'clients'       => 'Clients',
 
     'username'      => 'Benutzername',
     'email'         => 'E-Mail',
