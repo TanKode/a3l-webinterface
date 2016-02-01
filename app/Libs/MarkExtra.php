@@ -852,12 +852,12 @@ class MarkExtra
     ];
 
     protected static $shortCodes = [
-        ':)' => ':smile:',
-        ';)' => ':wink:',
-        ':D' => ':laughing:',
-        ':P' => ':stuck_out_tongue:',
-        ';P' => ':stuck_out_tongue_winking_eye:',
-        ':/' => ':confused:',
+        ' :)' => ':smile:',
+        ' ;)' => ':wink:',
+        ' :D' => ':laughing:',
+        ' :P' => ':stuck_out_tongue:',
+        ' ;P' => ':stuck_out_tongue_winking_eye:',
+        ' :/' => ':confused:',
     ];
 
     public static function parse($text)
