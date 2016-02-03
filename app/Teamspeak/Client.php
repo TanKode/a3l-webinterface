@@ -11,7 +11,15 @@ class Client extends Model
 
     private function prepareAttributes()
     {
-        $this->nickname = $this->info['client_nickname']->toString();
-        $this->country = $this->info['client_country']->toString();
+        if(method_exists($this->info['client_nickname'], 'toString')) {
+            $this->nickname = $this->info['client_nickname']->toString();
+        } else {
+            $this->nickname = $this->info['client_nickname'];
+        }
+        if(method_exists($this->info['client_country'], 'toString')) {
+            $this->country = $this->info['client_country']->toString();
+        } else {
+            $this->country = $this->info['client_country'];
+        }
     }
 }
