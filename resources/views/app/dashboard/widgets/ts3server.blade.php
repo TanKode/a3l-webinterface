@@ -8,7 +8,7 @@
             <li class="list-group-item">
                 <strong class="list-group-item-heading">{{ trans('messages.host') }}</strong>
                 <span class="pull-right">
-                    <a href="ts3server://{{ $ts3server['server']->host }}?port={{ $ts3server['server']->port }}">{{ $ts3server['server']->host.':'.$ts3server['server']->port }}</a>
+                    <a href="ts3server://{{ $ts3server['server']->host }}?port={{ $ts3server['server']->port }}">{{ $ts3server['server']->host }}@if($ts3server['server']->port != 9987):{{ $ts3server['server']->port }}@endif</a>
                 </span>
             </li>
             <li class="list-group-item">
