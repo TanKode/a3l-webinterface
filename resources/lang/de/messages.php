@@ -152,4 +152,6 @@ return [
         '#616161' => 'grey',
         '#37474F' => 'blue-grey',
     ],
+
+    'tokenmismatch' => 'Deine Session ist abgelaufen, bitte sende dein Formular erneut ab.',
 ];

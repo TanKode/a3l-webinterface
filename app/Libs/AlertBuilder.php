@@ -51,30 +51,39 @@ class AlertBuilder
             $text = implode('</p><p>', $text);
         }
 
-        return '<div' . $this->html->attributes($options) . '>' . $this->getDismiss($options) . $this->getIcon($options) . $this->getTitle($options) . '<p>' . $text . '</p></div>';
+        return '<div' . $this->html->attributes($this->clearOptions($options)) . '>' . $this->getDismiss($options) . $this->getIcon($options) . $this->getTitle($options) . '<p>' . $text . '</p></div>';
     }
 
-    private function getDismiss(array $options)
+    protected function getDismiss(array $options)
     {
         return $options['dismiss'] ? '<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>' : '';
     }
 
-    private function getIcon(array $options)
+    protected function getIcon(array $options)
     {
         return isset($options['icon']) ? '<i class="icon ' . $options['icon'] . '"></i>' : '';
     }
 
-    private function getTitle(array $options)
+    protected function getTitle(array $options)
     {
         return isset($options['title']) ? '<h4>' . $options['title'] . '</h4>' : '';
     }
 
-    private function getOption(array $options, $key, $default = null, $value = null)
+    protected function getOption(array $options, $key, $default = null, $value = null)
     {
         if (is_null($value)) {
             return array_get($options, $key, $default);
         } else {
             return isset($options[$key]) && $options[$key] ? $value : $default;
         }
+    }
+
+    protected function clearOptions($options)
+    {
+        unset(
+            $options['dark'],
+            $options['dismiss']
+        );
+        return $options;
     }
 }
