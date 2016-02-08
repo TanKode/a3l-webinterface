@@ -11,20 +11,22 @@
                     <a href="ts3server://{{ $ts3server['server']->host }}?port={{ $ts3server['server']->port }}">{{ $ts3server['server']->host }}@if($ts3server['server']->port != 9987):{{ $ts3server['server']->port }}@endif</a>
                 </span>
             </li>
-            <li class="list-group-item">
-                <strong class="list-group-item-heading">{{ trans('messages.clients') }}</strong>
-                <span class="pull-right">{{ $ts3server['clients']->count() . ' / ' . $ts3server['server']->max_clients }}</span>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-primary" style="width: {{ $ts3server['clients']->count() / ($ts3server['server']->max_clients / 100)}}%;"></div>
-                </div>
-                @if($ts3server['clients']->count())
-                    <ul class="list-inline">
-                        @foreach($ts3server['clients'] as $client)
-                            <li><p><span class="label label-primary">{{ $client->nickname }}</span></p></li>
-                        @endforeach
-                    </ul>
-                @endif
-            </li>
+            @if(!is_null($ts3server['clients']))
+                <li class="list-group-item">
+                    <strong class="list-group-item-heading">{{ trans('messages.clients') }}</strong>
+                    <span class="pull-right">{{ $ts3server['clients']->count() . ' / ' . $ts3server['server']->max_clients }}</span>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-primary" style="width: {{ $ts3server['clients']->count() / ($ts3server['server']->max_clients / 100)}}%;"></div>
+                    </div>
+                    @if($ts3server['clients']->count())
+                        <ul class="list-inline">
+                            @foreach($ts3server['clients'] as $client)
+                                <li><p><span class="label label-primary">{{ $client->nickname }}</span></p></li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </li>
+            @endif
         </ul>
     </div>
 @endif
