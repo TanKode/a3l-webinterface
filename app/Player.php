@@ -43,11 +43,12 @@ class Player extends Model
 
     public static $rules = [
         'update' => [
-            'cash' => 'required|integer',
-            'bankacc' => 'required|integer',
-            'coplevel' => 'required|integer',
-            'mediclevel' => 'required|integer',
-            'adminlevel' => 'required|integer',
+            'cash' => 'integer',
+            'bankacc' => 'integer',
+            'coplevel' => 'integer',
+            'mediclevel' => 'integer',
+            'ataclevel' => 'integer',
+            'adminlevel' => 'integer',
         ],
     ];
 
