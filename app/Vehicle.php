@@ -39,7 +39,7 @@ class Vehicle extends Model
 
     public function getDisplayNameAttribute()
     {
-        return transd('vehicles.'.$this->classname, $this->classname);
+        return transd('vehicles.' . $this->classname, $this->classname);
     }
 
     public function scopeAlive($query)
@@ -54,7 +54,7 @@ class Vehicle extends Model
 
     public function scopeSearch($query, $string)
     {
-        $search = collect(array_map('trim', explode(';', $string)))->map(function($string) {
+        $search = collect(array_map('trim', explode(';', $string)))->map(function ($string) {
             return array_map('trim', explode('=', $string));
         })->pluck(1, 0);
 
@@ -67,10 +67,10 @@ class Vehicle extends Model
             'active' => '=',
         ];
 
-        foreach($search as $key => $value) {
+        foreach ($search as $key => $value) {
             $key = strtolower($key);
-            if(array_key_exists($key, $searchable)) {
-                $query->where($key, $searchable[$key], ($searchable[$key] == 'LIKE' ? '%'.$value.'%' : $value));
+            if (array_key_exists($key, $searchable)) {
+                $query->where($key, $searchable[$key], ($searchable[$key] == 'LIKE' ? '%' . $value . '%' : $value));
             }
         }
 

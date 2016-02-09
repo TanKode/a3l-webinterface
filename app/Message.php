@@ -27,6 +27,6 @@ class Message extends Model
 
     public function getMessageAttribute($value)
     {
-        return utf8_encode(trim($value,  '"'));
+        return utf8_encode(trim($value, '"'));
     }
 }

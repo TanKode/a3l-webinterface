@@ -203,14 +203,14 @@ class GoogleDriveAdapter extends AbstractAdapter
         ))->getItems();
 
         $files = [];
-        foreach($result as $file) {
-            if($file instanceof Google_Service_Drive_DriveFile) {
+        foreach ($result as $file) {
+            if ($file instanceof Google_Service_Drive_DriveFile) {
                 $parents = $file->getParents();
                 $folder = '';
-                foreach($parents as $parent) {
+                foreach ($parents as $parent) {
                     if ($parent instanceof \Google_Service_Drive_ParentReference) {
                         $parent = $this->service->files->get($parent->getId());
-                        if($parent instanceof Google_Service_Drive_DriveFile) {
+                        if ($parent instanceof Google_Service_Drive_DriveFile) {
                             $folder .= $parent->getTitle() . '/';
                         }
                     }

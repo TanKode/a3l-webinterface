@@ -40,7 +40,7 @@ class SlackHandler extends AbstractProcessingHandler
                     ],
                 ],
             ])->send(explode("\n", array_get($record, 'message'))[0]);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             // ignore it
         }
     }

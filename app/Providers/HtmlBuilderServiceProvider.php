@@ -23,7 +23,7 @@ class HtmlBuilderServiceProvider extends ServiceProvider
             $form = new FormBuilder($app['html'], $app['url'], $app['session.store']->getToken());
             return $form->setSessionStore($app['session.store']);
         });
-        $this->app->bindShared('markextra', function($app) {
+        $this->app->bindShared('markextra', function ($app) {
             return new MarkExtra();
         });
     }

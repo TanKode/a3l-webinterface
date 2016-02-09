@@ -51,7 +51,7 @@ class UserController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        if(empty($data['password'])) {
+        if (empty($data['password'])) {
             unset($data['password']);
         } else {
             $data['password'] = bcrypt($data['password']);

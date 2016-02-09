@@ -13,7 +13,7 @@ class GoogleDriveServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Storage::extend('gdrive', function($app, $config) {
+        Storage::extend('gdrive', function ($app, $config) {
             $client = new Google_Client();
             $client->setAuthConfig($config['authfile']);
             $client->addScope('https://www.googleapis.com/auth/drive');

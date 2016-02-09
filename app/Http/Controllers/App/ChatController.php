@@ -20,7 +20,7 @@ class ChatController extends Controller
     public function getIndex()
     {
         $thread = Thread::forUser(\Auth::id())->latest('updated_at')->first();
-        if(!is_null($thread)) {
+        if (!is_null($thread)) {
             $thread->markAsRead(\Auth::id());
         }
 
@@ -38,7 +38,7 @@ class ChatController extends Controller
 
     public function getShow(Thread $thread)
     {
-        if(!$thread->hasParticipant(\Auth::id())) {
+        if (!$thread->hasParticipant(\Auth::id())) {
             abort(404);
         }
 
@@ -58,7 +58,7 @@ class ChatController extends Controller
 
     public function postReply(Thread $thread)
     {
-        if(!$thread->hasParticipant(\Auth::id())) {
+        if (!$thread->hasParticipant(\Auth::id())) {
             abort(404);
         }
 

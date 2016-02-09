@@ -89,19 +89,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function createThread($participants, $body)
     {
-        if(is_array($participants)) $participants = collect($participants);
+        if (is_array($participants)) $participants = collect($participants);
 
-        if($participants instanceof Collection || $participants instanceof EloquentCollection) {
+        if ($participants instanceof Collection || $participants instanceof EloquentCollection) {
             $participants->push($this->getKey());
         } else {
             throw new \BadMethodCallException('$participants should be a Collection or an Array');
         }
         $participants = $participants->toArray();
 
-        $thread = Thread::between($participants)->get()->filter(function($thread) use ($participants) {
+        $thread = Thread::between($participants)->get()->filter(function ($thread) use ($participants) {
             return $thread->participants->count() == count($participants);
         })->first();
-        if(is_null($thread)) {
+        if (is_null($thread)) {
             $thread = Thread::create([
                 'subject' => 'Chat started by User#' . $this->getKey(),
             ]);
@@ -118,7 +118,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public static function getList($remove = 0)
     {
-        if(!is_array($remove)) $remove = [$remove];
+        if (!is_array($remove)) $remove = [$remove];
         return self::whereNotIn('id', $remove)->lists('name', 'id');
     }
 }

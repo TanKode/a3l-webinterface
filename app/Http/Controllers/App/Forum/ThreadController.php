@@ -13,7 +13,7 @@ class ThreadController extends Controller
     {
         $this->authorize('view', $category);
 
-        if($category->getKey() != $thread->category_id) abort(404);
+        if ($category->getKey() != $thread->category_id) abort(404);
 
         return view('app.forum.thread.show')->with([
             'category' => $category,
@@ -35,13 +35,13 @@ class ThreadController extends Controller
         $this->authorize('view', $category);
 
         $thread = $this->api('thread.store')->parameters([
-            'author_id'     => \Auth::id(),
-            'category_id'   => $category->getKey(),
-            'title'         => \Input::get('title'),
-            'content'       => \Input::get('content'),
+            'author_id' => \Auth::id(),
+            'category_id' => $category->getKey(),
+            'title' => \Input::get('title'),
+            'content' => \Input::get('content'),
         ])->post();
 
-        return redirect('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey());
+        return redirect('app/forum/category/' . $category->getKey() . '/thread/' . $thread->getKey());
     }
 
     public function postReply(Category $category, Thread $thread)
@@ -51,8 +51,8 @@ class ThreadController extends Controller
         $post = $this->api('post.store')->parameters([
             'thread_id' => $thread->getKey(),
             'author_id' => \Auth::User()->getKey(),
-            'post_id'   => 0,
-            'content'   => \Input::get('content'),
+            'post_id' => 0,
+            'content' => \Input::get('content'),
         ])->post();
 
         $post->thread->touch();

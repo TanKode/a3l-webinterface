@@ -38,7 +38,7 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::post('/{chat_thread}', 'ChatController@postReply');
     });
 
-    Route::group(['prefix' => 'message'], function() {
+    Route::group(['prefix' => 'message'], function () {
         Route::get('/', 'MessageController@getIndex');
         Route::get('/{player}', 'MessageController@getShow');
     });
@@ -54,7 +54,7 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
             Route::get('/delete/{forum_category}', 'CategoryController@getDelete');
             Route::get('/{forum_category}', 'CategoryController@getShow');
 
-            Route::group(['prefix' => '{forum_category}/thread'], function() {
+            Route::group(['prefix' => '{forum_category}/thread'], function () {
                 Route::get('/create', 'ThreadController@getCreate');
                 Route::post('/create', 'ThreadController@postCreate');
                 Route::get('/{forum_thread}', 'ThreadController@getShow');

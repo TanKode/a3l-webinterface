@@ -14,13 +14,13 @@ class BackupDatabase extends Command
     {
         $connections = array_filter(array_map('trim', explode(',', $this->input->getOption('connection'))));
         $connections = count($connections) ? $connections : array_keys(config('database.connections'));
-        foreach($connections as $connection) {
-            if(array_key_exists($connection, config('database.connections'))) {
-                $this->comment('Start backup for DB-Connection ['.$connection.']');
+        foreach ($connections as $connection) {
+            if (array_key_exists($connection, config('database.connections'))) {
+                $this->comment('Start backup for DB-Connection [' . $connection . ']');
                 $this->createBackup($connection);
-                $this->info('Backup for DB-Connection ['.$connection.'] created successfully');
+                $this->info('Backup for DB-Connection [' . $connection . '] created successfully');
             } else {
-                $this->error('DB-Connection ['.$connection.'] does not exist.');
+                $this->error('DB-Connection [' . $connection . '] does not exist.');
             }
         }
     }

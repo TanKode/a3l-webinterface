@@ -15,7 +15,7 @@ class MessageController extends Controller
     public function __construct()
     {
         \Config::set('app.debug', true);
-        if(!\Auth::User()->hasPlayer()) {
+        if (!\Auth::User()->hasPlayer()) {
             abort(404);
         }
 

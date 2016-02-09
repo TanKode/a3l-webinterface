@@ -62,7 +62,7 @@ class CategoryController extends Controller
     public function postEdit(Category $category)
     {
         $category = $this->api("category.rename", $category->getKey())->parameters(\Input::all())->patch();
-        if(\Input::get('category_id')) {
+        if (\Input::get('category_id')) {
             $category = $this->api("category.move", $category->getKey())->parameters(\Input::all())->patch();
         }
 

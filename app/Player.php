@@ -41,6 +41,11 @@ class Player extends Model
         'donatorlvl' => 'int',
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
+
     public static $rules = [
         'update' => [
             'cash' => 'integer',
@@ -70,10 +75,10 @@ class Player extends Model
     public function messagesWithPlayer($player)
     {
         $playerId = $this->playerid;
-        if($player instanceof Player) $player = $player->playerid;
-        return Message::where(function($query) use ($playerId) {
+        if ($player instanceof Player) $player = $player->playerid;
+        return Message::where(function ($query) use ($playerId) {
             return $query->where('fromID', $playerId)->orWhere('toID', $playerId);
-        })->where(function($query) use ($player) {
+        })->where(function ($query) use ($player) {
             return $query->where('fromID', $player)->orWhere('toID', $player);
         })->orderBy('time', 'desc')->get();
     }
@@ -81,14 +86,14 @@ class Player extends Model
     public function getMessageParticipants()
     {
         $playerId = $this->playerid;
-        return $this->messages()->map(function($message) {
+        return $this->messages()->map(function ($message) {
             return [
                 'from' => $message->fromID,
                 'to' => $message->toID,
             ];
-        })->flatten()->toBase()->unique()->reject(function($pid) use ($playerId) {
+        })->flatten()->toBase()->unique()->reject(function ($pid) use ($playerId) {
             return $pid == $playerId;
-        })->map(function($pid) {
+        })->map(function ($pid) {
             return Player::pid($pid)->first();
         })->filter();
     }
@@ -110,7 +115,7 @@ class Player extends Model
 
     public function getAliasAttribute()
     {
-        return $this->aliases[0];
+        return is_array($this->aliases) ? array_get($this->aliases, 0, '') : '';
     }
 
     public function getTotalMoneyAttribute()

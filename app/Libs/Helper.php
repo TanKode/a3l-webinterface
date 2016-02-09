@@ -14,9 +14,9 @@ class Helper
 
     public function getContrastColor($color)
     {
-        $r = hexdec(substr($color,0,2));
-        $g = hexdec(substr($color,2,2));
-        $b = hexdec(substr($color,4,2));
+        $r = hexdec(substr($color, 0, 2));
+        $g = hexdec(substr($color, 2, 2));
+        $b = hexdec(substr($color, 4, 2));
 
         return ($r + $g + $b > 382) ? '#000000' : '#ffffff';
     }

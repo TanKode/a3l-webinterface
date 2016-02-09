@@ -25,11 +25,11 @@ class BackupController extends Controller
         $this->authorize('download-backups');
 
         $filename = str_replace(' ', '+', $request->get('filename'));
-        $fielpath = 'backups/'.$filename;
-        if(\Storage::disk('gdrive')->has($fielpath)) {
+        $fielpath = 'backups/' . $filename;
+        if (\Storage::disk('gdrive')->has($fielpath)) {
             $response = new StreamedResponse();
 
-            $response->setCallBack(function() use ($fielpath) {
+            $response->setCallBack(function () use ($fielpath) {
                 echo \Storage::disk('gdrive')->get($fielpath);
             });
 
@@ -47,8 +47,8 @@ class BackupController extends Controller
         $this->authorize('delete-backups');
 
         $filename = str_replace(' ', '+', $request->get('filename'));
-        $fielpath = 'backups/'.$filename;
-        if(\Storage::disk('gdrive')->has($fielpath)) {
+        $fielpath = 'backups/' . $filename;
+        if (\Storage::disk('gdrive')->has($fielpath)) {
             \Storage::disk('gdrive')->delete($fielpath);
 
             return back();
@@ -59,7 +59,7 @@ class BackupController extends Controller
 
     protected function getDetailsForBackups($backups)
     {
-        foreach($backups as &$backup) {
+        foreach ($backups as &$backup) {
             $backup['carbon'] = Carbon::createFromTimestampUTC($backup['timestamp']);
             $backup['display_size'] = \Formatter::getMBbyB($backup['size']);
         }

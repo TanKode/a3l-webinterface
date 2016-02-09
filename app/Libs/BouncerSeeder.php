@@ -56,17 +56,17 @@ class BouncerSeeder
 
     public function seed()
     {
-        foreach($this->models as $model => $abilities) {
-            foreach($abilities as $ability) {
+        foreach ($this->models as $model => $abilities) {
+            foreach ($abilities as $ability) {
                 \Bouncer::allow('superadmin')->to($ability, $model);
             }
         }
 
-        foreach($this->abilities as $ability) {
+        foreach ($this->abilities as $ability) {
             \Bouncer::allow('superadmin')->to($ability);
         }
 
-        foreach(User::all() as $user) {
+        foreach (User::all() as $user) {
             $user->assign('member');
         }
     }

@@ -43,6 +43,7 @@ return [
     'events_today'  => 'Events heute',
 
     'name'          => 'Name',
+    'alias'         => 'Alias',
     'money'         => 'Geld',
     'cash'          => 'Bargeld',
     'bankacc'       => 'Bank',
@@ -53,6 +54,8 @@ return [
     'alive'         => 'ganz',
     'active'        => 'aktiv',
     'gangbank'      => 'Gang-Bank',
+    'created_at'    => 'erstellt am',
+    'updated_at'    => 'geändert am',
 
     'user'          => 'Benutzer',
     'action'        => 'Aktion',

@@ -49,12 +49,12 @@ class PlayerController extends Controller
         }
 
         $allowedFields = collect([]);
-        if(\Auth::User()->can('edit-money', $player)) $allowedFields->push(['cash', 'bankacc']);
-        if(\Auth::User()->can('edit-civ', $player)) $allowedFields->push(['civ_licenses']);
-        if(\Auth::User()->can('edit-cop', $player)) $allowedFields->push(['coplevel', 'cop_licenses']);
-        if(\Auth::User()->can('edit-medic', $player)) $allowedFields->push(['mediclevel', 'med_licenses']);
-        if(\Auth::User()->can('edit-atac', $player)) $allowedFields->push(['ataclevel', 'atac_licenses']);
-        if(\Auth::User()->can('edit-admin', $player)) $allowedFields->push(['adminlevel']);
+        if (\Auth::User()->can('edit-money', $player)) $allowedFields->push(['cash', 'bankacc']);
+        if (\Auth::User()->can('edit-civ', $player)) $allowedFields->push(['civ_licenses']);
+        if (\Auth::User()->can('edit-cop', $player)) $allowedFields->push(['coplevel', 'cop_licenses']);
+        if (\Auth::User()->can('edit-medic', $player)) $allowedFields->push(['mediclevel', 'med_licenses']);
+        if (\Auth::User()->can('edit-atac', $player)) $allowedFields->push(['ataclevel', 'atac_licenses']);
+        if (\Auth::User()->can('edit-admin', $player)) $allowedFields->push(['adminlevel']);
         $allowedFields = $allowedFields->flatten()->toArray();
         $data = array_intersect_key($data, array_combine($allowedFields, $allowedFields));
         $player->update($data);

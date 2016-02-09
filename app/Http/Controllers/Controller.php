@@ -24,7 +24,7 @@ abstract class Controller extends BaseController
 
             $now = Carbon::now()->setTimezone(config('app.timezone'));
             $restarts = collect([]);
-            foreach(config('a3lwebinterface.restarts') as $time) {
+            foreach (config('a3lwebinterface.restarts') as $time) {
                 $parts = explode(':', $time);
                 $carbon = Carbon::now()->setTimezone(config('app.timezone'))->setTime($parts[0], $parts[1], 0);
                 $restarts->put($time, [
@@ -33,7 +33,7 @@ abstract class Controller extends BaseController
                 ]);
             }
 
-            $a3lRestart = $restarts->reject(function($restart) {
+            $a3lRestart = $restarts->reject(function ($restart) {
                 return $restart['diff'] <= 0;
             })->sortBy('diff')->first()['carbon'];
 

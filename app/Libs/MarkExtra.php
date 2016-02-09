@@ -871,7 +871,7 @@ class MarkExtra
 
     protected static function transformTwemoji($text)
     {
-        collect(self::$shortCodes)->each(function($value, $key) use(&$text) {
+        collect(self::$shortCodes)->each(function ($value, $key) use (&$text) {
             $text = str_replace($key, $value, $text);
         });
 
@@ -880,7 +880,7 @@ class MarkExtra
             if (isset(self::$emojiCodes[$hits[1]])) {
                 return Twemoji::create(self::$emojiCodes[$hits[1]]);
             }
-            return ':'.$hits[1].':';
+            return ':' . $hits[1] . ':';
         }, $text);
 
         $pattern = '/:(?<type>[0-9abcdef]*):/mi';

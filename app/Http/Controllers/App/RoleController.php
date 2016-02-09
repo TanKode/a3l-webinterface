@@ -91,10 +91,10 @@ class RoleController extends Controller
     {
         $this->authorize('delete', $role);
 
-        foreach($role->users as $user) {
+        foreach ($role->users as $user) {
             $user->retract($role->name);
         }
-        foreach($role->abilities as $ability) {
+        foreach ($role->abilities as $ability) {
             \Bouncer::disallow($role)->to($ability);
         }
         $role->delete();

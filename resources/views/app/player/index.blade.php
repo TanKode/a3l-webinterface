@@ -18,13 +18,19 @@
                 <tr>
                     <th>#</th>
                     <th>{{ trans('messages.name') }}</th>
+                    <th>{{ trans('messages.alias') }}</th>
                     <th>{{ trans('messages.player_id') }}</th>
                     @can('edit-money', App\Player::class)
                         <th>{{ trans('messages.money') }}</th>
                     @endcan
+                    <th></th>
                     <th>{{ trans('messages.cop') }}</th>
+                    <th></th>
                     <th>{{ trans('messages.medic') }}</th>
+                    <th></th>
                     <th>{{ trans('messages.atac') }}</th>
+                    <th>{{ trans('messages.created_at') }}</th>
+                    <th>{{ trans('messages.updated_at') }}</th>
                     <th class="noindex"></th>
                 </tr>
                 </thead>
@@ -33,13 +39,19 @@
                     <tr>
                         <td>{{ $player->getKey() }}</td>
                         <td>{{ $player->name }}</td>
+                        <td>{{ $player->alias }}</td>
                         <td>{{ $player->playerid }}</td>
                         @can('edit-money', App\Player::class)
-                            <td>{{ \Formatter::money($player->total_money) }}</td>
+                            <td class="text-right">{{ \Formatter::money($player->total_money) }}</td>
                         @endcan
+                        <td class="text-right">{{ $player->coplevel }}</td>
                         <td>{{ trans('messages.coplevel.'.$player->coplevel) }}</td>
+                        <td class="text-right">{{ $player->mediclevel }}</td>
                         <td>{{ trans('messages.mediclevel.'.$player->mediclevel) }}</td>
+                        <td class="text-right">{{ $player->ataclevel }}</td>
                         <td>{{ trans('messages.ataclevel.'.$player->ataclevel) }}</td>
+                        <td>{{ $player->created_at }}</td>
+                        <td>{{ $player->updated_at }}</td>
 
                         <td>
                             <div class="btn-group pull-right">
