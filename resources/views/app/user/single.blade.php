@@ -54,6 +54,7 @@
                         'errors' => $errors->get('player_id'),
                     ]) !!}
                 </div>
+                @if(\Auth::id() != $user->getKey())
                 <div class="clearfix"></div>
                 <div class="col-md-12">
                     {!! Form::multiselect('role[]', $roles, null, [
@@ -62,6 +63,7 @@
                         'errors' => $errors->get('role'),
                     ]) !!}
                 </div>
+                @endif
                 <div class="clearfix"></div>
                 @if(!$readonly)
                     <div class="col-md-4">

@@ -32,18 +32,17 @@
                 @endif
             </ul>
             <ul class="nav navbar-nav navbar-right am-user-nav">
-                <li>
-                    <img src="{{ \Auth::User()->avatar(50) }}" class="img-circle padding-15" data-toggle="tooltip" data-placement="bottom" title="{{ \Auth::User()->name }}" />
-                </li>
-                <li>
-                    <a href="https://gummibeer.freshdesk.com/support/tickets/new" target="_blank" data-toggle="tooltip" data-placement="bottom" title="{{ trans('messages.support') }}">
-                        <i class="icon wh-supportalt icon-2x"></i>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                        <img src="{{ \Auth::User()->avatar(50) }}" />
+                        <span class="user-name">{{ \Auth::User()->name }}</span>
+                        <i class="angle-down wh-chevron-down"></i>
                     </a>
-                </li>
-                <li>
-                    <a href="{{ url('auth/logout') }}" data-toggle="tooltip" data-placement="bottom" title="{{ trans('messages.signout') }}">
-                        <i class="icon wh-off"></i>
-                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url('app/user/edit/'.\Auth::id()) }}"> <span class="icon wh-user"></span>{{ trans('messages.profile') }}</a></li>
+                        <li><a href="https://gummibeer.freshdesk.com/support/tickets/new"> <i class="icon wh-supportalt"></i>{{ trans('messages.support') }}</a></li>
+                        <li><a href="{{ url('auth/logout') }}"> <i class="icon wh-off"></i>{{ trans('messages.signout') }}</a></li>
+                    </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right am-icons-nav">

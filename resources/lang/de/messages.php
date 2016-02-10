@@ -33,6 +33,7 @@ return [
     'new_role'      => 'neue Rolle',
     'role'          => 'Rolle',
     'roles'         => 'Rollen',
+    'profile'       => 'Profil',
 
     'dynmarket'     => 'Markt-System',
     'backups'       => 'Backups',
