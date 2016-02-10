@@ -24,8 +24,6 @@ class DashboardController extends Controller
     {
         \Config::set('app.debug', true);
 
-        dd(\Auth::User()->getNotifications()->first());
-
         abort(403);
     }
 }

@@ -5,3 +5,10 @@ if (!function_exists('transd')) {
         return \Helper::transd($key, $default);
     }
 }
+
+if (!function_exists('aurl')) {
+    function aurl($path)
+    {
+        return \Helper::aurl($path);
+    }
+}

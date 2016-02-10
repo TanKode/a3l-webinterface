@@ -20,4 +20,9 @@ class Helper
 
         return ($r + $g + $b > 382) ? '#000000' : '#ffffff';
     }
+
+    public function aurl($path)
+    {
+        return config('app.url') . '/' . trim($path, '/');
+    }
 }

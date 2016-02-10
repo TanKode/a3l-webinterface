@@ -18,6 +18,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::get('register', 'AuthController@getRegister');
     Route::post('register', 'AuthController@postRegister');
     Route::get('logout', 'AuthController@getLogout');
+    Route::get('confirm/{token}', 'AuthController@getConfirm');
 });
 
 Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], function () {

@@ -27,10 +27,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'email',
         'password',
         'player_id',
+        'confirmed',
+        'confirmation_token',
     ];
     protected $hidden = [
         'password',
         'remember_token',
+        'confirmation_token',
     ];
 
     protected $appends = [
@@ -121,5 +124,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         if (!is_array($remove)) $remove = [$remove];
         return self::whereNotIn('id', $remove)->lists('name', 'id');
+    }
+
+    public function scopeConfirmToken($query, $token)
+    {
+        $query->where('confirmation_token', $token);
     }
 }
