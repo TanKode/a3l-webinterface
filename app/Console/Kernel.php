@@ -1,6 +1,7 @@
 <?php
 namespace App\Console;
 
+use App\Console\Commands\LottoCreate;
 use App\Console\Commands\LottoDraw;
 use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
@@ -12,6 +13,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         BackupDatabase::class,
         LottoDraw::class,
+        LottoCreate::class,
     ];
 
     protected function schedule(Schedule $schedule)
