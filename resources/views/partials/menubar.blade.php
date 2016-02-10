@@ -8,42 +8,69 @@
                     <span>{{ trans('menu.dashboard') }}</span>
                 </a>
             </li>
-            <li class="@if(Request::is('app/calendar*')) active @endif">
-                <a href="{{ url('app/calendar') }}" class="text-center">
-                    @if(\App\Event::today()->count())
-                        <span class="badge badge-primary white">{{ \App\Event::today()->count() }}</span>
-                    @endif
-                    <i class="icon wh-calendarthree"></i>
-                    <span>{{ trans('menu.calendar') }}</span>
-                </a>
-            </li>
-            <li class="@if(Request::is('app/chat*')) active @endif">
-                <a href="{{ url('app/chat') }}" class="text-center">
-                    @if(\Auth::User()->newMessagesCount())
-                        <span class="badge badge-primary white">{{ \Auth::User()->newMessagesCount() }}</span>
-                    @endif
-                    <i class="icon wh-chat"></i>
-                    <span>{{ trans('menu.chat') }}</span>
-                </a>
-            </li>
+
             @if(\Auth::User()->hasPlayer())
-            <li class="@if(Request::is('app/message*')) active @endif">
-                <a href="{{ url('app/message') }}" class="text-center">
-                    <i class="icon wh-iphone"></i>
-                    <span>{{ trans('menu.messages') }}</span>
-                </a>
-            </li>
+                <li class="@if(Request::is('app/message*')) active @endif">
+                    <a href="{{ url('app/message') }}" class="text-center">
+                        <i class="icon wh-iphone"></i>
+                        <span>{{ trans('menu.messages') }}</span>
+                    </a>
+                </li>
             @endif
-            <li class="@if(Request::is('app/forum*')) active @endif">
-                <a href="{{ url('app/forum') }}" class="text-center">
-                    <i class="icon wh-forumsalt"></i>
-                    <span>{{ trans('menu.forum') }}</span>
+            @if(\Auth::User()->hasPlayer())
+                <li class="@if(Request::is('app/lotto*')) active @endif">
+                    <a href="{{ url('app/lotto') }}" class="text-center">
+                        <span class="badge badge-primary white pull-right">new</span>
+                        <i class="icon wh-piggybank"></i>
+                        <span>{{ trans('menu.lotto') }}</span>
+                    </a>
+                </li>
+            @endif
+
+            <li class="parent">
+                <a href="#" class="text-center">
+                    <i class="icon wh-community"></i>
+                    <span>{{ trans('menu.community') }}</span>
                 </a>
+                <ul class="sub-menu">
+                    <li class="title">{{ trans('menu.community') }}</li>
+                    <li class="nav-items">
+                        <div class="am-scroller nano has-scrollbar"><div class="content nano-content">
+                                <ul>
+                                    <li class="@if(Request::is('app/calendar*')) active @endif">
+                                        <a href="{{ url('app/calendar') }}" class="white">
+                                            @if(\App\Event::today()->count())
+                                                <span class="badge badge-primary white">{{ \App\Event::today()->count() }}</span>
+                                            @endif
+                                            <i class="icon wh-calendarthree"></i>
+                                            <span>{{ trans('menu.calendar') }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="@if(Request::is('app/chat*')) active @endif">
+                                        <a href="{{ url('app/chat') }}" class="white">
+                                            @if(\Auth::User()->newMessagesCount())
+                                                <span class="badge badge-primary white">{{ \Auth::User()->newMessagesCount() }}</span>
+                                            @endif
+                                            <i class="icon wh-chat"></i>
+                                            <span>{{ trans('menu.chat') }}</span>
+                                        </a>
+                                    </li>
+                                    <li class="@if(Request::is('app/forum*')) active @endif">
+                                        <a href="{{ url('app/forum') }}" class="white">
+                                            <i class="icon wh-forumsalt"></i>
+                                            <span>{{ trans('menu.forum') }}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </li>
 
             @can('access-support')
             <li class="parent">
-                <a href="#">
+                <a href="#" class="text-center">
                     <i class="icon wh-supportalt"></i>
                     <span>{{ trans('menu.support') }}</span>
                 </a>
@@ -80,7 +107,7 @@
 
             @can('access-admin')
             <li class="parent">
-                <a href="#">
+                <a href="#" class="text-center">
                     <i class="icon wh-lock"></i>
                     <span>{{ trans('menu.admin') }}</span>
                 </a>

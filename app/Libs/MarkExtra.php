@@ -863,6 +863,7 @@ class MarkExtra
     public static function parse($text)
     {
         $text = addslashes(htmlentities($text));
+        $text = nl2br($text);
         $text = \Markdown::parse($text);
         $text = str_replace('<img ', '<img class="img-responsive" ', $text);
         $text = self::transformTwemoji($text);

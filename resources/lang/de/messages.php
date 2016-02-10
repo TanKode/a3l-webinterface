@@ -28,6 +28,7 @@ return [
     'delete'        => 'löschen',
     'close'         => 'schließen',
     'send'          => 'absenden',
+    'buy'           => 'kaufen für :price',
 
     'new_role'      => 'neue Rolle',
     'role'          => 'Rolle',
@@ -41,6 +42,8 @@ return [
     'revision_log'  => 'Veränderungen',
     'new_event'     => 'neues Event',
     'events_today'  => 'Events heute',
+
+    'read_all_notify' => 'alle Benachrichtigungen lesen',
 
     'name'          => 'Name',
     'alias'         => 'Alias',
@@ -92,6 +95,18 @@ return [
     'coplicenses'   => 'Cop-Lizenzen',
     'mediclicenses' => 'Medic-Lizenzen',
     'ataclicenses'  => 'ATAC-Lizenzen',
+
+    'lotto'         => 'Lotto',
+    'jackpot'       => 'Jackpot',
+    'next_draw'     => 'nächste Ziehung: :date',
+    'number_1'      => 'Zahl 1',
+    'number_2'      => 'Zahl 2',
+    'number_3'      => 'Zahl 3',
+    'number_4'      => 'Zahl 4',
+    'number_5'      => 'Zahl 5',
+    'number_6'      => 'Zahl 6',
+    'lotto_bet_info'=> 'Du kannst für jede Ziehung einen Tipp abgeben. Ein Ticket kostet :bet_cost - die Kosten werden dir zum Zeitpunkt der Ziehung abgezogen, falls du dann nicht mehr genug Geld hast ist auch dein Lotterieschein ungültig.',
+    'lotto_closed'  => 'Leider ist die Lotterie gerade geschlossen. Versuche es später noch einmal.',
 
     'coplevel'      => [
         0 => 'Zivilist',

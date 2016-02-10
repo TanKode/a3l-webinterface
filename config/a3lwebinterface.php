@@ -15,4 +15,24 @@ return [
         '14:00',
         '20:00',
     ],
+
+    'lotto' => [
+        'cost' => 25000,
+        'draw' => [
+            'day' => \Carbon\Carbon::FRIDAY,
+            'new' => \Carbon\Carbon::MONDAY,
+            'time' => '20:00',
+        ],
+        'jackpot' => [
+            2500000,
+            10000000,
+        ],
+        'profits' => [
+            2 => 0.01,
+            3 => 0.1,
+            4 => 0.25,
+            5 => 0.5,
+            6 => 1,
+        ],
+    ],
 ];

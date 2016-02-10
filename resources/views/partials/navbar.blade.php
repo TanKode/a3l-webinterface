@@ -46,6 +46,9 @@
                     </a>
                 </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right am-icons-nav">
+                @include('partials.notifications')
+            </ul>
         </div>
     </div>
 </nav>

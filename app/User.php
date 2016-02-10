@@ -4,6 +4,7 @@ namespace App;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Thread;
 use Cmgmyr\Messenger\Traits\Messagable;
+use Fenos\Notifynder\Notifable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +18,7 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRolesAndAbilities, SoftDeletes, Messagable;
+    use Authenticatable, Authorizable, CanResetPassword, HasRolesAndAbilities, SoftDeletes, Messagable, Notifable;
 
     protected $table = 'users';
 

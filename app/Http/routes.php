@@ -24,6 +24,11 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
     Route::get('dashboard', 'DashboardController@getIndex');
     Route::get('test', 'DashboardController@getTest');
 
+    Route::group(['prefix' => 'lotto'], function () {
+        Route::get('/', 'LottoController@getIndex');
+        Route::post('/bet', 'LottoController@postBet');
+    });
+
     Route::group(['prefix' => 'calendar'], function () {
         Route::get('/', 'CalendarController@getIndex');
         Route::post('/add-event', 'CalendarController@postAddEvent');
@@ -69,6 +74,7 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::post('/edit/{user}', 'UserController@postEdit');
         Route::get('/delete/{user}', 'UserController@getDelete');
         Route::get('/{user}', 'UserController@getShow');
+        Route::get('/read-notify/{notification}', 'UserController@getReadNotify');
     });
 
     Route::group(['prefix' => 'role'], function () {

@@ -15,4 +15,6 @@ return [
     'messages' => 'SMS',
     'support' => 'Support',
     'admin' => 'Admin',
+    'lotto' => 'Lotto',
+    'community' => 'Community',
 ];

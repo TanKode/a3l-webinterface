@@ -70,4 +70,14 @@ class UserController extends Controller
         $user->delete();
         return redirect('app/user');
     }
+
+    public function getReadNotify($notificationId)
+    {
+        if(empty($notificationId)) {
+            \Auth::User()->readAllNotifications();
+        } else {
+            \Notify::readOne($notificationId);
+        }
+        return back();
+    }
 }
