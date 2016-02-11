@@ -38,12 +38,12 @@
                     </td>
                     <td>
                         @if(!($history->key == 'created_at' && !$history->old_value))
-                            {{ is_array($history->oldValue()) ? json_encode($history->oldValue()) : $history->oldValue() }}
+                            {{ $history->old_value }}
                         @endif
                     </td>
                     <td>
                         @if(!($history->key == 'created_at' && !$history->old_value))
-                            {{ is_array($history->newValue()) ? json_encode($history->newValue()) : $history->newValue() }}
+                            {{ $history->new_value }}
                         @endif
                     </td>
                     <td>{{ $history->created_at }}</td>

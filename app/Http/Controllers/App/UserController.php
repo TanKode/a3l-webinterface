@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Venturecraft\Revisionable\Revision;
 
 class UserController extends Controller
 {
@@ -57,8 +58,27 @@ class UserController extends Controller
             $data['password'] = bcrypt($data['password']);
         }
 
+        if($user->email != array_get($data, 'email', $user->email)) {
+            $user->unconfirm();
+        }
+
         $user->fill($data);
-        $user->role = array_get($data, 'role', []);
+        if(!is_null(array_get($data, 'role', null))) {
+            $roles = array_get($data, 'role', []);
+            if(count($user->role) != count(array_intersect($user->role, $roles)) || count($roles) != count(array_intersect($user->role, $roles))) {
+                \DB::table((new Revision())->getTable())->insert([
+                    'revisionable_type' => get_class($user),
+                    'revisionable_id' => $user->getKey(),
+                    'key' => 'role',
+                    'old_value' => json_encode($user->role),
+                    'new_value' => json_encode($roles),
+                    'user_id' => \Auth::check() ? \Auth::id() : null,
+                    'created_at' => new \DateTime(),
+                    'updated_at' => new \DateTime(),
+                ]);
+            }
+            $user->role = $roles;
+        }
         $user->save();
         $user->assign('member');
         return redirect('app/user/edit/' . $user->getKey());

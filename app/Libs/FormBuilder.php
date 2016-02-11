@@ -119,11 +119,12 @@ class FormBuilder extends CollectiveFormBuilder
         $errors = array_get($options, 'errors', []);
         $container = array_get($options, 'container', true);
         $label = array_get($options, 'label', null);
+        $state = array_get($options, 'state', null);
 
         if (!$container) return $input;
 
         $html = '';
-        $html .= '<div class="form-group">';
+        $html .= '<div class="form-group '.(is_null($state) ? '' : 'has-'.$state).'">';
         $html .= $this->label($options['id'], $label);
         $html .= empty($icon) ? '' : '<div class="input-group">';
         $html .= empty($icon) ? '' : '<span class="input-group-addon"><i class="icon ' . $icon . '"></i></span>';
@@ -160,6 +161,7 @@ class FormBuilder extends CollectiveFormBuilder
         unset($options['icon']);
         unset($options['errors']);
         unset($options['container']);
+        unset($options['state']);
         return $options;
     }
 }

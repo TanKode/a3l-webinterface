@@ -28,15 +28,12 @@ class LottoDraw extends Command
         $this->comment('jackpot: ' . \Formatter::money($lottoDraw->jackpot));
         $this->comment('draw: ' . $lottoDraw->week . ' @ ' . $lottoDraw->year);
 
-        $drawNumbers = explode(',', $lottoDraw->numbers);
-        $profits = config('a3lwebinterface.lotto.profits');
         foreach($lottoDraw->users as $user) {
             if($user->hasPlayer()) {
                 $player = $user->player;
                 if($player->bankacc >= config('a3lwebinterface.lotto.cost')) {
-                    $betNumbers = explode(',', $user->pivot->numbers);
-                    $correct = count(array_intersect($drawNumbers, $betNumbers));
-                    $profit = array_get($profits, $correct, 0) * $lottoDraw->jackpot;
+                    $correct = $lottoDraw->getCorrectsByNumbers($user->pivot->numbers);
+                    $profit = $lottoDraw->getProfitByNumbers($user->pivot->numbers);
                     $player->bankacc -= config('a3lwebinterface.lotto.cost');
                     $player->bankacc += $profit;
                     $player->save();

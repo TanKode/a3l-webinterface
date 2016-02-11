@@ -7,7 +7,7 @@
     <div class="user-profile margin-top-50">
         <div class="user-display">
             <div class="bottom">
-                <div class="user-avatar"><span class="status"></span><img src="{{ $user->avatar(150) }}"></div>
+                <div class="user-avatar"><img src="{{ $user->avatar(150) }}"></div>
                 <div class="user-info">
                     <h4>
                         {{ $user->name }}
@@ -83,6 +83,7 @@
                             'label' => trans('messages.confirmation_token'),
                             'readonly' => true,
                             'icon' => $user->confirmed ? 'wh-ok' : 'wh-remove',
+                            'state' => $user->confirmed ? 'success' : 'error',
                         ]) !!}
                     </div>
                     <div class="clearfix"></div>

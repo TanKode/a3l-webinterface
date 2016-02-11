@@ -19,6 +19,7 @@ return [
     'remember_me'   => 'Angemeldet bleiben',
     'player_id'     => 'Spieler-ID',
     'confirmation_token' => 'Bestätigungs-Token',
+    'confirmed'     => 'Bestätigt',
 
     'signin'        => 'anmelden',
     'signup'        => 'registrieren',
@@ -86,6 +87,7 @@ return [
     'new_chat'      => 'neuer Chat',
     'recipients'    => 'Empfänger',
 
+    'player'        => 'Spieler',
     'cop'           => 'Polizist',
     'cops'          => 'Polizisten',
     'medic'         => 'Sanitäter',
@@ -108,8 +110,13 @@ return [
     'number_4'      => 'Zahl 4',
     'number_5'      => 'Zahl 5',
     'number_6'      => 'Zahl 6',
+    'numbers'       => 'Zahlen',
+    'corrects'      => 'Richtige',
+    'profit'        => 'Gewinn',
+    'bets'          => 'Wetten',
     'lotto_bet_info'=> 'Du kannst für jede Ziehung einen Tipp abgeben. Ein Ticket kostet :bet_cost - die Kosten werden dir zum Zeitpunkt der Ziehung abgezogen, falls du dann nicht mehr genug Geld hast ist auch dein Lotterieschein ungültig.',
     'lotto_closed'  => 'Leider ist die Lotterie gerade geschlossen. Versuche es später noch einmal.',
+    'jackpot_hint'  => 'Hinweis: Die Summe aller Lotto-Zahlen ist :sum - viel Erfolg beim wetten.',
 
     'coplevel'      => [
         0 => 'Zivilist',

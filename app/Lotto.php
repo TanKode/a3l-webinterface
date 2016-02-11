@@ -17,7 +17,7 @@ class Lotto extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_lottos', 'lotto_id', 'user_id')->withPivot('numbers');
+        return $this->belongsToMany(User::class, 'user_lottos', 'lotto_id', 'user_id')->withPivot('numbers', 'created_at');
     }
 
     public function setNumbersAttribute()
@@ -70,5 +70,22 @@ class Lotto extends Model
         $now->hour = explode(':', config('a3lwebinterface.lotto.draw.time'))[0];
         $now->minute = explode(':', config('a3lwebinterface.lotto.draw.time'))[1];
         return $now;
+    }
+
+    public function getCorrectsByNumbers($numbers)
+    {
+        if(is_string($numbers)) $numbers = explode(',', $numbers);
+        return count(array_intersect(explode(',', $this->numbers), $numbers));
+    }
+
+    public function getProfitByNumbers($numbers)
+    {
+        $correct = $this->getCorrectsByNumbers($numbers);
+        return array_get(config('a3lwebinterface.lotto.profits'), $correct, 0) * $this->jackpot;
+    }
+
+    public function getNumbersSum()
+    {
+        return array_sum(explode(',', $this->numbers));
     }
 }

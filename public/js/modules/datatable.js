@@ -22,7 +22,13 @@ var App = (function () {
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
-                    "url": "vehicle/datatable"
+                    "url": "vehicle/datatable",
+                    "beforeSend": function () {
+                        loader().show();
+                    }
+                },
+                "drawCallback": function () {
+                    loader().hide();
                 },
                 "columns": [
                     {"data": "id"},

@@ -34,4 +34,6 @@
             </div>
         </section>
     </div>
+
+    @include('app.lotto.widget.bets')
 @endsection

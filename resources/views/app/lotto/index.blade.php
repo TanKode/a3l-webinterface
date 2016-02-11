@@ -13,6 +13,9 @@
                 'date' => $lotto->getNextDrawDate()->format('d.m.Y H:i'),
             ]),
             trans('messages.jackpot') . ': ' . \Formatter::money($lotto->jackpot),
+            trans('messages.jackpot_hint', [
+                'sum' => $lotto->getNumbersSum(),
+            ])
         ]) !!}
         <section class="panel-body">
             {!! Form::open([
@@ -84,4 +87,6 @@
             {!! Form::close() !!}
         </section>
     </div>
+
+    @include('app.lotto.widget.bets')
 @endsection

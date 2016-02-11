@@ -2,6 +2,7 @@
 namespace App\Libs;
 
 use App\Event;
+use App\Lotto;
 use App\Player;
 use App\Role;
 use App\User;
@@ -45,6 +46,9 @@ class BouncerSeeder
         ForumCategory::class => [
             'edit',
             'delete',
+        ],
+        Lotto::class => [
+            'view',
         ],
     ];
 

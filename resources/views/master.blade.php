@@ -21,6 +21,12 @@
 </head>
 <body class="@yield('body-class')">
 
+<div id="site-loader">
+    <span class="vertical-middle">
+        <i class="icon wh-loadingflowcw icon-spin icon-5x"></i>
+    </span>
+</div>
+
 <div class="am-wrapper am-fixed-sidebar @yield('body-class')">
     @yield('pre-content')
     <div class="am-content @yield('content-class')">
@@ -56,6 +62,7 @@
 <script src="{{ asset('js/modules/licenses.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/modules/forum.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/modules/markdown.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/jquery.main.js') }}" type="text/javascript"></script>
 @yield('scripts')
 <script type="text/javascript">
     jQuery(window).on('load', function() {

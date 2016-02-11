@@ -57,7 +57,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'email' => 'required|email|max:255',
             'player_id' => 'required|numeric|exists:arma.players,playerid',
             'password' => 'confirmed|min:6',
-            'role' => 'required|array',
+            'role' => 'array',
         ],
     ];
 
@@ -153,5 +153,17 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'confirmed' => 1,
             'confirmation_token' => '',
         ]);
+    }
+
+    public function unconfirm()
+    {
+        $update = $this->update([
+            'confirmed' => 0,
+            'confirmation_token' => str_random(32),
+        ]);
+        if($update) {
+            $this->sendVerificationEmail();
+        }
+        return $update;
     }
 }

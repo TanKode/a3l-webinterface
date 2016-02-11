@@ -1,0 +1,25 @@
+#site-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background: fade(@color-grey-700, 50%);
+  z-index: 10000;
+
+  .vertical-middle {
+    display: block;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    .icon {
+      color: @color-white;
+    }
+  }
+}
