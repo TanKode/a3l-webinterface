@@ -89,7 +89,9 @@
                     <div class="clearfix"></div>
                     <div class="col-md-12">
                         <div class="btn-group pull-right">
-                            <a href="{{ url('app/user/send-verify-mail/'.$user->getKey()) }}" class="btn btn-success">{{ trans('messages.send_verify_mail') }}</a>
+                            @if(!$user->confirmed)
+                                <a href="{{ url('app/user/send-verify-mail/'.$user->getKey()) }}" class="btn btn-success">{{ trans('messages.send_verify_mail') }}</a>
+                            @endif
                             {!! Form::submit(trans('messages.save'), [
                                 'class' => 'btn-warning',
                             ]) !!}

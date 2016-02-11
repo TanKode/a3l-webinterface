@@ -15,7 +15,7 @@
 
     <div style="Margin-left: 20px;Margin-right: 20px;">
         <p class="size-16" style="Margin-top: 16px;Margin-bottom: 20px;font-size: 16px;line-height: 24px;">
-            You have registered for a membership at "{{ trans('messages.title') }}", to get access to the Tool pleas verify your E-Mail address.
+            You have registered for a membership at "{{ trans('messages.title') }}", to get access to the Tool please verify your E-Mail address.
         </p>
     </div>
 
