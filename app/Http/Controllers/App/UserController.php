@@ -80,4 +80,14 @@ class UserController extends Controller
         }
         return back();
     }
+
+    public function getSendVerificationMail(User $user)
+    {
+        $this->authorize('edit', $user);
+
+        if(!$user->confirmed && $user->confirmation_token != '') {
+            $user->sendVerificationEmail();
+        }
+        return back();
+    }
 }

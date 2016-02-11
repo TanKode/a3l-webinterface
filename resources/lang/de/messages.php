@@ -18,6 +18,7 @@ return [
     'confirm'       => 'bestätigen',
     'remember_me'   => 'Angemeldet bleiben',
     'player_id'     => 'Spieler-ID',
+    'confirmation_token' => 'Bestätigungs-Token',
 
     'signin'        => 'anmelden',
     'signup'        => 'registrieren',
@@ -29,6 +30,7 @@ return [
     'close'         => 'schließen',
     'send'          => 'absenden',
     'buy'           => 'kaufen für :price',
+    'send_verify_mail' => 'Bestätigungsmail senden',
 
     'new_role'      => 'neue Rolle',
     'role'          => 'Rolle',

@@ -130,4 +130,28 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         $query->where('confirmation_token', $token);
     }
+
+    public function scopeUnconfirmed($query)
+    {
+        $query->where('confirmed', 0);
+    }
+
+    public function sendVerificationEmail()
+    {
+        $user = $this;
+        \Mail::send('emails.verification', [
+            'user' => $user,
+        ], function ($mail) use ($user) {
+            $mail->from('noreply@gummibeer.de', trans('messages.title'));
+            $mail->to($user->email, $user->name)->subject('E-Mail verification.');
+        });
+    }
+
+    public function confirm()
+    {
+        return $this->update([
+            'confirmed' => 1,
+            'confirmation_token' => '',
+        ]);
+    }
 }

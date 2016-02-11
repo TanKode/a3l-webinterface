@@ -33,12 +33,7 @@ class AuthController extends Controller
         ]);
         $user->assign('member');
         $user->allow('edit', $user);
-        \Mail::send('emails.verification', [
-            'user' => $user,
-        ], function ($m) use ($user) {
-            $m->from('noreply@gummibeer.de', trans('messages.title'));
-            $m->to($user->email, $user->name)->subject('E-Mail verification.');
-        });
+        $user->sendVerificationEmail();
         return $user;
     }
 
@@ -60,13 +55,11 @@ class AuthController extends Controller
 
     public function getConfirm($token)
     {
-        $user = User::confirmToken($token)->first();
+        $user = User::unconfirmed()->confirmToken($token)->first();
         if(!is_null($user)) {
-            $user->update([
-                'confirmed' => 1,
-                'confirmation_token' => '',
-            ]);
-            \Auth::login($user);
+            if($user->confirm()) {
+                \Auth::login($user);
+            }
 
             return redirect($this->redirectPath());
         }

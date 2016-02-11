@@ -78,11 +78,21 @@
                             'errors' => $errors->get('password_confirmation'),
                         ]) !!}
                     </div>
+                    <div class="col-md-4">
+                        {!! Form::text('confirmation_token', null, [
+                            'label' => trans('messages.confirmation_token'),
+                            'readonly' => true,
+                            'icon' => $user->confirmed ? 'wh-ok' : 'wh-remove',
+                        ]) !!}
+                    </div>
                     <div class="clearfix"></div>
                     <div class="col-md-12">
-                        {!! Form::submit(trans('messages.save'), [
-                            'class' => 'btn-warning pull-right',
-                        ]) !!}
+                        <div class="btn-group pull-right">
+                            <a href="{{ url('app/user/send-verify-mail/'.$user->getKey()) }}" class="btn btn-success">{{ trans('messages.send_verify_mail') }}</a>
+                            {!! Form::submit(trans('messages.save'), [
+                                'class' => 'btn-warning',
+                            ]) !!}
+                        </div>
                     </div>
                 @endif
             </div>

@@ -74,8 +74,9 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::get('/edit/{user}', 'UserController@getEdit');
         Route::post('/edit/{user}', 'UserController@postEdit');
         Route::get('/delete/{user}', 'UserController@getDelete');
-        Route::get('/{user}', 'UserController@getShow');
         Route::get('/read-notify/{notification}', 'UserController@getReadNotify');
+        Route::get('/send-verify-mail/{user}', 'UserController@getSendVerificationMail');
+        Route::get('/{user}', 'UserController@getShow');
     });
 
     Route::group(['prefix' => 'role'], function () {
