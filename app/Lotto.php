@@ -65,11 +65,20 @@ class Lotto extends Model
 
     public function getNextDrawDate()
     {
-        $now = Carbon::now(config('app.timezone'))->next(config('a3lwebinterface.lotto.draw.day'));
-        $now->second = 0;
-        $now->hour = explode(':', config('a3lwebinterface.lotto.draw.time'))[0];
-        $now->minute = explode(':', config('a3lwebinterface.lotto.draw.time'))[1];
-        return $now;
+        $now = Carbon::now(config('app.timezone'));
+        $next = Carbon::now(config('app.timezone'))->next(config('a3lwebinterface.lotto.draw.day'));
+        $parts = explode(':', config('a3lwebinterface.lotto.draw.time'));
+        $hour = $parts[0];
+        $minute = $parts[1];
+        if($now->dayOfWeek == config('a3lwebinterface.lotto.draw.day')) {
+            $draw = $now->setTime($hour, $minute, 0);
+        } else {
+            $draw = $next->setTime($hour, $minute, 0);
+        }
+        if($draw->diffInSeconds(null, false) > 0) {
+            $draw = $next->setTime($hour, $minute, 0);
+        }
+        return $draw;
     }
 
     public function getCorrectsByNumbers($numbers)
