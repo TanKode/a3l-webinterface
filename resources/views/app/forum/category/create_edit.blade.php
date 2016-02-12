@@ -34,9 +34,12 @@
                         {!! Form::hidden('weight', 0) !!}
                         {!! Form::hidden('enable_threads', 1) !!}
                         {!! Form::hidden('private', 0) !!}
-                        {!! Form::submit(trans('messages.save'), [
-                            'class' => 'btn-warning pull-right',
-                        ]) !!}
+                        <div class="btn-group pull-right">
+                            <a href="{{ url('app/forum/category/'.$category->getKey()) }}" class="btn btn-default">{{ trans('forum::general.cancel') }}</a>
+                            {!! Form::submit(trans('messages.save'), [
+                                'class' => 'btn-warning pull-right',
+                            ]) !!}
+                        </div>
                     </div>
                 </div>
             </div>

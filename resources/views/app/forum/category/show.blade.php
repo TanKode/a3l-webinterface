@@ -5,11 +5,14 @@
         <div class="panel">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
+                    @can ('createThreads', $category)
+                        <a href="{{ url('app/forum/category/'.$category->getKey().'/thread/create') }}" class="btn btn-success">{{ trans('forum::threads.new_thread') }}</a>
+                    @endcan
                     @can('edit', $category)
-                    <a href="{{ url('app/forum/category/edit/'.$category->getKey()) }}" class="btn btn-warning">{{ trans('forum::general.edit') }}</a>
+                        <a href="{{ url('app/forum/category/edit/'.$category->getKey()) }}" class="btn btn-warning">{{ trans('forum::general.edit') }}</a>
                     @endcan
                     @can('delete', $category)
-                    <a href="{{ url('app/forum/category/delete/'.$category->getKey()) }}" class="btn btn-danger">{{ trans('forum::general.delete') }}</a>
+                        <a href="{{ url('app/forum/category/delete/'.$category->getKey()) }}" class="btn btn-danger">{{ trans('forum::general.delete') }}</a>
                     @endcan
                 </div>
                 <div class="pull-left">
@@ -39,9 +42,6 @@
                                         @endif
                                         @if ($thread->pinned)
                                             <span class="label label-info">{{ trans('forum::threads.pinned') }}</span>
-                                        @endif
-                                        @if ($thread->userReadStatus && !$thread->trashed())
-                                            <span class="label label-primary">{{ trans($thread->userReadStatus) }}</span>
                                         @endif
                                         @if ($thread->trashed())
                                             <span class="label label-danger">{{ trans('forum::general.deleted') }}</span>

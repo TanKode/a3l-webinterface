@@ -30,7 +30,6 @@
                             <th class="col-md-2">{{ trans_choice('forum::threads.thread', 2) }}</th>
                             <th class="col-md-2">{{ trans_choice('forum::posts.post', 2) }}</th>
                             <th class="col-md-2">{{ trans('forum::threads.newest') }}</th>
-                            <th class="col-md-2">{{ trans('forum::posts.last') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -48,17 +47,9 @@
                                     <td>{{ $subcategory->postCount }}</td>
                                     <td>
                                         @if($subcategory->newestThread)
-                                            <a href="{{ \Forum::route('forum.thread.show', $subcategory->newestThread) }}">
+                                            <a href="{{ url('app/forum/category/' . $subcategory->getKey().'/thread/'.$subcategory->newestThread->getKey()) }}">
                                                 {{ $subcategory->newestThread->title }}
                                                 ({{ $subcategory->newestThread->authorName }})
-                                            </a>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if($subcategory->latestActiveThread)
-                                            <a href="{{ \Forum::route('forum.post.show', $subcategory->latestActiveThread->lastPost) }}">
-                                                {{ $subcategory->latestActiveThread->title }}
-                                                ({{ $subcategory->latestActiveThread->lastPost->authorName }})
                                             </a>
                                         @endif
                                     </td>

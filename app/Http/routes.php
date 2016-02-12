@@ -65,6 +65,12 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
                 Route::post('/create', 'ThreadController@postCreate');
                 Route::get('/{forum_thread}', 'ThreadController@getShow');
                 Route::post('/{forum_thread}/reply', 'ThreadController@postReply');
+
+                Route::group(['prefix' => '{forum_thread}/post/{forum_post}'], function () {
+                    Route::get('/edit', 'PostController@getEdit');
+                    Route::post('/edit', 'PostController@postEdit');
+                    Route::get('/delete', 'PostController@getDelete');
+                });
             });
         });
     });

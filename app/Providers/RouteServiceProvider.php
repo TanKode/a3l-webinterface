@@ -12,6 +12,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Riari\Forum\Models\Category as ForumCategory;
 use Riari\Forum\Models\Thread as ForumThread;
+use Riari\Forum\Models\Post as ForumPost;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->model('forum_category', ForumCategory::class);
         $router->model('forum_thread', ForumThread::class);
+        $router->model('forum_post', ForumPost::class);
 
         $router->model('event', Event::class);
         $router->model('user', User::class);
