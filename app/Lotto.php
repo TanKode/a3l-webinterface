@@ -48,7 +48,7 @@ class Lotto extends Model
     public function scopeLast($query)
     {
         $lastDraw = $this->getNextDrawDate()->subDays(7);
-        $query->year($lastDraw->year)->week($lastDraw->week);
+        $query->year($lastDraw->year)->week($lastDraw->weekOfYear);
     }
 
     public function scopeYear($query, $year = null)
