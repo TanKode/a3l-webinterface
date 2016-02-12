@@ -2,6 +2,7 @@
 
 return [
     'title'         => 'Pyro-Life',
+    'site_description' => 'Der Einzige deutsche Life-Server mit der aktuellsten Taviana Karte, mit einer wachsenden Arma 3 Rollenspiel Community. In Kooperation mit dem PYROLYSE Team.',
 
     'support'       => 'Support für das WebInterface',
     'unread_messages' => 'ungelesene Nachrichten',
