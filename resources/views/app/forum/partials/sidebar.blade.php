@@ -13,12 +13,25 @@
                 </ul>
                 @foreach($categoryList as $category)
                     @can('view', $category)
-                        <p class="title">{{ $category->title }}</p>
+                        <p class="title">
+                            {{ $category->title }}
+                            @can('edit', App\Role::class)
+                                #{{ $category->getKey() }}
+                            @endcan
+                        </p>
                         <ul class="nav">
                             @if(!$category->children->isEmpty())
                                 @foreach($category->children as $subcategory)
                                     @can('view', $subcategory)
-                                        <li><a href="{{ url('app/forum/category/' . $subcategory->getKey()) }}"><i class="icon wh-forumsalt"></i> {{ $subcategory->title }}</a></li>
+                                        <li>
+                                            <a href="{{ url('app/forum/category/' . $subcategory->getKey()) }}">
+                                                <i class="icon wh-forumsalt"></i>
+                                                {{ $subcategory->title }}
+                                                @can('edit', App\Role::class)
+                                                    #{{ $subcategory->getKey() }}
+                                                @endcan
+                                            </a>
+                                        </li>
                                     @endcan
                                 @endforeach
                             @endif

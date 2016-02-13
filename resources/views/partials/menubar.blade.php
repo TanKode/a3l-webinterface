@@ -10,20 +10,34 @@
             </li>
 
             @if(\Auth::User()->hasPlayer())
-                <li class="@if(Request::is('app/message*')) active @endif">
-                    <a href="{{ url('app/message') }}" class="text-center">
-                        <i class="icon wh-iphone"></i>
-                        <span>{{ trans('menu.messages') }}</span>
+                <li class="parent">
+                    <a href="#" class="text-center">
+                        <i class="icon wh-gameboy"></i>
+                        <span>{{ trans('menu.ingame') }}</span>
                     </a>
-                </li>
-            @endif
-            @if(\Auth::User()->hasPlayer())
-                <li class="@if(Request::is('app/lotto*')) active @endif">
-                    <a href="{{ url('app/lotto') }}" class="text-center">
-                        <span class="badge badge-primary white pull-right">new</span>
-                        <i class="icon wh-piggybank"></i>
-                        <span>{{ trans('menu.lotto') }}</span>
-                    </a>
+                    <ul class="sub-menu">
+                        <li class="title">{{ trans('menu.ingame') }}</li>
+                        <li class="nav-items">
+                            <div class="am-scroller nano has-scrollbar"><div class="content nano-content">
+                                    <ul>
+                                        <li class="@if(Request::is('app/message*')) active @endif">
+                                            <a href="{{ url('app/message') }}" class="white">
+                                                <i class="icon wh-iphone"></i>
+                                                <span>{{ trans('menu.messages') }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="@if(Request::is('app/lotto*')) active @endif">
+                                            <a href="{{ url('app/lotto') }}" class="white">
+                                                <span class="badge badge-primary white pull-right">new</span>
+                                                <i class="icon wh-piggybank"></i>
+                                                <span>{{ trans('menu.lotto') }}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </li>
             @endif
 

@@ -17,4 +17,5 @@ return [
     'admin' => 'Admin',
     'lotto' => 'Lotto',
     'community' => 'Community',
+    'ingame' => 'Ingame',
 ];

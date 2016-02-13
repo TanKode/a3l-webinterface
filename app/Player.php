@@ -72,6 +72,11 @@ class Player extends Model
         return Message::where('fromID', $this->playerid)->orWhere('toID', $this->playerid)->orderBy('time', 'desc')->get();
     }
 
+    public function skills()
+    {
+        return $this->hasOne(Skillsys::class, 'playerid', 'playerid');
+    }
+
     public function messagesWithPlayer($player)
     {
         $playerId = $this->playerid;

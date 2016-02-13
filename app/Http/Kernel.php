@@ -1,6 +1,7 @@
 <?php
 namespace App\Http;
 
+use App\Http\Middleware\AntiIframe;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\ForceDomain;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -22,6 +23,7 @@ class Kernel extends HttpKernel
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         VerifyCsrfToken::class,
         ForceDomain::class,
+        AntiIframe::class,
     ];
 
     /**

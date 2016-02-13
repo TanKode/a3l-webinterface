@@ -1,6 +1,8 @@
 <?php
 namespace App\Console;
 
+use App\Console\Commands\CarInsurance;
+use App\Console\Commands\CreateStats;
 use App\Console\Commands\LottoCreate;
 use App\Console\Commands\LottoDraw;
 use Carbon\Carbon;
@@ -14,12 +16,15 @@ class Kernel extends ConsoleKernel
         BackupDatabase::class,
         LottoDraw::class,
         LottoCreate::class,
+        CreateStats::class,
+        CarInsurance::class,
     ];
 
     protected function schedule(Schedule $schedule)
     {
         foreach (config('a3lwebinterface.restarts') as $restart) {
             $schedule->command('db:backup')->timezone(config('app.timezone'))->dailyAt($restart);
+            $schedule->command('stats:create')->timezone(config('app.timezone'))->dailyAt($restart);
         }
         $schedule->command('bouncer:seed')->everyThirtyMinutes();
 

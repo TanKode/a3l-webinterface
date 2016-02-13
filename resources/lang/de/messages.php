@@ -33,6 +33,7 @@ return [
     'send'          => 'absenden',
     'buy'           => 'kaufen für :price',
     'send_verify_mail' => 'Bestätigungsmail senden',
+    'insure'        => 'versichern',
 
     'new_role'      => 'neue Rolle',
     'role'          => 'Rolle',
@@ -50,6 +51,7 @@ return [
 
     'read_all_notify' => 'alle Benachrichtigungen lesen',
 
+    'vehicle'       => 'Fahrzeug',
     'name'          => 'Name',
     'alias'         => 'Alias',
     'money'         => 'Geld',
@@ -64,6 +66,8 @@ return [
     'gangbank'      => 'Gang-Bank',
     'created_at'    => 'erstellt am',
     'updated_at'    => 'geändert am',
+    'vehicle_insurance' => 'Fahrzeug-Versicherung',
+    'insured_vehicles' => 'versicherte Fahrzeuge',
 
     'user'          => 'Benutzer',
     'action'        => 'Aktion',
@@ -158,6 +162,7 @@ return [
     'errors' => [
         403 => 'nicht berechtigt',
         404 => 'nicht gefunden',
+        500 => 'Fehler',
     ],
 
     'confirms' => [

@@ -16,6 +16,8 @@ class Vehicle extends Model
         'plate',
         'color',
         'inventory',
+        'insured',
+        'insured_at',
     ];
     protected $hidden = [];
 
@@ -47,6 +49,31 @@ class Vehicle extends Model
         return $query->where('alive', 1);
     }
 
+    public function scopeDestroyed($query)
+    {
+        return $query->where('alive', 0);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
+
+    public function scopeInactive($query)
+    {
+        return $query->where('active', 0);
+    }
+
+    public function scopeInsured($query)
+    {
+        return $query->where('insured', 1);
+    }
+
+    public function scopeUninsured($query)
+    {
+        return $query->where('insured', 0);
+    }
+
     public function scopePid($query, $pid)
     {
         return $query->where('pid', $pid);
@@ -75,5 +102,37 @@ class Vehicle extends Model
         }
 
         return $query;
+    }
+
+    public function insure()
+    {
+        if(!$this->active) {
+            return $this->update([
+                'insured' => 1,
+                'insured_at' => new \DateTime(),
+            ]);
+        }
+        return false;
+    }
+
+    public function useInsurance()
+    {
+        $update = $this->update([
+            'insured' => 0,
+            'insured_at' => null,
+            'alive' => 1,
+            'active' => 0,
+        ]);
+        if($this->owner->hasUser() && $update) {
+            \Notify::category('vehicle.insurance')
+                ->from(0)
+                ->to($this->owner->user->getKey())
+                ->url('#')
+                ->extra([
+                    'vehiclename' => $this->display_name,
+                ])
+                ->send();
+        }
+        return $update;
     }
 }

@@ -181,5 +181,7 @@
     </div>
     {!! Form::close() !!}
 
+{{--    {{ dump($player->skills) }}--}}
+
     @include('partials.revisions', ['model' => $player])
 @endsection

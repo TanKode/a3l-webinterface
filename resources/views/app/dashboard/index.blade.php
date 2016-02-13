@@ -17,6 +17,12 @@
             </div>
         @endif
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
+            @include('app.dashboard.widgets.stats_count')
+        </div>
+        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
+            @include('app.dashboard.widgets.stats_money')
+        </div>
+        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
             @include('app.dashboard.widgets.lotto')
         </div>
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">

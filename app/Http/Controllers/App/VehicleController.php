@@ -106,4 +106,30 @@ class VehicleController extends Controller
         $out .= '</div>';
         return $out;
     }
+
+    public function getInsure()
+    {
+        $this->authorize('edit', Vehicle::class);
+
+        if(!\Auth::User()->hasPlayer()) abort(403);
+
+        $vehicles = [];
+        foreach(\Auth::User()->player->vehicles()->alive()->inactive()->uninsured()->get() as $vehicle) {
+            $vehicles[$vehicle->side . ' - ' . $vehicle->type][$vehicle->getKey()] = $vehicle->display_name;
+        }
+
+        return view('app.vehicle.insure')->with([
+            'vehicles' => $vehicles,
+            'insuredVehicles' => \Auth::User()->player->vehicles()->insured()->get(),
+        ]);
+    }
+
+    public function postInsure()
+    {
+        $this->authorize('edit', Vehicle::class);
+
+        $vehicle = Vehicle::alive()->inactive()->uninsured()->findOrFail(\Input::get('vehicle'));
+        $vehicle->insure();
+        return back();
+    }
 }

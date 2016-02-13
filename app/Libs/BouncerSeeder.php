@@ -32,6 +32,7 @@ class BouncerSeeder
             'edit-medic',
             'edit-atac',
             'edit-admin',
+            'edit-donator',
             'delete',
         ],
         Vehicle::class => [
