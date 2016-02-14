@@ -34,6 +34,7 @@ return [
     'buy'           => 'kaufen für :price',
     'send_verify_mail' => 'Bestätigungsmail senden',
     'insure'        => 'versichern',
+    'home'          => 'Startseite',
 
     'new_role'      => 'neue Rolle',
     'role'          => 'Rolle',

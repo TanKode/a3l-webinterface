@@ -12,6 +12,8 @@ Route::get('auth', function () {
     return redirect('auth/login');
 });
 
+Route::get('page/{page}', 'PageController@getShow');
+
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::get('login', 'AuthController@getLogin');
     Route::post('login', 'AuthController@postLogin');
