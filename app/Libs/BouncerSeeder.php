@@ -66,6 +66,11 @@ class BouncerSeeder
 
     public function seed()
     {
+        \Log::debug('seed bouncer with default data & force assignments', [
+        'component' => 'artisan.command',
+            'class' => get_called_class(),
+            'signature' => 'bouncer:seed',
+        ]);
         foreach ($this->models as $model => $abilities) {
             foreach ($abilities as $ability) {
                 \Bouncer::allow('superadmin')->to($ability, $model);

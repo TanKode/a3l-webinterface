@@ -2,7 +2,6 @@
 namespace App\Console\Commands;
 
 use App\Lotto;
-use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class LottoDraw extends Command

@@ -2,7 +2,6 @@
 namespace App\Console\Commands;
 
 use App\Statlog;
-use Illuminate\Console\Command;
 
 class CreateStats extends Command
 {
@@ -17,6 +16,7 @@ class CreateStats extends Command
 
     public function handle()
     {
+        $this->comment('create new Statlog');
         Statlog::newLog();
     }
 }
