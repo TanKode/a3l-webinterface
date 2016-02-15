@@ -2,7 +2,6 @@
 namespace App\Console\Commands;
 
 use App\Lotto;
-use Illuminate\Console\Command;
 
 class LottoCreate extends Command
 {
@@ -17,11 +16,13 @@ class LottoCreate extends Command
 
     public function handle()
     {
+        $this->comment('create new Looto draw');
         $lottoDraw = new Lotto();
         $lottoDraw->week = null;
         $lottoDraw->year = null;
         $lottoDraw->numbers = null;
         $lottoDraw->jackpot = null;
         $lottoDraw->save();
+        $this->info('created new Lotto draw for '.$lottoDraw->week.'@'.$lottoDraw->year .' with ' . \Formatter::money($lottoDraw->jackpot . ' jackpot & numbers: ' . $lottoDraw->numbers));
     }
 }

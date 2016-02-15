@@ -2,7 +2,6 @@
 namespace App\Console\Commands;
 
 use App\Vehicle;
-use Illuminate\Console\Command;
 
 class CarInsurance extends Command
 {
@@ -17,8 +16,10 @@ class CarInsurance extends Command
 
     public function handle()
     {
+        $this->comment('do insurance:car');
         $destroyedInsuredVehicles = Vehicle::destroyed()->insured()->get();
         foreach($destroyedInsuredVehicles as $vehicle) {
+            $this->info('do insurance:car for vehicle#'.$vehicle->getKey() . ' of ' . $vehicle->owner->playerid);
             $vehicle->useInsurance();
         }
     }
