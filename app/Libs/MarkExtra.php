@@ -860,14 +860,20 @@ class MarkExtra
         ' :/' => ':confused:',
     ];
 
-    public static function parse($text)
+    public static function parse($text, $nl2br = true)
     {
         $text = addslashes(htmlentities($text));
-        $text = nl2br($text);
+        $text = $nl2br ? nl2br($text) : $text;
         $text = \Markdown::parse($text);
         $text = str_replace('<img ', '<img class="img-responsive" ', $text);
+        $text = self::tables($text);
         $text = self::transformTwemoji($text);
         return $text;
+    }
+
+    protected static function tables($text)
+    {
+        return str_replace('<table', '<table class="table table-striped"', $text);
     }
 
     protected static function transformTwemoji($text)

@@ -6,7 +6,7 @@
     <div class="container">
         <div class="panel">
             <div class="panel-body">
-                {!! \MarkExtra::parse($content) !!}
+                {!! \MarkExtra::parse($content, false) !!}
             </div>
             <div class="btn-group btn-group-justified">
             <a class="btn btn-primary btn-block" href="@if(\URL::previous() != \URL::current()) {{ \URL::previous() }} @else {{ url('/') }} @endif">{{ trans('messages.back') }}</a>

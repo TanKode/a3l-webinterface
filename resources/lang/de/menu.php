@@ -18,4 +18,7 @@ return [
     'lotto' => 'Lotto',
     'community' => 'Community',
     'ingame' => 'Ingame',
+    'fine' => 'Bußgeld-Katalog',
+    'rules' => 'Server-Regeln',
+    'fine_calculator' => 'Bußgeld-Berechner',
 ];

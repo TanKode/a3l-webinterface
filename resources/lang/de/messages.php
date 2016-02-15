@@ -35,11 +35,18 @@ return [
     'send_verify_mail' => 'Bestätigungsmail senden',
     'insure'        => 'versichern',
     'home'          => 'Startseite',
+    'calculate'     => 'berechnen',
 
     'new_role'      => 'neue Rolle',
     'role'          => 'Rolle',
     'roles'         => 'Rollen',
     'profile'       => 'Profil',
+
+    'fines'         => 'Bußgelder',
+    'fine_results'  => 'Bußgeld-Ergebnis',
+    'min'           => 'Minimum',
+    'max'           => 'Maximum',
+    'prison'        => 'Gefängnis',
 
     'dynmarket'     => 'Markt-System',
     'backups'       => 'Backups',

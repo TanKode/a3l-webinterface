@@ -28,9 +28,26 @@
                                         </li>
                                         <li class="@if(Request::is('app/lotto*')) active @endif">
                                             <a href="{{ url('app/lotto') }}" class="white">
-                                                <span class="badge badge-primary white pull-right">new</span>
                                                 <i class="icon wh-piggybank"></i>
                                                 <span>{{ trans('menu.lotto') }}</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url('page/busgeld') }}" class="white">
+                                                <i class="icon wh-police"></i>
+                                                <span>{{ trans('menu.fine') }}</span>
+                                            </a>
+                                        </li>
+                                        <li class="@if(Request::is('app/fine/calculator')) active @endif">
+                                            <a href="{{ url('app/fine/calculator') }}" class="white">
+                                                <i class="icon wh-calculator"></i>
+                                                <span>{{ trans('menu.fine_calculator') }}</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ url('page/regeln') }}" class="white">
+                                                <i class="icon wh-law"></i>
+                                                <span>{{ trans('menu.rules') }}</span>
                                             </a>
                                         </li>
                                     </ul>
