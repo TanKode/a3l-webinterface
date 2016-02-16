@@ -171,6 +171,7 @@ return [
         403 => 'nicht berechtigt',
         404 => 'nicht gefunden',
         500 => 'Fehler',
+        503 => 'Wartungsarbeiten',
     ],
 
     'confirms' => [
