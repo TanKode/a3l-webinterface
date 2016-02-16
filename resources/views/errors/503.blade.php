@@ -1,5 +1,7 @@
 @extends('errors')
 
+@section('title', 503)
+
 @section('content')
     <div class="text-center">
         <h1 class="white font-size-80"><i class="icon wh-wrench text-danger"></i> 503</h1>
