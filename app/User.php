@@ -161,7 +161,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'confirmed' => 0,
             'confirmation_token' => str_random(32),
         ]);
-        if($update) {
+        if ($update) {
             $this->sendVerificationEmail();
         }
         return $update;

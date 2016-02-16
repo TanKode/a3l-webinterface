@@ -22,7 +22,7 @@ class Lotto extends Model
 
     public function setNumbersAttribute()
     {
-        $this->attributes['numbers'] = collect(range(1,49))->random(6)->sort()->implode(',');
+        $this->attributes['numbers'] = collect(range(1, 49))->random(6)->sort()->implode(',');
     }
 
     public function setWeekAttribute()
@@ -70,12 +70,12 @@ class Lotto extends Model
         $parts = explode(':', config('a3lwebinterface.lotto.draw.time'));
         $hour = $parts[0];
         $minute = $parts[1];
-        if($now->dayOfWeek == config('a3lwebinterface.lotto.draw.day')) {
+        if ($now->dayOfWeek == config('a3lwebinterface.lotto.draw.day')) {
             $draw = $now->setTime($hour, $minute, 0);
         } else {
             $draw = $next->setTime($hour, $minute, 0);
         }
-        if($draw->diffInSeconds(null, false) > 0) {
+        if ($draw->diffInSeconds(null, false) > 0) {
             $draw = $next->setTime($hour, $minute, 0);
         }
         return $draw;
@@ -83,7 +83,7 @@ class Lotto extends Model
 
     public function getCorrectsByNumbers($numbers)
     {
-        if(is_string($numbers)) $numbers = explode(',', $numbers);
+        if (is_string($numbers)) $numbers = explode(',', $numbers);
         return count(array_intersect(explode(',', $this->numbers), $numbers));
     }
 

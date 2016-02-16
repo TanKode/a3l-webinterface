@@ -5,12 +5,15 @@ class Formatter
 {
     public function decodeDBArray($string)
     {
-        $return = array();
-        if (!empty($string)):
+        $return = [];
+        if (!empty($string)) {
             $string = str_replace('"', '', $string);
-            $string = str_replace('`', '"', $string);
-            $return = json_decode($string);
-        endif;
+            $json = str_replace('`', '"', $string);
+            $return = json_decode($json);
+            if (is_null($return)) {
+                dump($string);
+            }
+        }
         return $return;
     }
 

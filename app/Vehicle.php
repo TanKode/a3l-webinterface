@@ -106,7 +106,7 @@ class Vehicle extends Model
 
     public function insure()
     {
-        if(!$this->active) {
+        if (!$this->active) {
             return $this->update([
                 'insured' => 1,
                 'insured_at' => new \DateTime(),
@@ -123,7 +123,7 @@ class Vehicle extends Model
             'alive' => 1,
             'active' => 0,
         ]);
-        if($this->owner->hasUser() && $update) {
+        if ($this->owner->hasUser() && $update) {
             \Notify::category('vehicle.insurance')
                 ->from(0)
                 ->to($this->owner->user->getKey())

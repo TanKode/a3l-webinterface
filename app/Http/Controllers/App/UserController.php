@@ -58,14 +58,14 @@ class UserController extends Controller
             $data['password'] = bcrypt($data['password']);
         }
 
-        if($user->email != array_get($data, 'email', $user->email)) {
+        if ($user->email != array_get($data, 'email', $user->email)) {
             $user->unconfirm();
         }
 
         $user->fill($data);
-        if(!is_null(array_get($data, 'role', null))) {
+        if (!is_null(array_get($data, 'role', null))) {
             $roles = array_get($data, 'role', []);
-            if(count($user->role) != count(array_intersect($user->role, $roles)) || count($roles) != count(array_intersect($user->role, $roles))) {
+            if (count($user->role) != count(array_intersect($user->role, $roles)) || count($roles) != count(array_intersect($user->role, $roles))) {
                 \DB::table((new Revision())->getTable())->insert([
                     'revisionable_type' => get_class($user),
                     'revisionable_id' => $user->getKey(),
@@ -93,7 +93,7 @@ class UserController extends Controller
 
     public function getReadNotify($notificationId)
     {
-        if(empty($notificationId)) {
+        if (empty($notificationId)) {
             \Auth::User()->readAllNotifications();
         } else {
             \Notify::readOne($notificationId);
@@ -105,7 +105,7 @@ class UserController extends Controller
     {
         $this->authorize('edit', $user);
 
-        if(!$user->confirmed && $user->confirmation_token != '') {
+        if (!$user->confirmed && $user->confirmation_token != '') {
             $user->sendVerificationEmail();
         }
         return back();

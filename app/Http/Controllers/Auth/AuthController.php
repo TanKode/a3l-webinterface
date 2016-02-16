@@ -56,8 +56,8 @@ class AuthController extends Controller
     public function getConfirm($token)
     {
         $user = User::unconfirmed()->confirmToken($token)->first();
-        if(!is_null($user)) {
-            if($user->confirm()) {
+        if (!is_null($user)) {
+            if ($user->confirm()) {
                 \Auth::login($user);
             }
 

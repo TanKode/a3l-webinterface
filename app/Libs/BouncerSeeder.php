@@ -67,7 +67,7 @@ class BouncerSeeder
     public function seed()
     {
         \Log::debug('seed bouncer with default data & force assignments', [
-        'component' => 'artisan.command',
+            'component' => 'artisan.command',
             'class' => get_called_class(),
             'signature' => 'bouncer:seed',
         ]);

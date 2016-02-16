@@ -53,8 +53,8 @@ class Skillsys extends Model
     public function getFillable()
     {
         $fillables = parent::getFillable();
-        foreach($this::$skills as $skill) {
-            $fillables[] = str_slug('skill_'.$skill, '_');
+        foreach ($this::$skills as $skill) {
+            $fillables[] = str_slug('skill_' . $skill, '_');
         }
         return $fillables;
     }

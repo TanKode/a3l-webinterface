@@ -16,11 +16,11 @@ class LottoController extends Controller
 
         $now = Carbon::now(config('app.timezone'));
         $lotto = Lotto::next()->first();
-        if($now->dayOfWeek < config('a3lwebinterface.lotto.draw.new') || $now->dayOfWeek > config('a3lwebinterface.lotto.draw.day') || is_null($lotto)) {
+        if ($now->dayOfWeek < config('a3lwebinterface.lotto.draw.new') || $now->dayOfWeek > config('a3lwebinterface.lotto.draw.day') || is_null($lotto)) {
             return view('app.lotto.closed');
         }
 
-        if(!is_null($bet = $lotto->users()->where('id', \Auth::id())->first())) {
+        if (!is_null($bet = $lotto->users()->where('id', \Auth::id())->first())) {
             return view('app.lotto.bought')->with([
                 'lotto' => $lotto,
                 'numbers' => explode(',', $bet->pivot->numbers),
@@ -36,7 +36,7 @@ class LottoController extends Controller
     {
         \Config::set('app.debug', true);
 
-        $data = \Input::only(['number_1','number_2','number_3','number_4','number_5','number_6']);
+        $data = \Input::only(['number_1', 'number_2', 'number_3', 'number_4', 'number_5', 'number_6']);
         $validator = \Validator::make($data, [
             'number_1' => 'required|integer',
             'number_2' => 'required|integer',
@@ -47,11 +47,11 @@ class LottoController extends Controller
         ]);
         $numbers = collect($data)->unique()->sort();
         if ($validator->fails() || $numbers->count() != 6) {
-            foreach(array_diff_key($data, $numbers->toArray()) as $value) {
-                $keys = array_keys(array_filter($data, function($element) use($value){
+            foreach (array_diff_key($data, $numbers->toArray()) as $value) {
+                $keys = array_keys(array_filter($data, function ($element) use ($value) {
                     return isset($element) && $element == $value;
                 }));
-                foreach($keys as $key) {
+                foreach ($keys as $key) {
                     $validator->messages()->add($key, trans('validation.unique', [
                         'attribute' => $value,
                     ]));
@@ -61,7 +61,7 @@ class LottoController extends Controller
         }
 
         $lotto = Lotto::next()->first();
-        if(is_null($lotto)) {
+        if (is_null($lotto)) {
             return back();
         }
 

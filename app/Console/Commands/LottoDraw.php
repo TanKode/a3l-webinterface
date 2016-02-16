@@ -19,7 +19,7 @@ class LottoDraw extends Command
     {
         $this->info('start lotto draw');
         $lottoDraw = Lotto::next()->first();
-        if(is_null($lottoDraw)) {
+        if (is_null($lottoDraw)) {
             $this->error('no lotto draw exists');
             throw (new ModelNotFoundException)->setModel(Lotto::class);
         }
@@ -27,10 +27,10 @@ class LottoDraw extends Command
         $this->comment('jackpot: ' . \Formatter::money($lottoDraw->jackpot));
         $this->comment('draw: ' . $lottoDraw->week . ' @ ' . $lottoDraw->year);
 
-        foreach($lottoDraw->users as $user) {
-            if($user->hasPlayer()) {
+        foreach ($lottoDraw->users as $user) {
+            if ($user->hasPlayer()) {
                 $player = $user->player;
-                if($player->bankacc >= config('a3lwebinterface.lotto.cost')) {
+                if ($player->bankacc >= config('a3lwebinterface.lotto.cost')) {
                     $correct = $lottoDraw->getCorrectsByNumbers($user->pivot->numbers);
                     $profit = $lottoDraw->getProfitByNumbers($user->pivot->numbers);
                     $player->bankacc -= config('a3lwebinterface.lotto.cost');
@@ -39,7 +39,7 @@ class LottoDraw extends Command
 
                     $this->comment('User#' . $user->getKey() . '(Player#' . $player->getKey() . ') wins ' . \Formatter::money($profit) . ' with ' . $correct . ' correct numbers');
 
-                    if($profit > 0) {
+                    if ($profit > 0) {
                         \Notify::category('lotto.won')
                             ->from(0)
                             ->to($user->getKey())

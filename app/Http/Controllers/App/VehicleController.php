@@ -111,10 +111,10 @@ class VehicleController extends Controller
     {
         $this->authorize('edit', Vehicle::class);
 
-        if(!\Auth::User()->hasPlayer()) abort(403);
+        if (!\Auth::User()->hasPlayer()) abort(403);
 
         $vehicles = [];
-        foreach(\Auth::User()->player->vehicles()->alive()->inactive()->uninsured()->get() as $vehicle) {
+        foreach (\Auth::User()->player->vehicles()->alive()->inactive()->uninsured()->get() as $vehicle) {
             $vehicles[$vehicle->side . ' - ' . $vehicle->type][$vehicle->getKey()] = $vehicle->display_name;
         }
 

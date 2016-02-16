@@ -124,7 +124,7 @@ class FormBuilder extends CollectiveFormBuilder
         if (!$container) return $input;
 
         $html = '';
-        $html .= '<div class="form-group '.(is_null($state) ? '' : 'has-'.$state).'">';
+        $html .= '<div class="form-group ' . (is_null($state) ? '' : 'has-' . $state) . '">';
         $html .= $this->label($options['id'], $label);
         $html .= empty($icon) ? '' : '<div class="input-group">';
         $html .= empty($icon) ? '' : '<span class="input-group-addon"><i class="icon ' . $icon . '"></i></span>';

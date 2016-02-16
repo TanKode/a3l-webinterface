@@ -12,7 +12,7 @@ class FineController extends Controller
 {
     public function getCalculator()
     {
-        $fines = collect(config('a3l.fines'))->map(function($fines) {
+        $fines = collect(config('a3l.fines'))->map(function ($fines) {
             return array_combine(array_keys($fines), array_keys($fines));
         });
 
@@ -30,9 +30,9 @@ class FineController extends Controller
             'max' => 0,
             'prison' => 0,
         ];
-        foreach(config('a3l.fines') as $fines) {
-            foreach($fines as $key => $fine) {
-                if(in_array($key, \Input::get('fines'))) {
+        foreach (config('a3l.fines') as $fines) {
+            foreach ($fines as $key => $fine) {
+                if (in_array($key, \Input::get('fines'))) {
                     $results['data'][$key] = $fine;
                     $results['min'] += array_get($fine, 'min', 0);
                     $results['max'] += array_get($fine, 'max', 0);
