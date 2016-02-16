@@ -40,7 +40,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('app/user/edit/'.\Auth::id()) }}"> <span class="icon wh-user"></span>{{ trans('messages.profile') }}</a></li>
-                        <li><a href="https://gummibeer.freshdesk.com/support/tickets/new"> <i class="icon wh-supportalt"></i>{{ trans('messages.support') }}</a></li>
+                        <li><a href="{{ url(config('a3l.links.support.url')) }}"> <i class="icon {{ config('a3l.links.support.icon') }}"></i>{{ config('a3l.links.support.name') }}</a></li>
                         <li><a href="{{ url('auth/logout') }}"> <i class="icon wh-off"></i>{{ trans('messages.signout') }}</a></li>
                     </ul>
                 </li>

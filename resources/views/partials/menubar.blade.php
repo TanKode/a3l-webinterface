@@ -38,13 +38,13 @@
                                                 <span>{{ trans('menu.fine_calculator') }}</span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="@if(Request::is('page/busgeld')) active @endif">
                                             <a href="{{ url('page/busgeld') }}" class="white">
                                                 <i class="icon wh-police"></i>
                                                 <span>{{ trans('menu.fine') }}</span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="@if(Request::is('page/regeln')) active @endif">
                                             <a href="{{ url('page/regeln') }}" class="white">
                                                 <i class="icon wh-law"></i>
                                                 <span>{{ trans('menu.rules') }}</span>

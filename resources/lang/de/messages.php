@@ -12,6 +12,7 @@ return [
     'next_restart'  => 'nächster Restart',
     'clock'         => 'Uhr',
     'clients'       => 'Clients',
+    'links'         => 'Links',
 
     'username'      => 'Benutzername',
     'email'         => 'E-Mail',
