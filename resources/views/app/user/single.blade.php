@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', $user->name .' - '.trans('menu.users'))
+
 @section('content')
     {!! Form::model($user, [
         'url' => $readonly ? 'dont/do/this' : 'app/user/edit/'.$user->getKey(),

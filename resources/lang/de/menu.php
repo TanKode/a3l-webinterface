@@ -21,4 +21,5 @@ return [
     'fine' => 'Bußgeld-Katalog',
     'rules' => 'Server-Regeln',
     'fine_calculator' => 'Bußgeld-Berechner',
+    'vehicle_insurance' => 'Fahrzeug-Versicherung',
 ];

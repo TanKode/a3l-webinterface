@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', trans('menu.chat'))
+
 @section('body-class', 'am-aside')
 @section('content-class', 'am-no-padding')
 

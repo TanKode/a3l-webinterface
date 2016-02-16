@@ -1,12 +1,14 @@
 @extends('app')
 
+@section('title', trans('menu.vehicle_insurance'))
+
 @section('content')
     {!! Form::open([
         'url' => 'app/vehicle/insure',
     ]) !!}
     <div class="panel panel-warning">
         <div class="panel-heading">
-            <h4 class="panel-title">{{ \Auth::User()->player->name }}'s {{ trans('messages.vehicle_insurance') }}</h4>
+            <h4 class="panel-title">{{ \Auth::User()->player->name }}'s {{ trans('menu.vehicle_insurance') }}</h4>
         </div>
         <div class="panel-body">
             <div class="row">

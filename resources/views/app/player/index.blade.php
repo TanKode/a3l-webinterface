@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', trans('menu.players'))
+
 @section('content')
     <div class="panel panel-alt4">
         <div class="panel-heading">

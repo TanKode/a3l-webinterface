@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', trans('menu.dashboard'))
+
 @section('body-class', 'am-splash-screen')
 
 @section('layout')

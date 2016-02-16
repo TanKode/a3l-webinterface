@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', trans('menu.lotto'))
+
 @section('content')
     <div class="panel">
         <header class="panel-heading">

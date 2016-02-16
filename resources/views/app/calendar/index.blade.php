@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', trans('menu.calendar'))
+
 @section('content')
     @can('edit', \App\Event::class)
     {!! Form::open([

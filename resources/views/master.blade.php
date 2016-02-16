@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
 
-    <title>{{ trans('messages.title') }}</title>
+    <title>@yield('title') | {{ trans('messages.title') }}</title>
 
     <meta property="og:title" content="{{ trans('messages.title') }}" />
     <meta property="og:description" content="{{ trans('messages.site_description') }}" />

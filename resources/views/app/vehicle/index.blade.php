@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', trans('menu.vehicles'))
+
 @section('content')
     <div class="panel panel-alt4">
         <div class="panel-heading">

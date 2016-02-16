@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', trans('menu.forum'))
+
 @section('body-class', 'am-aside')
 @section('content-class', 'am-no-padding')
 

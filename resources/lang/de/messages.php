@@ -75,7 +75,6 @@ return [
     'gangbank'      => 'Gang-Bank',
     'created_at'    => 'erstellt am',
     'updated_at'    => 'geändert am',
-    'vehicle_insurance' => 'Fahrzeug-Versicherung',
     'insured_vehicles' => 'versicherte Fahrzeuge',
 
     'user'          => 'Benutzer',

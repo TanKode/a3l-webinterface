@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', object_get($role, 'name', trans('messages.new_role')) .' - '.trans('menu.roles'))
+
 @section('content')
     {!! Form::model($role, [
         'url' => $readonly ? 'dont/do/this' : (is_null($role->getKey()) ? 'app/role/create' : 'app/role/edit/'.$role->getKey()),

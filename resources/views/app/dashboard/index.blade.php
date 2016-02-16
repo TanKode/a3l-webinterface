@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', trans('menu.dashboard'))
+
 @section('content')
     <div class="row masonry-container">
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">

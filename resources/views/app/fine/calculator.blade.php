@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', trans('menu.fine_calculator'))
+
 @section('content')
     {!! Form::open([
         'url' => 'app/fine/calculator/',

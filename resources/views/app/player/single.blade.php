@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', $player->name.' - '.trans('menu.players'))
+
 @section('content')
     {!! Form::model($player, [
         'url' => $readonly ? 'dont/do/this' : 'app/player/edit/'.$player->getKey(),
