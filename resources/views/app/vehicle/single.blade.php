@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title', $vehicle->display_name.' - '.$vehicle->owner->name.' - '.trans('menu.vehicles'))
+
 @section('content')
     {!! Form::model($vehicle, [
         'url' => $readonly ? 'dont/do/this' : 'app/vehicle/edit/'.$vehicle->getKey(),
