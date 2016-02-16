@@ -74,7 +74,8 @@
                 <div class="col-md-3">
                     {!! Form::number('donatorlvl', null, [
                         'label' => trans('messages.donator'),
-                        'readonly' => true,
+                        'readonly' => $readonly || !\Auth::User()->can('edit-donator', $player),
+                        'errors' => $errors->get('donatorlvl'),
                     ]) !!}
                 </div>
                 <div class="clearfix"></div>
