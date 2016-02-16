@@ -1,5 +1,6 @@
 /public/google*.html
 /_ide_helper.php
+/public/sitemap.xml
 /.idea
 *.iml
 /vendor
