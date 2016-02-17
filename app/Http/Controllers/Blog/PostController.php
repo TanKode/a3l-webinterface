@@ -49,7 +49,7 @@ class PostController extends Controller
     public function getSingle($slug)
     {
         $post = get_page_by_path($slug, OBJECT, 'post');
-        if(is_null($post) && !($post instanceof \WP_Post)) abort(404);
+        if (is_null($post) && !($post instanceof \WP_Post)) abort(404);
 
         return view('wordpress.single')->with([
             'post' => $post,

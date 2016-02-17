@@ -58,7 +58,7 @@ class PlayerController extends Controller
         if (\Auth::User()->can('edit-donator', $player)) $allowedFields->push(['donatorlvl']);
         $allowedFields = $allowedFields->flatten()->toArray();
         $data = array_intersect_key($data, array_combine($allowedFields, $allowedFields));
-        if(in_array('manipulate_bankacc', $allowedFields)) {
+        if (in_array('manipulate_bankacc', $allowedFields)) {
             $data['bankacc'] += $data['manipulate_bankacc'];
         }
         $player->update($data);

@@ -864,7 +864,7 @@ class MarkExtra
 
     public static function parse($text, $nl2br = true)
     {
-        if($nl2br) {
+        if ($nl2br) {
             $text = addslashes(htmlentities($text));
             $text = nl2br($text);
         }

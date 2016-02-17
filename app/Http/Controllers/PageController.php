@@ -19,7 +19,7 @@ class PageController extends Controller
             'name' => $page,
         ));
         $post = array_get($query->get_posts(), 0);
-        if(!is_null($post) && $post instanceof \WP_Post) {
+        if (!is_null($post) && $post instanceof \WP_Post) {
             return view('page')->with([
                 'wppost' => $post,
             ]);

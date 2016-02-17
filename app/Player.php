@@ -195,7 +195,7 @@ class Player extends Model
 
     public function scopeName($query, $name)
     {
-        return $query->where('name', 'LIKE', '%'.$name.'%');
+        return $query->where('name', 'LIKE', '%' . $name . '%');
     }
 
     public function scopeCop($query)

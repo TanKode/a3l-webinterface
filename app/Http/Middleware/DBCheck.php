@@ -11,7 +11,7 @@ class DBCheck
             \DB::connection('mysql')->getDatabaseName();
             \DB::connection('arma')->getDatabaseName();
             \DB::connection('wordpress')->getDatabaseName();
-        } catch (\PDOException $e){
+        } catch (\PDOException $e) {
             abort(503);
         }
         return $next($request);
