@@ -10,4 +10,5 @@
 /public/css/style.*
 /composer.lock
 Homestead.yaml
+/wordpress/wp-config.php
 Homestead.json

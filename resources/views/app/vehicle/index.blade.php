@@ -27,6 +27,8 @@
                     <th>{{ trans('messages.classname') }}</th>
                     <th>{{ trans('messages.alive') }}</th>
                     <th>{{ trans('messages.active') }}</th>
+                    <th>{{ trans('messages.created_at') }}</th>
+                    <th>{{ trans('messages.updated_at') }}</th>
                     <th class="noindex"></th>
                 </tr>
                 </thead>

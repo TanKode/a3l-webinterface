@@ -26,6 +26,20 @@
                         'errors' => $errors->get('type'),
                     ]) !!}
                 </div>
+                <div class="col-md-2">
+                    {!! Form::text('created_at', null, [
+                        'label' => trans('messages.created_at'),
+                        'readonly' => true,
+                        'errors' => $errors->get('created_at'),
+                    ]) !!}
+                </div>
+                <div class="col-md-2">
+                    {!! Form::text('updated_at', null, [
+                        'label' => trans('messages.updated_at'),
+                        'readonly' => true,
+                        'errors' => $errors->get('updated_at'),
+                    ]) !!}
+                </div>
                 <div class="clearfix"></div>
                 <div class="col-md-4">
                     {!! Form::text('pid', null, [

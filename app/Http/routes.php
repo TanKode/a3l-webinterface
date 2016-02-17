@@ -14,6 +14,12 @@ Route::get('auth', function () {
 
 Route::get('page/{page}', 'PageController@getShow');
 
+
+Route::group(['prefix' => 'blog', 'namespace' => 'Blog'], function () {
+    Route::get('/', 'PostController@getIndex');
+    Route::get('/{slug}', 'PostController@getSingle');
+});
+
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::get('login', 'AuthController@getLogin');
     Route::post('login', 'AuthController@postLogin');

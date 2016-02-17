@@ -85,6 +85,8 @@ class VehicleController extends Controller
                 'classname' => $vehicle->classname,
                 'alive' => trans('messages.confirms.' . $vehicle->alive),
                 'active' => trans('messages.confirms.' . $vehicle->active),
+                'created_at' => $vehicle->created_at->toDateTimeString(),
+                'updated_at' => $vehicle->updated_at->toDateTimeString(),
                 'btns' => $this->getBtnsForVehicle($vehicle),
             ];
         });
