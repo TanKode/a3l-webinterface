@@ -193,6 +193,11 @@ class Player extends Model
         return $query->where('playerid', $pid);
     }
 
+    public function scopeName($query, $name)
+    {
+        return $query->where('name', 'LIKE', '%'.$name.'%');
+    }
+
     public function scopeCop($query)
     {
         return $query->where('coplevel', '>', 0);
