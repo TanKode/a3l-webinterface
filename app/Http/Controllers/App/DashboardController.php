@@ -25,8 +25,6 @@ class DashboardController extends Controller
     {
         \Config::set('app.debug', true);
 
-        dd(\Formatter::decodeDBArray(\DB::connection('arma')->table('wanted')->first()->list));
-
         abort(403);
     }
 }

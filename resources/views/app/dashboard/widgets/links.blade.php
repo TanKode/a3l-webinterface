@@ -5,7 +5,7 @@
     </div>
     <div class="list-group">
         @foreach(config('a3l.links') as $link)
-            <a href="{{ url($link['url']) }}" class="list-group-item">
+            <a href="{{ url($link['url']) }}" class="list-group-item" @if(starts_with($link['url'], 'http')) target="_blank" @endif>
                 <i class="icon {{ $link['icon'] }}"></i>
                 {{ $link['name'] }}
             </a>

@@ -33,8 +33,11 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
     Route::get('dashboard', 'DashboardController@getIndex');
     Route::get('test', 'DashboardController@getTest');
 
-    Route::get('fine/calculator', 'FineController@getCalculator');
-    Route::post('fine/calculator', 'FineController@postCalculator');
+    Route::group(['prefix' => 'fine'], function () {
+        Route::get('wanted', 'FineController@getWanted');
+        Route::get('calculator', 'FineController@getCalculator');
+        Route::post('calculator', 'FineController@postCalculator');
+    });
 
     Route::group(['prefix' => 'lotto'], function () {
         Route::get('/', 'LottoController@getIndex');

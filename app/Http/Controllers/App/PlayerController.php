@@ -49,7 +49,7 @@ class PlayerController extends Controller
         }
 
         $allowedFields = collect([]);
-        if (\Auth::User()->can('edit-money', $player)) $allowedFields->push(['cash', 'bankacc']);
+        if (\Auth::User()->can('edit-money', $player)) $allowedFields->push(['cash', 'bankacc', 'manipulate_bankacc']);
         if (\Auth::User()->can('edit-civ', $player)) $allowedFields->push(['civ_licenses']);
         if (\Auth::User()->can('edit-cop', $player)) $allowedFields->push(['coplevel', 'cop_licenses']);
         if (\Auth::User()->can('edit-medic', $player)) $allowedFields->push(['mediclevel', 'med_licenses']);
@@ -58,6 +58,9 @@ class PlayerController extends Controller
         if (\Auth::User()->can('edit-donator', $player)) $allowedFields->push(['donatorlevel']);
         $allowedFields = $allowedFields->flatten()->toArray();
         $data = array_intersect_key($data, array_combine($allowedFields, $allowedFields));
+        if(in_array('manipulate_bankacc', $allowedFields)) {
+            $data['bankacc'] += $data['manipulate_bankacc'];
+        }
         $player->update($data);
         return redirect('app/player/edit/' . $player->getKey());
     }

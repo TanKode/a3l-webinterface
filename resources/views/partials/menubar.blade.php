@@ -38,6 +38,12 @@
                                                 <span>{{ trans('menu.fine_calculator') }}</span>
                                             </a>
                                         </li>
+                                        <li class="@if(Request::is('app/fine/wanted')) active @endif">
+                                            <a href="{{ url('app/fine/wanted') }}" class="white">
+                                                <i class="icon wh-handcuffs"></i>
+                                                <span>{{ trans('menu.wanted_list') }}</span>
+                                            </a>
+                                        </li>
                                         <li class="@if(Request::is('page/busgeld')) active @endif">
                                             <a href="{{ url('page/busgeld') }}" class="white">
                                                 <i class="icon wh-police"></i>

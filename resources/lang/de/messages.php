@@ -76,6 +76,7 @@ return [
     'created_at'    => 'erstellt am',
     'updated_at'    => 'geändert am',
     'insured_vehicles' => 'versicherte Fahrzeuge',
+    'manipulate_bankacc' => 'Bank verändern',
 
     'user'          => 'Benutzer',
     'action'        => 'Aktion',

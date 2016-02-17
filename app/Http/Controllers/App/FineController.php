@@ -10,6 +10,15 @@ use App\Http\Controllers\Controller;
 
 class FineController extends Controller
 {
+    public function getWanted()
+    {
+        $wanteds = \Formatter::decodeDBArray(\DB::connection('arma')->table('wanted')->first()->list);
+
+        return view('app.fine.wanted')->with([
+            'wanteds' => $wanteds,
+        ]);
+    }
+
     public function getCalculator()
     {
         $fines = collect(config('a3l.fines'))->map(function ($fines) {

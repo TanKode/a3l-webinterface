@@ -1,6 +1,8 @@
 <?php
 namespace App\Libs;
 
+use Michelf\MarkdownExtra;
+
 class MarkExtra
 {
     private static $emojiCodes = [
@@ -866,7 +868,7 @@ class MarkExtra
             $text = addslashes(htmlentities($text));
             $text = nl2br($text);
         }
-        $text = \Markdown::parse($text);
+        $text = MarkdownExtra::defaultTransform($text);
         $text = str_replace('<img ', '<img class="img-responsive" ', $text);
         $text = self::tables($text);
         $text = self::transformTwemoji($text);

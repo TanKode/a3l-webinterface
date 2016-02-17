@@ -80,6 +80,7 @@
                             'errors' => $errors->get('password_confirmation'),
                         ]) !!}
                     </div>
+                    @if(\Auth::id() != $user->getKey())
                     <div class="col-md-4">
                         {!! Form::text('confirmation_token', null, [
                             'label' => trans('messages.confirmation_token'),
@@ -88,6 +89,7 @@
                             'state' => $user->confirmed ? 'success' : 'error',
                         ]) !!}
                     </div>
+                    @endif
                     <div class="clearfix"></div>
                     <div class="col-md-12">
                         <div class="btn-group pull-right">
@@ -105,5 +107,7 @@
     </div>
     {!! Form::close() !!}
 
-    @include('partials.revisions', ['model' => $user])
+    @if(\Auth::id() != $user->getKey())
+        @include('partials.revisions', ['model' => $user])
+    @endif
 @endsection

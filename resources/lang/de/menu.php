@@ -22,4 +22,5 @@ return [
     'rules' => 'Server-Regeln',
     'fine_calculator' => 'Bußgeld-Berechner',
     'vehicle_insurance' => 'Fahrzeug-Versicherung',
+    'wanted_list' => 'Wanted-Liste',
 ];

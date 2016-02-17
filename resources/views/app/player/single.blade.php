@@ -12,13 +12,13 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     {!! Form::text('name', null, [
                         'label' => trans('messages.name'),
                         'readonly' => true,
                     ]) !!}
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     {!! Form::text('playerid', null, [
                         'label' => trans('messages.player_id'),
                         'readonly' => true,
@@ -26,20 +26,25 @@
                 </div>
                 <div class="clearfix"></div>
                 @can('edit-money', $player)
-                <div class="col-md-4">
+                <div class="col-md-3">
                     {!! Form::number('cash', null, [
                         'label' => trans('messages.cash'),
                         'readonly' => $readonly || !\Auth::User()->can('edit-money', $player),
                         'errors' => $errors->get('cash'),
                     ]) !!}
                 </div>
-                @endcan
-                @can('edit-money', $player)
-                <div class="col-md-4">
+                <div class="col-md-3">
                     {!! Form::number('bankacc', null, [
                         'label' => trans('messages.bankacc'),
                         'readonly' => $readonly || !\Auth::User()->can('edit-money', $player),
                         'errors' => $errors->get('bankacc'),
+                    ]) !!}
+                </div>
+                <div class="col-md-3">
+                    {!! Form::number('manipulate_bankacc', null, [
+                        'label' => trans('messages.manipulate_bankacc'),
+                        'readonly' => $readonly || !\Auth::User()->can('edit-money', $player),
+                        'errors' => $errors->get('manipulate_bankacc'),
                     ]) !!}
                 </div>
                 @endcan
