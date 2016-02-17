@@ -29,14 +29,6 @@ class PostController extends Controller
     {
         $post = get_page_by_path($slug, OBJECT, 'post');
         if(is_null($post) && !($post instanceof \WP_Post)) abort(404);
-        $GLOBALS['post'] = $post;
-        setup_postdata($post);
-
-        global $vc_manager;
-        if($vc_manager instanceof \Vc_Manager) {
-            dump($vc_manager);
-            dump($vc_manager->init());
-        }
 
         return view('wordpress.single')->with([
             'post' => $post,

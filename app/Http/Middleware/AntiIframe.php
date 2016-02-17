@@ -5,10 +5,6 @@ use Illuminate\Http\Request;
 
 class AntiIframe
 {
-    protected $blacklist = [
-        'sw270887.wix.com',
-    ];
-
     public function handle(Request $request, \Closure $next)
     {
         if ($request->is('error')) {

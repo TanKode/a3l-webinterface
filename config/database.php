@@ -70,6 +70,18 @@ return [
 			'strict'    => false,
 		],
 
+		'wordpress' => [
+			'driver'    => 'mysql',
+			'host'      => env('DB_WP_HOST'),
+			'database'  => env('DB_WP_DATABASE'),
+			'username'  => env('DB_WP_USERNAME'),
+			'password'  => env('DB_WP_PASSWORD'),
+			'charset'   => 'utf8',
+			'collation' => 'utf8_general_ci',
+			'prefix'    => '',
+			'strict'    => false,
+		],
+
 	],
 
     /*

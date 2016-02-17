@@ -3,6 +3,7 @@ namespace App\Http;
 
 use App\Http\Middleware\AntiIframe;
 use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\DBCheck;
 use App\Http\Middleware\ForceDomain;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\VerifyCsrfToken;
@@ -24,6 +25,7 @@ class Kernel extends HttpKernel
         VerifyCsrfToken::class,
         ForceDomain::class,
         AntiIframe::class,
+        DBCheck::class,
     ];
 
     /**
