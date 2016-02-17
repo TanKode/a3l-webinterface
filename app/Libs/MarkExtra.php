@@ -862,8 +862,10 @@ class MarkExtra
 
     public static function parse($text, $nl2br = true)
     {
-        $text = addslashes(htmlentities($text));
-        $text = $nl2br ? nl2br($text) : $text;
+        if($nl2br) {
+            $text = addslashes(htmlentities($text));
+            $text = nl2br($text);
+        }
         $text = \Markdown::parse($text);
         $text = str_replace('<img ', '<img class="img-responsive" ', $text);
         $text = self::tables($text);

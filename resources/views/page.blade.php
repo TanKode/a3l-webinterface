@@ -31,7 +31,7 @@
                         <h2 class="panel-title">{{ get_the_title($wppost) }}</h2>
                     </header>
                     <section class="padding-horizontal-20 padding-bottom-30">
-                        {!! \Michelf\MarkdownExtra::defaultTransform($wppost->post_content) !!}
+                        {!! \MarkExtra::parse($wppost->post_content, false) !!}
                     </section>
                 @endif
             @if(!\Auth::check())
