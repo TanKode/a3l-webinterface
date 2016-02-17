@@ -1,6 +1,11 @@
 @extends('wordpress')
 
-@section('title', 'Blog')
+@section('title')
+    @if(!is_null($category))
+        {{ $category->name }} -
+    @endif
+    Blog
+@endsection
 
 @section('content')
 <div class="row masonry-container">

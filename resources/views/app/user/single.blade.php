@@ -110,4 +110,132 @@
     @if(\Auth::id() != $user->getKey())
         @include('partials.revisions', ['model' => $user])
     @endif
+
+    @if(\Auth::id() == $user->getKey() && $user->hasPlayer())
+        <div class="panel panel-alt4">
+            <header class="panel-heading">
+                <h4 class="panel-title">{{ $user->player->name }}</h4>
+            </header>
+            <section class="panel-body">
+                <div class="col-md-12">
+                    <label>{{ trans('messages.civlicenses') }}</label>
+                    <ul class="list-inline">
+                        @foreach($user->player->civ_licenses as $license)
+                            <li>
+                                <p>
+                                    <span class="label @if($license[1]) label-success @else label-dark @endif">
+                                        {{ trans('licenses.'.$license[0]) }}
+                                    </span>
+                                </p>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="col-md-12">
+                    <label>{{ trans('messages.civ_vehicles') }}</label>
+                    <ul class="list-inline">
+                        @foreach($user->player->vehicles()->civ()->alive()->get() as $vehicle)
+                            <li>
+                                <p>
+                                    <span class="label @if($vehicle->active) label-warning @else label-success @endif">
+                                        {{ $vehicle->display_name }}
+                                    </span>
+                                </p>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                @if($user->player->coplevel > 0)
+                    <div class="col-md-12">
+                        <label>{{ trans('messages.coplicenses') }}</label>
+                        <ul class="list-inline">
+                            @foreach($user->player->cop_licenses as $license)
+                                <li>
+                                    <p>
+                                        <span class="label @if($license[1]) label-success @else label-dark @endif">
+                                            {{ trans('licenses.'.$license[0]) }}
+                                        </span>
+                                    </p>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="col-md-12">
+                        <label>{{ trans('messages.cop_vehicles') }}</label>
+                        <ul class="list-inline">
+                            @foreach($user->player->vehicles()->cop()->alive()->get() as $vehicle)
+                                <li>
+                                    <p>
+                                    <span class="label @if($vehicle->active) label-warning @else label-success @endif">
+                                        {{ $vehicle->display_name }}
+                                    </span>
+                                    </p>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if($user->player->mediclevel > 0)
+                    <div class="col-md-12">
+                        <label>{{ trans('messages.mediclicenses') }}</label>
+                        <ul class="list-inline">
+                            @foreach($user->player->med_licenses as $license)
+                                <li>
+                                    <p>
+                                        <span class="label @if($license[1]) label-success @else label-dark @endif">
+                                            {{ trans('licenses.'.$license[0]) }}
+                                        </span>
+                                    </p>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="col-md-12">
+                        <label>{{ trans('messages.medic_vehicles') }}</label>
+                        <ul class="list-inline">
+                            @foreach($user->player->vehicles()->medic()->alive()->get() as $vehicle)
+                                <li>
+                                    <p>
+                                    <span class="label @if($vehicle->active) label-warning @else label-success @endif">
+                                        {{ $vehicle->display_name }}
+                                    </span>
+                                    </p>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if($user->player->ataclevel > 0)
+                    <div class="col-md-12">
+                        <label>{{ trans('messages.ataclicenses') }}</label>
+                        <ul class="list-inline">
+                            @foreach($user->player->atac_licenses as $license)
+                                <li>
+                                    <p>
+                                        <span class="label @if($license[1]) label-success @else label-dark @endif">
+                                            {{ trans('licenses.'.$license[0]) }}
+                                        </span>
+                                    </p>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="col-md-12">
+                        <label>{{ trans('messages.atac_vehicles') }}</label>
+                        <ul class="list-inline">
+                            @foreach($user->player->vehicles()->atac()->alive()->get() as $vehicle)
+                                <li>
+                                    <p>
+                                    <span class="label @if($vehicle->active) label-warning @else label-success @endif">
+                                        {{ $vehicle->display_name }}
+                                    </span>
+                                    </p>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </section>
+        </div>
+    @endif
 @endsection

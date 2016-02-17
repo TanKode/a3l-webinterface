@@ -1,6 +1,6 @@
 <?php
 return [
-    'version' => '3.5',
+    'version' => '3.6',
 
     'formatter' => [
         'decimals' => 0,

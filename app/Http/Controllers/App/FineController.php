@@ -41,7 +41,7 @@ class FineController extends Controller
         ];
         foreach (config('a3l.fines') as $fines) {
             foreach ($fines as $key => $fine) {
-                if (in_array($key, \Input::get('fines'))) {
+                if (in_array($key, \Input::get('fines', []))) {
                     $results['data'][$key] = $fine;
                     $results['min'] += array_get($fine, 'min', 0);
                     $results['max'] += array_get($fine, 'max', 0);

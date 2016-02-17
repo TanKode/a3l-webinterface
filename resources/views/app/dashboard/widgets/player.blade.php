@@ -35,4 +35,5 @@
             </li>
         @endif
     </ul>
+    <a href="{{ url('app/user/edit/'.\Auth::id()) }}" class="btn btn-primary btn-block">{{ trans('messages.profile') }}</a>
 </div>

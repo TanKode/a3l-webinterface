@@ -17,7 +17,11 @@
         <li>{{ get_the_author_meta('display_name', $post->post_author) }}</li>
         <li>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $post->post_date_gmt, 'UTC')->setTimezone(config('app.timezone'))->diffForHumans() }}</li>
         @foreach(get_the_category($post->ID) as $category)
-            <li>{{ $category->name }}</li>
+            <li>
+                <a href="{{ url('blog/cat/'.$category->slug) }}">
+                    {{ $category->name }}
+                </a>
+            </li>
         @endforeach
     </ul>
 </header>

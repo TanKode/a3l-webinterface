@@ -111,9 +111,13 @@ return [
     'admin'         => 'Admin',
     'donator'       => 'Donator',
     'civlicenses'   => 'Civ-Lizenzen',
+    'civ_vehicles'  => 'Civ-Fahrzeuge',
     'coplicenses'   => 'Cop-Lizenzen',
+    'cop_vehicles'  => 'Cop-Fahrzeuge',
     'mediclicenses' => 'Medic-Lizenzen',
+    'medic_vehicles' => 'Medic-Fahrzeuge',
     'ataclicenses'  => 'ATAC-Lizenzen',
+    'atac_vehicles'  => 'ATAC-Fahrzeuge',
 
     'lotto'         => 'Lotto',
     'jackpot'       => 'Jackpot',

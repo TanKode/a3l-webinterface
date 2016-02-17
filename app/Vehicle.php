@@ -104,6 +104,26 @@ class Vehicle extends Model
         return $query;
     }
 
+    public function scopeCiv($query)
+    {
+        return $query->where('side', 'civ');
+    }
+
+    public function scopeCop($query)
+    {
+        return $query->where('side', 'cop');
+    }
+
+    public function scopeMedic($query)
+    {
+        return $query->where('side', 'med');
+    }
+
+    public function scopeAtac($query)
+    {
+        return $query->where('side', 'atac');
+    }
+
     public function insure()
     {
         if (!$this->active) {

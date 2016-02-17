@@ -23,4 +23,5 @@ return [
     'fine_calculator' => 'Bußgeld-Berechner',
     'vehicle_insurance' => 'Fahrzeug-Versicherung',
     'wanted_list' => 'Wanted-Liste',
+    'blog' => 'Blog',
 ];

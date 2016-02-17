@@ -22,6 +22,27 @@ class PostController extends Controller
 
         return view('wordpress.index')->with([
             'posts' => $posts,
+            'category' => null,
+        ]);
+    }
+
+    public function getCategory($category)
+    {
+        $category = get_cat_ID($category);
+        $query = new \WP_Query(array(
+            'posts_per_page' => -1,
+            'order' => 'desc',
+            'orderby' => 'post_date',
+            'cat' => $category,
+        ));
+
+        $category = get_category($category);
+
+        $posts = $query->get_posts();
+
+        return view('wordpress.index')->with([
+            'posts' => $posts,
+            'category' => $category,
         ]);
     }
 
