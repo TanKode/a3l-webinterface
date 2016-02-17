@@ -22,7 +22,7 @@ class Player extends Model
         'atac_licenses',
         'atac_gear',
         'adminlevel',
-        'donatorlevel',
+        'donatorlvl',
     ];
     protected $hidden = [];
 

@@ -55,7 +55,7 @@ class PlayerController extends Controller
         if (\Auth::User()->can('edit-medic', $player)) $allowedFields->push(['mediclevel', 'med_licenses']);
         if (\Auth::User()->can('edit-atac', $player)) $allowedFields->push(['ataclevel', 'atac_licenses']);
         if (\Auth::User()->can('edit-admin', $player)) $allowedFields->push(['adminlevel']);
-        if (\Auth::User()->can('edit-donator', $player)) $allowedFields->push(['donatorlevel']);
+        if (\Auth::User()->can('edit-donator', $player)) $allowedFields->push(['donatorlvl']);
         $allowedFields = $allowedFields->flatten()->toArray();
         $data = array_intersect_key($data, array_combine($allowedFields, $allowedFields));
         if(in_array('manipulate_bankacc', $allowedFields)) {
