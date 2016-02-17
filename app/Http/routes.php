@@ -79,6 +79,9 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
                 Route::post('/create', 'ThreadController@postCreate');
                 Route::get('/{forum_thread}', 'ThreadController@getShow');
                 Route::post('/{forum_thread}/reply', 'ThreadController@postReply');
+                Route::get('/{forum_thread}/delete', 'ThreadController@getDelete');
+                Route::get('/{forum_thread}/pin', 'ThreadController@getPin');
+                Route::get('/{forum_thread}/unpin', 'ThreadController@getUnpin');
 
                 Route::group(['prefix' => '{forum_thread}/post/{forum_post}'], function () {
                     Route::get('/edit', 'PostController@getEdit');

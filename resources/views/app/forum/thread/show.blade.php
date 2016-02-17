@@ -3,8 +3,22 @@
 @section('content')
     <div class="padding-35">
         <section class="panel">
-            <header class="panel-heading">
-                <h3 class="panel-title">{{ $thread->title }}</h3>
+            <header class="panel-heading clearfix">
+                <div class="btn-group pull-right">
+                    @can('edit', $thread)
+                    @if($thread->pinned)
+                        <a href="{{ url('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey().'/unpin') }}" class="btn btn-warning">{{ trans('forum::threads.unpin') }}</a>
+                    @else
+                        <a href="{{ url('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey().'/pin') }}" class="btn btn-warning">{{ trans('forum::threads.pin') }}</a>
+                    @endif
+                    @endcan
+                    @can('delete', $thread)
+                        <a href="{{ url('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey().'/delete') }}" class="btn btn-danger">{{ trans('forum::general.delete') }}</a>
+                    @endcan
+                </div>
+                <div class="pull-left">
+                    <h3 class="panel-title">{{ $thread->title }}</h3>
+                </div>
             </header>
             @foreach($thread->postsPaginated as $post)
                 @if(is_null($post->deleted_at))
@@ -33,7 +47,7 @@
                                         @can('edit', $post)
                                             <a href="{{ url('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey().'/post/'.$post->getKey().'/edit') }}" class="btn btn-warning">{{ trans('forum::posts.edit') }}</a>
                                         @endcan
-                                        @can('edit', $post)
+                                        @can('delete', $post)
                                             <a href="{{ url('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey().'/post/'.$post->getKey().'/delete') }}" class="btn btn-danger">{{ trans('forum::general.delete') }}</a>
                                         @endcan
                                     </div>

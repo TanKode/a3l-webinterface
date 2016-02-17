@@ -59,4 +59,39 @@ class ThreadController extends Controller
 
         return back();
     }
+
+    public function getPin(Request $request, Category $category, Thread $thread)
+    {
+        $this->authorize('edit', $thread);
+
+        $thread = $this->api('thread.pin', $thread->getKey())->parameters($request->all())->patch();
+
+        return back();
+    }
+
+    public function getUnpin(Request $request, Category $category, Thread $thread)
+    {
+        $this->authorize('edit', $thread);
+
+        $thread = $this->api('thread.unpin', $thread->getKey())->parameters($request->all())->patch();
+
+        return back();
+    }
+
+    public function getDelete(Request $request, Category $category, Thread $thread)
+    {
+        $this->authorize('delete', $thread);
+
+        $permanent = !config('forum.preferences.soft_deletes');
+
+        $parameters = $request->all();
+
+        if ($permanent) {
+            $parameters['force'] = 1;
+        }
+
+        $thread = $this->api('thread.delete', $thread->getKey())->parameters($parameters)->delete();
+
+        return redirect('app/forum/category/' . $category->getKey());
+    }
 }

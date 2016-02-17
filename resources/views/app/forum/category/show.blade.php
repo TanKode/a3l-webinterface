@@ -34,24 +34,19 @@
                     <tbody>
                     @if (!$category->threadsPaginated->isEmpty())
                         @foreach ($category->threadsPaginated as $thread)
-                            <tr class="{{ $thread->trashed() ? "deleted" : "" }}">
-                                <td>
-                                    <span class="pull-right">
-                                        @if ($thread->locked)
-                                            <span class="label label-warning">{{ trans('forum::threads.locked') }}</span>
-                                        @endif
-                                        @if ($thread->pinned)
-                                            <span class="label label-info">{{ trans('forum::threads.pinned') }}</span>
-                                        @endif
-                                        @if ($thread->trashed())
-                                            <span class="label label-danger">{{ trans('forum::general.deleted') }}</span>
-                                        @endif
-                                    </span>
-                                    <a href="{{ url('app/forum/category/' . $category->getKey().'/thread/'.$thread->getKey()) }}">{{ $thread->title }}</a>
-                                </td>
-                                @if ($thread->trashed())
-                                    <td colspan="2">&nbsp;</td>
-                                @else
+                            @if(!$thread->trashed())
+                                <tr class="{{ $thread->trashed() ? "deleted" : "" }}">
+                                    <td>
+                                        <span class="pull-right">
+                                            @if ($thread->locked)
+                                                <span class="label label-warning">{{ trans('forum::threads.locked') }}</span>
+                                            @endif
+                                            @if ($thread->pinned)
+                                                <span class="label label-info">{{ trans('forum::threads.pinned') }}</span>
+                                            @endif
+                                        </span>
+                                        <a href="{{ url('app/forum/category/' . $category->getKey().'/thread/'.$thread->getKey()) }}">{{ $thread->title }}</a>
+                                    </td>
                                     <td class="text-right">
                                         {{ $thread->replyCount }}
                                     </td>
@@ -59,8 +54,8 @@
                                         {{ $thread->lastPost->authorName }}
                                         <p class="text-muted">({{ $thread->lastPost->posted }})</p>
                                     </td>
-                                @endif
-                            </tr>
+                                </tr>
+                            @endif
                         @endforeach
                     @else
                         <tr>

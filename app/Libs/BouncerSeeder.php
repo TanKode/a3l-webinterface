@@ -8,6 +8,7 @@ use App\Role;
 use App\User;
 use App\Vehicle;
 use Riari\Forum\Models\Category as ForumCategory;
+use Riari\Forum\Models\Thread as ForumThread;
 use Riari\Forum\Models\Post as ForumPost;
 
 class BouncerSeeder
@@ -46,6 +47,10 @@ class BouncerSeeder
             'delete',
         ],
         ForumCategory::class => [
+            'edit',
+            'delete',
+        ],
+        ForumThread::class => [
             'edit',
             'delete',
         ],
