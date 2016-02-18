@@ -131,6 +131,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         $query->where('confirmation_token', $token);
     }
 
+    public function scopeConfirmed($query)
+    {
+        $query->where('confirmed', 1);
+    }
+
     public function scopeUnconfirmed($query)
     {
         $query->where('confirmed', 0);

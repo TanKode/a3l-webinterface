@@ -29,7 +29,7 @@ class Statlog extends Model
             'vehicle_count' => Vehicle::alive()->count(),
             'gang_count' => Gang::count(),
             'gang_money' => Gang::sum('bank'),
-            'user_count' => User::count(),
+            'user_count' => User::confirmed()->count(),
         ]);
     }
 }

@@ -14,7 +14,7 @@ return [
         'icon' => 'wh-facebook',
         'class' => 'social-facebook',
         'name' => 'Facebook',
-        'url' => 'https://www.facebook.com/groups/215960425417617',
+        'url' => 'https://facebook.com/Pyro-Life-auf-Taviana-1683525228561823',
     ],
     'support' => [
         'icon' => 'wh-supportalt',
