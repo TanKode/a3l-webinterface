@@ -40,5 +40,9 @@ return [
     'license_med_air'           => 'Pilotenschein',
     'license_atac_air'          => 'Pilotenschein',
     'license_civ_uran'          => 'Uranlizenz',
-    'license_civ_fuel'          => 'Benzinlizenz',
+    'license_civ_fuel'          => 'Tankschein',
+
+    'license_civ_low'           => 'LOW-Clan',
+    'license_civ_laf'           => 'LAF-Clan',
+    'license_civ_irish'         => 'Irish-Clan',
 ];

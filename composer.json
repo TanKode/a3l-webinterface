@@ -10,7 +10,7 @@
     "laravel/socialite": "2.0.*",
     "laravelcollective/html": "~5.0",
     "maknz/slack": "1.7.0",
-    "silber/bouncer": "0.*",
+    "silber/bouncer": "0.1.2",
     "michelf/php-markdown": "1.5.0",
     "fenos/notifynder": "3.1.*",
     "venturecraft/revisionable": "1.*",
@@ -22,7 +22,8 @@
     "cmgmyr/messenger": "~2.0",
     "google/apiclient": "2.x-dev",
     "fkubis/teamspeak-php-framework": "dev-master",
-    "xpaw/php-source-query-class": "1.0.0"
+    "xpaw/php-source-query-class": "1.0.0",
+    "golonka/bbcodeparser": "^2.2"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

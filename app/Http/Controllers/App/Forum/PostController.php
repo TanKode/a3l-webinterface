@@ -50,6 +50,6 @@ class PostController extends Controller
 
         $post = $this->api('post.delete', $post->getKey())->parameters($parameters)->delete();
 
-        return back();
+        return redirect('app/forum/category/' . $category->getKey() . '/thread/' . $thread->getKey());
     }
 }

@@ -52,7 +52,10 @@ var App = (function () {
         });
 
         jQuery('body').on('change keyup keydown paste cut', 'textarea.markdown', function () {
+            var $body = jQuery('body');
+            var scrollTop = $body.scrollTop();
             jQuery(this).height(0).height(this.scrollHeight);
+            $body.scrollTop(scrollTop);
         }).find('textarea.markdown').change();
 
     };

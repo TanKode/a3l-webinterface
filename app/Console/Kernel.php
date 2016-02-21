@@ -28,11 +28,21 @@ class Kernel extends ConsoleKernel
         }
         $schedule->command('bouncer:seed')->everyThirtyMinutes();
 
-        $schedule->command('lotto:draw')->timezone(config('app.timezone'))->dailyAt(config('a3lwebinterface.lotto.time'))->when(function () {
-            return Carbon::now(config('app.timezone'))->dayOfWeek === config('a3lwebinterface.lotto.draw.day');
+        $schedule->command('lotto:draw')->timezone(config('app.timezone'))->when(function () {
+            $now = Carbon::now(config('app.timezone'));
+            return (
+                $now->dayOfWeek === config('a3lwebinterface.lotto.draw.day')
+                &&
+                $now->format('H:i') == config('a3lwebinterface.lotto.draw.time')
+            );
         });
-        $schedule->command('lotto:create')->timezone(config('app.timezone'))->dailyAt(config('a3lwebinterface.lotto.time'))->when(function () {
-            return Carbon::now(config('app.timezone'))->dayOfWeek === config('a3lwebinterface.lotto.draw.new');
+        $schedule->command('lotto:create')->timezone(config('app.timezone'))->when(function () {
+            $now = Carbon::now(config('app.timezone'));
+            return (
+                $now->dayOfWeek === config('a3lwebinterface.lotto.draw.new')
+                &&
+                $now->format('H:i') == config('a3lwebinterface.lotto.draw.time')
+            );
         });
     }
 }

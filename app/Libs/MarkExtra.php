@@ -862,7 +862,7 @@ class MarkExtra
         ' :/' => ':confused:',
     ];
 
-    public static function parse($text, $nl2br = true)
+    public static function parse($text, $nl2br = false)
     {
         if ($nl2br) {
             $text = addslashes(htmlentities($text));
@@ -875,9 +875,28 @@ class MarkExtra
         return $text;
     }
 
+    public static function bbcode($text)
+    {
+        $text = stripslashes($text);
+        $text = \BBCode::parse($text);
+        $text = str_replace('<img ', '<img class="img-responsive" ', $text);
+        $text = self::tables($text);
+        $text = self::transformTwemoji($text);
+        $text = self::transformUrls($text);
+        return $text;
+    }
+
     protected static function tables($text)
     {
         return str_replace('<table', '<table class="table table-striped"', $text);
+    }
+
+    protected static function transformUrls($text)
+    {
+        return preg_replace_callback("/([^\"=\'])((http(|s):\/\/|www)([^\s\">]+))/im", function($hits) {
+            $url = trim(array_get($hits, 2));
+            return array_get($hits, 1, '').'<a href="'.$url.'" rel="nofollow" target="_blank">'.$url.'</a>';
+        }, $text);
     }
 
     protected static function transformTwemoji($text)

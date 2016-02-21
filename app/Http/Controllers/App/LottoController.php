@@ -17,7 +17,10 @@ class LottoController extends Controller
         $now = Carbon::now(config('app.timezone'));
         $lotto = Lotto::next()->first();
         if ($now->dayOfWeek < config('a3lwebinterface.lotto.draw.new') || $now->dayOfWeek > config('a3lwebinterface.lotto.draw.day') || is_null($lotto)) {
-            return view('app.lotto.closed');
+            $lotto = Lotto::last()->first();
+            return view('app.lotto.closed')->with([
+                'lotto' => $lotto,
+            ]);
         }
 
         if (!is_null($bet = $lotto->users()->where('id', \Auth::id())->first())) {

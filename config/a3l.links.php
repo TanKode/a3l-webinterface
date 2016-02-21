@@ -29,5 +29,9 @@ return [
         'icon' => 'wh-police',
         'name' => 'Bußgeld-Katalog',
         'url' => 'page/busgeld',
+    ],[
+        'icon' => 'wh-post',
+        'name' => 'Blog',
+        'url' => 'blog',
     ],
 ];

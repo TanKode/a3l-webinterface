@@ -34,6 +34,9 @@ class AuthController extends Controller
         $user->assign('member');
         $user->allow('edit', $user);
         $user->sendVerificationEmail();
+        if($user->hasPlayer()) {
+            $user->player->enableLicense('civ', 'license_civ_fuel');
+        }
         return $user;
     }
 

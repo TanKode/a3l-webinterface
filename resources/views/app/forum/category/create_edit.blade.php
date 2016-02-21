@@ -18,7 +18,9 @@
                         ]) !!}
                     </div>
                     <div class="col-md-6">
-                        {!! Form::select('category_id', \Riari\Forum\Models\Category::all()->pluck('title', 'id')->prepend(trans('forum::general.none'), '')->toArray(), null, [
+                        {!! Form::select('category_id', \Riari\Forum\Models\Category::all()->reject(function($category) {
+                            return $category->children->isEmpty();
+                        })->pluck('title', 'id')->prepend(trans('forum::general.none'), '')->toArray(), null, [
                             'label' => trans_choice('forum::categories.category', 1),
                             'errors' => $errors->get('category_id'),
                         ]) !!}

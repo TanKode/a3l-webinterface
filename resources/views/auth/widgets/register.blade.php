@@ -1,11 +1,17 @@
 {!! Form::open([
     'url' => 'auth/register',
 ]) !!}
+<p>
+    {{ trans('validation.alpha_dash', [
+        'attribute' => trans('messages.username'),
+    ]) }}
+</p>
 {!! Form::text('name', null, [
     'placeholder' => trans('messages.username'),
     'icon' => 'wh-user',
     'errors' => $errors->get('username'),
 ]) !!}
+<p>Bitte trage deine ArmA-Spieler-ID ein - zu finden im Profil in ArmA.</p>
 {!! Form::text('player_id', null, [
     'placeholder' => trans('messages.player_id'),
     'icon' => 'wh-steam',

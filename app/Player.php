@@ -212,4 +212,18 @@ class Player extends Model
     {
         return $query->where('ataclevel', '>', 0);
     }
+
+    public function enableLicense($area, $key)
+    {
+        $licences = [];
+        foreach($this->{$area.'_licenses'} as $index => $licence) {
+            if($licence[0] == $key) {
+                $licences[$licence[0]] = 1;
+            } else {
+                $licences[$licence[0]] = $licence[1];
+            }
+        }
+        $this->{$area.'_licenses'} = $licences;
+        $this->save();
+    }
 }

@@ -55,7 +55,7 @@
                             </div>
                         </header>
                         <section class="padding-20">
-                            {!! \MarkExtra::parse($post->content) !!}
+                            {!! \MarkExtra::bbcode($post->content) !!}
                         </section>
                     </article>
                 @endif
@@ -85,6 +85,7 @@
                         ]) !!}
                     </div>
                     <div class="col-md-12">
+                        @include('partials.md_help')
                         @include('partials.twemoji')
                     </div>
                     <div class="col-md-12">

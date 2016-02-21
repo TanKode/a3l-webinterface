@@ -9,4 +9,8 @@
         </header>
         {!! Alert::warning(trans('messages.lotto_closed')) !!}
     </div>
+
+    @if(!is_null($lotto))
+        @include('app.lotto.widget.bets')
+    @endif
 @endsection

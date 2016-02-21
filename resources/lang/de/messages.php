@@ -19,7 +19,7 @@ return [
     'password'      => 'Passwort',
     'confirm'       => 'bestätigen',
     'remember_me'   => 'Angemeldet bleiben',
-    'player_id'     => 'Spieler-ID',
+    'player_id'     => 'ArmA-Spieler-ID',
     'confirmation_token' => 'Bestätigungs-Token',
     'confirmed'     => 'Bestätigt',
 

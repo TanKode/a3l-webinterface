@@ -149,6 +149,7 @@ return [
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider::class,
         Cmgmyr\Messenger\MessengerServiceProvider::class,
+        Golonka\BBCode\BBCodeParserServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -225,6 +226,7 @@ return [
         'Calendar'  => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         'Markdown'  => AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra::class,
         'Debugbar'  => Barryvdh\Debugbar\Facade::class,
+        'BBCode'    => Golonka\BBCode\Facades\BBCodeParser::class,
 
     ],
 

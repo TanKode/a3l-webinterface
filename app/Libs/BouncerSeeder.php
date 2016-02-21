@@ -86,8 +86,24 @@ class BouncerSeeder
             \Bouncer::allow('superadmin')->to($ability);
         }
 
-        foreach (User::all() as $user) {
+        foreach (User::with('player')->get() as $user) {
             $user->assign('member');
+            if ($user->hasPlayer()) {
+                $user->player->enableLicense('civ', 'license_civ_fuel');
+
+                $user->retract('polizist');
+                $user->retract('medic');
+                $user->retract('atacler');
+                if ($user->player->coplevel > 0) {
+                    $user->assign('polizist');
+                }
+                if ($user->player->mediclevel > 0) {
+                    $user->assign('medic');
+                }
+                if ($user->player->ataclevel > 0) {
+                    $user->assign('atacler');
+                }
+            }
         }
     }
 }

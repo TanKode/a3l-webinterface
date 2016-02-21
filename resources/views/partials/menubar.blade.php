@@ -64,7 +64,6 @@
                 </li>
             @endif
 
-            @if(false)
             <li class="parent">
                 <a href="#" class="text-center">
                     <i class="icon wh-post"></i>
@@ -95,7 +94,6 @@
                     </li>
                 </ul>
             </li>
-            @endif
 
             <li class="parent">
                 <a href="#" class="text-center">

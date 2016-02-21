@@ -19,6 +19,9 @@
             </div>
         @endif
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
+            @include('app.dashboard.widgets.last_post')
+        </div>
+        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
             @include('app.dashboard.widgets.links')
         </div>
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
