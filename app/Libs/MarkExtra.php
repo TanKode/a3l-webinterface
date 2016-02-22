@@ -893,7 +893,7 @@ class MarkExtra
 
     protected static function transformUrls($text)
     {
-        return preg_replace_callback("/([^\"=\'])((http(|s):\/\/|www)([^\s\">]+))/im", function($hits) {
+        return preg_replace_callback("/([^\"=\'])((http(|s):\/\/|www)([^\s\"><]+))/im", function($hits) {
             $url = trim(array_get($hits, 2));
             return array_get($hits, 1, '').'<a href="'.$url.'" rel="nofollow" target="_blank">'.$url.'</a>';
         }, $text);

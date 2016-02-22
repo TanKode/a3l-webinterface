@@ -93,7 +93,7 @@
                             <li>
                                 <p>
                                     @if(!$readonly && \Auth::User()->can('edit-civ', $player))
-                                        <label for="civ_licenses-{{ $license[0] }}" class="cursor-pointer license label @if($license[1]) label-success @else label-dark @endif">
+                                        <label for="civ_licenses-{{ $license[0] }}" class="cursor-pointer license label @if($license[1]) label-success @else label-dark @endif @if(starts_with(trans('licenses.'.$license[0]), 'Clan')) font-weight-700 @endif">
                                             {!! Form::hidden('civ_licenses['.$license[0].']', ($license[1] ? 1 : 0)) !!}
                                             {{ trans('licenses.'.$license[0]) }}
                                         </label>

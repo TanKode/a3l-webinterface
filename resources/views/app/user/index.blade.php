@@ -23,6 +23,7 @@
                     <th>{{ trans('messages.player_id') }}</th>
                     <th>{{ trans('messages.email') }}</th>
                     <th>{{ trans('messages.roles') }}</th>
+                    <th>{{ trans('messages.created_at') }}</th>
                     <th>{{ trans('messages.confirmed') }}</th>
                     <th class="noindex"></th>
                 </tr>
@@ -41,6 +42,7 @@
                             @endforeach
                             </ul>
                         </td>
+                        <td>{{ $user->created_at }}</td>
                         <td>{{ trans('messages.confirms.'.$user->confirmed) }}</td>
                         <td>
                             <div class="btn-group pull-right">

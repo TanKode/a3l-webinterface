@@ -34,6 +34,7 @@ return [
     'send'          => 'absenden',
     'buy'           => 'kaufen für :price',
     'send_verify_mail' => 'Bestätigungsmail senden',
+    'verify_mail'   => 'E-Mail bestätigen',
     'insure'        => 'versichern',
     'home'          => 'Startseite',
     'calculate'     => 'berechnen',

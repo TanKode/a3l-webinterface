@@ -100,6 +100,7 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::get('/delete/{user}', 'UserController@getDelete');
         Route::get('/read-notify/{notification}', 'UserController@getReadNotify');
         Route::get('/send-verify-mail/{user}', 'UserController@getSendVerificationMail');
+        Route::get('/verify-mail/{user}', 'UserController@getVerifyMail');
         Route::get('/{user}', 'UserController@getShow');
     });
 

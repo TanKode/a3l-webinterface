@@ -110,4 +110,14 @@ class UserController extends Controller
         }
         return back();
     }
+
+    public function getVerifyMail(User $user)
+    {
+        $this->authorize('edit', $user);
+
+        if (!$user->confirmed && $user->confirmation_token != '') {
+            $user->confirm();
+        }
+        return back();
+    }
 }

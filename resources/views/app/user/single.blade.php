@@ -94,6 +94,7 @@
                     <div class="col-md-12">
                         <div class="btn-group pull-right">
                             @if(!$user->confirmed)
+                                <a href="{{ url('app/user/verify-mail/'.$user->getKey()) }}" class="btn btn-warning">{{ trans('messages.verify_mail') }}</a>
                                 <a href="{{ url('app/user/send-verify-mail/'.$user->getKey()) }}" class="btn btn-success">{{ trans('messages.send_verify_mail') }}</a>
                             @endif
                             {!! Form::submit(trans('messages.save'), [

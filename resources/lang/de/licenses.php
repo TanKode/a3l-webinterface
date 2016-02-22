@@ -42,7 +42,7 @@ return [
     'license_civ_uran'          => 'Uranlizenz',
     'license_civ_fuel'          => 'Tankschein',
 
-    'license_civ_low'           => 'LOW-Clan',
-    'license_civ_laf'           => 'LAF-Clan',
-    'license_civ_irish'         => 'Irish-Clan',
+    'license_civ_low'           => 'Clan [LOW]',
+    'license_civ_laf'           => 'Clan [LAF]',
+    'license_civ_irish'         => 'Clan [IRISH]',
 ];
