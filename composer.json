@@ -20,7 +20,7 @@
     "maddhatter/laravel-fullcalendar": "^1.2",
     "alfredo-ramos/parsedown-extra-laravel": "0.3.0",
     "cmgmyr/messenger": "~2.0",
-    "google/apiclient": "2.x-dev",
+    "google/apiclient": "2.0.0-RC4",
     "fkubis/teamspeak-php-framework": "dev-master",
     "xpaw/php-source-query-class": "1.0.0",
     "golonka/bbcodeparser": "^2.2"
@@ -55,8 +55,6 @@
       "php artisan ide-helper:generate",
       "php artisan optimize"
     ],
-    "pre-update-cmd": [
-    ],
     "post-update-cmd": [
       "php artisan clear-compiled",
       "php artisan ide-helper:generate",
@@ -70,6 +68,9 @@
     ]
   },
   "config": {
-    "preferred-install": "dist"
+    "preferred-install": "dist",
+    "github-oauth": {
+      "github.com": "45d494cf414560479c397dcb7ec1e02b7b76bdcc"
+    }
   }
 }
