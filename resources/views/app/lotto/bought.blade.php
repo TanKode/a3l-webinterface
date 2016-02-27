@@ -37,5 +37,7 @@
         </section>
     </div>
 
-    @include('app.lotto.widget.bets')
+    @can('view', $lotto)
+        @include('app.lotto.widget.bets')
+    @endcan
 @endsection
