@@ -48,7 +48,11 @@ class PostController extends Controller
             $parameters['force'] = 1;
         }
 
-        $post = $this->api('post.delete', $post->getKey())->parameters($parameters)->delete();
+        if ($thread->posts()->count() == 1) {
+            return redirect('app/forum/category/' . $category->getKey() . '/thread/' . $thread->getKey() . '/delete');
+        } else {
+            $this->api('post.delete', $post->getKey())->parameters($parameters)->delete();
+        }
 
         return redirect('app/forum/category/' . $category->getKey() . '/thread/' . $thread->getKey());
     }
