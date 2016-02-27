@@ -1,6 +1,12 @@
 #!/usr/bin/env php
 <?php
 
+//Start - Code to allow PhpStorm CLI
+if(isset($argv[1]) == 2 && $argv[1] == "-V"){
+    die("Symfony version 3.0.0");
+}
+//End - Code to allow PhpStorm CLI
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
