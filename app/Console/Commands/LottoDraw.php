@@ -18,7 +18,7 @@ class LottoDraw extends Command
     public function handle()
     {
         $this->info('start lotto draw');
-        $lottoDraw = Lotto::next()->first();
+        $lottoDraw = Lotto::last()->first();
         if (is_null($lottoDraw)) {
             $this->error('no lotto draw exists');
             throw (new ModelNotFoundException)->setModel(Lotto::class);
