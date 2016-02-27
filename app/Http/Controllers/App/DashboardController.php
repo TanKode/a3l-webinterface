@@ -28,10 +28,6 @@ class DashboardController extends Controller
     {
         \Config::set('app.debug', true);
 
-        dd(array_get(wp_get_recent_posts([
-            'numberposts' => 1,
-        ], OBJECT), 0));
-
         abort(403);
     }
 }
