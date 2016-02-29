@@ -38,14 +38,23 @@
                                 <tr class="{{ $thread->trashed() ? "deleted" : "" }}">
                                     <td>
                                         <span class="pull-right">
-                                            @if ($thread->locked)
+                                            @if($thread->locked)
                                                 <span class="label label-warning">{{ trans('forum::threads.locked') }}</span>
                                             @endif
-                                            @if ($thread->pinned)
+                                            @if($thread->pinned)
                                                 <span class="label label-info">{{ trans('forum::threads.pinned') }}</span>
                                             @endif
+                                            @if(is_null($thread->reader))
+                                                <span class="label label-primary">{{ trans('forum::general.new') }}</span>
+                                            @endif
                                         </span>
-                                        <a href="{{ url('app/forum/category/' . $category->getKey().'/thread/'.$thread->getKey()) }}">{{ $thread->title }}</a>
+                                        <a href="{{ url('app/forum/category/' . $category->getKey().'/thread/'.$thread->getKey()) }}">
+                                            @if(is_null($thread->reader))
+                                                <strong>{{ $thread->title }}</strong>
+                                            @else
+                                                {{ $thread->title }}
+                                            @endif
+                                        </a>
                                     </td>
                                     <td class="text-right">
                                         {{ $thread->replyCount }}

@@ -15,6 +15,8 @@ class ThreadController extends Controller
 
         if ($category->getKey() != $thread->category_id) abort(404);
 
+        $thread->readers()->sync([\Auth::id()], false);
+
         return view('app.forum.thread.show')->with([
             'category' => $category,
             'thread' => $thread,
