@@ -45,4 +45,5 @@ return [
     'license_civ_low'           => 'Clan [LOW]',
     'license_civ_laf'           => 'Clan [LAF]',
     'license_civ_irish'         => 'Clan [IRISH]',
+    'license_civ_platoon'       => 'Clan [PLATOON]',
 ];
