@@ -58,6 +58,7 @@ class ThreadController extends Controller
         ])->post();
 
         $post->thread->touch();
+        $thread->readers()->sync([]);
 
         return back();
     }
