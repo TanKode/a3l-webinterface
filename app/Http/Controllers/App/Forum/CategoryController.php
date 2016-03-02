@@ -24,7 +24,7 @@ class CategoryController extends Controller
         $this->authorize('view', $category);
 
         return view('app.forum.category.show')->with([
-            'category' => $category,
+            'category' => $category->load('children'),
         ]);
     }
 
