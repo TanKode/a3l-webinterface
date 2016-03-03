@@ -50,6 +50,8 @@ class ThreadController extends Controller
     {
         $this->authorize('view', $category);
 
+        if ($thread->locked) abort(403);
+
         $post = $this->api('post.store')->parameters([
             'thread_id' => $thread->getKey(),
             'author_id' => \Auth::User()->getKey(),
@@ -85,8 +87,6 @@ class ThreadController extends Controller
     {
         $this->authorize('edit', $thread);
 
-        if ($thread->locked) abort(403);
-
         $thread = $this->api('thread.lock', $thread->getKey())->parameters($request->all())->patch();
 
         return back();
@@ -95,8 +95,6 @@ class ThreadController extends Controller
     public function getUnlock(Request $request, Category $category, Thread $thread)
     {
         $this->authorize('edit', $thread);
-
-        if ($thread->locked) abort(403);
 
         $thread = $this->api('thread.unlock', $thread->getKey())->parameters($request->all())->patch();
 
