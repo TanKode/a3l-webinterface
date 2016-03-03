@@ -81,6 +81,28 @@ class ThreadController extends Controller
         return back();
     }
 
+    public function getLock(Request $request, Category $category, Thread $thread)
+    {
+        $this->authorize('edit', $thread);
+
+        if ($thread->locked) abort(403);
+
+        $thread = $this->api('thread.lock', $thread->getKey())->parameters($request->all())->patch();
+
+        return back();
+    }
+
+    public function getUnlock(Request $request, Category $category, Thread $thread)
+    {
+        $this->authorize('edit', $thread);
+
+        if ($thread->locked) abort(403);
+
+        $thread = $this->api('thread.unlock', $thread->getKey())->parameters($request->all())->patch();
+
+        return back();
+    }
+
     public function getDelete(Request $request, Category $category, Thread $thread)
     {
         $this->authorize('delete', $thread);

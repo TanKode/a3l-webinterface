@@ -11,6 +11,11 @@
                     @else
                         <a href="{{ url('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey().'/pin') }}" class="btn btn-warning">{{ trans('forum::threads.pin') }}</a>
                     @endif
+                    @if($thread->locked)
+                        <a href="{{ url('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey().'/unlock') }}" class="btn btn-warning">{{ trans('forum::threads.unlock') }}</a>
+                    @else
+                        <a href="{{ url('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey().'/lock') }}" class="btn btn-warning">{{ trans('forum::threads.lock') }}</a>
+                    @endif
                     @endcan
                     @can('delete', $thread)
                         <a href="{{ url('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey().'/delete') }}" class="btn btn-danger">{{ trans('forum::general.delete') }}</a>
@@ -67,7 +72,8 @@
             @endif
         </section>
 
-        {!! Form::open([
+        @if(!$thread->locked)
+        {!! \Form::open([
             'url' => 'app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey().'/reply',
         ]) !!}
         <section class="panel panel-alt4">
@@ -77,7 +83,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        {!! Form::textarea('content', null, [
+                        {!! \Form::textarea('content', null, [
                             'label' => trans('forum::general.content'),
                             'errors' => $errors->get('content'),
                             'rows' => 5,
@@ -89,13 +95,14 @@
                         @include('partials.twemoji')
                     </div>
                     <div class="col-md-12">
-                        {!! Form::submit(trans('messages.save'), [
+                        {!! \Form::submit(trans('messages.save'), [
                             'class' => 'btn-warning pull-right',
                         ]) !!}
                     </div>
                 </div>
             </div>
         </section>
-        {!! Form::close() !!}
+        {!! \Form::close() !!}
+        @endif
     </div>
 @endsection
