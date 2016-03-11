@@ -34,16 +34,28 @@ return [
     'license_civ_meth'          => 'Methlizenz',
     'license_civ_nsa'           => 'NSA-Datensammler',
     'license_civ_moebel'        => 'Möbelbauer',
+    'license_civ_uran'          => 'Uranlizenz',
+    'license_civ_fuel'          => 'Tankschein',
+    'license_civ_motorad'       => 'Motoradschein',
+    'license_civ_lkwg'          => 'Großraum LKW-Führerschein',
+    'license_civ_taxi'          => 'Personenbeförderungslizenz',
+    'license_civ_nachrichten'   => 'Nachrichtendienst',
+    'license_civ_security'      => 'Sicherheitsdienst',
+
     'license_cop_air'           => 'Pilotenschein',
     'license_cop_swat'          => 'SWAT',
     'license_cop_cg'            => 'Küstenwache',
+
     'license_med_air'           => 'Pilotenschein',
+    'license_med_medicfeuer'    => 'Feuerwehr',
+
     'license_atac_air'          => 'Pilotenschein',
-    'license_civ_uran'          => 'Uranlizenz',
-    'license_civ_fuel'          => 'Tankschein',
 
     'license_civ_low'           => 'Clan [LOW]',
     'license_civ_laf'           => 'Clan [LAF]',
     'license_civ_irish'         => 'Clan [IRISH]',
     'license_civ_platoon'       => 'Clan [PLATOON]',
+    'license_civ_perez'         => 'Clan [Perez]',
+    'license_civ_rip'         => 'Clan [RestInPeace]',
+    'license_civ_sky'           => 'Clan [S.K.Y.]',
 ];
