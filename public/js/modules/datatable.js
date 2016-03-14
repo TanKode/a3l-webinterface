@@ -35,7 +35,7 @@ var App = (function () {
                     {"data": "pid"},
                     {"data": "side"},
                     {"data": "type"},
-                    {"data": "name"},
+                    {"data": "name", "searchable": false, "orderable": false},
                     {"data": "classname"},
                     {"data": "alive"},
                     {"data": "active"},
