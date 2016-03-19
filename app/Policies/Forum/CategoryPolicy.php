@@ -42,7 +42,7 @@ class CategoryPolicy
      */
     public function deleteThreads($user, Category $category)
     {
-        return true;
+        return false;
     }
 
     /**
@@ -126,6 +126,6 @@ class CategoryPolicy
      */
     public function delete($user, Category $category)
     {
-        return true;
+        return false;
     }
 }
