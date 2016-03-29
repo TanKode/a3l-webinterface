@@ -13,7 +13,7 @@ return [
     */
 
     'policies' => [
-        'forum' => Riari\Forum\Policies\ForumPolicy::class,
+        'forum' => App\Policies\Forum\ForumPolicy::class,
         'model' => [
             Riari\Forum\Models\Category::class  => App\Policies\Forum\CategoryPolicy::class,
             Riari\Forum\Models\Thread::class    => App\Policies\Forum\ThreadPolicy::class,

@@ -81,6 +81,13 @@
                     </tbody>
                 </table>
             </div>
+            @if($category->threadsPaginated->lastPage() > 1)
+                <footer class="padding-horizontal-15 clearfix">
+                    <div class="pull-right">
+                        {!! $category->threadsPaginated->render() !!}
+                    </div>
+                </footer>
+            @endif
         </div>
     </div>
 @endsection
