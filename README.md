@@ -1,5 +1,7 @@
 # Arme 3 Altis Life WebInterface
 
+[![](https://img.shields.io/badge/phptrends-arma-orange.svg?style=flat-square)](http://phptrends.com/dig_in/ARMA)
+
 ## Settings
 
 * `broadcast.*`             _Text_ - global message
