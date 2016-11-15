@@ -1,0 +1,24 @@
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+        php:
+          mass_threshold: 40
+  fixme:
+    enabled: true
+  phpmd:
+    enabled: true
+ratings:
+  paths:
+    - "app/**.php"
+    - "bootstrap/**.php"
+    - "config/**.php"
+    - "database/**.php"
+    - "database/**.php"
+exclude_paths:
+  - wordpress/
+  - tests/
+  - storage/
+  - resources/
+  - public/
