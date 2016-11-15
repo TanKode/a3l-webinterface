@@ -1,0 +1,56 @@
+.icon {
+  display: inline-block;
+  width: 1em;
+  text-align: center;
+  font-weight: 400;
+}
+
+.icon-2x {
+  font-size: 2em;
+}
+
+.icon-3x {
+  font-size: 3em;
+}
+
+.icon-4x {
+  font-size: 4em;
+}
+
+.icon-5x {
+  font-size: 5em;
+}
+
+.icon-spin {
+  -webkit-animation: icon-spin 2s infinite linear;
+  animation: icon-spin 2s infinite linear;
+}
+@-webkit-keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+.wh-moon-waning-gibbous::before{content:'\f530'}
+.wh-moon-third-quarter::before{content:'\f531'}
+.wh-moon-waning-crescent::before{content:'\f532'}
+.wh-moon-new-moon::before{content:'\f52b'}
+.wh-moon-waxing-crescent::before{content:'\f52c'}
+.wh-moon-first-quarter::before{content:'\f52d'}
+.wh-moon-waxing-gibbous::before{content:'\f52e'}
+.wh-moon-full-moon::before{content:'\f52f'}
