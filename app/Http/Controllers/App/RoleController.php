@@ -1,67 +1,103 @@
 <?php
 namespace App\Http\Controllers\App;
 
-use App\Http\Controllers\Controller;
+use App\Ability;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Validator;
+
 use App\Http\Requests;
-use Silber\Bouncer\Database\Ability;
-use Silber\Bouncer\Database\Role;
+use App\Http\Controllers\Controller;
 
 class RoleController extends Controller
 {
-    public function __construct()
-    {
-        if(\Auth::check() && !\Auth::User()->can('manage', Role::class)) {
-            abort(403);
-        }
-    }
-
     public function getIndex()
     {
+        $this->authorize('view', Role::class);
+
         return view('app.role.index')->with([
             'roles' => Role::all(),
-            'abilities' => Ability::all()->keyBy('id')->transform(function ($item, $key) {
-                return $item->slug;
-            })->toArray(),
         ]);
     }
 
-    public function postStore()
+    public function getShow(Role $role)
     {
-        $data = array_filter(\Input::only('name', 'abilities'));
-        \Bouncer::allow('admin')->to('manage-'.str_slug($data['name']).'-role');
-        foreach($data['abilities'] as $abilityId) {
-            $ability = Ability::where('id', $abilityId)->firstOrFail();
-            \Bouncer::allow(str_slug($data['name']))->to($ability->name, $ability->entity_type, $ability->entity_id);
-        }
-        return back();
-    }
+        $this->authorize('view', $role);
 
-    public function getEdit($id)
-    {
-        $role = Role::where('id', $id)->firstOrFail();
-        if(!\Auth::User()->canAssignRole($role)) {
-            abort(403);
-        }
-        return view('app.role.edit')->with([
+        return view('app.role.single')->with([
             'role' => $role,
-            'abilities' => Ability::all()->keyBy('id')->transform(function ($item, $key) {
-                return $item->slug;
-            })->toArray(),
+            'abilities' => Ability::getList(),
+            'readonly' => true,
         ]);
     }
 
-    public function postUpdate($id)
+    public function getEdit(Role $role)
     {
-        $role = Role::where('id', $id)->firstOrFail();
-        if(!\Auth::User()->canAssignRole($role)) {
-            abort(403);
+        $this->authorize('edit', $role);
+
+        return view('app.role.single')->with([
+            'role' => $role,
+            'abilities' => Ability::getList(),
+            'readonly' => false,
+            'action' => 'edit',
+        ]);
+    }
+
+    public function getCreate()
+    {
+        $this->authorize('edit', Role::class);
+
+        return view('app.role.single')->with([
+            'role' => new Role(),
+            'abilities' => Ability::getList(),
+            'readonly' => false,
+            'action' => 'create',
+        ]);
+    }
+
+    public function postEdit(Role $role)
+    {
+        $this->authorize('edit', $role);
+
+        $data = \Input::all();
+        $validator = \Validator::make($data, Role::$rules['update']);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
         }
-        $abilityIds = \Input::get('abilities', []);
-        $role->abilities()->sync($abilityIds);
-        return back();
+
+        $role->name = array_get($data, 'display_name', '');
+        $role->ability = array_get($data, 'ability', []);
+        $role->save();
+        return redirect('app/role/edit/' . $role->getKey());
+    }
+
+    public function postCreate()
+    {
+        $this->authorize('edit', Role::class);
+
+        $data = \Input::all();
+        $validator = \Validator::make($data, Role::$rules['create']);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $role = Role::create(['name' => array_get($data, 'display_name', '')]);
+        $role->ability = array_get($data, 'ability', []);
+        $role->save();
+        return redirect('app/role/edit/' . $role->getKey());
+    }
+
+    public function getDelete(Role $role)
+    {
+        $this->authorize('delete', $role);
+
+        foreach ($role->users as $user) {
+            $user->retract($role->name);
+        }
+        foreach ($role->abilities as $ability) {
+            \Bouncer::disallow($role)->to($ability);
+        }
+        $role->delete();
+        return redirect('app/role');
     }
 }

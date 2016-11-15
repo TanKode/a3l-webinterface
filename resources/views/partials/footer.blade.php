@@ -1,6 +1,8 @@
-<footer class="site-footer clearfix">
-    <span class="site-footer-legal">© 2015 by <a href="http://bambusfarm.net">Bambusfarm</a> | all rights reserved | created by <a href="https://github.com/Gummibeer">Gummibeer</a></span>
-    <div class="site-footer-right">
-        <a href="https://www.paypal.me/gummibeer/5" target="_blank" class="btn btn-xs btn-outline btn-info"><i class="fa-paypal"></i> unterstützen</a>
+<footer id="page-footer" class="clearfix">
+    <div class="pull-left">
+        v{{ config('a3lwebinterface.version') }} A3L-WebInterface | {{ trans('messages.title') }} © <a href="https://gummibeer.de">Gummibeer</a> 2015 - {{ date('Y') }}
+        <a href="{{ url('page/impressum') }}">Impressum</a>
+        |
+        <a href="{{ url('page/datenschutz') }}">Datenschutz</a>
     </div>
 </footer>

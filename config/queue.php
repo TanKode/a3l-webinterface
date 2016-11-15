@@ -37,7 +37,7 @@ return [
 
         'database' => [
             'driver' => 'database',
-            'table' => 'jobs',
+            'table' => 'queue_jobs_open',
             'queue' => 'default',
             'expire' => 60,
         ],
@@ -87,7 +87,7 @@ return [
     */
 
     'failed' => [
-        'database' => 'mysql', 'table' => 'failed_jobs',
+        'database' => 'mysql', 'table' => 'queue_jobs_failed',
     ],
 
 ];

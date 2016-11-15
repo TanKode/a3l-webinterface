@@ -29,6 +29,6 @@ class CreateNotificationCategoryNotificationGroupTable extends Migration
      */
     public function down()
     {
-        Schema::drop('notifications_categories_in_groups');
+        Schema::dropIfExists('notifications_categories_in_groups');
     }
 }

@@ -1,4 +1,18 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Wordpress
+|--------------------------------------------------------------------------
+|
+| Integrate Wordpress with Laravel core
+|
+*/
+
+$wpFile = __DIR__ . '/../wordpress/wp-blog-header.php';
+if (file_exists($wpFile)) {
+    define('WP_USE_THEMES', false);
+    require $wpFile;
+}
 
 /**
  * Laravel - A PHP Framework For Web Artisans
@@ -19,7 +33,7 @@
 |
 */
 
-require __DIR__.'/../bootstrap/autoload.php';
+require __DIR__ . '/../bootstrap/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +47,7 @@ require __DIR__.'/../bootstrap/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once __DIR__ . '/../bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -46,8 +60,6 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 | and wonderful application we have prepared for them.
 |
 */
-
-\Carbon\Carbon::setLocale('de');
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 

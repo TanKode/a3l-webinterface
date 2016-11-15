@@ -1,66 +1,69 @@
 @extends('app')
 
-@section('title', 'Benutzer Übersicht')
+@section('title', trans('menu.users'))
 
 @section('content')
-    <div class="panel">
+    <div class="panel panel-alt4">
         <div class="panel-heading">
-            <h3 class="panel-title">@yield('title')</h3>
+            <div class="tools"></div>
+            <span class="title">{{ trans('menu.users') }}</span>
         </div>
-        <div class="panel-body" id="listjs" data-plugin="list" data-options='{"valueNames":["username","email"]}'>
-            <div class="row">
-                <div class="form-group col-md-10">
-                    {!! Form::search('userListSearch', null, ['class' => 'search']) !!}
-                </div>
-                <div class="form-group col-md-2">
-                    {!! Form::selectpicker('userListSort', [
-                        'username' => 'Benutzername',
-                        'email' => 'E-Mail',
-                    ], null, ['class' => 'sort']) !!}
-                </div>
-            </div>
+        <div class="margin-top-20 margin-horizontal-20">
+            {!! Form::text('datatable-search', '', [
+                'icon' => 'wh-search'
+            ]) !!}
+        </div>
 
-            <ul class="list-group list">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-fw-widget datatable">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>{{ trans('messages.name') }}</th>
+                    <th>{{ trans('messages.player_id') }}</th>
+                    <th>{{ trans('messages.email') }}</th>
+                    <th>{{ trans('messages.roles') }}</th>
+                    <th>{{ trans('messages.created_at') }}</th>
+                    <th>{{ trans('messages.confirmed') }}</th>
+                    <th class="noindex"></th>
+                </tr>
+                </thead>
+                <tbody>
                 @foreach($users as $user)
-                    <li class="list-group-item">
-                        <div class="media">
-                            <div class="media-left">
-                                <div class="avatar">
-                                    <img src="{{ $user->avatar() }}"/>
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">
-                                    <strong class="username">{{ $user->username }}</strong>
-                                </h4>
-                                <ul class="list-inline">
-                                    <li>
-                                        <i class="icon fa-envelope"></i>
-                                        <span class="email">{{ $user->email }}</span>
-                                    </li>
-                                </ul>
-                                <a href="mailto:{{ $user->email }}" class="text-success icon fa-send"></a>
-                                @if(\Auth::User()->canAssignRole($user->role))
-                                    <a href="{{ url('app/user/edit/'.$user->id) }}" class="text-warning icon fa-pencil"></a>
+                    <tr>
+                        <td>{{ $user->getKey() }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->player_id }}</td>
+                        <td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
+                        <td>
+                            <ul class="list-inline">
+                            @foreach($user->roles as $role)
+                                <li><span class="label label-info font-weight-400">{{ $role->name }}</span></li>
+                            @endforeach
+                            </ul>
+                        </td>
+                        <td>{{ $user->created_at }}</td>
+                        <td>{{ trans('messages.confirms.'.$user->confirmed) }}</td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                @if(\Auth::User()->can('view', $user))
+                                    <a href="{{ url('app/user/'.$user->getKey()) }}" class="btn btn-pure btn-icon btn-success"><i class="icon wh-eye-view"></i></a>
                                 @endif
-                                @if(!is_null($user->facebook)) <i class="icon fa-facebook text-info"></i> @endif
-                                @if(!is_null($user->github)) <i class="icon fa-github text-info"></i> @endif
-                                @if(!is_null($user->slack)) <i class="icon fa-slack text-info"></i> @endif
-                                @if(!is_null($user->steam)) <i class="icon fa-steam text-info"></i> @endif
-                            </div>
-                            <div class="media-right">
-                                @if($user->isSuperAdmin())
-                                    <span class="label label-danger label-outline">super-admin</span>
-                                @else
-                                <span class="label label-default label-outline">
-                                    {{ $user->role->name }}
-                                </span>
+                                @if(\Auth::User()->can('edit', $user))
+                                    <a href="{{ url('app/user/edit/'.$user->getKey()) }}" class="btn btn-pure btn-icon btn-warning"><i class="icon wh-edit"></i></a>
+                                @endif
+                                @if(\Auth::User()->can('delete', $user))
+                                    <a href="{{ url('app/user/delete/'.$user->getKey()) }}" class="btn btn-pure btn-icon btn-danger"><i class="icon wh-trash"></i></a>
+                                @endif
+                                @if(\Auth::User()->can('view', $user->player))
+                                    <a href="{{ url('app/player/'.$user->player->getKey()) }}" class="btn btn-pure btn-icon btn-success"><i class="icon wh-boardgame"></i></a>
                                 @endif
                             </div>
-                        </div>
-                    </li>
+                        </td>
+                    </tr>
                 @endforeach
-            </ul>
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection

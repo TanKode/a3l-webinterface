@@ -1,0 +1,129 @@
+.ms-container {
+  width: 100%;
+
+  &::before {
+    position: absolute;
+    left: 50%;
+    margin-left: -0.5em;
+    top: 160px;
+    display: inline-block;
+    font-family: "WebHostingHub-Glyphs";
+    font-size: inherit;
+    font-style: normal;
+    font-weight: normal;
+    content:'\f078';
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+
+    text-rendering: auto;
+  }
+
+  &::after {
+    display: block;
+    height: 0;
+    min-height: 0;
+    clear: both;
+    font-size: 0;
+    line-height: 0;
+    visibility: hidden;
+    content: ".";
+  }
+
+  .ms-selectable {
+    float: right;
+  }
+
+  .ms-selection {
+    float: left;
+
+    .ms-list {
+      border-color: @brand-success;
+    }
+  }
+
+  .ms-selectable,
+  .ms-selection {
+    float: left;
+    width: 45%;
+    color: @text-color;
+    background: @input-bg;
+
+    li {
+      &.ms-elem-selectable,
+      &.ms-elem-selection {
+        padding: 5px 10px 5px 20px;
+      }
+
+      &.ms-hover {
+        color: @text-color;
+        text-decoration: none;
+        cursor: pointer;
+        background-color: @gray-lightest;
+      }
+
+      &.disabled {
+        color: @disabled-color-base;
+        cursor: text;
+        background-color: @input-bg-disabled;
+      }
+    }
+  }
+
+  .ms-selection {
+    float: right;
+  }
+
+  .ms-list {
+    position: relative;
+    height: 300px;
+    padding: 3px;
+    overflow-y: auto;
+    border: 1px solid @input-border;
+    border-radius: @border-radius-base;
+
+    &.ms-focus {
+      border-color: @brand-primary;
+      outline: none;
+    }
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+
+  .ms-optgroup-container {
+    width: 100%;
+  }
+
+  .ms-optgroup-label {
+    padding: 5px 0 0 7px;
+    margin: 0;
+    font-weight: 500;
+    color: #76838f;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 480px) {
+  .ms-container {
+    &::before {
+      top: 240px;
+      left: 50%;
+      margin-left: -8px;
+    }
+
+    .ms-selectable,
+    .ms-selection {
+      display: block;
+      width: 100%;
+    }
+
+    .ms-selectable {
+      margin-bottom: 40px;
+    }
+  }
+}

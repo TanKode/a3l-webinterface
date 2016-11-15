@@ -1,9 +1,14 @@
-@extends('error')
+@extends('errors')
 
-@section('title', 'Wartungsarbeiten')
+@section('title', 503)
 
 @section('content')
-    <i class="icon text-info fa-cog fa-spin"></i>
-    <h2>Wartungsarbeiten</h2>
-    <p>Die Anwendung braucht eine kurze Auszeit.</p>
+    <div class="text-center">
+        <h1 class="white font-size-80"><i class="icon wh-wrench text-danger"></i> 503</h1>
+        <h2 class="white">{{ trans('messages.errors.503') }}</h2>
+
+        <div class="text-center">
+            @include('partials.footer')
+        </div>
+    </div>
 @endsection

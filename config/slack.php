@@ -13,7 +13,7 @@ return [
   |
   */
 
-  'endpoint' => 'https://hooks.slack.com/services/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',
+  'endpoint' => env('SLACK_ENDPOINT'),
 
   /*
   |-------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
   |
   */
 
-  'username' => 'Status-Bot',
+  'username' => 'Robot',
 
   /*
   |-------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
   |
   */
 
-  'icon' => ':computer:',
+  'icon' => null,
 
   /*
   |-------------------------------------------------------------
@@ -63,7 +63,7 @@ return [
   |
   */
 
-  'link_names' => true,
+  'link_names' => false,
 
   /*
   |-------------------------------------------------------------

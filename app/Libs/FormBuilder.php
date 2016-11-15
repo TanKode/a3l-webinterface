@@ -1,171 +1,167 @@
 <?php
 namespace App\Libs;
 
-use Collective\Html\FormBuilder as IlluminateFormBuilder;
+use Collective\Html\FormBuilder as CollectiveFormBuilder;
 
-class FormBuilder extends IlluminateFormBuilder
+class FormBuilder extends CollectiveFormBuilder
 {
     public function input($type, $name, $value = null, $options = [])
     {
-        $options['class'] = array_get($options, 'class', '') . ' form-control';
-        $options['id'] = array_get($options, 'id', ($type != 'hidden' ? $this->id($type, $name) : null));
-
-        return $this->constructHTML(parent::input($type, $name, $value, $this->clearOptions($options)), $options);
-    }
-
-    public function hidden($name, $value = null, $options = [])
-    {
-        return parent::input('hidden', $name, $value, $options);
-    }
-
-    public function search($name, $value = null, $options)
-    {
-        $options['container'] = false;
-        $options['id'] = array_get($options, 'id', $this->id('search', $name));
-
-        $before = '<div class="input-search"><i class="input-search-icon fa-search"></i>';
-        $label = isset($options['label']) ? $this->label($options['id'], $options['label']) : '';
-        unset($options['label']);
-        $input = $this->input('search', $name, $value, $options);
-        $after = '<button type="button" class="input-search-close input-reset icon fa-trash-o" data-reset="#'.$options['id'].'"></button></div>';
-        return $label.$before.$input.$after;
-    }
-
-    protected function checkable($type, $name, $value, $checked, $options)
-    {
-        $checked = $this->getCheckedState($type, $name, $value, $checked);
-        if ($checked) {
-            $options['checked'] = 'checked';
+        $options['id'] = $this->getId($options, $type, $name);
+        if ($type == 'hidden') {
+            $options['container'] = false;
         }
-        $options['id'] = array_get($options, 'id', $this->id($type, $name));
-        return $this->constructHTML(parent::input($type, $name, $value, $this->clearOptions($options)), $options);
+        $options['class'] = $this->getClass($options, 'form-control');
+        if (array_get($options, 'readonly', false)) {
+            $options['disabled'] = true;
+        } else {
+            unset($options['readonly']);
+        }
+
+        return $this->constructHtml(parent::input($type, $name, $value, $this->clearOptions($options)), $options);
     }
 
     public function textarea($name, $value = null, $options = [])
     {
-        $options['class'] = array_get($options, 'class', '') . ' form-control';
-        $options['id'] = array_get($options, 'id', $this->id('textarea', $name));
-        return $this->constructHTML(parent::textarea($name, $value, $this->clearOptions($options)), $options);
+        $options['id'] = $this->getId($options, 'textarea', $name);
+        $options['class'] = $this->getClass($options, 'form-control');
+        if (array_get($options, 'readonly', false)) {
+            $options['disabled'] = true;
+        } else {
+            unset($options['readonly']);
+        }
+
+        return $this->constructHtml(parent::textarea($name, $value, $this->clearOptions($options)), $options);
     }
 
-    public function label($name, $value = null, $options = [])
+    public function select($name, $list = [], $selected = null, $options = [])
     {
-        $options['class'] = isset($options['class']) ? $options['class'] . ' control-label' : 'control-label';
-        return parent::label($name, $value, $options);
+        $options['id'] = $this->getId($options, 'select', $name);
+        $options['class'] = $this->getClass($options, 'form-control');
+        if (array_get($options, 'readonly', false)) {
+            $options['disabled'] = true;
+        } else {
+            unset($options['readonly']);
+        }
+
+        return $this->constructHtml(parent::select($name, $list, $selected, $this->clearOptions($options)), $options);
     }
 
-    public function datepicker($name, $value = null, array $options = [])
+    public function multiselect($name, $list = [], $selected = null, $options = [])
     {
-        $options['id'] = array_get($options, 'id', $this->id('datepicker', $name));
-        $options['data-plugin'] = 'datepicker';
-        $options['data-language'] = str_slug(\LaravelGettext::getLocale(), '-');
-        $options['beforeInput'] = '<div class="input-group"><label for="'.$options['id'].'" class="input-group-addon bg-dark"><i class="icon fa-calendar"></i></label>';
-        $options['afterInput'] = '</div>';
-
-        return $this->input('text', $name, $value, $options);
-    }
-
-    public function selectpicker($name, $list = [], $selected = null, $options = [])
-    {
-        $options['data-plugin'] = 'selectpicker';
-        $options['data-none-selected-text'] = array_get($options, 'placeholder', '');
-        $options['data-live-search'] = array_get($options, 'search', false);
-        $options['data-size'] = array_get($options, 'size', 10);
-        $options['class'] = array_get($options, 'class', '') . ' show-tick';
-        $options['id'] =  array_get($options, 'id', $this->id('select-picker', $name));
-
-        if (isset($options['data-filter']) && $options['data-filter'] === true) {
-            $tmp = ['' => ''];
-            foreach ($list as $val) {
-                $tmp[$val] = $val;
-            }
-            $list = $tmp;
-            unset($tmp);
+        $options['id'] = $this->getId($options, 'multiselect', $name);
+        $options['class'] = $this->getClass($options, 'multi-select');
+        if (array_get($options, 'readonly', false)) {
+            $options['disabled'] = true;
+        } else {
+            unset($options['readonly']);
+        }
+        if (!array_get($options, 'multiple', true)) {
+            unset($options['multiple']);
+        } else {
+            $options['multiple'] = true;
         }
 
         return $this->select($name, $list, $selected, $options);
     }
 
-    public function select($name, $list = [], $selected = null, $options = [])
-    {
-        $options['class'] = array_get($options, 'class', '') . ' form-control';
-        $options['id'] =  array_get($options, 'id', $this->id('select', $name));
-        return $this->constructHTML(parent::select($name, $list, $selected, $this->clearOptions($options)), $options);
-    }
-
-    public function icon($icon = null, $options = [])
-    {
-        $options['class'] = isset($options['class']) ? $options['class'] . ' icon '.$icon : 'btn-default icon '.$icon;
-        return $this->button('', $options);
-    }
-
     public function submit($value = null, $options = [])
     {
         $options['type'] = 'submit';
+        $options['class'] = $this->getClass($options, 'btn');
         return $this->button($value, $options);
     }
 
-    public function button($value = null, $options = [])
+    public function checkbox($name, $value = 1, $checked = null, $options = [])
     {
-        $classes = [];
-        $classes[] = 'btn';
-        $classes[] = isset($options['class']) ? $options['class'] : 'btn-default';
-        $classes[] = isset($options['icon']) ? 'btn-labeled' : '';
-        $options['class'] = implode(' ', $classes);
-        $icon = isset($options['icon']) ? '<span class="btn-label"><i class="icon '.$options['icon'].'"></i></span>' : '';
-        return parent::button($icon.$value, $this->clearOptions($options));
+        $options['id'] = $this->getId($options, 'checkbox', $name);
+        $options['class'] = $this->getClass($options, 'icheck');
+
+        $html = '<div class="am-checkbox">';
+        $html .= $this->hidden($name, $value);
+        $html .= parent::checkbox($name, $value, $checked, $options);
+        $html .= $this->label($options['id'], array_get($options, 'label'));
+        $html .= '</div>';
+        return $html;
     }
 
-    private function constructHTML($input, $options)
+    public function label($name, $value = null, $options = [])
     {
-        $options['container'] = array_get($options, 'container', true);
-        $before = $options['container'] ? '<div class="form-group clearfix">' : '';
-        $label = isset($options['label']) ? $this->label($options['id'], $options['label']) : '';
-        $errors = '';
-        if(isset($options['errors']) && is_array($options['errors']) && count($options['errors'])) {
-            $before = $options['container'] ? '<div class="form-group has-error clearfix">' : '';
-            $errors = $this->formatErrors($options['errors']);
-        }
-
-        $beforeInput = array_get($options, 'beforeInput', '');
-        $afterInput = array_get($options, 'afterInput', '');
-
-        $after = $options['container'] ? '</div>' : '';
-        return $before.$label.$beforeInput.$input.$afterInput.$errors.$after;
-    }
-
-    private function formatErrors(array $errors)
-    {
-        if(isset($errors) && is_array($errors) && count($errors)) {
-            $before = '<div class="help-block">';
-            $messages = '';
-            foreach ($errors as $error) {
-                $messages .= '<div>' . $error . '</div>';
-            }
-            $after = '</div>';
-            return $before.$messages.$after;
+        if (!empty($name) && !empty($value)) {
+            return parent::label($name, $value, $options);
         } else {
             return '';
         }
     }
 
-    private function id($type, $name)
+    protected function checkable($type, $name, $value, $checked, $options)
     {
-        return camel_case($type.'-field-'.$name);
+        $options['container'] = false;
+        return parent::checkable($type, $name, $value, $checked, $options);
     }
 
-    private function clearOptions(array $options = [])
+    protected function option($display, $value, $selected)
     {
-        unset(
-            $options['icon'],
-            $options['label'],
-            $options['size'],
-            $options['errors'],
-            $options['search'],
-            $options['container'],
-            $options['beforeInput'],
-            $options['afterInput']
-        );
+        $selected = $this->getSelectedValue($value, $selected);
+
+        $options = [
+            'value' => $value,
+            'selected' => $selected,
+            'style' => starts_with($value, '#') && strlen($value) == 7 ? 'color:' . \Helper::getContrastColor($value) . ';background:' . $value . ';' : '',
+        ];
+
+        return '<option' . $this->html->attributes($options) . '>' . e($display) . '</option>';
+    }
+
+    protected function constructHtml($input, array $options = [])
+    {
+        $icon = array_get($options, 'icon', null);
+        $errors = array_get($options, 'errors', []);
+        $container = array_get($options, 'container', true);
+        $label = array_get($options, 'label', null);
+        $state = array_get($options, 'state', null);
+
+        if (!$container) return $input;
+
+        $html = '';
+        $html .= '<div class="form-group ' . (is_null($state) ? '' : 'has-' . $state) . '">';
+        $html .= $this->label($options['id'], $label);
+        $html .= empty($icon) ? '' : '<div class="input-group">';
+        $html .= empty($icon) ? '' : '<span class="input-group-addon"><i class="icon ' . $icon . '"></i></span>';
+        $html .= $input;
+        $html .= empty($icon) ? '' : '</div>';
+        if (!empty($errors)) {
+            $html .= '<ul class="parsley-errors-list filled">';
+            foreach ($errors as $error) {
+                $html .= '<li>' . $error . '</li>';
+            }
+            $html .= '</ul>';
+        }
+        $html .= '</div>';
+        return $html;
+    }
+
+    private function getId($options, $type, $name)
+    {
+        return array_get($options, 'id', camel_case($type . '-field-' . $name));
+    }
+
+    protected function getClass(array $options, $defaults)
+    {
+        $defaults = is_string($defaults) ? explode(' ', $defaults) : $defaults;
+        $classes = collect(explode(' ', array_get($options, 'class', '')));
+        foreach ($defaults as $default) {
+            $classes->push($default);
+        }
+        return $classes->unique()->sort()->implode(' ');
+    }
+
+    protected function clearOptions(array $options)
+    {
+        unset($options['icon']);
+        unset($options['errors']);
+        unset($options['container']);
+        unset($options['state']);
         return $options;
     }
 }

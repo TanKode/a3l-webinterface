@@ -27,6 +27,6 @@ class NotificationCategories extends Migration
      */
     public function down()
     {
-        Schema::drop('notification_categories');
+        Schema::dropIfExists('notification_categories');
     }
 }

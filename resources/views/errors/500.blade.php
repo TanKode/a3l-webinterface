@@ -1,16 +1,10 @@
-@extends('error')
+@extends('errors')
 
-@section('title', 'Verwirrung')
+@section('title', 500)
 
 @section('content')
-    <h1 class="font-size-80">
-        <i class="icon text-danger fa-bomb"></i>
-        500
-    </h1>
-    <p class="error-advise">
-        Du hast unseren Server sehr verwirrt!
-        <br/>
-        Überprüfe noch einmal alles - ansonsten melde dich bei einem Amdin.
-    </p>
-    <a class="btn btn-primary" href="{{ url('/') }}">Startseite</a>
+    <div class="text-center">
+        <h1 class="white font-size-80"><i class="icon wh-erroralt text-danger"></i> 500</h1>
+        <h2 class="white">{{ trans('messages.errors.500') }}</h2>
+    </div>
 @endsection

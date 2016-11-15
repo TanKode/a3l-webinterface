@@ -11,10 +11,10 @@ class Server extends Model
     public function __construct()
     {
         try {
-            $this->instance = TeamSpeak3::factory('serverquery://'.config('services.teamspeak.user').':'.config('services.teamspeak.password').'@'.config('services.teamspeak.host').':'.config('services.teamspeak.port').'/?server_port='.config('services.teamspeak.server_port').'');
+            $this->instance = TeamSpeak3::factory('serverquery://' . config('services.teamspeak.host') . ':' . config('services.teamspeak.port') . '/?server_port=' . config('services.teamspeak.server_port') . '');
             $this->info = $this->instance->getInfo();
             $this->prepareAttributes();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->info = [];
         }
     }
@@ -31,7 +31,7 @@ class Server extends Model
     public function getClients()
     {
         try {
-            if(is_null($this->instance)) return null;
+            if (is_null($this->instance)) return null;
             $clientList = $this->instance->clientList();
             $clients = new Collection();
             foreach ($clientList as $client) {
@@ -39,7 +39,7 @@ class Server extends Model
                 $clients->push(new Client($client->getInfo(), $this));
             }
             return $clients;
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return null;
         }
     }

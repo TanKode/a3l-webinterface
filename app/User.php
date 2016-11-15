@@ -1,158 +1,89 @@
 <?php
 namespace App;
 
-use App\A3L\Player as A3lPlayer;
-use App\A3E\Account as A3eAccount;
-use App\Traits\AssignsRoles;
-use App\Traits\UserCan;
+use Cmgmyr\Messenger\Models\Message;
+use Cmgmyr\Messenger\Models\Thread;
+use Cmgmyr\Messenger\Traits\Messagable;
 use Fenos\Notifynder\Notifable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Support\Collection;
-use Riari\Forum\Models\Post;
-use Riari\Forum\Models\Thread;
-use Silber\Bouncer\Database\Ability;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRolesAndAbilities, Notifable, UserCan, AssignsRoles;
+    use Authenticatable, Authorizable, CanResetPassword, HasRolesAndAbilities, SoftDeletes, Messagable, Notifable;
 
     protected $table = 'users';
+
     protected $fillable = [
-        'username',
+        'name',
         'email',
         'password',
-        'signature',
-        'facebook',
-        'github',
-        'steam',
+        'player_id',
+        'confirmed',
+        'confirmation_token',
     ];
     protected $hidden = [
         'password',
         'remember_token',
-        'facebook',
-        'github',
-        'slack',
-        'steam',
+        'confirmation_token',
+    ];
+
+    protected $appends = [
+        'role',
+    ];
+
+    protected $dontKeepRevisionOf = [
+        'password'
     ];
 
     public static $rules = [
         'create' => [
-            'email' => 'required|email|unique:users',
-            'username' => 'required|unique:users',
-            'password' => 'confirmed|min:8',
+            'name' => 'required|alpha_dash|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users',
+            'player_id' => 'required|numeric|unique:users|exists:arma.players,playerid',
+            'password' => 'required|confirmed|min:6',
+            'role' => 'array',
         ],
         'update' => [
-            'email' => 'required|email',
-            'password' => 'confirmed|min:8',
+            'name' => 'required|alpha_dash|max:255',
+            'email' => 'required|email|max:255',
+            'player_id' => 'required|numeric|exists:arma.players,playerid',
+            'password' => 'confirmed|min:6',
+            'role' => 'array',
         ],
     ];
 
-    public function threads()
+    public function player()
     {
-        return $this->hasMany(Thread::class, 'author_id', 'id');
-    }
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class, 'author_id', 'id');
-    }
-
-    public function postedThreads()
-    {
-        $posts = $this->posts;
-        $threads = new Collection();
-        foreach($posts as $post) {
-            $threads->put($post->thread->id, $post->thread);
-        }
-        return $threads;
-    }
-
-    public function a3lPlayer()
-    {
-        if(!is_null($this->steam)) {
-            return A3lPlayer::pid($this->steam)->first();
-        }
-    }
-
-    public function a3eAccount()
-    {
-        if(!is_null($this->steam)) {
-            return A3eAccount::uid($this->steam)->first();
-        }
-    }
-
-    public function can($ability, $arguments = [])
-    {
-        if ($this->isSuperAdmin()) {
-            return true;
-        }
-        if(is_subclass_of($arguments, EloquentModel::class)) {
-            $model = new $arguments();
-            $ability = Ability::where('name', $ability)->forModel($model)->first();
-        } else {
-            $ability = Ability::where('name', $ability)->simpleAbility()->first();
-        }
-        if(!is_null($ability)) {
-            return $this->role->abilities->contains(function ($key, $value) use ($ability) {
-                return $value->id == $ability->id;
-            });
-        } else {
-            return false;
-        }
+        return $this->hasOne(Player::class, 'playerid', 'player_id');
     }
 
     public function avatar($size = 64)
     {
-        if(!empty($this->facebook_id)) {
-            return 'https://graph.facebook.com/v2.4/' . $this->facebook_id . '/picture?type=normal';
-        } else {
-            return 'https://gravatar.com/avatar/'.md5($this->email).'?d=mm&s='.$size;
-        }
+        return 'https://gravatar.com/avatar/' . md5($this->email) . '?d=mm&s=' . $size;
     }
 
-    public function addBambooCoins($amount)
+    public function hasPlayer()
     {
-        $this->bamboo_coins += $amount;
-        $this->save();
-        $from = \Auth::check() ? \Auth::User()->id : 1;
-        \Notifynder::category('coins.added')
-            ->from($from)
-            ->to($this->id)
-            ->url('#')
-            ->extra(['bamboo_amount' => $amount])
-            ->send();
+        return !is_null($this->player);
     }
 
     public function getRoleAttribute()
     {
-        return $this->roles->first();
+        return $this->roles()->lists('id')->toArray();
     }
 
-    public function setRoleIdAttribute($value)
+    public function setRoleAttribute($value)
     {
-        $role = $this->getRoleName($value * 1);
-        if(isset($role)) {
-            $this->retractAll();
-            $this->assign($role);
-        }
-    }
-
-    public function isSuperAdmin()
-    {
-        return $this->is('super-admin');
-    }
-
-    public function saveOauthId($provider, $id)
-    {
-        $this->$provider = $id;
-        $this->save();
+        $this->roles()->sync($value);
     }
 
     public function setEmailAttribute($value)
@@ -160,43 +91,84 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         $this->attributes['email'] = strtolower($value);
     }
 
-    public function getEmailAttribute($value)
+    public function createThread($participants, $body)
     {
-        return strtolower($value);
+        if (is_array($participants)) $participants = collect($participants);
+
+        if ($participants instanceof Collection || $participants instanceof EloquentCollection) {
+            $participants->push($this->getKey());
+        } else {
+            throw new \BadMethodCallException('$participants should be a Collection or an Array');
+        }
+        $participants = $participants->toArray();
+
+        $thread = Thread::between($participants)->get()->filter(function ($thread) use ($participants) {
+            return $thread->participants->count() == count($participants);
+        })->first();
+        if (is_null($thread)) {
+            $thread = Thread::create([
+                'subject' => 'Chat started by User#' . $this->getKey(),
+            ]);
+            $thread->addParticipants($participants);
+        }
+
+        Message::create([
+            'thread_id' => $thread->getKey(),
+            'user_id' => $this->getKey(),
+            'body' => $body,
+        ]);
+        return $thread;
     }
 
-    public function getSlugAttribute()
+    public static function getList($remove = 0)
     {
-        return str_slug($this->username);
+        if (!is_array($remove)) $remove = [$remove];
+        return self::whereNotIn('id', $remove)->lists('name', 'id');
     }
 
-    public function scopeId($query, $id)
+    public function scopeConfirmToken($query, $token)
     {
-        return $query->where('id', $id);
+        $query->where('confirmation_token', $token);
     }
 
-    public function scopeFacebook($query, $id)
+    public function scopeConfirmed($query)
     {
-        return $query->where('facebook', $id);
+        $query->where('confirmed', 1);
     }
 
-    public function scopeGithub($query, $id)
+    public function scopeUnconfirmed($query)
     {
-        return $query->where('github', $id);
+        $query->where('confirmed', 0);
     }
 
-    public function scopeSlack($query, $id)
+    public function sendVerificationEmail()
     {
-        return $query->where('slack', $id);
+        $user = $this;
+        \Mail::send('emails.verification', [
+            'user' => $user,
+        ], function ($mail) use ($user) {
+            $mail->from('noreply@gummibeer.de', trans('messages.title'));
+            $mail->to($user->email, $user->name)->subject('E-Mail verification.');
+        });
     }
 
-    public function scopeSteam($query, $id)
+    public function confirm()
     {
-        return $query->where('steam', $id);
+        return $this->update([
+            'confirmed' => 1,
+            'confirmation_token' => '',
+        ]);
     }
 
-    public function scopeEmail($query, $email)
+    public function unconfirm()
     {
-        return $query->where('email', $email);
+        $update = $this->update([
+            'confirmed' => 0,
+            'confirmation_token' => str_random(32),
+        ]);
+        if ($update) {
+            $this->sendVerificationEmail();
+        }
+        return $update;
     }
 }

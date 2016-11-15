@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'https://bambusfarm.net',
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Berlin',
 
     /*
     |--------------------------------------------------------------------------
@@ -137,6 +137,20 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        Silber\Bouncer\BouncerServiceProvider::class,
+        Maknz\Slack\SlackServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Fenos\Notifynder\NotifynderServiceProvider::class,
+        Riari\Forum\ForumServiceProvider::class,
+        Riari\Forum\Frontend\ForumFrontendServiceProvider::class,
+        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+        AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider::class,
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
+        Golonka\BBCode\BBCodeParserServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -144,22 +158,9 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
         App\Providers\HtmlBuilderServiceProvider::class,
-
-        /*
-         * Packages
-         */
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Linfo\Laravel\LinfoServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
-        Maknz\Slack\SlackServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
-        Silber\Bouncer\BouncerServiceProvider::class,
-        Fenos\Notifynder\NotifynderServiceProvider::class,
-        Invisnik\LaravelSteamAuth\SteamServiceProvider::class,
-        Vinkla\GitLab\GitLabServiceProvider::class,
-        AbsoluteSoftware\Curl\CurlServiceProvider::class,
-        Riari\Forum\ForumServiceProvider::class,
+        App\Providers\GoogleDriveServiceProvider::class,
 
     ],
 
@@ -210,18 +211,22 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+        'Helper'	=> App\Facades\HelperFacade::class,
+        'Formatter'	=> App\Facades\FormatterFacade::class,
+        'Alert'     => App\Facades\AlertBuilderFacade::class,
         'Form'      => App\Facades\FormBuilderFacade::class,
-        'Filter'    => App\Facades\FilterBuilderFacade::class,
         'MarkExtra' => App\Facades\MarkExtraFacade::class,
         'Twemoji'   => App\Libs\Twemoji::class,
 
-        'Html'      => Collective\Html\HtmlFacade::class,
+        'Bouncer'   => Silber\Bouncer\BouncerFacade::class,
         'Slack'     => Maknz\Slack\Facades\Slack::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'Bouncer'   => Silber\Bouncer\BouncerFacade::class,
-        'Notifynder'=> Fenos\Notifynder\Facades\Notifynder::class,
-        'Curl'      => AbsoluteSoftware\Curl\Facades\CurlFacade::class,
-        'GitLab'    => Vinkla\GitLab\Facades\GitLab::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
+        'Notify'    => Fenos\Notifynder\Facades\Notifynder::class,
+        'Calendar'  => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+        'Markdown'  => AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra::class,
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
+        'BBCode'    => Golonka\BBCode\Facades\BBCodeParser::class,
 
     ],
 
