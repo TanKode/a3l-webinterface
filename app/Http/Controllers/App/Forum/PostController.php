@@ -26,7 +26,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function postEdit(Request $request, Category $category, Thread $thread, Post $post)
+    public function postEdit(Request $request, Thread $thread, Post $post)
     {
         $this->authorize('edit', $post);
 
