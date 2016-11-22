@@ -25,7 +25,7 @@ class PostPolicy
      * @param  Post  $post
      * @return bool
      */
-    public function delete($user, Post $post)
+    public function delete()
     {
         return false;
     }
