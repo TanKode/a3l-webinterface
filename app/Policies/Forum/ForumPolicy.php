@@ -10,7 +10,7 @@ class ForumPolicy
      * @param  object  $user
      * @return bool
      */
-    public function createCategories($user)
+    public function createCategories()
     {
         return true;
     }
@@ -33,7 +33,7 @@ class ForumPolicy
      * @param  object  $user
      * @return bool
      */
-    public function moveCategories($user)
+    public function moveCategories()
     {
         return true;
     }
@@ -44,7 +44,7 @@ class ForumPolicy
      * @param  object  $user
      * @return bool
      */
-    public function renameCategories($user)
+    public function renameCategories()
     {
         return true;
     }
@@ -55,7 +55,7 @@ class ForumPolicy
      * @param  object  $user
      * @return bool
      */
-    public function markNewThreadsAsRead($user)
+    public function markNewThreadsAsRead()
     {
         return true;
     }
@@ -66,7 +66,7 @@ class ForumPolicy
      * @param  object  $user
      * @return bool
      */
-    public function viewTrashedThreads($user)
+    public function viewTrashedThreads()
     {
         return false;
     }
@@ -77,7 +77,7 @@ class ForumPolicy
      * @param  object  $user
      * @return bool
      */
-    public function viewTrashedPosts($user)
+    public function viewTrashedPosts()
     {
         return false;
     }
