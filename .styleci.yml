@@ -1,0 +1,21 @@
+preset: laravel
+
+risky: false
+
+linting: true
+
+finder:
+  exclude:
+    - wordpress/
+    - tests/
+    - storage/
+    - resources/
+    - public/
+  name:
+    - "*.php"
+  path:
+    - "app/**.php"
+    - "bootstrap/**.php"
+    - "config/**.php"
+    - "database/**.php"
+    - "database/**.php"
