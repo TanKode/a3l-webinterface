@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Policies\Forum;
 
 use Riari\Forum\Models\Category;

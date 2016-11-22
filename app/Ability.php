@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use Silber\Bouncer\Database\Ability as BouncerAbility;
@@ -30,8 +31,13 @@ class Ability extends BouncerAbility
     public function getDisplayNameAttribute()
     {
         $slug = strtolower($this->attributes['name']);
-        if ($this->attributes['entity_type']) $slug .= ' ' . ucfirst(class_basename($this->attributes['entity_type']));
-        if ($this->attributes['entity_id']) $slug .= '[' . $this->attributes['entity_id'] . ']';
+        if ($this->attributes['entity_type']) {
+            $slug .= ' '.ucfirst(class_basename($this->attributes['entity_type']));
+        }
+        if ($this->attributes['entity_id']) {
+            $slug .= '['.$this->attributes['entity_id'].']';
+        }
+
         return $slug;
     }
 }

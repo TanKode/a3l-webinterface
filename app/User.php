@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use Cmgmyr\Messenger\Models\Message;
@@ -41,7 +42,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     ];
 
     protected $dontKeepRevisionOf = [
-        'password'
+        'password',
     ];
 
     public static $rules = [
@@ -68,12 +69,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function avatar($size = 64)
     {
-        return 'https://gravatar.com/avatar/' . md5($this->email) . '?d=mm&s=' . $size;
+        return 'https://gravatar.com/avatar/'.md5($this->email).'?d=mm&s='.$size;
     }
 
     public function hasPlayer()
     {
-        return !is_null($this->player);
+        return ! is_null($this->player);
     }
 
     public function getRoleAttribute()
@@ -93,7 +94,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function createThread($participants, $body)
     {
-        if (is_array($participants)) $participants = collect($participants);
+        if (is_array($participants)) {
+            $participants = collect($participants);
+        }
 
         if ($participants instanceof Collection || $participants instanceof EloquentCollection) {
             $participants->push($this->getKey());
@@ -107,7 +110,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         })->first();
         if (is_null($thread)) {
             $thread = Thread::create([
-                'subject' => 'Chat started by User#' . $this->getKey(),
+                'subject' => 'Chat started by User#'.$this->getKey(),
             ]);
             $thread->addParticipants($participants);
         }
@@ -117,12 +120,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
             'user_id' => $this->getKey(),
             'body' => $body,
         ]);
+
         return $thread;
     }
 
     public static function getList($remove = 0)
     {
-        if (!is_array($remove)) $remove = [$remove];
+        if (! is_array($remove)) {
+            $remove = [$remove];
+        }
+
         return self::whereNotIn('id', $remove)->lists('name', 'id');
     }
 
@@ -169,6 +176,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         if ($update) {
             $this->sendVerificationEmail();
         }
+
         return $update;
     }
 }

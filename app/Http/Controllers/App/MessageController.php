@@ -1,13 +1,10 @@
 <?php
+
 namespace App\Http\Controllers\App;
 
 use App\Player;
 use App\User;
 use Cmgmyr\Messenger\Models\Message;
-use Cmgmyr\Messenger\Models\Thread;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class MessageController extends Controller
@@ -15,7 +12,7 @@ class MessageController extends Controller
     public function __construct()
     {
         \Config::set('app.debug', true);
-        if (!\Auth::User()->hasPlayer()) {
+        if (! \Auth::User()->hasPlayer()) {
             abort(404);
         }
 

@@ -1,10 +1,8 @@
 <?php
+
 namespace App\Http\Controllers\App;
 
 use App\Event;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class CalendarController extends Controller
@@ -20,8 +18,8 @@ class CalendarController extends Controller
                     'right' => 'prev,today,next',
                 ],
             ])->setCallbacks([
-                'viewRender' => "function(){ calendar.fn.viewRender(); }",
-                'eventClick' => "function(calEvent, jsEvent, view){ return calendar.fn.eventClick(calEvent, jsEvent, view); }",
+                'viewRender' => 'function(){ calendar.fn.viewRender(); }',
+                'eventClick' => 'function(calEvent, jsEvent, view){ return calendar.fn.eventClick(calEvent, jsEvent, view); }',
             ]);
 
         return view('app.calendar.index')->with([
@@ -40,6 +38,7 @@ class CalendarController extends Controller
         }
 
         Event::create($data);
+
         return redirect('app/calendar');
     }
 
@@ -47,6 +46,7 @@ class CalendarController extends Controller
     {
         $this->authorize('delete', $event);
         $event->delete();
+
         return redirect('app/calendar');
     }
 }

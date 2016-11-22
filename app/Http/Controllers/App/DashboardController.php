@@ -1,12 +1,10 @@
 <?php
+
 namespace App\Http\Controllers\App;
 
 use App\Lotto;
 use App\Player;
 use App\Statlog;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
@@ -31,16 +29,16 @@ class DashboardController extends Controller
 
         $player = Player::find(179);
         dump($player);
-        foreach($player->revisionHistory()->orderBy('created_at', 'desc')->limit(100)->get() as $history) {
+        foreach ($player->revisionHistory()->orderBy('created_at', 'desc')->limit(100)->get() as $history) {
             $field = $history->fieldName();
             $old = $history->old_value;
             $new = $history->new_value;
-            if(is_numeric($history->new_value) && is_numeric($history->old_value)) {
+            if (is_numeric($history->new_value) && is_numeric($history->old_value)) {
                 $type = 'numeric';
                 $old *= 1;
                 $new *= 1;
                 $diff = $new - $old;
-            } elseif(str_contains($field, 'licenses')) {
+            } elseif (str_contains($field, 'licenses')) {
                 $type = 'array';
                 $old = \Formatter::decodeDBArray($old);
                 $new = \Formatter::decodeDBArray($new);

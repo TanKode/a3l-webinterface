@@ -211,8 +211,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-        'Helper'	=> App\Facades\HelperFacade::class,
-        'Formatter'	=> App\Facades\FormatterFacade::class,
+        'Helper'    => App\Facades\HelperFacade::class,
+        'Formatter'    => App\Facades\FormatterFacade::class,
         'Alert'     => App\Facades\AlertBuilderFacade::class,
         'Form'      => App\Facades\FormBuilderFacade::class,
         'MarkExtra' => App\Facades\MarkExtraFacade::class,

@@ -1,11 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\App;
 
-use App\Lotto;
-use App\Statlog;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class FineController extends Controller

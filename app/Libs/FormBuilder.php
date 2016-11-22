@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Libs;
 
 use Collective\Html\FormBuilder as CollectiveFormBuilder;
@@ -56,7 +57,7 @@ class FormBuilder extends CollectiveFormBuilder
         } else {
             unset($options['readonly']);
         }
-        if (!array_get($options, 'multiple', true)) {
+        if (! array_get($options, 'multiple', true)) {
             unset($options['multiple']);
         } else {
             $options['multiple'] = true;
@@ -69,6 +70,7 @@ class FormBuilder extends CollectiveFormBuilder
     {
         $options['type'] = 'submit';
         $options['class'] = $this->getClass($options, 'btn');
+
         return $this->button($value, $options);
     }
 
@@ -82,12 +84,13 @@ class FormBuilder extends CollectiveFormBuilder
         $html .= parent::checkbox($name, $value, $checked, $options);
         $html .= $this->label($options['id'], array_get($options, 'label'));
         $html .= '</div>';
+
         return $html;
     }
 
     public function label($name, $value = null, $options = [])
     {
-        if (!empty($name) && !empty($value)) {
+        if (! empty($name) && ! empty($value)) {
             return parent::label($name, $value, $options);
         } else {
             return '';
@@ -97,6 +100,7 @@ class FormBuilder extends CollectiveFormBuilder
     protected function checkable($type, $name, $value, $checked, $options)
     {
         $options['container'] = false;
+
         return parent::checkable($type, $name, $value, $checked, $options);
     }
 
@@ -107,10 +111,10 @@ class FormBuilder extends CollectiveFormBuilder
         $options = [
             'value' => $value,
             'selected' => $selected,
-            'style' => starts_with($value, '#') && strlen($value) == 7 ? 'color:' . \Helper::getContrastColor($value) . ';background:' . $value . ';' : '',
+            'style' => starts_with($value, '#') && strlen($value) == 7 ? 'color:'.\Helper::getContrastColor($value).';background:'.$value.';' : '',
         ];
 
-        return '<option' . $this->html->attributes($options) . '>' . e($display) . '</option>';
+        return '<option'.$this->html->attributes($options).'>'.e($display).'</option>';
     }
 
     protected function constructHtml($input, array $options = [])
@@ -121,29 +125,32 @@ class FormBuilder extends CollectiveFormBuilder
         $label = array_get($options, 'label', null);
         $state = array_get($options, 'state', null);
 
-        if (!$container) return $input;
+        if (! $container) {
+            return $input;
+        }
 
         $html = '';
-        $html .= '<div class="form-group ' . (is_null($state) ? '' : 'has-' . $state) . '">';
+        $html .= '<div class="form-group '.(is_null($state) ? '' : 'has-'.$state).'">';
         $html .= $this->label($options['id'], $label);
         $html .= empty($icon) ? '' : '<div class="input-group">';
-        $html .= empty($icon) ? '' : '<span class="input-group-addon"><i class="icon ' . $icon . '"></i></span>';
+        $html .= empty($icon) ? '' : '<span class="input-group-addon"><i class="icon '.$icon.'"></i></span>';
         $html .= $input;
         $html .= empty($icon) ? '' : '</div>';
-        if (!empty($errors)) {
+        if (! empty($errors)) {
             $html .= '<ul class="parsley-errors-list filled">';
             foreach ($errors as $error) {
-                $html .= '<li>' . $error . '</li>';
+                $html .= '<li>'.$error.'</li>';
             }
             $html .= '</ul>';
         }
         $html .= '</div>';
+
         return $html;
     }
 
     private function getId($options, $type, $name)
     {
-        return array_get($options, 'id', camel_case($type . '-field-' . $name));
+        return array_get($options, 'id', camel_case($type.'-field-'.$name));
     }
 
     protected function getClass(array $options, $defaults)
@@ -153,6 +160,7 @@ class FormBuilder extends CollectiveFormBuilder
         foreach ($defaults as $default) {
             $classes->push($default);
         }
+
         return $classes->unique()->sort()->implode(' ');
     }
 
@@ -162,6 +170,7 @@ class FormBuilder extends CollectiveFormBuilder
         unset($options['errors']);
         unset($options['container']);
         unset($options['state']);
+
         return $options;
     }
 }

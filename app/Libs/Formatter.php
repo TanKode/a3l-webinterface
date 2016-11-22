@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Libs;
 
 class Formatter
@@ -6,7 +7,7 @@ class Formatter
     public function decodeDBArray($string)
     {
         $return = [];
-        if (!empty($string)) {
+        if (! empty($string)) {
             $string = str_replace('"', '', $string);
             $json = str_replace('`', '"', $string);
             $return = json_decode($json);
@@ -14,6 +15,7 @@ class Formatter
                 dump($string);
             }
         }
+
         return $return;
     }
 
@@ -26,21 +28,22 @@ class Formatter
         $return = null;
         if (is_array($array)):
             $string = json_encode($array);
-            $string = str_replace('{', '[', $string);
-            $string = str_replace('"', '`', $string);
-            $string = str_replace(':', ',', $string);
-            $string = str_replace('}', ']', $string);
-            if ($ints == false) {
-                $string = preg_replace("/`(\d+)`/", "$1", $string);
-            }
-            $return = '"' . $string . '"';
+        $string = str_replace('{', '[', $string);
+        $string = str_replace('"', '`', $string);
+        $string = str_replace(':', ',', $string);
+        $string = str_replace('}', ']', $string);
+        if ($ints == false) {
+            $string = preg_replace("/`(\d+)`/", '$1', $string);
+        }
+        $return = '"'.$string.'"';
         endif;
+
         return $return;
     }
 
     public function money($number)
     {
-        return number_format($number, config('a3lwebinterface.formatter.decimals', 0), config('a3lwebinterface.formatter.decimal_seperator', ','), config('a3lwebinterface.formatter.thousand_seperator', '.')) . ' ' . config('a3lwebinterface.formatter.currency', '€');
+        return number_format($number, config('a3lwebinterface.formatter.decimals', 0), config('a3lwebinterface.formatter.decimal_seperator', ','), config('a3lwebinterface.formatter.thousand_seperator', '.')).' '.config('a3lwebinterface.formatter.currency', '€');
     }
 
     public function getMBbyB($bytes)

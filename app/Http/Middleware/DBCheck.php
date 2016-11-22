@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ class DBCheck
         } catch (\PDOException $e) {
             abort(503);
         }
+
         return $next($request);
     }
 }

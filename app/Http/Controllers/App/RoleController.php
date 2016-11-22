@@ -1,12 +1,9 @@
 <?php
+
 namespace App\Http\Controllers\App;
 
 use App\Ability;
 use App\Role;
-use App\User;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class RoleController extends Controller
@@ -68,7 +65,8 @@ class RoleController extends Controller
         $role->name = array_get($data, 'display_name', '');
         $role->ability = array_get($data, 'ability', []);
         $role->save();
-        return redirect('app/role/edit/' . $role->getKey());
+
+        return redirect('app/role/edit/'.$role->getKey());
     }
 
     public function postCreate()
@@ -84,7 +82,8 @@ class RoleController extends Controller
         $role = Role::create(['name' => array_get($data, 'display_name', '')]);
         $role->ability = array_get($data, 'ability', []);
         $role->save();
-        return redirect('app/role/edit/' . $role->getKey());
+
+        return redirect('app/role/edit/'.$role->getKey());
     }
 
     public function getDelete(Role $role)
@@ -98,6 +97,7 @@ class RoleController extends Controller
             \Bouncer::disallow($role)->to($ability);
         }
         $role->delete();
+
         return redirect('app/role');
     }
 }

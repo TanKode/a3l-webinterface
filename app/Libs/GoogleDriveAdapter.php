@@ -1,13 +1,11 @@
 <?php
+
 namespace App\Libs;
 
-use Carbon\Carbon;
 use Google_Service_Drive;
 use Google_Service_Drive_DriveFile;
-
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\Config;
-use League\Flysystem\Util;
 use League\Flysystem\FileNotFoundException;
 use League\Flysystem\FileExistsException;
 
@@ -55,14 +53,14 @@ class GoogleDriveAdapter extends AbstractAdapter
         $file->setParents([
             [
                 'kind' => 'drive#fileLink',
-                'id' => $parentId
-            ]
+                'id' => $parentId,
+            ],
         ]);
 
-        $result = $this->service->files->insert($file, array(
+        $result = $this->service->files->insert($file, [
             'data' => $contents,
             'uploadType' => 'media',
-        ));
+        ]);
 
         return $this->normalizeResponse($result, $path);
     }
@@ -74,7 +72,7 @@ class GoogleDriveAdapter extends AbstractAdapter
 
     public function update($path, $contents, Config $config)
     {
-        if (!$this->has($path)) {
+        if (! $this->has($path)) {
             return false;
         }
         $fileName = $this->getFilenameByPath($path);
@@ -87,20 +85,21 @@ class GoogleDriveAdapter extends AbstractAdapter
         $file->setParents([
             [
                 'kind' => 'drive#fileLink',
-                'id' => $parentId
-            ]
+                'id' => $parentId,
+            ],
         ]);
 
 
         $fileId = $this->getFileId($path);
-        if (!is_null($fileId)) {
-            $result = $this->service->files->update($fileId, $file, array(
+        if (! is_null($fileId)) {
+            $result = $this->service->files->update($fileId, $file, [
                 'data' => $contents,
                 'uploadType' => 'media',
-            ));
+            ]);
 
             return $this->normalizeResponse($result, $path);
         }
+
         return false;
     }
 
@@ -111,15 +110,17 @@ class GoogleDriveAdapter extends AbstractAdapter
 
     public function delete($path)
     {
-        if (!$this->has($path)) {
+        if (! $this->has($path)) {
             return false;
         }
 
         $fileId = $this->getFileId($path);
-        if (!is_null($fileId)) {
+        if (! is_null($fileId)) {
             $result = $this->service->files->trash($fileId);
+
             return $this->normalizeResponse($result->getLabels()->getTrashed(), $path);
         }
+
         return false;
     }
 
@@ -127,12 +128,13 @@ class GoogleDriveAdapter extends AbstractAdapter
     {
         if ($this->has($path)) {
             $fileId = $this->getFileId($path);
-            if (!is_null($fileId)) {
+            if (! is_null($fileId)) {
                 $response = $this->service->files->get($fileId, [
-                    'alt' => 'media'
+                    'alt' => 'media',
                 ]);
                 if ($response->getStatusCode() == 200) {
                     $contents = $response->getBody()->__toString();
+
                     return compact('contents', 'path');
                 }
             }
@@ -186,7 +188,7 @@ class GoogleDriveAdapter extends AbstractAdapter
     {
         $parentId = null;
 
-        if (!empty($directory)) {
+        if (! empty($directory)) {
             $parentId = $this->getDirectory($directory, false);
         }
 
@@ -198,9 +200,9 @@ class GoogleDriveAdapter extends AbstractAdapter
             $parentId,
         ]);
 
-        $result = $this->service->files->listFiles(array(
+        $result = $this->service->files->listFiles([
             'q' => $q,
-        ))->getItems();
+        ])->getItems();
 
         $files = [];
         foreach ($result as $file) {
@@ -211,19 +213,20 @@ class GoogleDriveAdapter extends AbstractAdapter
                     if ($parent instanceof \Google_Service_Drive_ParentReference) {
                         $parent = $this->service->files->get($parent->getId());
                         if ($parent instanceof Google_Service_Drive_DriveFile) {
-                            $folder .= $parent->getTitle() . '/';
+                            $folder .= $parent->getTitle().'/';
                         }
                     }
                 }
-                $folder = trim($folder, '/') . '/';
+                $folder = trim($folder, '/').'/';
                 $files[] = [
                     'type' => 'file',
-                    'path' => $folder . $file->getOriginalFilename(),
+                    'path' => $folder.$file->getOriginalFilename(),
                     'size' => $file->getFileSize() * 1,
                     'timestamp' => strtotime($file->getModifiedDate()),
                 ];
             }
         }
+
         return $files;
     }
 
@@ -242,7 +245,7 @@ class GoogleDriveAdapter extends AbstractAdapter
     {
         $folderId = $this->getDirectory($dirname, false);
 
-        if (!$folderId) {
+        if (! $folderId) {
             throw new FileNotFoundException($dirname);
         }
 
@@ -274,7 +277,7 @@ class GoogleDriveAdapter extends AbstractAdapter
         foreach ($parts as $name) {
             $folderId = $this->getDirectoryId($name, $folderId);
 
-            if (!$folderId) {
+            if (! $folderId) {
                 if ($create) {
                     $folder = $this->createDirectory($name, $parentFolderId);
                     $folderId = $folder->id;
@@ -286,7 +289,7 @@ class GoogleDriveAdapter extends AbstractAdapter
             $parentFolderId = $folderId;
         }
 
-        if (!$folderId) {
+        if (! $folderId) {
             return false;
         }
 
@@ -299,18 +302,18 @@ class GoogleDriveAdapter extends AbstractAdapter
             $parentId = $this->baseFolderId;
         }
 
-        $q = 'mimeType="application/vnd.google-apps.folder" and title = "' . $name . '" and trashed = false';
+        $q = 'mimeType="application/vnd.google-apps.folder" and title = "'.$name.'" and trashed = false';
 
-        if (!is_null($parentId)) {
+        if (! is_null($parentId)) {
             $q .= sprintf(' and "%s" in parents', $parentId);
         }
 
-        $folders = $this->service->files->listFiles(array(
+        $folders = $this->service->files->listFiles([
             'q' => $q,
-        ))->getItems();
+        ])->getItems();
 
         if (count($folders) == 0) {
-            return null;
+            return;
         } else {
             return $folders[0]->id;
         }
@@ -322,7 +325,7 @@ class GoogleDriveAdapter extends AbstractAdapter
         $fileName = $this->getFilenameByPath($path);
         $pathInfo = pathinfo($path);
 
-        if (!empty($pathInfo['dirname'])) {
+        if (! empty($pathInfo['dirname'])) {
             $parentId = $this->getDirectory($pathInfo['dirname'], false);
         }
 
@@ -336,15 +339,15 @@ class GoogleDriveAdapter extends AbstractAdapter
         ]);
 
         try {
-            $files = $this->service->files->listFiles(array(
+            $files = $this->service->files->listFiles([
                 'q' => $q,
-            ))->getItems();
+            ])->getItems();
         } catch (\Google_Service_Exception $e) {
-            return null;
+            return;
         }
 
         if (count($files) == 0) {
-            return null;
+            return;
         } else {
             return $files[0]->id;
         }
@@ -353,6 +356,7 @@ class GoogleDriveAdapter extends AbstractAdapter
     protected function getFilenameByPath($path)
     {
         $paths = explode('/', $path);
+
         return array_pop($paths);
     }
 
@@ -362,8 +366,8 @@ class GoogleDriveAdapter extends AbstractAdapter
         $file->setTitle($name);
         $file->setParents([
             [
-                'id' => $parentId
-            ]
+                'id' => $parentId,
+            ],
         ]);
         $file->setMimeType('application/vnd.google-apps.folder');
 

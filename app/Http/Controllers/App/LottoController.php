@@ -1,11 +1,9 @@
 <?php
+
 namespace App\Http\Controllers\App;
 
 use App\Lotto;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class LottoController extends Controller
@@ -18,12 +16,13 @@ class LottoController extends Controller
         $lotto = Lotto::next()->first();
         if ($now->dayOfWeek < config('a3lwebinterface.lotto.draw.new') || $now->dayOfWeek > config('a3lwebinterface.lotto.draw.day') || is_null($lotto)) {
             $lotto = Lotto::last()->first();
+
             return view('app.lotto.closed')->with([
                 'lotto' => $lotto,
             ]);
         }
 
-        if (!is_null($bet = $lotto->users()->where('id', \Auth::id())->first())) {
+        if (! is_null($bet = $lotto->users()->where('id', \Auth::id())->first())) {
             return view('app.lotto.bought')->with([
                 'lotto' => $lotto,
                 'numbers' => explode(',', $bet->pivot->numbers),
@@ -60,6 +59,7 @@ class LottoController extends Controller
                     ]));
                 }
             }
+
             return back()->withErrors($validator)->withInput();
         }
 
@@ -72,7 +72,7 @@ class LottoController extends Controller
             \Auth::id() => [
                 'numbers' => $numbers->implode(','),
                 'created_at' => Carbon::now('UTC'),
-            ]
+            ],
         ], false);
 
         return back();

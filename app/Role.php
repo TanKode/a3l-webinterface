@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use Silber\Bouncer\Database\Role as BouncerRole;

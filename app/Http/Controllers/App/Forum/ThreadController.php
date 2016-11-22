@@ -1,9 +1,8 @@
 <?php
+
 namespace App\Http\Controllers\App\Forum;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Riari\Forum\Models\Category;
 use Riari\Forum\Models\Thread;
 
@@ -13,7 +12,9 @@ class ThreadController extends Controller
     {
         $this->authorize('view', $category);
 
-        if ($category->getKey() != $thread->category_id) abort(404);
+        if ($category->getKey() != $thread->category_id) {
+            abort(404);
+        }
 
         $thread->readers()->sync([\Auth::id()], false);
 
@@ -43,14 +44,16 @@ class ThreadController extends Controller
             'content' => \Input::get('content'),
         ])->post();
 
-        return redirect('app/forum/category/' . $category->getKey() . '/thread/' . $thread->getKey());
+        return redirect('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey());
     }
 
     public function postReply(Category $category, Thread $thread)
     {
         $this->authorize('view', $category);
 
-        if ($thread->locked) abort(403);
+        if ($thread->locked) {
+            abort(403);
+        }
 
         $post = $this->api('post.store')->parameters([
             'thread_id' => $thread->getKey(),
@@ -105,7 +108,7 @@ class ThreadController extends Controller
     {
         $this->authorize('delete', $thread);
 
-        $permanent = !config('forum.preferences.soft_deletes');
+        $permanent = ! config('forum.preferences.soft_deletes');
 
         $parameters = $request->all();
 
@@ -115,6 +118,6 @@ class ThreadController extends Controller
 
         $thread = $this->api('thread.delete', $thread->getKey())->parameters($parameters)->delete();
 
-        return redirect('app/forum/category/' . $category->getKey());
+        return redirect('app/forum/category/'.$category->getKey());
     }
 }

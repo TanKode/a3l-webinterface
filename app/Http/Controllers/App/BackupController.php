@@ -1,10 +1,9 @@
 <?php
+
 namespace App\Http\Controllers\App;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -25,7 +24,7 @@ class BackupController extends Controller
         $this->authorize('download-backups');
 
         $filename = str_replace(' ', '+', $request->get('filename'));
-        $fielpath = 'backups/' . $filename;
+        $fielpath = 'backups/'.$filename;
         if (\Storage::disk('gdrive')->has($fielpath)) {
             $response = new StreamedResponse();
 
@@ -47,7 +46,7 @@ class BackupController extends Controller
         $this->authorize('delete-backups');
 
         $filename = str_replace(' ', '+', $request->get('filename'));
-        $fielpath = 'backups/' . $filename;
+        $fielpath = 'backups/'.$filename;
         if (\Storage::disk('gdrive')->has($fielpath)) {
             \Storage::disk('gdrive')->delete($fielpath);
 
@@ -63,6 +62,7 @@ class BackupController extends Controller
             $backup['carbon'] = Carbon::createFromTimestampUTC($backup['timestamp']);
             $backup['display_size'] = \Formatter::getMBbyB($backup['size']);
         }
+
         return $backups;
     }
 }

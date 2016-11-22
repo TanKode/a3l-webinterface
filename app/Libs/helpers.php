@@ -1,19 +1,20 @@
 <?php
-if (!function_exists('transd')) {
+
+if (! function_exists('transd')) {
     function transd($key, $default = null)
     {
         return \Helper::transd($key, $default);
     }
 }
 
-if (!function_exists('aurl')) {
+if (! function_exists('aurl')) {
     function aurl($path)
     {
         return \Helper::aurl($path);
     }
 }
 
-if (!function_exists('array_diff_recursive')) {
+if (! function_exists('array_diff_recursive')) {
     function array_diff_recursive($arr1, $arr2)
     {
         $outputDiff = [];
@@ -26,10 +27,10 @@ if (!function_exists('array_diff_recursive')) {
                     if (count($recursiveDiff)) {
                         $outputDiff[$key] = $recursiveDiff;
                     }
-                } else if (!in_array($value, $arr2)) {
+                } elseif (! in_array($value, $arr2)) {
                     $outputDiff[$key] = $value;
                 }
-            } else if (!in_array($value, $arr2)) {
+            } elseif (! in_array($value, $arr2)) {
                 $outputDiff[$key] = $value;
             }
         }

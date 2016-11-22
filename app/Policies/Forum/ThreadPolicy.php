@@ -2,7 +2,6 @@
 
 namespace App\Policies\Forum;
 
-use Illuminate\Support\Facades\Gate;
 use Riari\Forum\Models\Thread;
 
 class ThreadPolicy
@@ -40,7 +39,7 @@ class ThreadPolicy
      */
     public function reply($user, Thread $thread)
     {
-        return !$thread->locked;
+        return ! $thread->locked;
     }
 
     /**

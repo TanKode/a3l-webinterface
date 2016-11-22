@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
@@ -13,26 +14,26 @@ class Model extends EloquentModel
     public function getRevisions($limit = 100)
     {
         $histories = [];
-        foreach($this->revisionHistory()->orderBy('created_at', 'desc')->limit($limit)->get() as $history) {
+        foreach ($this->revisionHistory()->orderBy('created_at', 'desc')->limit($limit)->get() as $history) {
             $field = $history->key;
             $old = $history->old_value;
             $oldValue = $old;
             $new = $history->new_value;
             $newValue = $new;
-            if(is_numeric($history->new_value) && is_numeric($history->old_value)) {
+            if (is_numeric($history->new_value) && is_numeric($history->old_value)) {
                 $type = 'numeric';
                 $old *= 1;
                 $new *= 1;
                 $diff = $new - $old;
                 $diffValue = $diff;
-            } elseif(str_contains($field, 'licenses')) {
+            } elseif (str_contains($field, 'licenses')) {
                 $type = 'array';
                 $old = \Formatter::decodeDBArray($old);
                 $new = \Formatter::decodeDBArray($new);
                 $old = array_combine(array_column($old, 0), array_column($old, 1));
                 $new = array_combine(array_column($new, 0), array_column($new, 1));
                 $diff = array_diff_assoc($new, $old);
-                if(count($diff)) {
+                if (count($diff)) {
                     $oldValue = [];
                     $newValue = [];
                     foreach ($diff as $key => $value) {
@@ -66,6 +67,7 @@ class Model extends EloquentModel
                 'created_at' => $history->created_at,
             ];
         }
+
         return $histories;
     }
 }

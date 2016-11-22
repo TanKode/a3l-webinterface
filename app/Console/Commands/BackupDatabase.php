@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Console\Commands;
 
 use Carbon\Carbon;
@@ -15,11 +16,11 @@ class BackupDatabase extends Command
         $connections = count($connections) ? $connections : array_keys(config('database.connections'));
         foreach ($connections as $connection) {
             if (array_key_exists($connection, config('database.connections'))) {
-                $this->comment('Start backup for DB-Connection [' . $connection . ']');
+                $this->comment('Start backup for DB-Connection ['.$connection.']');
                 $this->createBackup($connection);
-                $this->info('Backup for DB-Connection [' . $connection . '] created successfully');
+                $this->info('Backup for DB-Connection ['.$connection.'] created successfully');
             } else {
-                $this->error('DB-Connection [' . $connection . '] does not exist.');
+                $this->error('DB-Connection ['.$connection.'] does not exist.');
             }
         }
     }
@@ -39,12 +40,12 @@ class BackupDatabase extends Command
 
         $content = $this->getComment([
             'DB-Backup',
-            $config['database'] . ' @ ' . $config['host'],
-            $config['charset'] . ' / ' . $config['collation'],
+            $config['database'].' @ '.$config['host'],
+            $config['charset'].' / '.$config['collation'],
             $date,
         ]);
         $content .= $this->getCommand([
-            "SET foreign_key_checks = 0;",
+            'SET foreign_key_checks = 0;',
         ]);
         $content .= $this->getCommand([
             "DROP DATABASE IF EXISTS `{$config['database']}`;",
@@ -63,7 +64,7 @@ class BackupDatabase extends Command
             ]);
             $content .= $this->getCommand([
                 "DROP TABLE IF EXISTS `{$table}`;",
-                \DB::connection($connection)->select("SHOW CREATE TABLE {$table}")[0]->{'Create Table'} . ';',
+                \DB::connection($connection)->select("SHOW CREATE TABLE {$table}")[0]->{'Create Table'}.';',
             ]);
             $content .= $this->getComment([
                 "table data for '{$table}'",
@@ -73,7 +74,7 @@ class BackupDatabase extends Command
             }
         }
         $content .= $this->getCommand([
-            "SET foreign_key_checks = 1;",
+            'SET foreign_key_checks = 1;',
         ]);
         $content = utf8_encode(trim($content));
 
@@ -85,11 +86,12 @@ class BackupDatabase extends Command
     protected function getComment(array $comments)
     {
         $out = PHP_EOL;
-        $out .= '-- ----------------------------' . PHP_EOL;
+        $out .= '-- ----------------------------'.PHP_EOL;
         foreach ($comments as $comment) {
-            $out .= '-- ' . $comment . PHP_EOL;
+            $out .= '-- '.$comment.PHP_EOL;
         }
-        $out .= '-- ----------------------------' . PHP_EOL;
+        $out .= '-- ----------------------------'.PHP_EOL;
+
         return $out;
     }
 
@@ -97,9 +99,10 @@ class BackupDatabase extends Command
     {
         $out = '';
         foreach ($commands as $command) {
-            $out .= $command . PHP_EOL;
+            $out .= $command.PHP_EOL;
         }
-        return $out . PHP_EOL;
+
+        return $out.PHP_EOL;
     }
 
     protected function getInput($table, $data)
@@ -112,8 +115,9 @@ class BackupDatabase extends Command
         }
         $keys = implode(',', $keys);
         $values = implode(',', $values);
-        $out = "INSERT INTO `{$table}` ({$keys})" . PHP_EOL;
-        $out .= "VALUES({$values});" . PHP_EOL;
+        $out = "INSERT INTO `{$table}` ({$keys})".PHP_EOL;
+        $out .= "VALUES({$values});".PHP_EOL;
+
         return $out;
     }
 
@@ -122,9 +126,9 @@ class BackupDatabase extends Command
         if (is_null($value)) {
             return 'null';
         }
-        $value = str_replace("\n", "\\n", addslashes($value));
+        $value = str_replace("\n", '\\n', addslashes($value));
         if (isset($value)) {
-            return '"' . $value . '"';
+            return '"'.$value.'"';
         } else {
             return '""';
         }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Teamspeak;
 
 use Illuminate\Support\Collection;
@@ -11,7 +12,7 @@ class Server extends Model
     public function __construct()
     {
         try {
-            $this->instance = TeamSpeak3::factory('serverquery://' . config('services.teamspeak.host') . ':' . config('services.teamspeak.port') . '/?server_port=' . config('services.teamspeak.server_port') . '');
+            $this->instance = TeamSpeak3::factory('serverquery://'.config('services.teamspeak.host').':'.config('services.teamspeak.port').'/?server_port='.config('services.teamspeak.server_port').'');
             $this->info = $this->instance->getInfo();
             $this->prepareAttributes();
         } catch (\Exception $e) {
@@ -31,16 +32,21 @@ class Server extends Model
     public function getClients()
     {
         try {
-            if (is_null($this->instance)) return null;
+            if (is_null($this->instance)) {
+                return;
+            }
             $clientList = $this->instance->clientList();
             $clients = new Collection();
             foreach ($clientList as $client) {
-                if ($client['client_type']) continue;
+                if ($client['client_type']) {
+                    continue;
+                }
                 $clients->push(new Client($client->getInfo(), $this));
             }
+
             return $clients;
         } catch (\Exception $e) {
-            return null;
+            return;
         }
     }
 }

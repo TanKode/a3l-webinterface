@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Libs;
 
 use Collective\Html\HtmlBuilder;
@@ -39,7 +40,7 @@ class AlertBuilder
 
         $classes = [
             'alert',
-            'alert-' . strtolower($type),
+            'alert-'.strtolower($type),
             $this->getOption($options, 'class'),
             $this->getOption($options, 'dismiss', null, 'alert-dismiss'),
             $this->getOption($options, 'icon', null, 'alert-icon'),
@@ -51,7 +52,7 @@ class AlertBuilder
             $text = implode('</p><p>', $text);
         }
 
-        return '<div' . $this->html->attributes($this->clearOptions($options)) . '>' . $this->getDismiss($options) . $this->getIcon($options) . $this->getTitle($options) . '<p>' . $text . '</p></div>';
+        return '<div'.$this->html->attributes($this->clearOptions($options)).'>'.$this->getDismiss($options).$this->getIcon($options).$this->getTitle($options).'<p>'.$text.'</p></div>';
     }
 
     protected function getDismiss(array $options)
@@ -61,12 +62,12 @@ class AlertBuilder
 
     protected function getIcon(array $options)
     {
-        return isset($options['icon']) ? '<i class="icon ' . $options['icon'] . '"></i>' : '';
+        return isset($options['icon']) ? '<i class="icon '.$options['icon'].'"></i>' : '';
     }
 
     protected function getTitle(array $options)
     {
-        return isset($options['title']) ? '<h4>' . $options['title'] . '</h4>' : '';
+        return isset($options['title']) ? '<h4>'.$options['title'].'</h4>' : '';
     }
 
     protected function getOption(array $options, $key, $default = null, $value = null)
@@ -84,6 +85,7 @@ class AlertBuilder
             $options['dark'],
             $options['dismiss']
         );
+
         return $options;
     }
 }

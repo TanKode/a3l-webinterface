@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Console;
 
 use App\Console\Commands\CarInsurance;
@@ -30,19 +31,19 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('lotto:draw')->timezone(config('app.timezone'))->when(function () {
             $now = Carbon::now(config('app.timezone'));
-            return (
+
+            return
                 $now->dayOfWeek === config('a3lwebinterface.lotto.draw.day')
                 &&
-                $now->format('H:i') == config('a3lwebinterface.lotto.draw.time')
-            );
+                $now->format('H:i') == config('a3lwebinterface.lotto.draw.time');
         });
         $schedule->command('lotto:create')->timezone(config('app.timezone'))->when(function () {
             $now = Carbon::now(config('app.timezone'));
-            return (
+
+            return
                 $now->dayOfWeek === config('a3lwebinterface.lotto.draw.new')
                 &&
-                $now->format('H:i') == config('a3lwebinterface.lotto.draw.time')
-            );
+                $now->format('H:i') == config('a3lwebinterface.lotto.draw.time');
         });
     }
 }

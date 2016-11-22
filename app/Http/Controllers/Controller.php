@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Teamspeak\Server;
@@ -57,6 +58,7 @@ abstract class Controller extends BaseController
     {
         $server = new Server();
         $clients = $server->getClients();
+
         return [
             'server' => $server,
             'clients' => $clients,

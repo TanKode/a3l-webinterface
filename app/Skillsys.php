@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 class Skillsys extends Model
@@ -54,8 +55,9 @@ class Skillsys extends Model
     {
         $fillables = parent::getFillable();
         foreach ($this::$skills as $skill) {
-            $fillables[] = str_slug('skill_' . $skill, '_');
+            $fillables[] = str_slug('skill_'.$skill, '_');
         }
+
         return $fillables;
     }
 }

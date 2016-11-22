@@ -1,8 +1,8 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use Illuminate\Http\Request;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -34,9 +34,10 @@ class AuthController extends Controller
         $user->assign('member');
         $user->allow('edit', $user);
         $user->sendVerificationEmail();
-        if($user->hasPlayer()) {
+        if ($user->hasPlayer()) {
             $user->player->enableLicense('civ', 'license_civ_fuel');
         }
+
         return $user;
     }
 
@@ -59,13 +60,14 @@ class AuthController extends Controller
     public function getConfirm($token)
     {
         $user = User::unconfirmed()->confirmToken($token)->first();
-        if (!is_null($user)) {
+        if (! is_null($user)) {
             if ($user->confirm()) {
                 \Auth::login($user);
             }
 
             return redirect($this->redirectPath());
         }
+
         return redirect('app');
     }
 }

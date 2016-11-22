@@ -34,8 +34,8 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->guest() || !object_get($this->auth->user(), 'confirmed')) {
-            if (!is_null($this->auth->user())) {
+        if ($this->auth->guest() || ! object_get($this->auth->user(), 'confirmed')) {
+            if (! is_null($this->auth->user())) {
                 $this->auth->logout();
             }
             if ($request->ajax()) {

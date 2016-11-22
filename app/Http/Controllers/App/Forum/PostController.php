@@ -1,9 +1,8 @@
 <?php
+
 namespace App\Http\Controllers\App\Forum;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Riari\Forum\Models\Category;
 use Riari\Forum\Models\Post;
 use Riari\Forum\Models\Thread;
@@ -40,7 +39,7 @@ class PostController extends Controller
     {
         $this->authorize('delete', $post);
 
-        $permanent = !config('forum.preferences.soft_deletes');
+        $permanent = ! config('forum.preferences.soft_deletes');
 
         $parameters = $request->all();
 
@@ -49,11 +48,11 @@ class PostController extends Controller
         }
 
         if ($thread->posts()->count() == 1) {
-            return redirect('app/forum/category/' . $category->getKey() . '/thread/' . $thread->getKey() . '/delete');
+            return redirect('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey().'/delete');
         } else {
             $this->api('post.delete', $post->getKey())->parameters($parameters)->delete();
         }
 
-        return redirect('app/forum/category/' . $category->getKey() . '/thread/' . $thread->getKey());
+        return redirect('app/forum/category/'.$category->getKey().'/thread/'.$thread->getKey());
     }
 }

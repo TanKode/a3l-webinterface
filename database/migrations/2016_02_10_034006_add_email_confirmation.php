@@ -12,7 +12,7 @@ class AddEmailConfirmation extends Migration
             $table->string('confirmation_token');
         });
 
-        foreach(\App\User::all() as $user) {
+        foreach (\App\User::all() as $user) {
             $user->confirmation_token = str_random(32);
             $user->save();
             $user->sendVerificationEmail();
