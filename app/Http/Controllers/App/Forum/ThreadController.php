@@ -68,7 +68,7 @@ class ThreadController extends Controller
         return back();
     }
 
-    public function getPin(Request $request, Category $category, Thread $thread)
+    public function getPin(Request $request, Thread $thread)
     {
         $this->authorize('edit', $thread);
 
@@ -77,7 +77,7 @@ class ThreadController extends Controller
         return back();
     }
 
-    public function getUnpin(Request $request, Category $category, Thread $thread)
+    public function getUnpin(Request $request, Thread $thread)
     {
         $this->authorize('edit', $thread);
 
@@ -86,7 +86,7 @@ class ThreadController extends Controller
         return back();
     }
 
-    public function getLock(Request $request, Category $category, Thread $thread)
+    public function getLock(Request $request, Thread $thread)
     {
         $this->authorize('edit', $thread);
 
@@ -95,7 +95,7 @@ class ThreadController extends Controller
         return back();
     }
 
-    public function getUnlock(Request $request, Category $category, Thread $thread)
+    public function getUnlock(Request $request, Thread $thread)
     {
         $this->authorize('edit', $thread);
 
