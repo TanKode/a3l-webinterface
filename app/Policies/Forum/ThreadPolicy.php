@@ -13,7 +13,7 @@ class ThreadPolicy
      * @param  Thread  $thread
      * @return bool
      */
-    public function deletePosts($user, Thread $thread)
+    public function deletePosts()
     {
         return false;
     }
@@ -49,7 +49,7 @@ class ThreadPolicy
      * @param  Thread  $thread
      * @return bool
      */
-    public function delete($user, Thread $thread)
+    public function delete()
     {
         return false;
     }
