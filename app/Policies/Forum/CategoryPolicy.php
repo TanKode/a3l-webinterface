@@ -13,7 +13,7 @@ class CategoryPolicy
      * @param  Category $category
      * @return bool
      */
-    public function createThreads($user, Category $category)
+    public function createThreads()
     {
         return true;
     }
@@ -41,7 +41,7 @@ class CategoryPolicy
      * @param  Category $category
      * @return bool
      */
-    public function deleteThreads($user, Category $category)
+    public function deleteThreads()
     {
         return false;
     }
@@ -53,7 +53,7 @@ class CategoryPolicy
      * @param  Category $category
      * @return bool
      */
-    public function enableThreads($user, Category $category)
+    public function enableThreads()
     {
         return true;
     }
@@ -65,7 +65,7 @@ class CategoryPolicy
      * @param  Category $category
      * @return bool
      */
-    public function moveThreadsFrom($user, Category $category)
+    public function moveThreadsFrom()
     {
         return true;
     }
@@ -77,7 +77,7 @@ class CategoryPolicy
      * @param  Category $category
      * @return bool
      */
-    public function moveThreadsTo($user, Category $category)
+    public function moveThreadsTo()
     {
         return true;
     }
@@ -89,7 +89,7 @@ class CategoryPolicy
      * @param  Category $category
      * @return bool
      */
-    public function lockThreads($user, Category $category)
+    public function lockThreads()
     {
         return true;
     }
@@ -101,7 +101,7 @@ class CategoryPolicy
      * @param  Category $category
      * @return bool
      */
-    public function pinThreads($user, Category $category)
+    public function pinThreads()
     {
         return true;
     }
@@ -113,7 +113,7 @@ class CategoryPolicy
      * @param  Category $category
      * @return bool
      */
-    public function view($user, Category $category)
+    public function view()
     {
         return false;
     }
@@ -125,7 +125,7 @@ class CategoryPolicy
      * @param  Category $category
      * @return bool
      */
-    public function delete($user, Category $category)
+    public function delete()
     {
         return false;
     }
