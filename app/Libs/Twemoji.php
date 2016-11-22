@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Libs;
 
 class Twemoji
@@ -26,6 +27,7 @@ class Twemoji
     public static function create($code, $clickable = false)
     {
         $type = trim(strtolower($code));
-        return '<img draggable="false" class="twemoji ' . ($clickable ? 'clickable' : '') . '" data-alt="' . $type . '" src="' . asset('svg/' . $type . '.svg') . '" />';
+
+        return '<img draggable="false" class="twemoji '.($clickable ? 'clickable' : '').'" data-alt="'.$type.'" src="'.asset('svg/'.$type.'.svg').'" />';
     }
 }

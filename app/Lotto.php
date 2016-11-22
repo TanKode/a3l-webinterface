@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use Carbon\Carbon;
@@ -78,18 +79,23 @@ class Lotto extends Model
         if ($draw->diffInSeconds(null, false) > 0) {
             $draw = $next->setTime($hour, $minute, 0);
         }
+
         return $draw;
     }
 
     public function getCorrectsByNumbers($numbers)
     {
-        if (is_string($numbers)) $numbers = explode(',', $numbers);
+        if (is_string($numbers)) {
+            $numbers = explode(',', $numbers);
+        }
+
         return count(array_intersect(explode(',', $this->numbers), $numbers));
     }
 
     public function getProfitByNumbers($numbers)
     {
         $correct = $this->getCorrectsByNumbers($numbers);
+
         return array_get(config('a3lwebinterface.lotto.profits'), $correct, 0) * $this->jackpot;
     }
 

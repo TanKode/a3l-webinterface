@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Libs;
 
 use Monolog\Handler\AbstractProcessingHandler;
@@ -21,22 +22,22 @@ class SlackHandler extends AbstractProcessingHandler
                     [
                         'title' => 'Server',
                         'value' => array_get($record, 'server', env('APP_ENV', 'cali')),
-                        'short' => true
+                        'short' => true,
                     ],
                     [
                         'title' => 'Level',
                         'value' => array_get($record, 'level_name', 'WARNING'),
-                        'short' => true
+                        'short' => true,
                     ],
                     [
                         'title' => 'URL',
                         'value' => array_get($record, 'extra.url'),
-                        'short' => true
+                        'short' => true,
                     ],
                     [
                         'title' => 'Request-IP',
                         'value' => array_get($record, 'extra.ip'),
-                        'short' => true
+                        'short' => true,
                     ],
                 ],
             ])->send(explode("\n", array_get($record, 'message'))[0]);

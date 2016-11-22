@@ -1,11 +1,9 @@
 <?php
+
 namespace App\Http\Controllers\App;
 
 use App\Role;
 use App\User;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Venturecraft\Revisionable\Revision;
 
@@ -63,7 +61,7 @@ class UserController extends Controller
         }
 
         $user->fill($data);
-        if (!is_null(array_get($data, 'role', null))) {
+        if (! is_null(array_get($data, 'role', null))) {
             $roles = array_get($data, 'role', []);
             if (count($user->role) != count(array_intersect($user->role, $roles)) || count($roles) != count(array_intersect($user->role, $roles))) {
                 \DB::table((new Revision())->getTable())->insert([
@@ -81,13 +79,15 @@ class UserController extends Controller
         }
         $user->save();
         $user->assign('member');
-        return redirect('app/user/edit/' . $user->getKey());
+
+        return redirect('app/user/edit/'.$user->getKey());
     }
 
     public function getDelete(User $user)
     {
         $this->authorize('delete', $user);
         $user->delete();
+
         return redirect('app/user');
     }
 
@@ -98,6 +98,7 @@ class UserController extends Controller
         } else {
             \Notify::readOne($notificationId);
         }
+
         return back();
     }
 
@@ -105,9 +106,10 @@ class UserController extends Controller
     {
         $this->authorize('edit', $user);
 
-        if (!$user->confirmed && $user->confirmation_token != '') {
+        if (! $user->confirmed && $user->confirmation_token != '') {
             $user->sendVerificationEmail();
         }
+
         return back();
     }
 
@@ -115,9 +117,10 @@ class UserController extends Controller
     {
         $this->authorize('edit', $user);
 
-        if (!$user->confirmed && $user->confirmation_token != '') {
+        if (! $user->confirmed && $user->confirmation_token != '') {
             $user->confirm();
         }
+
         return back();
     }
 }

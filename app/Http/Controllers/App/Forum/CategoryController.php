@@ -1,9 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\App\Forum;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Riari\Forum\Models\Category;
 
 class CategoryController extends Controller
@@ -56,19 +54,19 @@ class CategoryController extends Controller
 
         \Bouncer::allow('superadmin')->to('view', $category);
 
-        return redirect('app/forum/category/' . $category->getKey());
+        return redirect('app/forum/category/'.$category->getKey());
     }
 
     public function postEdit(Category $category)
     {
-        $category = $this->api("category.rename", $category->getKey())->parameters(\Input::all())->patch();
+        $category = $this->api('category.rename', $category->getKey())->parameters(\Input::all())->patch();
         if (\Input::get('category_id')) {
-            $category = $this->api("category.move", $category->getKey())->parameters(\Input::all())->patch();
+            $category = $this->api('category.move', $category->getKey())->parameters(\Input::all())->patch();
         }
 
         \Bouncer::allow('superadmin')->to('view', $category);
 
-        return redirect('app/forum/category/' . $category->getKey());
+        return redirect('app/forum/category/'.$category->getKey());
     }
 
     public function getDelete(Category $category)

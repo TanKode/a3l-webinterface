@@ -7,7 +7,6 @@ use App\Libs\BouncerSeeder;
 use App\Role;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
-use Riari\Forum\Models\Category;
 
 class AppServiceProvider extends ServiceProvider
 {

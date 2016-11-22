@@ -1,11 +1,10 @@
 <?php
+
 namespace App\Http\Controllers\App;
 
 use App\Player;
 use App\Vehicle;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class VehicleController extends Controller
@@ -52,13 +51,15 @@ class VehicleController extends Controller
         }
 
         $vehicle->update($data);
-        return redirect('app/vehicle/edit/' . $vehicle->getKey());
+
+        return redirect('app/vehicle/edit/'.$vehicle->getKey());
     }
 
     public function getDelete(Vehicle $vehicle)
     {
         $this->authorize('delete', $vehicle);
         $vehicle->delete();
+
         return redirect('app/vehicle');
     }
 
@@ -73,7 +74,7 @@ class VehicleController extends Controller
         $start = $request->get('start');
         $length = $request->get('length');
 
-        $vehicles = Vehicle::search($search)->orderBy(array_get($columns, array_get($order, 'column') . '.data'), array_get($order, 'dir'))->skip($start)->take($length)->get();
+        $vehicles = Vehicle::search($search)->orderBy(array_get($columns, array_get($order, 'column').'.data'), array_get($order, 'dir'))->skip($start)->take($length)->get();
         $vehicles->load('owner');
         $vehicles = $vehicles->map(function ($vehicle) {
             return [
@@ -83,13 +84,14 @@ class VehicleController extends Controller
                 'type' => $vehicle->type,
                 'name' => $vehicle->display_name,
                 'classname' => $vehicle->classname,
-                'alive' => trans('messages.confirms.' . $vehicle->alive),
-                'active' => trans('messages.confirms.' . $vehicle->active),
+                'alive' => trans('messages.confirms.'.$vehicle->alive),
+                'active' => trans('messages.confirms.'.$vehicle->active),
                 'created_at' => $vehicle->created_at->toDateTimeString(),
                 'updated_at' => $vehicle->updated_at->toDateTimeString(),
                 'btns' => $this->getBtnsForVehicle($vehicle),
             ];
         });
+
         return json_encode([
             'draw' => $draw,
             'recordsTotal' => Vehicle::count(),
@@ -101,11 +103,20 @@ class VehicleController extends Controller
     protected function getBtnsForVehicle($vehicle)
     {
         $out = '<div class="btn-group pull-right">';
-        if (\Auth::User()->can('view', $vehicle)) $out .= '<a href="' . url('app/vehicle/' . $vehicle->getKey()) . '" class="btn btn-pure btn-icon btn-success"><i class="icon wh-eye-view"></i></a>';
-        if (\Auth::User()->can('edit', $vehicle)) $out .= '<a href="' . url('app/vehicle/edit/' . $vehicle->getKey()) . '" class="btn btn-pure btn-icon btn-warning"><i class="icon wh-edit"></i></a>';
-        if (\Auth::User()->can('delete', $vehicle)) $out .= '<a href="' . url('app/vehicle/delete/' . $vehicle->getKey()) . '" class="btn btn-pure btn-icon btn-danger"><i class="icon wh-trash"></i></a>';
-        if (\Auth::User()->can('view', $vehicle->owner)) $out .= '<a href="' . url('app/player/' . $vehicle->owner->getKey()) . '" class="btn btn-pure btn-icon btn-success"><i class="icon wh-boardgame"></i></a>';
+        if (\Auth::User()->can('view', $vehicle)) {
+            $out .= '<a href="'.url('app/vehicle/'.$vehicle->getKey()).'" class="btn btn-pure btn-icon btn-success"><i class="icon wh-eye-view"></i></a>';
+        }
+        if (\Auth::User()->can('edit', $vehicle)) {
+            $out .= '<a href="'.url('app/vehicle/edit/'.$vehicle->getKey()).'" class="btn btn-pure btn-icon btn-warning"><i class="icon wh-edit"></i></a>';
+        }
+        if (\Auth::User()->can('delete', $vehicle)) {
+            $out .= '<a href="'.url('app/vehicle/delete/'.$vehicle->getKey()).'" class="btn btn-pure btn-icon btn-danger"><i class="icon wh-trash"></i></a>';
+        }
+        if (\Auth::User()->can('view', $vehicle->owner)) {
+            $out .= '<a href="'.url('app/player/'.$vehicle->owner->getKey()).'" class="btn btn-pure btn-icon btn-success"><i class="icon wh-boardgame"></i></a>';
+        }
         $out .= '</div>';
+
         return $out;
     }
 
@@ -113,11 +124,13 @@ class VehicleController extends Controller
     {
         $this->authorize('edit', Vehicle::class);
 
-        if (!\Auth::User()->hasPlayer()) abort(403);
+        if (! \Auth::User()->hasPlayer()) {
+            abort(403);
+        }
 
         $vehicles = [];
         foreach (\Auth::User()->player->vehicles()->alive()->inactive()->uninsured()->get() as $vehicle) {
-            $vehicles[$vehicle->side . ' - ' . $vehicle->type][$vehicle->getKey()] = $vehicle->display_name;
+            $vehicles[$vehicle->side.' - '.$vehicle->type][$vehicle->getKey()] = $vehicle->display_name;
         }
 
         return view('app.vehicle.insure')->with([
@@ -132,6 +145,7 @@ class VehicleController extends Controller
 
         $vehicle = Vehicle::alive()->inactive()->uninsured()->findOrFail(\Input::get('vehicle'));
         $vehicle->insure();
+
         return back();
     }
 }

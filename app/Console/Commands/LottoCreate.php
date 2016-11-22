@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Console\Commands;
 
 use App\Lotto;
@@ -23,6 +24,6 @@ class LottoCreate extends Command
         $lottoDraw->numbers = null;
         $lottoDraw->jackpot = null;
         $lottoDraw->save();
-        $this->info('created new Lotto draw for ' . $lottoDraw->week . '@' . $lottoDraw->year . ' with ' . \Formatter::money($lottoDraw->jackpot) . ' jackpot & numbers: ' . $lottoDraw->numbers);
+        $this->info('created new Lotto draw for '.$lottoDraw->week.'@'.$lottoDraw->year.' with '.\Formatter::money($lottoDraw->jackpot).' jackpot & numbers: '.$lottoDraw->numbers);
     }
 }

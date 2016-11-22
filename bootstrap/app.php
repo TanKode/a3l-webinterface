@@ -65,9 +65,10 @@ $app->configureMonologUsing(function (Monolog\Logger $monolog) {
                 $record['extra']['account_id'] = \Auth::id();
                 $record['extra']['account_email'] = \Auth::User()->email;
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             // ignore it
         }
+
         return $record;
     });
 });

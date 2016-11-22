@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Console\Commands;
 
 use App\Lotto;
@@ -23,9 +24,9 @@ class LottoDraw extends Command
             $this->error('no lotto draw exists');
             throw (new ModelNotFoundException)->setModel(Lotto::class);
         }
-        $this->comment('numbers: ' . $lottoDraw->numbers);
-        $this->comment('jackpot: ' . \Formatter::money($lottoDraw->jackpot));
-        $this->comment('draw: ' . $lottoDraw->week . ' @ ' . $lottoDraw->year);
+        $this->comment('numbers: '.$lottoDraw->numbers);
+        $this->comment('jackpot: '.\Formatter::money($lottoDraw->jackpot));
+        $this->comment('draw: '.$lottoDraw->week.' @ '.$lottoDraw->year);
 
         foreach ($lottoDraw->users as $user) {
             if ($user->hasPlayer()) {
@@ -37,7 +38,7 @@ class LottoDraw extends Command
                     $player->bankacc += $profit;
                     $player->save();
 
-                    $this->comment('User#' . $user->getKey() . '(Player#' . $player->getKey() . ') wins ' . \Formatter::money($profit) . ' with ' . $correct . ' correct numbers');
+                    $this->comment('User#'.$user->getKey().'(Player#'.$player->getKey().') wins '.\Formatter::money($profit).' with '.$correct.' correct numbers');
 
                     if ($profit > 0) {
                         \Notify::category('lotto.won')

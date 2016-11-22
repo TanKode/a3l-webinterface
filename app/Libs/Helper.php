@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Libs;
 
 class Helper
@@ -23,6 +24,6 @@ class Helper
 
     public function aurl($path)
     {
-        return config('app.url') . '/' . trim($path, '/');
+        return config('app.url').'/'.trim($path, '/');
     }
 }

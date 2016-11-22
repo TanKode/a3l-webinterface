@@ -16,7 +16,7 @@ return [
         'namespace' => 'Riari\Forum\Frontend\Http\Controllers',
         'category'  => 'CategoryController',
         'thread'    => 'ThreadController',
-        'post'      => 'PostController'
+        'post'      => 'PostController',
     ],
 
     /*
@@ -30,12 +30,11 @@ return [
     |
     */
 
-    /**
+    /*
      * @param  string  $type    The type of alert ('success' or 'warning')
      * @param  string  $message The alert message
      */
-    'process_alert' => function ($type, $message)
-    {
+    'process_alert' => function ($type, $message) {
         $alerts = [];
         if (Session::has('alerts')) {
             $alerts = Session::get('alerts');

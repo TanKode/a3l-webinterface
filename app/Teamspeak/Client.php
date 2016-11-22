@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Teamspeak;
 
 class Client extends Model

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Libs;
 
 use Michelf\MarkdownExtra;
@@ -872,6 +873,7 @@ class MarkExtra
         $text = str_replace('<img ', '<img class="img-responsive" ', $text);
         $text = self::tables($text);
         $text = self::transformTwemoji($text);
+
         return $text;
     }
 
@@ -882,6 +884,7 @@ class MarkExtra
         $text = str_replace('<img ', '<img class="img-responsive" ', $text);
         $text = self::tables($text);
         $text = self::transformTwemoji($text);
+
         return $text;
     }
 
@@ -901,13 +904,15 @@ class MarkExtra
             if (isset(self::$emojiCodes[$hits[1]])) {
                 return Twemoji::create(self::$emojiCodes[$hits[1]]);
             }
-            return ':' . $hits[1] . ':';
+
+            return ':'.$hits[1].':';
         }, $text);
 
         $pattern = '/:(?<type>[0-9abcdef]*):/mi';
         $text = preg_replace_callback($pattern, function ($hits) {
             return Twemoji::create($hits['type']);
         }, $text);
+
         return $text;
     }
 }

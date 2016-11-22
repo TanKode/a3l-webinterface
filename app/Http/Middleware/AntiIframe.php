@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ class AntiIframe
         if ($request->is('error')) {
             abort(500);
         }
+
         return $next($request);
     }
 }

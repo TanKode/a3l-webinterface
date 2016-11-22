@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 class Vehicle extends Model
@@ -41,7 +42,7 @@ class Vehicle extends Model
 
     public function getDisplayNameAttribute()
     {
-        return transd('vehicles.' . $this->classname, $this->classname);
+        return transd('vehicles.'.$this->classname, $this->classname);
     }
 
     public function scopeAlive($query)
@@ -97,7 +98,7 @@ class Vehicle extends Model
         foreach ($search as $key => $value) {
             $key = strtolower($key);
             if (array_key_exists($key, $searchable)) {
-                $query->where($key, $searchable[$key], ($searchable[$key] == 'LIKE' ? '%' . $value . '%' : $value));
+                $query->where($key, $searchable[$key], ($searchable[$key] == 'LIKE' ? '%'.$value.'%' : $value));
             }
         }
 
@@ -126,12 +127,13 @@ class Vehicle extends Model
 
     public function insure()
     {
-        if (!$this->active) {
+        if (! $this->active) {
             return $this->update([
                 'insured' => 1,
                 'insured_at' => new \DateTime(),
             ]);
         }
+
         return false;
     }
 
@@ -153,6 +155,7 @@ class Vehicle extends Model
                 ])
                 ->send();
         }
+
         return $update;
     }
 }

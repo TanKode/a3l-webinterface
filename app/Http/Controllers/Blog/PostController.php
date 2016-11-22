@@ -1,22 +1,18 @@
 <?php
+
 namespace App\Http\Controllers\Blog;
 
-use App\Lotto;
-use App\Statlog;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
     public function getIndex()
     {
-        $query = new \WP_Query(array(
+        $query = new \WP_Query([
             'posts_per_page' => -1,
             'order' => 'desc',
             'orderby' => 'post_date',
-        ));
+        ]);
 
         $posts = $query->get_posts();
 
@@ -29,12 +25,12 @@ class PostController extends Controller
     public function getCategory($category)
     {
         $category = get_cat_ID($category);
-        $query = new \WP_Query(array(
+        $query = new \WP_Query([
             'posts_per_page' => -1,
             'order' => 'desc',
             'orderby' => 'post_date',
             'cat' => $category,
-        ));
+        ]);
 
         $category = get_category($category);
 
@@ -49,7 +45,9 @@ class PostController extends Controller
     public function getSingle($slug)
     {
         $post = get_page_by_path($slug, OBJECT, 'post');
-        if (is_null($post) && !($post instanceof \WP_Post)) abort(404);
+        if (is_null($post) && ! ($post instanceof \WP_Post)) {
+            abort(404);
+        }
 
         return view('wordpress.single')->with([
             'post' => $post,

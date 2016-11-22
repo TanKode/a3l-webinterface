@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Illuminate\Contracts\Auth\Guard;
@@ -17,11 +18,12 @@ class ForceDomain
     {
         if ($request->server('HTTP_HOST') != $request->server('SERVER_NAME')) {
             return redirect()->to(
-                $request->server('HTTP_X_FORWARDED_PROTO') . '://' .
-                $request->server('SERVER_NAME') . '/' .
+                $request->server('HTTP_X_FORWARDED_PROTO').'://'.
+                $request->server('SERVER_NAME').'/'.
                 trim($request->server('REQUEST_URI'), '/')
             );
         }
+
         return $next($request);
     }
 }

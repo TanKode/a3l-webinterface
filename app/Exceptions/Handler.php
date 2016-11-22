@@ -52,6 +52,7 @@ class Handler extends ExceptionHandler
 
         if ($e instanceof TokenMismatchException) {
             $errors->add('message', trans('messages.tokenmismatch'));
+
             return redirect()->back()->withErrors($errors);
         }
 

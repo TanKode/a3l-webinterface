@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 class Player extends Model
@@ -80,7 +81,10 @@ class Player extends Model
     public function messagesWithPlayer($player)
     {
         $playerId = $this->playerid;
-        if ($player instanceof Player) $player = $player->playerid;
+        if ($player instanceof self) {
+            $player = $player->playerid;
+        }
+
         return Message::where(function ($query) use ($playerId) {
             return $query->where('fromID', $playerId)->orWhere('toID', $playerId);
         })->where(function ($query) use ($player) {
@@ -91,6 +95,7 @@ class Player extends Model
     public function getMessageParticipants()
     {
         $playerId = $this->playerid;
+
         return $this->messages()->map(function ($message) {
             return [
                 'from' => $message->fromID,
@@ -105,7 +110,7 @@ class Player extends Model
 
     public function hasUser()
     {
-        return !is_null($this->user);
+        return ! is_null($this->user);
     }
 
     public function getNameAttribute($value)
@@ -195,7 +200,7 @@ class Player extends Model
 
     public function scopeName($query, $name)
     {
-        return $query->where('name', 'LIKE', '%' . $name . '%');
+        return $query->where('name', 'LIKE', '%'.$name.'%');
     }
 
     public function scopeCop($query)
@@ -216,8 +221,8 @@ class Player extends Model
     public function enableLicense($area, $key)
     {
         $licences = [];
-        foreach($this->{$area.'_licenses'} as $index => $licence) {
-            if($licence[0] == $key) {
+        foreach ($this->{$area.'_licenses'} as $index => $licence) {
+            if ($licence[0] == $key) {
                 $licences[$licence[0]] = 1;
             } else {
                 $licences[$licence[0]] = $licence[1];

@@ -1,9 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\App\Forum;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Riari\Forum\Frontend\Http\Controllers\BaseController;
 use Riari\Forum\Models\Category;
 
