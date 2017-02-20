@@ -66,37 +66,6 @@
 
             <li class="parent">
                 <a href="#" class="text-center">
-                    <i class="icon wh-post"></i>
-                    <span>{{ trans('menu.blog') }}</span>
-                </a>
-                <ul class="sub-menu">
-                    <li class="title">{{ trans('menu.blog') }}</li>
-                    <li class="nav-items">
-                        <div class="am-scroller nano has-scrollbar"><div class="content nano-content">
-                                <ul>
-                                    <li class="@if(Request::is('blog')) active @endif">
-                                        <a href="{{ url('blog') }}" class="white">
-                                            <i class="icon wh-post"></i>
-                                            <span>{{ trans('menu.blog') }}</span>
-                                        </a>
-                                    </li>
-                                    @foreach(get_categories() as $category)
-                                        <li class="@if(Request::is('blog/cat/'.$category->slug)) active @endif">
-                                            <a href="{{ url('blog/cat/'.$category->slug) }}" class="white">
-                                                <i class="icon wh-list"></i>
-                                                <span>{{ $category->name }}</span>
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="parent">
-                <a href="#" class="text-center">
                     <i class="icon wh-community"></i>
                     <span>{{ trans('menu.community') }}</span>
                 </a>

@@ -15,13 +15,7 @@ return [
         'icon' => 'wh-facebook',
         'class' => 'social-facebook',
         'name' => 'Facebook',
-        'url' => 'https://facebook.com/Pyro-Life-auf-Taviana-1683525228561823',
-    ],
-    'support' => [
-        'icon' => 'wh-supportalt',
-        'class' => 'social-freshdesk',
-        'name' => 'Support-WebInterface',
-        'url' => 'https://gummibeer.freshdesk.com/support/tickets/new',
+        'url' => 'https://facebook.com/kibase.games',
     ], [
         'icon' => 'wh-law',
         'name' => 'Server-Regeln',
@@ -30,9 +24,5 @@ return [
         'icon' => 'wh-police',
         'name' => 'Bußgeld-Katalog',
         'url' => 'page/busgeld',
-    ], [
-        'icon' => 'wh-post',
-        'name' => 'Blog',
-        'url' => 'blog',
     ],
 ];

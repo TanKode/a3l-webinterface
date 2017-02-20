@@ -1,18 +1,4 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| Wordpress
-|--------------------------------------------------------------------------
-|
-| Integrate Wordpress with Laravel core
-|
-*/
-
-$wpFile = __DIR__ . '/../wordpress/wp-blog-header.php';
-if (file_exists($wpFile)) {
-    define('WP_USE_THEMES', false);
-    require $wpFile;
-}
 
 /**
  * Laravel - A PHP Framework For Web Artisans

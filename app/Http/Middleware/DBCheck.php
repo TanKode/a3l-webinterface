@@ -11,7 +11,6 @@ class DBCheck
         try {
             \DB::connection('mysql')->getDatabaseName();
             \DB::connection('arma')->getDatabaseName();
-            \DB::connection('wordpress')->getDatabaseName();
         } catch (\PDOException $e) {
             abort(503);
         }

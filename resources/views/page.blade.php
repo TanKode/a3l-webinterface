@@ -22,18 +22,9 @@
     <div class="container">
     @endif
         <article class="panel">
-                @if(isset($content))
-                    <section class="panel-body">
-                        {!! \MarkExtra::parse($content, false) !!}
-                    </section>
-                @elseif(isset($wppost))
-                    <header class="panel-heading">
-                        <h2 class="panel-title">{{ get_the_title($wppost) }}</h2>
-                    </header>
-                    <section class="padding-horizontal-20 padding-bottom-30">
-                        {!! \MarkExtra::parse($wppost->post_content, false) !!}
-                    </section>
-                @endif
+            <section class="panel-body">
+                {!! \MarkExtra::parse($content, false) !!}
+            </section>
             @if(!\Auth::check())
             <div class="btn-group btn-group-justified">
                 <a class="btn btn-primary btn-block" href="@if(\URL::previous() != \URL::current()) {{ \URL::previous() }} @else {{ url('/') }} @endif">{{ trans('messages.back') }}</a>
