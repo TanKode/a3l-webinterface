@@ -9,100 +9,23 @@
                 </a>
             </li>
 
-            @if(\Auth::User()->hasPlayer())
-                <li class="parent">
-                    <a href="#" class="text-center">
-                        <i class="icon wh-gameboy"></i>
-                        <span>{{ trans('menu.ingame') }}</span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li class="title">{{ trans('menu.ingame') }}</li>
-                        <li class="nav-items">
-                            <div class="am-scroller nano has-scrollbar"><div class="content nano-content">
-                                    <ul>
-                                        <li class="@if(Request::is('app/message*')) active @endif">
-                                            <a href="{{ url('app/message') }}" class="white">
-                                                <i class="icon wh-iphone"></i>
-                                                <span>{{ trans('menu.messages') }}</span>
-                                            </a>
-                                        </li>
-                                        <li class="@if(Request::is('app/lotto*')) active @endif">
-                                            <a href="{{ url('app/lotto') }}" class="white">
-                                                <i class="icon wh-piggybank"></i>
-                                                <span>{{ trans('menu.lotto') }}</span>
-                                            </a>
-                                        </li>
-                                        <li class="@if(Request::is('app/fine/calculator')) active @endif">
-                                            <a href="{{ url('app/fine/calculator') }}" class="white">
-                                                <i class="icon wh-calculator"></i>
-                                                <span>{{ trans('menu.fine_calculator') }}</span>
-                                            </a>
-                                        </li>
-                                        <li class="@if(Request::is('app/fine/wanted')) active @endif">
-                                            <a href="{{ url('app/fine/wanted') }}" class="white">
-                                                <i class="icon wh-handcuffs"></i>
-                                                <span>{{ trans('menu.wanted_list') }}</span>
-                                            </a>
-                                        </li>
-                                        <li class="@if(Request::is('page/busgeld')) active @endif">
-                                            <a href="{{ url('page/busgeld') }}" class="white">
-                                                <i class="icon wh-police"></i>
-                                                <span>{{ trans('menu.fine') }}</span>
-                                            </a>
-                                        </li>
-                                        <li class="@if(Request::is('page/regeln')) active @endif">
-                                            <a href="{{ url('page/regeln') }}" class="white">
-                                                <i class="icon wh-law"></i>
-                                                <span>{{ trans('menu.rules') }}</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            @endif
-
-            <li class="parent">
-                <a href="#" class="text-center">
-                    <i class="icon wh-community"></i>
-                    <span>{{ trans('menu.community') }}</span>
+            <li class="@if(Request::is('app/wanted')) active @endif">
+                <a href="{{ url('app/wanted') }}" class="text-center">
+                    <i class="icon wh-handcuffs"></i>
+                    <span>{{ trans('menu.wanted_list') }}</span>
                 </a>
-                <ul class="sub-menu">
-                    <li class="title">{{ trans('menu.community') }}</li>
-                    <li class="nav-items">
-                        <div class="am-scroller nano has-scrollbar"><div class="content nano-content">
-                                <ul>
-                                    <li class="@if(Request::is('app/calendar*')) active @endif">
-                                        <a href="{{ url('app/calendar') }}" class="white">
-                                            @if(\App\Event::today()->count())
-                                                <span class="badge badge-primary white">{{ \App\Event::today()->count() }}</span>
-                                            @endif
-                                            <i class="icon wh-calendarthree"></i>
-                                            <span>{{ trans('menu.calendar') }}</span>
-                                        </a>
-                                    </li>
-                                    <li class="@if(Request::is('app/chat*')) active @endif">
-                                        <a href="{{ url('app/chat') }}" class="white">
-                                            @if(\Auth::User()->newMessagesCount())
-                                                <span class="badge badge-primary white">{{ \Auth::User()->newMessagesCount() }}</span>
-                                            @endif
-                                            <i class="icon wh-chat"></i>
-                                            <span>{{ trans('menu.chat') }}</span>
-                                        </a>
-                                    </li>
-                                    <li class="@if(Request::is('app/forum*')) active @endif">
-                                        <a href="{{ url('app/forum') }}" class="white">
-                                            <i class="icon wh-forumsalt"></i>
-                                            <span>{{ trans('menu.forum') }}</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+            </li>
+            <li class="@if(Request::is('page/busgeld')) active @endif">
+                <a href="{{ url('page/busgeld') }}" class="text-center">
+                    <i class="icon wh-police"></i>
+                    <span>{{ trans('menu.fine') }}</span>
+                </a>
+            </li>
+            <li class="@if(Request::is('page/regeln')) active @endif">
+                <a href="{{ url('page/regeln') }}" class="text-center">
+                    <i class="icon wh-law"></i>
+                    <span>{{ trans('menu.rules') }}</span>
+                </a>
             </li>
 
             @can('access-support')
@@ -167,14 +90,6 @@
                                         <a href="{{ url('app/role') }}" class="white">
                                             <i class="icon wh-firewall"></i>
                                             <span>{{ trans('menu.roles') }}</span>
-                                        </a>
-                                    </li>
-                                    @endcan
-                                    @can('view-backups')
-                                    <li class="@if(Request::is('app/backup*')) active @endif">
-                                        <a href="{{ url('app/backup') }}" class="white">
-                                            <i class="icon wh-backup-vault"></i>
-                                            <span>{{ trans('menu.backups') }}</span>
                                         </a>
                                     </li>
                                     @endcan

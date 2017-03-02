@@ -7,6 +7,8 @@ class House extends Model
     protected $connection = 'arma';
     protected $table = 'houses';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'pid',
         'pos',
@@ -23,7 +25,7 @@ class House extends Model
 
     public function owner()
     {
-        return $this->belongsTo(Player::class, 'pid', 'playerid');
+        return $this->belongsTo(Player::class, 'pid', 'pid');
     }
 
     public function scopeOwned($query)

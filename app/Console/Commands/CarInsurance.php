@@ -20,7 +20,7 @@ class CarInsurance extends Command
         $this->comment('do insurance:car');
         $destroyedInsuredVehicles = Vehicle::destroyed()->insured()->get();
         foreach ($destroyedInsuredVehicles as $vehicle) {
-            $this->info('do insurance:car for vehicle#'.$vehicle->getKey().' of '.$vehicle->owner->playerid);
+            $this->info('do insurance:car for vehicle#'.$vehicle->getKey().' of '.$vehicle->owner->pid);
             $vehicle->useInsurance();
         }
     }

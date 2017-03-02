@@ -15,10 +15,6 @@ use Riari\Forum\Models\Post as ForumPost;
 class BouncerSeeder
 {
     protected $models = [
-        Event::class => [
-            'edit',
-            'delete',
-        ],
         User::class => [
             'view',
             'edit',
@@ -32,7 +28,6 @@ class BouncerSeeder
             'edit-civ',
             'edit-cop',
             'edit-medic',
-            'edit-atac',
             'edit-admin',
             'edit-donator',
             'delete',
@@ -46,21 +41,6 @@ class BouncerSeeder
             'view',
             'edit',
             'delete',
-        ],
-        ForumCategory::class => [
-            'edit',
-            'delete',
-        ],
-        ForumThread::class => [
-            'edit',
-            'delete',
-        ],
-        ForumPost::class => [
-            'edit',
-            'delete',
-        ],
-        Lotto::class => [
-            'view',
         ],
     ];
 
@@ -100,9 +80,6 @@ class BouncerSeeder
                 }
                 if ($user->player->mediclevel > 0) {
                     $user->assign('medic');
-                }
-                if ($user->player->ataclevel > 0) {
-                    $user->assign('atacler');
                 }
             }
         }

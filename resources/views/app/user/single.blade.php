@@ -206,36 +206,6 @@
                         </ul>
                     </div>
                 @endif
-                @if($user->player->ataclevel > 0)
-                    <div class="col-md-12">
-                        <label>{{ trans('messages.ataclicenses') }}</label>
-                        <ul class="list-inline">
-                            @foreach($user->player->atac_licenses as $license)
-                                <li>
-                                    <p>
-                                        <span class="label @if($license[1]) label-success @else label-dark @endif">
-                                            {{ trans('licenses.'.$license[0]) }}
-                                        </span>
-                                    </p>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="col-md-12">
-                        <label>{{ trans('messages.atac_vehicles') }}</label>
-                        <ul class="list-inline">
-                            @foreach($user->player->vehicles()->atac()->alive()->get() as $vehicle)
-                                <li>
-                                    <p>
-                                    <span class="label @if($vehicle->active) label-warning @else label-success @endif">
-                                        {{ $vehicle->display_name }}
-                                    </span>
-                                    </p>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
             </section>
         </div>
     @endif

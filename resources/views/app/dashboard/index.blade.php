@@ -13,25 +13,13 @@
         <div class="col-md-6 col-xs-12 masonry-item masonry-sizer">
             @include('app.dashboard.widgets.ts3server')
         </div>
-        @if(\Auth::User()->player)
+        @if(\Auth::user()->player)
             <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
                 @include('app.dashboard.widgets.player')
             </div>
         @endif
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
-            @include('app.dashboard.widgets.last_post')
-        </div>
-        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
             @include('app.dashboard.widgets.links')
-        </div>
-        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
-            @include('app.dashboard.widgets.stats_count')
-        </div>
-        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
-            @include('app.dashboard.widgets.stats_money')
-        </div>
-        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
-            @include('app.dashboard.widgets.lotto')
         </div>
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
             @include('app.dashboard.widgets.players')
@@ -41,9 +29,6 @@
         </div>
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
             @include('app.dashboard.widgets.medics')
-        </div>
-        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
-            @include('app.dashboard.widgets.atacs')
         </div>
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
             @include('app.dashboard.widgets.money')
@@ -59,9 +44,6 @@
         </div>
         <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
             @include('app.dashboard.widgets.users')
-        </div>
-        <div class="col-md-3 col-xs-12 masonry-item masonry-sizer">
-            @include('app.dashboard.widgets.events')
         </div>
     </div>
 @endsection

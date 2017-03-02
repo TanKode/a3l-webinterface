@@ -2,10 +2,6 @@
 
 namespace App;
 
-use Cmgmyr\Messenger\Models\Message;
-use Cmgmyr\Messenger\Models\Thread;
-use Cmgmyr\Messenger\Traits\Messagable;
-use Fenos\Notifynder\Notifable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,13 +9,11 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, HasRolesAndAbilities, SoftDeletes, Messagable, Notifable;
+    use Authenticatable, Authorizable, CanResetPassword, HasRolesAndAbilities, SoftDeletes;
 
     protected $table = 'users';
 
@@ -49,14 +43,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'create' => [
             'name' => 'required|alpha_dash|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
-            'player_id' => 'required|numeric|unique:users|exists:arma.players,playerid',
+            'player_id' => 'required|numeric|unique:users|exists:arma.players,pid',
             'password' => 'required|confirmed|min:6',
             'role' => 'array',
         ],
         'update' => [
             'name' => 'required|alpha_dash|max:255',
             'email' => 'required|email|max:255',
-            'player_id' => 'required|numeric|exists:arma.players,playerid',
+            'player_id' => 'required|numeric|exists:arma.players,pid',
             'password' => 'confirmed|min:6',
             'role' => 'array',
         ],
@@ -64,7 +58,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function player()
     {
-        return $this->hasOne(Player::class, 'playerid', 'player_id');
+        return $this->hasOne(Player::class, 'pid', 'player_id');
     }
 
     public function avatar($size = 64)
@@ -90,38 +84,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function setEmailAttribute($value)
     {
         $this->attributes['email'] = strtolower($value);
-    }
-
-    public function createThread($participants, $body)
-    {
-        if (is_array($participants)) {
-            $participants = collect($participants);
-        }
-
-        if ($participants instanceof Collection || $participants instanceof EloquentCollection) {
-            $participants->push($this->getKey());
-        } else {
-            throw new \BadMethodCallException('$participants should be a Collection or an Array');
-        }
-        $participants = $participants->toArray();
-
-        $thread = Thread::between($participants)->get()->filter(function ($thread) use ($participants) {
-            return $thread->participants->count() == count($participants);
-        })->first();
-        if (is_null($thread)) {
-            $thread = Thread::create([
-                'subject' => 'Chat started by User#'.$this->getKey(),
-            ]);
-            $thread->addParticipants($participants);
-        }
-
-        Message::create([
-            'thread_id' => $thread->getKey(),
-            'user_id' => $this->getKey(),
-            'body' => $body,
-        ]);
-
-        return $thread;
     }
 
     public static function getList($remove = 0)

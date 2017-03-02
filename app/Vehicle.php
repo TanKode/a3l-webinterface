@@ -7,6 +7,8 @@ class Vehicle extends Model
     protected $connection = 'arma';
     protected $table = 'vehicles';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'side',
         'classname',
@@ -28,7 +30,7 @@ class Vehicle extends Model
 
     public static $rules = [
         'update' => [
-            'pid' => 'required|exists:arma.players,playerid',
+            'pid' => 'required|exists:arma.players,pid',
             'classname' => 'required',
             'alive' => 'required|integer',
             'active' => 'required|integer',
@@ -37,7 +39,7 @@ class Vehicle extends Model
 
     public function owner()
     {
-        return $this->belongsTo(Player::class, 'pid', 'playerid');
+        return $this->belongsTo(Player::class, 'pid', 'pid');
     }
 
     public function getDisplayNameAttribute()
@@ -118,11 +120,6 @@ class Vehicle extends Model
     public function scopeMedic($query)
     {
         return $query->where('side', 'med');
-    }
-
-    public function scopeAtac($query)
-    {
-        return $query->where('side', 'atac');
     }
 
     public function insure()

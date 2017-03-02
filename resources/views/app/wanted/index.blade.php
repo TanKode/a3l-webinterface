@@ -19,14 +19,20 @@
                     <th>{{ trans('messages.name') }}</th>
                     <th>{{ trans('messages.player_id') }}</th>
                     <th>{{ trans('messages.fines') }}</th>
+                    <th>{{ trans('messages.bounty') }}</th>
+                    <th>{{ trans('messages.active') }}</th>
+                    <th>{{ trans('messages.created_at') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($wanteds as $wanted)
                     <tr>
-                        <td>{{ \App\Player::pid($wanted[1])->first()->name }}</td>
-                        <td>{{ $wanted[1] }}</td>
-                        <td>{{ implode(', ', $wanted[2]) }}</td>
+                        <td>{{ $wanted->player->name }}</td>
+                        <td>{{ $wanted->player->pid }}</td>
+                        <td>{{ $wanted->wantedCrimes }}</td>
+                        <td>{{ \Formatter::money($wanted->wantedBounty) }}</td>
+                        <td>{{ trans('messages.confirms.'.$wanted->active) }}</td>
+                        <td>{{ $wanted->insert_time }}</td>
                     </tr>
                 @endforeach
                 </tbody>

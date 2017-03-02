@@ -8,6 +8,8 @@ class Player extends Model
     protected $table = 'players';
     protected $primaryKey = 'uid';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'cash',
         'bankacc',
@@ -19,9 +21,6 @@ class Player extends Model
         'mediclevel',
         'med_licenses',
         'med_gear',
-        'ataclevel',
-        'atac_licenses',
-        'atac_gear',
         'adminlevel',
         'donatorlvl',
     ];
@@ -42,75 +41,29 @@ class Player extends Model
         'donatorlvl' => 'int',
     ];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-    ];
-
     public static $rules = [
         'update' => [
             'cash' => 'integer',
             'bankacc' => 'integer',
             'coplevel' => 'integer',
             'mediclevel' => 'integer',
-            'ataclevel' => 'integer',
             'adminlevel' => 'integer',
         ],
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'playerid', 'player_id');
+        return $this->belongsTo(User::class, 'pid', 'player_id');
     }
 
     public function vehicles()
     {
-        return $this->hasMany(Vehicle::class, 'pid', 'playerid');
-    }
-
-    public function messages()
-    {
-        return Message::where('fromID', $this->playerid)->orWhere('toID', $this->playerid)->orderBy('time', 'desc')->get();
-    }
-
-    public function skills()
-    {
-        return $this->hasOne(Skillsys::class, 'playerid', 'playerid');
-    }
-
-    public function messagesWithPlayer($player)
-    {
-        $playerId = $this->playerid;
-        if ($player instanceof self) {
-            $player = $player->playerid;
-        }
-
-        return Message::where(function ($query) use ($playerId) {
-            return $query->where('fromID', $playerId)->orWhere('toID', $playerId);
-        })->where(function ($query) use ($player) {
-            return $query->where('fromID', $player)->orWhere('toID', $player);
-        })->orderBy('time', 'desc')->get();
-    }
-
-    public function getMessageParticipants()
-    {
-        $playerId = $this->playerid;
-
-        return $this->messages()->map(function ($message) {
-            return [
-                'from' => $message->fromID,
-                'to' => $message->toID,
-            ];
-        })->flatten()->toBase()->unique()->reject(function ($pid) use ($playerId) {
-            return $pid == $playerId;
-        })->map(function ($pid) {
-            return Player::pid($pid)->first();
-        })->filter();
+        return $this->hasMany(Vehicle::class, 'pid', 'pid');
     }
 
     public function hasUser()
     {
-        return ! is_null($this->user);
+        return !is_null($this->user);
     }
 
     public function getNameAttribute($value)
@@ -195,7 +148,7 @@ class Player extends Model
 
     public function scopePid($query, $pid)
     {
-        return $query->where('playerid', $pid);
+        return $query->where('pid', $pid);
     }
 
     public function scopeName($query, $name)
@@ -211,11 +164,6 @@ class Player extends Model
     public function scopeMedic($query)
     {
         return $query->where('mediclevel', '>', 0);
-    }
-
-    public function scopeAtac($query)
-    {
-        return $query->where('ataclevel', '>', 0);
     }
 
     public function enableLicense($area, $key)

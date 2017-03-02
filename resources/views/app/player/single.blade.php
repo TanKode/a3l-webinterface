@@ -19,7 +19,7 @@
                     ]) !!}
                 </div>
                 <div class="col-md-3">
-                    {!! Form::text('playerid', null, [
+                    {!! Form::text('pid', null, [
                         'label' => trans('messages.player_id'),
                         'readonly' => true,
                     ]) !!}
@@ -61,13 +61,6 @@
                         'label' => trans('messages.medic'),
                         'readonly' => $readonly || !\Auth::User()->can('edit-medic', $player),
                         'errors' => $errors->get('mediclevel'),
-                    ]) !!}
-                </div>
-                <div class="col-md-3">
-                    {!! Form::select('ataclevel', trans('messages.ataclevel'), null, [
-                        'label' => trans('messages.atac'),
-                        'readonly' => $readonly || !\Auth::User()->can('edit-atac', $player),
-                        'errors' => $errors->get('ataclevel'),
                     ]) !!}
                 </div>
                 <div class="clearfix"></div>
@@ -140,29 +133,6 @@
                                         @if(!$readonly && \Auth::User()->can('edit-medic', $player))
                                             <label for="med_licenses-{{ $license[0] }}" class="cursor-pointer license label @if($license[1]) label-success @else label-dark @endif">
                                                 {!! Form::hidden('med_licenses['.$license[0].']', ($license[1] ? 1 : 0)) !!}
-                                                {{ trans('licenses.'.$license[0]) }}
-                                            </label>
-                                        @else
-                                            <span class="label @if($license[1]) label-success @else label-dark @endif">
-                                                {{ trans('licenses.'.$license[0]) }}
-                                            </span>
-                                        @endif
-                                    </p>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                @if($player->ataclevel > 0)
-                    <div class="col-md-12">
-                        <label>{{ trans('messages.ataclicenses') }}</label>
-                        <ul class="list-inline">
-                            @foreach($player->atac_licenses as $license)
-                                <li>
-                                    <p>
-                                        @if(!$readonly && \Auth::User()->can('edit-atac', $player))
-                                            <label for="med_licenses-{{ $license[0] }}" class="cursor-pointer license label @if($license[1]) label-success @else label-dark @endif">
-                                                {!! Form::hidden('atac_licenses['.$license[0].']', ($license[1] ? 1 : 0)) !!}
                                                 {{ trans('licenses.'.$license[0]) }}
                                             </label>
                                         @else

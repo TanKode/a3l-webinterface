@@ -9,7 +9,7 @@
             <span class="title">{{ trans('menu.vehicles') }}</span>
         </div>
         <div class="margin-top-20 margin-horizontal-20">
-            {!! Form::text('datatable-search', is_null($player) ? '' : 'pid='.$player->playerid.';', [
+            {!! Form::text('datatable-search', is_null($player) ? '' : 'pid='.$player->pid.';', [
                 'icon' => 'wh-search',
                 'placeholder' => 'pid=1234;side=civ;type=car;active=0;alive=1;classname=C_Kart_01_Blu_F;'
             ]) !!}
@@ -27,8 +27,6 @@
                     <th>{{ trans('messages.classname') }}</th>
                     <th>{{ trans('messages.alive') }}</th>
                     <th>{{ trans('messages.active') }}</th>
-                    <th>{{ trans('messages.created_at') }}</th>
-                    <th>{{ trans('messages.updated_at') }}</th>
                     <th class="noindex"></th>
                 </tr>
                 </thead>

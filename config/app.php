@@ -140,16 +140,8 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Silber\Bouncer\BouncerServiceProvider::class,
-        Maknz\Slack\SlackServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Fenos\Notifynder\NotifynderServiceProvider::class,
-        Riari\Forum\ForumServiceProvider::class,
-        Riari\Forum\Frontend\ForumFrontendServiceProvider::class,
-        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
-        AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider::class,
-        Cmgmyr\Messenger\MessengerServiceProvider::class,
-        Golonka\BBCode\BBCodeParserServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -219,14 +211,9 @@ return [
         'Twemoji'   => App\Libs\Twemoji::class,
 
         'Bouncer'   => Silber\Bouncer\BouncerFacade::class,
-        'Slack'     => Maknz\Slack\Facades\Slack::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Html'      => Collective\Html\HtmlFacade::class,
-        'Notify'    => Fenos\Notifynder\Facades\Notifynder::class,
-        'Calendar'  => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
-        'Markdown'  => AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra::class,
         'Debugbar'  => Barryvdh\Debugbar\Facade::class,
-        'BBCode'    => Golonka\BBCode\Facades\BBCodeParser::class,
 
     ],
 

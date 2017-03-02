@@ -9,21 +9,12 @@
     "laravel/framework": "5.1.*",
     "laravel/socialite": "2.0.*",
     "laravelcollective/html": "~5.0",
-    "maknz/slack": "1.7.0",
     "silber/bouncer": "0.1.2",
     "michelf/php-markdown": "1.5.0",
-    "fenos/notifynder": "3.1.*",
     "venturecraft/revisionable": "1.*",
     "doctrine/dbal": "2.6.x-dev",
-    "riari/laravel-forum": "~3.0",
-    "riari/laravel-forum-frontend": "~1.0",
-    "maddhatter/laravel-fullcalendar": "^1.2",
-    "alfredo-ramos/parsedown-extra-laravel": "0.3.0",
-    "cmgmyr/messenger": "~2.0",
-    "google/apiclient": "2.0.0-RC4",
     "fkubis/teamspeak-php-framework": "dev-master",
-    "xpaw/php-source-query-class": "1.0.0",
-    "golonka/bbcodeparser": "^2.2"
+    "xpaw/php-source-query-class": "1.0.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

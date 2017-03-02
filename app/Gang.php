@@ -24,7 +24,7 @@ class Gang extends Model
 
     public function owner()
     {
-        return $this->belongsTo(Player::class, 'owner', 'playerid');
+        return $this->belongsTo(Player::class, 'owner', 'pid');
     }
 
     public function scopeActive($query)

@@ -10,7 +10,7 @@
         </li>
         <li class="list-group-item">
             <strong class="list-group-item-heading">{{ trans('messages.player_id') }}</strong>
-            <span class="pull-right">{{ \Auth::User()->player->playerid }}</span>
+            <span class="pull-right">{{ \Auth::User()->player->pid }}</span>
         </li>
         <li class="list-group-item">
             <strong class="list-group-item-heading">{{ trans('messages.money') }}</strong>
@@ -26,12 +26,6 @@
             <li class="list-group-item">
                 <strong class="list-group-item-heading">{{ trans('messages.medic') }}</strong>
                 <span class="pull-right">{{ trans('messages.mediclevel.'.\Auth::User()->player->mediclevel) }}</span>
-            </li>
-        @endif
-        @if(\Auth::User()->player->ataclevel)
-            <li class="list-group-item">
-                <strong class="list-group-item-heading">{{ trans('messages.atac') }}</strong>
-                <span class="pull-right">{{ trans('messages.ataclevel.'.\Auth::User()->player->ataclevel) }}</span>
             </li>
         @endif
     </ul>

@@ -4,11 +4,7 @@
 /.idea
 *.iml
 /vendor
-/composer.phar
 /.env
 /node_modules
 /public/css/style.*
-/composer.lock
-Homestead.yaml
-/wordpress/wp-config.php
-Homestead.json
+/*.lock

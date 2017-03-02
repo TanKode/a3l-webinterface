@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title'         => 'Pyro-Life',
+    'title'         => 'Die Sippe',
     'site_description' => 'Der Einzige deutsche Life-Server mit der aktuellsten Taviana Karte, mit einer wachsenden Arma 3 Rollenspiel Community. In Kooperation mit dem PYROLYSE Team.',
 
     'support'       => 'Support für das WebInterface',
@@ -107,7 +107,6 @@ return [
     'cops'          => 'Polizisten',
     'medic'         => 'Sanitäter',
     'medics'        => 'Sanitäter',
-    'atac'          => 'ATAC',
     'atacs'         => 'ATACs',
     'admin'         => 'Admin',
     'donator'       => 'Donator',
@@ -117,25 +116,7 @@ return [
     'cop_vehicles'  => 'Cop-Fahrzeuge',
     'mediclicenses' => 'Medic-Lizenzen',
     'medic_vehicles' => 'Medic-Fahrzeuge',
-    'ataclicenses'  => 'ATAC-Lizenzen',
-    'atac_vehicles'  => 'ATAC-Fahrzeuge',
-
-    'lotto'         => 'Lotto',
-    'jackpot'       => 'Jackpot',
-    'next_draw'     => 'nächste Ziehung: :date',
-    'number_1'      => 'Zahl 1',
-    'number_2'      => 'Zahl 2',
-    'number_3'      => 'Zahl 3',
-    'number_4'      => 'Zahl 4',
-    'number_5'      => 'Zahl 5',
-    'number_6'      => 'Zahl 6',
-    'numbers'       => 'Zahlen',
-    'corrects'      => 'Richtige',
-    'profit'        => 'Gewinn',
-    'bets'          => 'Wetten',
-    'lotto_bet_info'=> 'Du kannst für jede Ziehung einen Tipp abgeben. Ein Ticket kostet :bet_cost - die Kosten werden dir zum Zeitpunkt der Ziehung abgezogen, falls du dann nicht mehr genug Geld hast ist auch dein Lotterieschein ungültig.',
-    'lotto_closed'  => 'Leider ist die Lotterie gerade geschlossen. Versuche es später noch einmal.',
-    'jackpot_hint'  => 'Hinweis: Die Summe aller Lotto-Zahlen ist :sum - viel Erfolg beim wetten.',
+    'bounty'        => 'Bußgeld',
 
     'coplevel'      => [
         0 => 'Zivilist',
@@ -162,15 +143,6 @@ return [
         4 => 'Notarzt',
         5 => 'Co-Chefarzt',
         6 => 'Chefarzt',
-    ],
-    'ataclevel'    => [
-        0 => 'Zivilist',
-        1 => 'Praktikant',
-        2 => 'Lehrling',
-        3 => 'Abschleper',
-        4 => 'Mechaniker',
-        5 => 'Meisterschüler',
-        6 => 'Meister',
     ],
 
     'errors' => [

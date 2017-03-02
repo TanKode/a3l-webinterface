@@ -29,10 +29,6 @@
                     <th>{{ trans('messages.cop') }}</th>
                     <th></th>
                     <th>{{ trans('messages.medic') }}</th>
-                    <th></th>
-                    <th>{{ trans('messages.atac') }}</th>
-                    <th>{{ trans('messages.created_at') }}</th>
-                    <th>{{ trans('messages.updated_at') }}</th>
                     <th class="noindex"></th>
                 </tr>
                 </thead>
@@ -42,7 +38,7 @@
                         <td>{{ $player->getKey() }}</td>
                         <td>{{ $player->name }}</td>
                         <td>{{ $player->alias }}</td>
-                        <td>{{ $player->playerid }}</td>
+                        <td>{{ $player->pid }}</td>
                         @can('edit-money', App\Player::class)
                             <td class="text-right">{{ \Formatter::money($player->total_money) }}</td>
                         @endcan
@@ -50,10 +46,6 @@
                         <td>{{ trans('messages.coplevel.'.$player->coplevel) }}</td>
                         <td class="text-right">{{ $player->mediclevel }}</td>
                         <td>{{ trans('messages.mediclevel.'.$player->mediclevel) }}</td>
-                        <td class="text-right">{{ $player->ataclevel }}</td>
-                        <td>{{ trans('messages.ataclevel.'.$player->ataclevel) }}</td>
-                        <td>{{ $player->created_at }}</td>
-                        <td>{{ $player->updated_at }}</td>
 
                         <td>
                             <div class="btn-group pull-right">

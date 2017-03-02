@@ -59,9 +59,6 @@ class PlayerController extends Controller
         if (\Auth::User()->can('edit-medic', $player)) {
             $allowedFields->push(['mediclevel', 'med_licenses']);
         }
-        if (\Auth::User()->can('edit-atac', $player)) {
-            $allowedFields->push(['ataclevel', 'atac_licenses']);
-        }
         if (\Auth::User()->can('edit-admin', $player)) {
             $allowedFields->push(['adminlevel']);
         }

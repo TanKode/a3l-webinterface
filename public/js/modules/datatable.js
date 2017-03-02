@@ -39,8 +39,6 @@ var App = (function () {
                     {"data": "classname"},
                     {"data": "alive"},
                     {"data": "active"},
-                    {"data": "created_at"},
-                    {"data": "updated_at"},
                     {"data": "btns"}
                 ]
             });
