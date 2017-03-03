@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Libs\Formatter;
 use App\Libs\Helper;
+use App\Libs\Formatter;
 use Illuminate\Support\ServiceProvider;
 
 class HelperServiceProvider extends ServiceProvider

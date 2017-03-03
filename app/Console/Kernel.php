@@ -2,14 +2,14 @@
 
 namespace App\Console;
 
-use App\Console\Commands\CarInsurance;
+use Carbon\Carbon;
+use App\Console\Commands\LottoDraw;
 use App\Console\Commands\CreateStats;
 use App\Console\Commands\LottoCreate;
-use App\Console\Commands\LottoDraw;
-use Carbon\Carbon;
+use App\Console\Commands\CarInsurance;
+use App\Console\Commands\BackupDatabase;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Console\Commands\BackupDatabase;
 
 class Kernel extends ConsoleKernel
 {

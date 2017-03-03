@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Http\Controllers\Controller;
 use App\Wanted;
+use App\Http\Controllers\Controller;
 
 class WantedController extends Controller
 {

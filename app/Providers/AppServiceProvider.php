@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Ability;
-use App\Libs\BouncerSeeder;
 use App\Role;
+use App\Ability;
 use Carbon\Carbon;
+use App\Libs\BouncerSeeder;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

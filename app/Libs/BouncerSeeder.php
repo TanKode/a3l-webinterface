@@ -2,15 +2,10 @@
 
 namespace App\Libs;
 
-use App\Event;
-use App\Lotto;
-use App\Player;
 use App\Role;
 use App\User;
+use App\Player;
 use App\Vehicle;
-use Riari\Forum\Models\Category as ForumCategory;
-use Riari\Forum\Models\Thread as ForumThread;
-use Riari\Forum\Models\Post as ForumPost;
 
 class BouncerSeeder
 {

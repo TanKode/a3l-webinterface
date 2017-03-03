@@ -2,17 +2,17 @@
 
 namespace App\Providers;
 
-use App\Event;
-use App\Player;
 use App\Role;
 use App\User;
+use App\Event;
+use App\Player;
 use App\Vehicle;
-use Cmgmyr\Messenger\Models\Thread as ChatThread;
 use Illuminate\Routing\Router;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Riari\Forum\Models\Category as ForumCategory;
-use Riari\Forum\Models\Thread as ForumThread;
 use Riari\Forum\Models\Post as ForumPost;
+use Riari\Forum\Models\Thread as ForumThread;
+use Cmgmyr\Messenger\Models\Thread as ChatThread;
+use Riari\Forum\Models\Category as ForumCategory;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
