@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Libs\AlertBuilder;
-use App\Libs\FormBuilder;
 use App\Libs\MarkExtra;
+use App\Libs\FormBuilder;
+use App\Libs\AlertBuilder;
 use Illuminate\Support\ServiceProvider;
 
 class HtmlBuilderServiceProvider extends ServiceProvider

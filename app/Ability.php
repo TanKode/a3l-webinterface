@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Silber\Bouncer\Database\Ability as BouncerAbility;
 use Venturecraft\Revisionable\RevisionableTrait;
+use Silber\Bouncer\Database\Ability as BouncerAbility;
 
 class Ability extends BouncerAbility
 {

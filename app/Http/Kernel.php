@@ -2,10 +2,10 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\DBCheck;
-use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\VerifyCsrfToken;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel

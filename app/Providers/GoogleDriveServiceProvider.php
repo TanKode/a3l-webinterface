@@ -6,8 +6,8 @@ use Storage;
 use Google_Client;
 use Google_Cache_File;
 use Google_Service_Drive;
-use League\Flysystem\Filesystem;
 use App\Libs\GoogleDriveAdapter;
+use League\Flysystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 
 class GoogleDriveServiceProvider extends ServiceProvider

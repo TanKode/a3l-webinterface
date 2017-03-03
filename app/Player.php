@@ -63,7 +63,7 @@ class Player extends Model
 
     public function hasUser()
     {
-        return !is_null($this->user);
+        return ! is_null($this->user);
     }
 
     public function getNameAttribute($value)

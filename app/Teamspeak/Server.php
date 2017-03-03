@@ -2,8 +2,8 @@
 
 namespace App\Teamspeak;
 
-use Illuminate\Support\Collection;
 use TeamSpeak3\TeamSpeak3;
+use Illuminate\Support\Collection;
 
 class Server extends Model
 {
