@@ -1,4 +1,5 @@
 <?php
+
 return [
     'donuts' => 'Donuts',
     'coffee' => 'Kaffee',
