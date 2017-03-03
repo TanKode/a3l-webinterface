@@ -101,49 +101,20 @@ class VehicleController extends Controller
     protected function getBtnsForVehicle($vehicle)
     {
         $out = '<div class="btn-group pull-right">';
-        if (\Auth::User()->can('view', $vehicle)) {
+        if (\Auth::user()->can('view', $vehicle)) {
             $out .= '<a href="'.url('app/vehicle/'.$vehicle->getKey()).'" class="btn btn-pure btn-icon btn-success"><i class="icon wh-eye-view"></i></a>';
         }
-        if (\Auth::User()->can('edit', $vehicle)) {
+        if (\Auth::user()->can('edit', $vehicle)) {
             $out .= '<a href="'.url('app/vehicle/edit/'.$vehicle->getKey()).'" class="btn btn-pure btn-icon btn-warning"><i class="icon wh-edit"></i></a>';
         }
-        if (\Auth::User()->can('delete', $vehicle)) {
+        if (\Auth::user()->can('delete', $vehicle)) {
             $out .= '<a href="'.url('app/vehicle/delete/'.$vehicle->getKey()).'" class="btn btn-pure btn-icon btn-danger"><i class="icon wh-trash"></i></a>';
         }
-        if (\Auth::User()->can('view', $vehicle->owner)) {
+        if (\Auth::user()->can('view', $vehicle->owner)) {
             $out .= '<a href="'.url('app/player/'.$vehicle->owner->getKey()).'" class="btn btn-pure btn-icon btn-success"><i class="icon wh-boardgame"></i></a>';
         }
         $out .= '</div>';
 
         return $out;
-    }
-
-    public function getInsure()
-    {
-        $this->authorize('edit', Vehicle::class);
-
-        if (! \Auth::User()->hasPlayer()) {
-            abort(403);
-        }
-
-        $vehicles = [];
-        foreach (\Auth::User()->player->vehicles()->alive()->inactive()->uninsured()->get() as $vehicle) {
-            $vehicles[$vehicle->side.' - '.$vehicle->type][$vehicle->getKey()] = $vehicle->display_name;
-        }
-
-        return view('app.vehicle.insure')->with([
-            'vehicles' => $vehicles,
-            'insuredVehicles' => \Auth::User()->player->vehicles()->insured()->get(),
-        ]);
-    }
-
-    public function postInsure()
-    {
-        $this->authorize('edit', Vehicle::class);
-
-        $vehicle = Vehicle::alive()->inactive()->uninsured()->findOrFail(\Input::get('vehicle'));
-        $vehicle->insure();
-
-        return back();
     }
 }

@@ -46,16 +46,16 @@
                         <td>{{ trans('messages.confirms.'.$user->confirmed) }}</td>
                         <td>
                             <div class="btn-group pull-right">
-                                @if(\Auth::User()->can('view', $user))
+                                @if(\Auth::user()->can('view', $user))
                                     <a href="{{ url('app/user/'.$user->getKey()) }}" class="btn btn-pure btn-icon btn-success"><i class="icon wh-eye-view"></i></a>
                                 @endif
-                                @if(\Auth::User()->can('edit', $user))
+                                @if(\Auth::user()->can('edit', $user))
                                     <a href="{{ url('app/user/edit/'.$user->getKey()) }}" class="btn btn-pure btn-icon btn-warning"><i class="icon wh-edit"></i></a>
                                 @endif
-                                @if(\Auth::User()->can('delete', $user))
+                                @if(\Auth::user()->can('delete', $user))
                                     <a href="{{ url('app/user/delete/'.$user->getKey()) }}" class="btn btn-pure btn-icon btn-danger"><i class="icon wh-trash"></i></a>
                                 @endif
-                                @if(\Auth::User()->can('view', $user->player))
+                                @if(\Auth::user()->can('view', $user->player))
                                     <a href="{{ url('app/player/'.$user->player->getKey()) }}" class="btn btn-pure btn-icon btn-success"><i class="icon wh-boardgame"></i></a>
                                 @endif
                             </div>

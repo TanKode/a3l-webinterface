@@ -47,23 +47,23 @@ class PlayerController extends Controller
         }
 
         $allowedFields = collect([]);
-        if (\Auth::User()->can('edit-money', $player)) {
+        if (\Auth::user()->can('edit-money', $player)) {
             $allowedFields->push(['cash', 'bankacc', 'manipulate_bankacc']);
         }
-        if (\Auth::User()->can('edit-civ', $player)) {
+        if (\Auth::user()->can('edit-civ', $player)) {
             $allowedFields->push(['civ_licenses']);
         }
-        if (\Auth::User()->can('edit-cop', $player)) {
+        if (\Auth::user()->can('edit-cop', $player)) {
             $allowedFields->push(['coplevel', 'cop_licenses']);
         }
-        if (\Auth::User()->can('edit-medic', $player)) {
+        if (\Auth::user()->can('edit-medic', $player)) {
             $allowedFields->push(['mediclevel', 'med_licenses']);
         }
-        if (\Auth::User()->can('edit-admin', $player)) {
+        if (\Auth::user()->can('edit-admin', $player)) {
             $allowedFields->push(['adminlevel']);
         }
-        if (\Auth::User()->can('edit-donator', $player)) {
-            $allowedFields->push(['donatorlvl']);
+        if (\Auth::user()->can('edit-donator', $player)) {
+            $allowedFields->push(['donorlevel']);
         }
         $allowedFields = $allowedFields->flatten()->toArray();
         $data = array_intersect_key($data, array_combine($allowedFields, $allowedFields));

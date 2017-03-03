@@ -91,17 +91,6 @@ class UserController extends Controller
         return redirect('app/user');
     }
 
-    public function getReadNotify($notificationId)
-    {
-        if (empty($notificationId)) {
-            \Auth::User()->readAllNotifications();
-        } else {
-            \Notify::readOne($notificationId);
-        }
-
-        return back();
-    }
-
     public function getSendVerificationMail(User $user)
     {
         $this->authorize('edit', $user);

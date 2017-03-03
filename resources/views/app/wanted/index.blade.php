@@ -17,23 +17,21 @@
                 <thead>
                 <tr>
                     <th>{{ trans('messages.name') }}</th>
-                    <th>{{ trans('messages.player_id') }}</th>
-                    <th>{{ trans('messages.fines') }}</th>
+                    <th>{{ trans('messages.crimes') }}</th>
                     <th>{{ trans('messages.bounty') }}</th>
-                    <th>{{ trans('messages.active') }}</th>
                     <th>{{ trans('messages.created_at') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($wanteds as $wanted)
+                    @if($wanted->hasPlayer())
                     <tr>
                         <td>{{ $wanted->player->name }}</td>
-                        <td>{{ $wanted->player->pid }}</td>
-                        <td>{{ $wanted->wantedCrimes }}</td>
+                        <td>{{ implode(', ', $wanted->wantedCrimes) }}</td>
                         <td>{{ \Formatter::money($wanted->wantedBounty) }}</td>
-                        <td>{{ trans('messages.confirms.'.$wanted->active) }}</td>
                         <td>{{ $wanted->insert_time }}</td>
                     </tr>
+                    @endif
                 @endforeach
                 </tbody>
             </table>

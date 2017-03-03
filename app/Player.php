@@ -22,7 +22,7 @@ class Player extends Model
         'med_licenses',
         'med_gear',
         'adminlevel',
-        'donatorlvl',
+        'donorlevel',
     ];
     protected $hidden = [];
 
@@ -38,7 +38,7 @@ class Player extends Model
         'coplevel' => 'int',
         'mediclevel' => 'int',
         'adminlevel' => 'int',
-        'donatorlvl' => 'int',
+        'donorlevel' => 'int',
     ];
 
     public static $rules = [

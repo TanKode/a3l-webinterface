@@ -6,10 +6,11 @@ linting: true
 
 finder:
   exclude:
-    - "wordpress"
     - "tests"
     - "storage"
-    - "resources"
+    - "resources/assets"
+    - "resources/views"
+    - "resources/pages"
     - "public"
   name:
     - "*.php"
@@ -18,4 +19,4 @@ finder:
     - "bootstrap"
     - "config"
     - "database"
-    - "database"
+    - "resources/lang"

@@ -20,10 +20,4 @@ return [
         'server_port' => env('TS3_SERVER_PORT', 9987),
     ],
 
-    'facebook' => [
-        'client_id'     => env('FB_APP_ID'),
-        'client_secret' => env('FB_SECRET'),
-        'redirect'      => '',
-    ],
-
 ];

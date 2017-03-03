@@ -11,8 +11,6 @@
     <meta property="og:description" content="{{ trans('messages.site_description') }}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ Request::url() }}" />
-    <meta property="og:image" content="{{ asset('img/pyro-life-banner.png') }}" />
-    <meta property="fb:app_id " content="{{ config('services.facebook.client_id') }}" />
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/nanoscroller.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dataTables.bootstrap.min.css') }}"/>

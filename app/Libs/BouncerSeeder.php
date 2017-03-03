@@ -65,11 +65,8 @@ class BouncerSeeder
         foreach (User::with('player')->get() as $user) {
             $user->assign('member');
             if ($user->hasPlayer()) {
-                $user->player->enableLicense('civ', 'license_civ_fuel');
-
                 $user->retract('polizist');
                 $user->retract('medic');
-                $user->retract('atacler');
                 if ($user->player->coplevel > 0) {
                     $user->assign('polizist');
                 }

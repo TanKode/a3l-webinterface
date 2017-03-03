@@ -40,13 +40,13 @@
                         </td>
                         <td>
                             <div class="btn-group pull-right">
-                                @if(\Auth::User()->can('view', $role))
+                                @if(\Auth::user()->can('view', $role))
                                     <a href="{{ url('app/role/'.$role->getKey()) }}" class="btn btn-pure btn-icon btn-success"><i class="icon wh-eye-view"></i></a>
                                 @endif
-                                @if(\Auth::User()->can('edit', $role))
+                                @if(\Auth::user()->can('edit', $role))
                                     <a href="{{ url('app/role/edit/'.$role->getKey()) }}" class="btn btn-pure btn-icon btn-warning"><i class="icon wh-edit"></i></a>
                                 @endif
-                                @if(\Auth::User()->can('delete', $role))
+                                @if(\Auth::user()->can('delete', $role))
                                     <a href="{{ url('app/role/delete/'.$role->getKey()) }}" class="btn btn-pure btn-icon btn-danger"><i class="icon wh-trash"></i></a>
                                 @endif
                             </div>

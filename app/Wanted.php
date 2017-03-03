@@ -25,6 +25,21 @@ class Wanted extends Model
         return $this->hasOne(Player::class, 'pid', 'wantedID');
     }
 
+    public function hasPlayer()
+    {
+        return ! is_null($this->player);
+    }
+
+    public function getWantedCrimesAttribute($value)
+    {
+        return \Formatter::decodeDBArray($value);
+    }
+
+    public function setWantedCrimesAttribute($value)
+    {
+        $this->attributes['wantedCrimes'] = \Formatter::encodeDBArray($value);
+    }
+
     public function scopePid($query, $pid)
     {
         return $query->where('wantedID', $pid);
