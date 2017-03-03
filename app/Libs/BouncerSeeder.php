@@ -39,12 +39,6 @@ class BouncerSeeder
         ],
     ];
 
-    protected $abilities = [
-        'view-backups',
-        'download-backups',
-        'delete-backups',
-    ];
-
     public function seed()
     {
         \Log::debug('seed bouncer with default data & force assignments', [
@@ -58,17 +52,13 @@ class BouncerSeeder
             }
         }
 
-        foreach ($this->abilities as $ability) {
-            \Bouncer::allow('superadmin')->to($ability);
-        }
-
         foreach (User::with('player')->get() as $user) {
-            $user->assign('member');
             if ($user->hasPlayer()) {
-                $user->retract('polizist');
+                $user->assign('member');
+                $user->retract('cop');
                 $user->retract('medic');
                 if ($user->player->coplevel > 0) {
-                    $user->assign('polizist');
+                    $user->assign('cop');
                 }
                 if ($user->player->mediclevel > 0) {
                     $user->assign('medic');

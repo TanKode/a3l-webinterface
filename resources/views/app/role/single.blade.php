@@ -38,6 +38,4 @@
         </div>
     </div>
     {!! Form::close() !!}
-
-    @include('partials.revisions', ['model' => $role])
 @endsection
