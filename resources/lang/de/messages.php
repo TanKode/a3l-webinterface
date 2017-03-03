@@ -2,7 +2,7 @@
 
 return [
     'title'         => 'Die Sippe',
-    'site_description' => 'Der Einzige deutsche Life-Server mit der aktuellsten Taviana Karte, mit einer wachsenden Arma 3 Rollenspiel Community. In Kooperation mit dem PYROLYSE Team.',
+    'site_description' => 'Tanoa! Eine Ansammlung wundervoller Inseln, die leider politisch getrennt sind. Spielt auf unserem Server und erlebt die bedrohliche Atmosphäre der Grenze, die abwechslungsreichen Routen oder überlistet die Eliteeinheiten der Polizei. Die Sippe - Tanoa Life macht\'s möglich!',
 
     'support'       => 'Support für das WebInterface',
     'unread_messages' => 'ungelesene Nachrichten',

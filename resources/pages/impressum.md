@@ -4,10 +4,12 @@
 
 Tom Witkowski (Gummibeer)
 
+Benzenbergweg 3, 22307 Hamburg
+
 #### Kontakt
 
 * **Telefon:** +491621525105
-* **E-Mail:** support@gummibeer.de
+* **E-Mail:** dev.gummibeer@gmail.com
 
 ### Hinweis auf EU-Streitschlichtung
 

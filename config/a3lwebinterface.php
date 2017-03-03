@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'version' => '4.0-dev',
+    'version' => '4.0-beta.1',
 
     'formatter' => [
         'decimals' => 0,

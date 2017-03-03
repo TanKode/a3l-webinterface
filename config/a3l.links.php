@@ -3,6 +3,7 @@
 return [
     [
         'icon' => 'wh-world',
+        'class' => 'bg-primary',
         'name' => 'Webseite',
         'url' => 'http://die-sippe.eu',
     ], [
