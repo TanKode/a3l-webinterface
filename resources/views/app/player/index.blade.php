@@ -25,9 +25,7 @@
                     @can('edit-money', App\Player::class)
                         <th>{{ trans('messages.money') }}</th>
                     @endcan
-                    <th></th>
                     <th>{{ trans('messages.cop') }}</th>
-                    <th></th>
                     <th>{{ trans('messages.medic') }}</th>
                     <th class="noindex"></th>
                 </tr>
@@ -40,12 +38,10 @@
                         <td>{{ $player->alias }}</td>
                         <td>{{ $player->pid }}</td>
                         @can('edit-money', App\Player::class)
-                            <td class="text-right">{{ \Formatter::money($player->total_money) }}</td>
+                            <td class="text-right" data-order="{{ $player->total_money }}">{{ \Formatter::money($player->total_money) }}</td>
                         @endcan
-                        <td class="text-right">{{ $player->coplevel }}</td>
-                        <td>{{ trans('messages.coplevel.'.$player->coplevel) }}</td>
-                        <td class="text-right">{{ $player->mediclevel }}</td>
-                        <td>{{ trans('messages.mediclevel.'.$player->mediclevel) }}</td>
+                        <td data-order="{{ $player->coplevel }}">{{ trans('messages.coplevel.'.$player->coplevel) }}</td>
+                        <td data-order="{{ $player->mediclevel }}">{{ trans('messages.mediclevel.'.$player->mediclevel) }}</td>
 
                         <td>
                             <div class="btn-group pull-right">
