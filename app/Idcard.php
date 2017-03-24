@@ -1,11 +1,12 @@
 <?php
+
 namespace App;
 
 class Idcard extends Model
 {
     protected $connection = 'arma';
     protected $table = 'perso';
-    
+
     public $timestamps = false;
 
     protected $fillable = [
