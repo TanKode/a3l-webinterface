@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Http\Controllers\Controller;
 use App\Player;
+use App\Http\Controllers\Controller;
 
 class IdcardController extends Controller
 {
@@ -11,7 +11,7 @@ class IdcardController extends Controller
     {
         $this->authorize('edit', $player);
 
-        $field = lcfirst(studly_case('perso_' . strtolower($side)));
+        $field = lcfirst(studly_case('perso_'.strtolower($side)));
         $idcard = $player->idcard;
         $idcard->$field = [];
         $idcard->save();

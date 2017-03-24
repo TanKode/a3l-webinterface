@@ -73,5 +73,4 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::get('/delete/{vehicle}', 'VehicleController@getDelete');
         Route::get('/{vehicle}', 'VehicleController@getShow');
     });
-
 });
