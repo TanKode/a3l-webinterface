@@ -175,4 +175,7 @@ return [
     ],
 
     'tokenmismatch' => 'Deine Session ist abgelaufen, bitte sende dein Formular erneut ab.',
+
+    'reset_id_cop' => 'Cop Ausweis zurücksetzen',
+    'reset_id_med' => 'Medic Ausweis zurücksetzen',
 ];

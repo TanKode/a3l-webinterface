@@ -156,6 +156,14 @@
                 @if(!$readonly)
                     <div class="clearfix"></div>
                     <div class="col-md-12">
+                        <div class="btn-group pull-left">
+                            <a href="{{ url('app/player/'.$player->getKey().'/idcard/reset/cop') }}" class="btn btn-default">
+                                {{ trans('messages.reset_id_cop') }}
+                            </a>
+                            <a href="{{ url('app/player/'.$player->getKey().'/idcard/reset/med') }}" class="btn btn-default">
+                                {{ trans('messages.reset_id_med') }}
+                            </a>
+                        </div>
                         {!! Form::submit(trans('messages.save'), [
                             'class' => 'btn-warning pull-right',
                         ]) !!}

@@ -63,6 +63,11 @@ class Player extends Model
         return $this->hasMany(Vehicle::class, 'pid', 'pid');
     }
 
+    public function idcard()
+    {
+        return $this->hasOne(Idcard::class, 'pid', 'pid');
+    }
+
     public function hasUser()
     {
         return $this->user()->exists();

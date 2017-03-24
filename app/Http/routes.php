@@ -30,7 +30,6 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
     Route::group(['prefix' => 'wanted'], function () {
         Route::get('/', 'WantedController@getIndex');
     });
-
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', 'UserController@getIndex');
         Route::get('/edit/{user}', 'UserController@getEdit');
@@ -58,6 +57,10 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::post('/edit/{player}', 'PlayerController@postEdit');
         Route::get('/delete/{player}', 'PlayerController@getDelete');
         Route::get('/{player}', 'PlayerController@getShow');
+
+        Route::group(['prefix' => '{player}/idcard'], function () {
+            Route::get('reset/{side}', 'IdcardController@getReset');
+        });
     });
 
     Route::group(['prefix' => 'vehicle'], function () {
@@ -70,4 +73,5 @@ Route::group(['prefix' => 'app', 'namespace' => 'App', 'middleware' => 'auth'], 
         Route::get('/delete/{vehicle}', 'VehicleController@getDelete');
         Route::get('/{vehicle}', 'VehicleController@getShow');
     });
+
 });
