@@ -47,21 +47,37 @@
                             <div class="btn-group pull-right">
                                 @can('view', $player)
                                     <a href="{{ url('app/player/'.$player->getKey()) }}" class="btn btn-pure btn-icon btn-success"><i class="icon wh-eye-view"></i></a>
+                                @else
+                                    <span class="btn btn-pure btn-icon btn-default disabled"><i class="icon wh-eye-view"></i></span>
                                 @endcan
                                 @can('edit', $player)
                                     <a href="{{ url('app/player/edit/'.$player->getKey()) }}" class="btn btn-pure btn-icon btn-warning"><i class="icon wh-edit"></i></a>
+                                @else
+                                    <span class="btn btn-pure btn-icon btn-default disabled"><i class="icon wh-edit"></i></span>
                                 @endcan
                                 @can('delete', $player)
                                     <a href="{{ url('app/player/delete/'.$player->getKey()) }}" class="btn btn-pure btn-icon btn-danger"><i class="icon wh-trash"></i></a>
+                                    @else
+                                        <span class="btn btn-pure btn-icon btn-default disabled"><i class="icon wh-trash"></i></span>
                                 @endcan
                                 @if($player->hasUser())
                                     @can('view', $player->user)
                                         <a href="{{ url('app/user/'.$player->user->getKey()) }}" class="btn btn-pure btn-icon btn-success"><i class="icon wh-user"></i></a>
+                                    @else
+                                        <span class="btn btn-pure btn-icon btn-default disabled"><i class="icon wh-user"></i></span>
                                     @endcan
+                                @else
+                                    <span class="btn btn-pure btn-icon btn-default disabled"><i class="icon wh-user"></i></span>
                                 @endif
-                                @can('view', \App\Vehicle::class)
-                                    <a href="{{ url('app/vehicle/?player='.$player->getKey()) }}" class="btn btn-pure btn-icon btn-success"><i class="icon wh-automobile-car"></i></a>
-                                @endcan
+                                @if($player->hasVehicles())
+                                    @can('view', \App\Vehicle::class)
+                                        <a href="{{ url('app/vehicle/?player='.$player->getKey()) }}" class="btn btn-pure btn-icon btn-success"><i class="icon wh-automobile-car"></i></a>
+                                        @else
+                                            <span class="btn btn-pure btn-icon btn-default disabled"><i class="icon wh-automobile-car"></i></span>
+                                    @endcan
+                                @else
+                                    <span class="btn btn-pure btn-icon btn-default disabled"><i class="icon wh-automobile-car"></i></span>
+                                @endif
                             </div>
                         </td>
                     </tr>

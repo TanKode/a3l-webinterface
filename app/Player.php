@@ -63,7 +63,12 @@ class Player extends Model
 
     public function hasUser()
     {
-        return ! is_null($this->user);
+        return $this->user()->exists();
+    }
+
+    public function hasVehicles()
+    {
+        return $this->vehicles()->exists();
     }
 
     public function getNameAttribute($value)
