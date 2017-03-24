@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{ $wanted->player->name }}</td>
                         <td>{{ implode(', ', $wanted->wantedCrimes) }}</td>
-                        <td data-order="{{ $wanted->wantedBounty }}">{{ \Formatter::money($wanted->wantedBounty) }}</td>
+                        <td class="text-right" data-order="{{ $wanted->wantedBounty }}">{{ \Formatter::money($wanted->wantedBounty) }}</td>
                         <td>{{ $wanted->insert_time }}</td>
                     </tr>
                     @endif
