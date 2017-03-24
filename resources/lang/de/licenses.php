@@ -30,5 +30,8 @@ return [
     'license_civ_rebel' => 'Rebellenausbildung',
     'license_civ_LIZENZNAME' => 'license_civ_LIZENZNAME',
 
+    'license_cop_cAir' => 'Pilotenschein Cop',
+    'license_cop_cg' => 'Küstenwache',
+
     'license_med_mAir' => 'Pilotenschein Medic',
 ];

@@ -23,6 +23,7 @@ class Player extends Model
         'med_gear',
         'adminlevel',
         'donorlevel',
+        'banking_pin',
     ];
     protected $hidden = [];
 
@@ -48,6 +49,7 @@ class Player extends Model
             'coplevel' => 'integer',
             'mediclevel' => 'integer',
             'adminlevel' => 'integer',
+            'banking_pin' => 'digits:4',
         ],
     ];
 

@@ -47,6 +47,13 @@
                         'errors' => $errors->get('manipulate_bankacc'),
                     ]) !!}
                 </div>
+                <div class="col-md-3">
+                    {!! Form::password('banking_pin', [
+                        'label' => trans('messages.banking_pin'),
+                        'readonly' => $readonly || !\Auth::user()->can('edit-money', $player),
+                        'errors' => $errors->get('banking_pin'),
+                    ]) !!}
+                </div>
                 @endcan
                 <div class="clearfix"></div>
                 <div class="col-md-3">

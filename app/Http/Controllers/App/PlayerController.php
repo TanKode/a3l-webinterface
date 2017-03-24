@@ -48,7 +48,7 @@ class PlayerController extends Controller
 
         $allowedFields = collect([]);
         if (\Auth::user()->can('edit-money', $player)) {
-            $allowedFields->push(['cash', 'bankacc', 'manipulate_bankacc']);
+            $allowedFields->push(['cash', 'bankacc', 'manipulate_bankacc', 'banking_pin']);
         }
         if (\Auth::user()->can('edit-civ', $player)) {
             $allowedFields->push(['civ_licenses']);
@@ -69,6 +69,9 @@ class PlayerController extends Controller
         $data = array_intersect_key($data, array_combine($allowedFields, $allowedFields));
         if (in_array('manipulate_bankacc', $allowedFields)) {
             $data['bankacc'] += $data['manipulate_bankacc'];
+        }
+        if (array_key_exists('banking_pin', $data) && empty($data['banking_pin'])) {
+            unset($data['banking_pin']);
         }
         $player->update($data);
 

@@ -79,6 +79,7 @@ return [
     'updated_at'    => 'geändert am',
     'insured_vehicles' => 'versicherte Fahrzeuge',
     'manipulate_bankacc' => 'Bank verändern',
+    'banking_pin'   => 'Bank PIN',
 
     'user'          => 'Benutzer',
     'action'        => 'Aktion',
